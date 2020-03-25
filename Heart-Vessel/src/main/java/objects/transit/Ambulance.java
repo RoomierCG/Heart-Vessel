@@ -1,6 +1,5 @@
 package objects.transit;
 
-import objects.persona.Persona;
 import objects.product.Product;
 
 import java.util.ArrayList;
