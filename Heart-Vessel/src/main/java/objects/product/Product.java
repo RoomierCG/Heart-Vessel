@@ -1,4 +1,9 @@
 package objects.product;
 
-public class Product {
+public abstract class Product {
+    protected int productID;
+    protected String name;
+    protected int quantity;
+    protected int inventoryId;
+
 }
