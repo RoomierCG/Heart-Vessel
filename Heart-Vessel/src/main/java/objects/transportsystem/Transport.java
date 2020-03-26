@@ -1,4 +1,4 @@
-package objects.transit;
+package objects.transportsystem;
 
 public abstract class Transport {
     protected int transportId;

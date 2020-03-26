@@ -1,9 +1,14 @@
 package objects.product;
 
+import java.util.Date;
+
 public abstract class Product {
-    protected int productID;
+    protected int equipmentId;
     protected String name;
     protected int quantity;
-    protected int inventoryId;
-
+    protected Inventory location;
+    protected String status;
+    protected Date buyDate;
 }
+
+
