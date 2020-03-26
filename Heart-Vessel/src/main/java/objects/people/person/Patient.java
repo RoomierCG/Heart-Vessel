@@ -1,6 +1,6 @@
-package objects.person.patient;
+package objects.people.person;
 
-import objects.person.Person;
+import objects.people.Person;
 
 public class Patient extends Person {
 
