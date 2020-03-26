@@ -19,4 +19,20 @@ public class CleaningEquipment extends Product {
         this.riskFactor = riskFactor;
         this.type = type;
     }
+
+    public int getRiskFactor() {
+        return riskFactor;
+    }
+
+    public void setRiskFactor(int riskFactor) {
+        this.riskFactor = riskFactor;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

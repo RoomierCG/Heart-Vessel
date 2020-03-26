@@ -1,20 +1,19 @@
 package objects.product.products.substance.substances;
 
 import objects.inventory.Inventory;
-import objects.product.Product;
+import objects.product.products.substance.Substance;
 
 import java.util.Date;
 
-public class CleaningProducts extends Product {
+public class CleaningProducts extends Substance {
     private String make;
 
-
-    public CleaningProducts(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate) {
-        super(equipmentId, name, quantity, location, status, buyDate);
+    public CleaningProducts(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, boolean toxic) {
+        super(equipmentId, name, quantity, location, status, buyDate, toxic);
     }
 
-    public CleaningProducts(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, String make) {
-        super(equipmentId, name, quantity, location, status, buyDate);
+    public CleaningProducts(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, boolean toxic, String make) {
+        super(equipmentId, name, quantity, location, status, buyDate, toxic);
         this.make = make;
     }
 
@@ -25,4 +24,5 @@ public class CleaningProducts extends Product {
     public void setMake(String make) {
         this.make = make;
     }
+
 }

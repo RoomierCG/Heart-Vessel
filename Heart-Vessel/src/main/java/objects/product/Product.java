@@ -69,6 +69,7 @@ public abstract class Product {
     public void setBuyDate(Date buyDate) {
         this.buyDate = buyDate;
     }
+
 }
 
 

@@ -24,4 +24,5 @@ public class SanitationMaterials extends Product {
     public void setModel(String model) {
         this.model = model;
     }
+
 }

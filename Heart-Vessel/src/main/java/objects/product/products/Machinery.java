@@ -37,4 +37,5 @@ public class Machinery extends Product {
     public void setModel(String model) {
         this.model = model;
     }
+
 }
