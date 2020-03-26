@@ -9,6 +9,10 @@ public class Employee extends Person {
     private int salary;
     private String job;
 
+    public Employee(int personId, String name, String lastName, String status) {
+        super(personId, name, lastName, status);
+    }
+
     public Employee(int personId, String name, String lastName, String status, String type, String shift, int salary, String job) {
         super(personId, name, lastName, status);
         this.type = type;
@@ -16,15 +20,6 @@ public class Employee extends Person {
         this.salary = salary;
         this.job = job;
     }
-
-    public Employee(String type, String shift, int salary, String job) {
-        this.type = type;
-        this.shift = shift;
-        this.salary = salary;
-        this.job = job;
-    }
-
-    public Employee(){}
 
     public String getType() {
         return type;

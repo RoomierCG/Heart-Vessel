@@ -13,7 +13,6 @@ public abstract class Person {
         this.status = status;
     }
 
-    public Person(){}
 
     public int getPersonId() {
         return personId;

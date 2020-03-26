@@ -11,18 +11,15 @@ public class RoomInventory extends Inventory {
     private Area area;
     private ArrayList<Product> products;
 
+    public RoomInventory(int idInventory) {
+        super(idInventory);
+    }
+
     public RoomInventory(int idInventory, Area area, ArrayList<Product> products) {
         super(idInventory);
         this.area = area;
         this.products = products;
     }
-
-    public RoomInventory(Area area, ArrayList<Product> products) {
-        this.area = area;
-        this.products = products;
-    }
-
-    public RoomInventory() {}
 
     public Area getArea() {
         return area;

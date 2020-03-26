@@ -2,7 +2,7 @@ package objects.area.areas;
 
 import objects.area.Area;
 import objects.people.Person;
-import objects.transit.Vehicle;
+import objects.transportsystem.transportsystems.vehicle.Vehicle;
 
 import java.util.ArrayList;
 
