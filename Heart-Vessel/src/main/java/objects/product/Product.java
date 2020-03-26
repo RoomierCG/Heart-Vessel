@@ -1,5 +1,7 @@
 package objects.product;
 
+import objects.inventory.Inventory;
+
 import java.util.Date;
 
 public abstract class Product {
