@@ -1,7 +1,7 @@
 package objects.transit;
 
 
-import objects.person.Person;
+import objects.people.Person;
 
 public class MovementAid extends Transport{
     private int lifespan;//Dias utiles de vida que le quedan

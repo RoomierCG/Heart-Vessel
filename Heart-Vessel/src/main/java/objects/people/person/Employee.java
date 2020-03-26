@@ -1,6 +1,6 @@
-package objects.person.employee;
+package objects.people.person;
 
-import objects.person.Person;
+import objects.people.Person;
 
 public class Employee extends Person {
 

@@ -1,0 +1,43 @@
+package objects.inventory.inventories;
+
+import objects.area.Area;
+import objects.inventory.Inventory;
+import objects.product.Product;
+
+import java.util.ArrayList;
+
+public class RoomInventory extends Inventory {
+
+    private Area area;
+    private ArrayList<Product> products;
+
+    public RoomInventory(int idInventory, Area area, ArrayList<Product> products) {
+        super(idInventory);
+        this.area = area;
+        this.products = products;
+    }
+
+    public RoomInventory(Area area, ArrayList<Product> products) {
+        this.area = area;
+        this.products = products;
+    }
+
+    public RoomInventory() {}
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+}

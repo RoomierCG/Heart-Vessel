@@ -1,4 +1,4 @@
-package objects.person;
+package objects.people;
 
 public abstract class Person {
     protected int personId;
