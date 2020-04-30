@@ -148,3 +148,6 @@ buildNumber.properties
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
+
+# Manually adds
+Heart-Vessel/src/main/resources/FirebaseKey/serviceAccountKey.json
