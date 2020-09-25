@@ -42,4 +42,7 @@ public class Patient extends Person {
     public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
+
+    public void askAllowVisitors(){}
+
 }
