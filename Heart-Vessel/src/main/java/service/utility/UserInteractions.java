@@ -43,32 +43,43 @@ public class UserInteractions {
 
     public String dateRequest(){
 
+        int cDay = Integer.parseInt(getCurrentDate().substring(0,2));
+        int cMonth = Integer.parseInt(getCurrentDate().substring(3,5));
+        int cYear = Integer.parseInt(getCurrentDate().substring(6,10));
+
         //Declaraciones
         int [] months = {31,28,31,30,31,30,31,31,30,31,30,31};
 
         int month = numRequest("Introduzca el mes.",1,12);
-        int year = numRequest("Introduzca el año.",0,2019);
+        int year = numRequest("Introduzca el año.",0,cYear);
         int day;
 
-        if (month == 2 ){
-            if (year % 4 == 0){
-                day = numRequest("Introduca el dia. ",1,29);
-            }else{
-                day = numRequest("Introduca el dia. ",1,28);
+        if(cYear == year && cMonth == month){
+            day = numRequest("Introduca el dia. ",1,cDay);
+        }else {
+            if (month == 2) {
+                if (year % 4 == 0) {
+                    day = numRequest("Introduca el dia. ", 1, 29);
+                } else {
+                    day = numRequest("Introduca el dia. ", 1, 28);
+                }
+            } else {
+                day = numRequest("Introduca el dia. ", 1, months[month - 1]);
             }
-        }else{
-            day = numRequest("Introduca el dia. ",1,months[month-1]);
+
+            //TODO Que no viajen al futuro en 2020 ni antes que jesucristo
+
         }
-
-        //TODO Que no viajen al futuro en 2020 ni antes que jesucristo
-        return day+"/"+month+"/"+year ;
+        return day + "/" + month + "/" + year;
     }
 
-    public static void main(String[] args) {
-        System.out.println("falg");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    ///////////////////////////////////Passive/////////////////////////////////////
+
+    private static String getCurrentDate() {//0-2,3-5,6-10 == dd/mm/yyyy
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
-        System.out.println(dtf.format(now));
-
+        return (dtf.format(now));
     }
+
+
 }
