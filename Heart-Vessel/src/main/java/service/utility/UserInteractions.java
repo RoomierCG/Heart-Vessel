@@ -7,13 +7,13 @@ import java.util.Scanner;
 
 public class UserInteractions {
 
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
     public void printSPACE(){
         System.out.println(":)");
     }
 
-    public int numRequest(String prompt,int min, int max){
+    public static int numRequest(String prompt,int min, int max){
         int number = 0;
 
         System.out.println(prompt + " El valor debe estar entre " + min + " y " + max);
@@ -32,16 +32,16 @@ public class UserInteractions {
         return number;
     }
 
-    public String strRequest(String prompt){
+    public static String strRequest(String prompt){
         String string;
 
-        System.out.println("Introduzca " + prompt);
+        System.out.println(prompt);
         string = sc.nextLine();
 
         return string;
     }
 
-    public String dateRequest(){
+    public static String dateRequest(){
 
         int cDay = Integer.parseInt(getCurrentDate().substring(0,2));
         int cMonth = Integer.parseInt(getCurrentDate().substring(3,5));
@@ -51,7 +51,7 @@ public class UserInteractions {
         int [] months = {31,28,31,30,31,30,31,31,30,31,30,31};
 
         int month = numRequest("Introduzca el mes.",1,12);
-        int year = numRequest("Introduzca el año.",0,cYear);
+        int year = numRequest(" elIntroduzca año.",0,cYear);
         int day;
 
         if(cYear == year && cMonth == month){
@@ -66,9 +66,6 @@ public class UserInteractions {
             } else {
                 day = numRequest("Introduca el dia. ", 1, months[month - 1]);
             }
-
-            //TODO Que no viajen al futuro en 2020 ni antes que jesucristo
-
         }
         return day + "/" + month + "/" + year;
     }
@@ -80,6 +77,5 @@ public class UserInteractions {
         LocalDateTime now = LocalDateTime.now();
         return (dtf.format(now));
     }
-
 
 }

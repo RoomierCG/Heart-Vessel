@@ -4,23 +4,23 @@ import objects.people.Person;
 
 import java.util.ArrayList;
 
+import service.utility.UserInteractions;
+
 public class Area {
 
     private int idArea;
     private ArrayList<Person> personal;
     private String status;
-    private int inventory;
+    private int idInventory;
     private int floor;
-    private String airFlow;
     private int risk;
 
-    public Area(int idArea, ArrayList<Person> personal, String status, int inventory, int floor, String airFlow, int risk) {
+    public Area(int idArea, ArrayList<Person> personal, String status, int idInventory, int floor, int risk) {
         this.idArea = idArea;
         this.personal = personal;
         this.status = status;
-        this.inventory = inventory;
+        this.idInventory = idInventory;
         this.floor = floor;
-        this.airFlow = airFlow;
         this.risk = risk;
     }
 
@@ -50,12 +50,12 @@ public class Area {
         this.status = status;
     }
 
-    public int getInventory() {
-        return inventory;
+    public int getIdInventory() {
+        return idInventory;
     }
 
-    public void setInventory(int inventory) {
-        this.inventory = inventory;
+    public void setIdInventory(int idInventory) {
+        this.idInventory = idInventory;
     }
 
     public int getFloor() {
@@ -66,20 +66,23 @@ public class Area {
         this.floor = floor;
     }
 
-    public String getAirFlow() {
-        return airFlow;
-    }
-
-    public void setAirFlow(String airFlow) {
-        this.airFlow = airFlow;
-    }
-
     public int getRisk() {
         return risk;
     }
 
     public void setRisk(int risk) {
         this.risk = risk;
+    }
+
+    public void askArea(){
+        this.idArea = 0;
+        this.personal = null;
+        this.status = UserInteractions.strRequest("Introduzca el estado");
+        this.idInventory = 0;
+        this.floor = 0;
+        //TODO Revisar la categoria de riesgos
+        this.risk = UserInteractions.numRequest("Introduzca el numero de riesgo adecuado entre 1 y 10",1,10);
+
     }
 
 }

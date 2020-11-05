@@ -10,16 +10,10 @@ public class Garaje extends Area {
 
     private ArrayList<Vehicle> vehicles;
 
-    public Garaje(int idArea, ArrayList<Person> personal, String status, int inventory, int floor, String airFlow, int risk, ArrayList<Vehicle> vehicles) {
-        super(idArea, personal, status, inventory, floor, airFlow, risk);
+    public Garaje(int idArea, ArrayList<Person> personal, String status, int inventory, int floor, int risk, ArrayList<Vehicle> vehicles) {
+        super(idArea, personal, status, inventory, floor, risk);
         this.vehicles = vehicles;
     }
-
-    public Garaje(ArrayList<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
-
-    public Garaje() {}
 
     public ArrayList<Vehicle> getVehicles() {
         return vehicles;
@@ -28,4 +22,10 @@ public class Garaje extends Area {
     public void setVehicles(ArrayList<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
+
+    public void askGaraje(){
+        super.askArea();
+        this.vehicles = null;
+    }
+
 }

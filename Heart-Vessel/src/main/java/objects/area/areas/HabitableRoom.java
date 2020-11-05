@@ -2,6 +2,9 @@ package objects.area.areas;
 
 import objects.area.Area;
 import objects.people.Person;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 import java.util.ArrayList;
 
@@ -9,16 +12,10 @@ public class HabitableRoom extends Area {
 
     private int idPatient;
 
-    public HabitableRoom(int idArea, ArrayList<Person> personal, String status, int inventory, int floor, String airFlow, int risk, int idPatient) {
-        super(idArea, personal, status, inventory, floor, airFlow, risk);
+    public HabitableRoom(int idArea, ArrayList<Person> personal, String status, int inventory, int floor, int risk, int idPatient) {
+        super(idArea, personal, status, inventory, floor, risk);
         this.idPatient = idPatient;
     }
-
-    public HabitableRoom(int idPatient) {
-        this.idPatient = idPatient;
-    }
-
-    public HabitableRoom() {}
 
     public int getIdPatient() {
         return idPatient;
@@ -28,4 +25,7 @@ public class HabitableRoom extends Area {
         this.idPatient = idPatient;
     }
 
+    public void askHabitableRoom(){
+        super.askArea();
+    }
 }
