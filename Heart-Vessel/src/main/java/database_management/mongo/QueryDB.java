@@ -3,6 +3,7 @@ package database_management.mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import database_management.AuxDB;
 import objects.area.Area;
 import objects.inventory.Inventory;
 import objects.people.Person;

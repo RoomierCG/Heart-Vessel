@@ -6,9 +6,9 @@ import objects.product.Product;
 import java.util.Date;
 
 public abstract class Substance extends Product {
-    private boolean toxic;
+    private boolean toxic; //Si es toxico o no
 
-    public Substance(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, boolean toxic) {
+    public Substance(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, boolean toxic) {
         super(equipmentId, name, quantity, location, status, buyDate);
         this.toxic = toxic;
     }

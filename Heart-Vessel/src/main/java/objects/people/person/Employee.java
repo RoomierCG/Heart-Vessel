@@ -4,10 +4,11 @@ import objects.people.Person;
 
 public class Employee extends Person {
 
-    private String type;
-    private String shift;
-    private int salary;
-    private String job;
+    //Status = Trabajando, En descanso, de vacaciones etc?
+    private String type; //Medicina, Limpieza, Admin?, Conductores, +?
+    private String shift; //Dia, noche, guardia
+    private int salary; //Cuanto cobra
+    private String job; //Cirujano, anestesista, medico de cabecera, etc.  --- Mas especifico
 
     public Employee(int personId, String name, String lastName, String status) {
         super(personId, name, lastName, status);

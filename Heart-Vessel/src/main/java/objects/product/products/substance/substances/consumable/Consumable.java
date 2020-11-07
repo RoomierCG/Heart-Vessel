@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Consumable extends Substance {
-    private ArrayList<String> allergyRiskIngredients;
-    private Date expirationDate;
+    private ArrayList<String> allergyRiskIngredients;  //Lista de ingredientes que pueden causar allergia
+    private String expirationDate;  //Fecha de caducidad
 
 
-    public Consumable(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, Date expirationDate) {
+    public Consumable(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, String expirationDate) {
         super(equipmentId, name, quantity, location, status, buyDate, toxic);
         this.allergyRiskIngredients = allergyRiskIngredients;
         this.expirationDate = expirationDate;
@@ -25,11 +25,11 @@ public abstract class Consumable extends Substance {
         this.allergyRiskIngredients = allergyRiskIngredients;
     }
 
-    public Date getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 

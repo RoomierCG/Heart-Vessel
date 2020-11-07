@@ -6,12 +6,13 @@ import service.utility.UserInteractions;
 import java.util.Date;
 
 public abstract class Product {
-    protected int equipmentId;
-    protected String name;
-    protected int quantity;
+    protected int equipmentId;  //Identificador
+    protected String name;   //Nombre
+    protected int quantity;  //Cantidad que tenemos
+    //TODO: Revisar validez de existencia de variable location
     protected Inventory location;
-    protected String status;
-    protected String buyDate;
+    protected String status; //Variable dependiendo de hijo
+    protected String buyDate; //Fecha de compra
 
 
     public Product(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate) {

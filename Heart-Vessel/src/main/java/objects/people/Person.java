@@ -1,10 +1,11 @@
 package objects.people;
 
 public abstract class Person {
-    protected int personId;
-    protected String name;
-    protected String lastName;
-    protected String status;
+
+    protected int personId; //Identificador
+    protected String name; //Nombre
+    protected String lastName; //Apellido
+    protected String status;  //Variable dependiendo de hijo
 
     public Person(int personId, String name, String lastName, String status) {
         this.personId = personId;

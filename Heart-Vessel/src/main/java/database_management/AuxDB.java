@@ -1,8 +1,10 @@
-package database_management.mongo;
+package database_management;
 
 import objects.area.Area;
+import objects.area.areas.Garaje;
 import objects.inventory.Inventory;
 import objects.people.Person;
+import objects.people.person.Employee;
 import objects.product.Product;
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
@@ -22,5 +24,6 @@ public class AuxDB {
     public static ArrayList<Provider> ArrlProvider = new ArrayList<Provider>();
 
     public static ArrayList<Transport> ArrlTransport = new ArrayList<Transport>();
+
 
 }

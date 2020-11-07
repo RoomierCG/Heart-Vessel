@@ -8,12 +8,12 @@ import service.utility.UserInteractions;
 
 public class Area {
 
-    private int idArea;
-    private ArrayList<Person> personal;
-    private String status;
-    private int idInventory;
-    private int floor;
-    private int risk;
+    private int idArea; //Identificador
+    private ArrayList<Person> personal; //Personas que estan en ese area
+    private String status; //Ocupdo, No Ocupada, Desinfectando etc.
+    private int idInventory; //El inventario que tiene asignado
+    private int floor; //En que planta se ubica
+    private int risk; //Como de arriesgado es
 
     public Area(int idArea, ArrayList<Person> personal, String status, int idInventory, int floor, int risk) {
         this.idArea = idArea;

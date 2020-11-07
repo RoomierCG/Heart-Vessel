@@ -2,11 +2,8 @@ package objects.inventory;
 
 public abstract class Inventory {
 
-    private int idInventory;
+    private int idInventory; //Identificador
 
-    public Inventory(int idInventory) {
-        this.idInventory = idInventory;
-    }
 
     public int getIdInventory() {
         return idInventory;
@@ -16,4 +13,7 @@ public abstract class Inventory {
         this.idInventory = idInventory;
     }
 
+    public Inventory(int idInventory) {
+        this.idInventory = idInventory;
+    }
 }

@@ -6,14 +6,14 @@ import objects.product.Product;
 import java.util.Date;
 
 public class SanitationMaterials extends Product {
-    private String model;
-    private String type;
+    private String model; //Marca/modelo del objeto
+    private String type;  //Herramiento, Consumible (eg. escarpelo vs vendas)
 
-    public SanitationMaterials(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate) {
+    public SanitationMaterials(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate) {
         super(equipmentId, name, quantity, location, status, buyDate);
     }
 
-    public SanitationMaterials(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, String model, String type) {
+    public SanitationMaterials(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, String model, String type) {
         super(equipmentId, name, quantity, location, status, buyDate);
         this.model = model;
         this.type = type;

@@ -4,9 +4,10 @@ import objects.people.Person;
 
 public class Patient extends Person {
 
-    private boolean allowVisitors;
-    private String Registry;
-    private int roomId;
+    //Status = Enfermo, recuperando, muerto
+    private boolean allowVisitors; //Si se permiten visitas
+    private String Registry; //Log de paciente
+    private int roomId; //Habitacion donde esta habitando el paciente (debe existir dentro de la lista de habitaciones)
 
     public Patient(int personId, String name, String lastName, String status) {
         super(personId, name, lastName, status);

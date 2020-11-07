@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class HabitableRoom extends Area {
 
-    private int idPatient;
+    private int idPatient; //Paciente que habita la habitacion
 
     public HabitableRoom(int idArea, ArrayList<Person> personal, String status, int inventory, int floor, int risk, int idPatient) {
         super(idArea, personal, status, inventory, floor, risk);

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class RoomInventory extends Inventory {
 
-    private Area area;
-    private ArrayList<Product> products;
+    private Area area;  //Area donde se ubica el inventario
+    private ArrayList<Product> products;  //Lista de objetos en dicho inventario
 
     public RoomInventory(int idInventory) {
         super(idInventory);

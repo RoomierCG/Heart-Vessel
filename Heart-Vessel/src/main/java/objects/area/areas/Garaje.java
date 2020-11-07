@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Garaje extends Area {
 
-    private ArrayList<Vehicle> vehicles;
+    private ArrayList<Vehicle> vehicles; //Los vehiculos que se ubican dentro del garaje en cuestion
 
     public Garaje(int idArea, ArrayList<Person> personal, String status, int inventory, int floor, int risk, ArrayList<Vehicle> vehicles) {
         super(idArea, personal, status, inventory, floor, risk);

@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class FoodMenu extends Consumable {
-    private String type;
+    private String type;  //
     private Provider provider;
 
-    public FoodMenu(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, Date expirationDate) {
+    public FoodMenu(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, String expirationDate) {
         super(equipmentId, name, quantity, location, status, buyDate, toxic, allergyRiskIngredients, expirationDate);
     }
 
-    public FoodMenu(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, Date expirationDate, String type, Provider provider) {
+    public FoodMenu(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, String expirationDate, String type, Provider provider) {
         super(equipmentId, name, quantity, location, status, buyDate, toxic, allergyRiskIngredients, expirationDate);
         this.type = type;
         this.provider = provider;
