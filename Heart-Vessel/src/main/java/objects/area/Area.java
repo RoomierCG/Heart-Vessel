@@ -9,14 +9,16 @@ import service.utility.UserInteractions;
 public class Area {
 
     private int idArea; //Identificador
+    private String name;
     private ArrayList<Person> personal; //Personas que estan en ese area
     private String status; //Ocupdo, No Ocupada, Desinfectando etc.
     private int idInventory; //El inventario que tiene asignado
     private int floor; //En que planta se ubica
     private int risk; //Como de arriesgado es
 
-    public Area(int idArea, ArrayList<Person> personal, String status, int idInventory, int floor, int risk) {
+    public Area(int idArea,String name, ArrayList<Person> personal, String status, int idInventory, int floor, int risk) {
         this.idArea = idArea;
+        this.name = name;
         this.personal = personal;
         this.status = status;
         this.idInventory = idInventory;
@@ -32,6 +34,14 @@ public class Area {
 
     public void setIdArea(int idArea) {
         this.idArea = idArea;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<Person> getPersonal() {
