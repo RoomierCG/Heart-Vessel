@@ -8,7 +8,6 @@ public abstract class Inventory {
         this.idInventory = idInventory;
     }
 
-
     public int getIdInventory() {
         return idInventory;
     }

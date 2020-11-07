@@ -28,4 +28,6 @@ public class HabitableRoom extends Area {
     public void askHabitableRoom(){
         super.askArea();
     }
+
 }
+
