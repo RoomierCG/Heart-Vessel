@@ -1,6 +1,7 @@
 package objects.product;
 
 import objects.inventory.Inventory;
+import service.utility.UserInteractions;
 
 import java.util.Date;
 
@@ -10,10 +11,10 @@ public abstract class Product {
     protected int quantity;
     protected Inventory location;
     protected String status;
-    protected Date buyDate;
+    protected String buyDate;
 
 
-    public Product(int equipmentId, String name, int quantity, Inventory location, String status, Date buyDate) {
+    public Product(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate) {
         this.equipmentId = equipmentId;
         this.name = name;
         this.quantity = quantity;
@@ -21,6 +22,7 @@ public abstract class Product {
         this.status = status;
         this.buyDate = buyDate;
     }
+
 
     public int getEquipmentId() {
         return equipmentId;
@@ -62,12 +64,20 @@ public abstract class Product {
         this.status = status;
     }
 
-    public Date getBuyDate() {
+    public String getBuyDate() {
         return buyDate;
     }
 
-    public void setBuyDate(Date buyDate) {
+    public void setBuyDate(String buyDate) {
         this.buyDate = buyDate;
+    }
+
+    public void askProduct() {
+        this.equipmentId = 0;
+        this.name = UserInteractions.strRequest("Introduzca el nombre del producto");
+        this.quantity = quantity;
+        this.status = UserInteractions.strRequest("Introduzca el estado del producto");
+        this.buyDate = UserInteractions.dateRequest();
     }
 
 }
