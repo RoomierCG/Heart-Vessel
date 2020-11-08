@@ -6,15 +6,20 @@ import com.mongodb.client.MongoDatabase;
 import database_management.AuxDB;
 import objects.area.Area;
 import objects.inventory.Inventory;
+import objects.inventory.inventories.VehicleInventory;
 import objects.people.Person;
 import objects.people.person.Employee;
 import objects.product.Product;
+import objects.product.products.CleaningEquipment;
+import objects.product.products.substance.Substance;
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.vehicle.Vehicle;
+import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import org.bson.Document;
 import objects.area.areas.*;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 
 public class QueryDB {
@@ -72,18 +77,41 @@ public class QueryDB {
     }
 
     public static void updateAreasBackUp(){
-        Employee aPE = new Employee(01,"Peter","s","Working","Surgeon", "Day",5000, "Yes");
-        Employee aPq = new Employee(02,"Juan","GUA","Working","Surgeon", "Day",5000, "Yes");
-        Employee aPu = new Employee(03,"asdfasd","Mario","Working","Surgeon", "Day",5000, "Yes");
+        Employee aPE = new Employee(101,"Peter","s","Working","Surgeon", "Day",5000, "Yes");
+        Employee aPq = new Employee(202,"Juan","GUA","Working","Surgeon", "Day",5000, "Yes");
+        Employee aPu = new Employee(303,"asdfasd","Mario","Working","Surgeon", "Day",5000, "Yes");
         ArrayList<Person> a = new ArrayList<>();
         a.add(aPE);
         a.add(aPq);
         a.add(aPu);
 
-        HabitableRoom room = new HabitableRoom(100001,"Hcamilla",a,"ocupado",056,1,0,2);
-        HabitableRoom aasd = new HabitableRoom(200002,"Tumadre",a,"ocupado",056,1,0,2);
+        CleaningEquipment ave = new CleaningEquipment(100443,"Fregona",1,101000,"Usado","10/10/1000");
+        CleaningEquipment aver = new CleaningEquipment(100443,"AK-47",10,101000,"Cyka-Blyat","10/10/1000");
+        CleaningEquipment avegetal = new CleaningEquipment(100443,"La billetera",1,101000,"Vacia","10/10/1000");
+        ArrayList<Product> baia = new ArrayList<>();
+        baia.add(ave);
+        baia.add(aver);
+        baia.add(avegetal);
+
+
+        VehicleInventory baya = new VehicleInventory(11,223,baia);
+
+        Ambulance uno = new Ambulance(45,"maaas","asdasdasd",a,24,baia);
+        Ambulance dos = new Ambulance(55,"maaas","asdasdasd",a,24,baia);
+        Ambulance tres = new Ambulance(35,"maaas","asdasdasd",a,24,baia);
+
+        ArrayList<Vehicle> bulbul = new ArrayList<>();
+        bulbul.add(uno);
+        bulbul.add(dos);
+        bulbul.add(tres);
+
+        HabitableRoom room = new HabitableRoom(100001,"Hcamilla",a,"ocupado",4056,1,0,2);
+        HabitableRoom aasd = new HabitableRoom(200002,"Tumadre",a,"ocupado",5056,1,0,2);
+        Garaje uff = new Garaje(101000,a,"Kachow","En llamas",6,1,3,bulbul);
         ArrLarea.add(room);
         ArrLarea.add(aasd);
+        ArrLarea.add(uff);
+
 
         for (Area area: ArrLarea) {
 
@@ -118,17 +146,45 @@ public class QueryDB {
             setDataChild.put("Planta", area.getFloor());
             setDataChild.put("riesgo",area.getRisk());
 
+
+            Document prueba1 = new Document();
+
             if (area instanceof Garaje){
 
                 Document setDataVehicle = new Document();
-                setDataAux.clear();
+
 
                 for (Vehicle vehicle: ((Garaje) area).getVehicles()) {
 
-                    //setDataVehicle.put("z", vehicle);
+                    setDataVehicle.clear();
+
+                    setDataVehicle.put("TransportID",vehicle.getTransportId());
+                    setDataVehicle.put("Gasolina",vehicle.getGasTank());
+                    setDataVehicle.put("Tipo",vehicle.getType());
+                    setDataVehicle.put("Estado",vehicle.getStatus());
+
+                    Document setDataVehicleEq = new Document();
+
+                    if(vehicle instanceof Ambulance){
+                        setDataVehicle.put("Tipo","Amblancia");
+                        for (Product product: ((Ambulance) vehicle).getEquipment() ){
+
+                            setDataVehicleEq.clear();
+
+                            setDataVehicleEq.put("Nombre",product.getName());
+                            setDataVehicleEq.put("Cantidad",product.getQuantity());
+                            setDataVehicleEq.put("Estado",product.getStatus());
+
+
+                        }
+                        setDataVehicle.put("Equipamiento",setDataVehicleEq);
+                    }
+                    prueba1.put("Ambulancia@"+vehicle.getTransportId(),setDataVehicle);
                 }
 
-                setDataChild.put("vehiculos", setDataAux);
+
+                setDataChild.put("vehiculos", prueba1);
+                prueba1.clear();
             }
 
             setData.put(Integer.toString(area.getIdArea()),setDataChild);

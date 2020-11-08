@@ -8,11 +8,11 @@ import java.util.Date;
 public class CleaningProducts extends Substance {
     private String make; //Marca del producto
 
-    public CleaningProducts(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, boolean toxic) {
+    public CleaningProducts(int equipmentId, String name, int quantity, int location, String status, String buyDate, boolean toxic) {
         super(equipmentId, name, quantity, location, status, buyDate, toxic);
     }
 
-    public CleaningProducts(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, boolean toxic, String make) {
+    public CleaningProducts(int equipmentId, String name, int quantity, int location, String status, String buyDate, boolean toxic, String make) {
         super(equipmentId, name, quantity, location, status, buyDate, toxic);
         this.make = make;
     }

@@ -1,6 +1,5 @@
 package objects.product.products;
 
-import objects.inventory.Inventory;
 import objects.product.Product;
 
 import java.util.Date;
@@ -10,11 +9,11 @@ public class CleaningEquipment extends Product {
     private String type;   //Liquido, solido, polvo, etc.
 
 
-    public CleaningEquipment(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate) {
+    public CleaningEquipment(int equipmentId, String name, int quantity, int location, String status, String buyDate) {
         super(equipmentId, name, quantity, location, status, buyDate);
     }
 
-    public CleaningEquipment(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate, int riskFactor, String type) {
+    public CleaningEquipment(int equipmentId, String name, int quantity, int location, String status, String buyDate, int riskFactor, String type) {
         super(equipmentId, name, quantity, location, status, buyDate);
         this.riskFactor = riskFactor;
         this.type = type;

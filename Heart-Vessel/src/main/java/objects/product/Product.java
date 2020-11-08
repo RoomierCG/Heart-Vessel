@@ -1,6 +1,6 @@
 package objects.product;
 
-import objects.inventory.Inventory;
+
 import service.utility.UserInteractions;
 
 import java.util.Date;
@@ -9,13 +9,13 @@ public abstract class Product {
     protected int equipmentId;  //Identificador
     protected String name;   //Nombre
     protected int quantity;  //Cantidad que tenemos
-    //TODO: Revisar validez de existencia de variable location
-    protected Inventory location;
+    //TODO: Revisar validez de existencia de variable location, fumarnos otro porro
+    protected int location;
     protected String status; //Variable dependiendo de hijo
     protected String buyDate; //Fecha de compra
 
 
-    public Product(int equipmentId, String name, int quantity, Inventory location, String status, String buyDate) {
+    public Product(int equipmentId, String name, int quantity, int location, String status, String buyDate) {
         this.equipmentId = equipmentId;
         this.name = name;
         this.quantity = quantity;
@@ -49,11 +49,11 @@ public abstract class Product {
         this.quantity = quantity;
     }
 
-    public Inventory getLocation() {
+    public int getLocation() {
         return location;
     }
 
-    public void setLocation(Inventory location) {
+    public void setLocation(int location) {
         this.location = location;
     }
 
@@ -76,7 +76,7 @@ public abstract class Product {
     public void askProduct() {
         this.equipmentId = 0;
         this.name = UserInteractions.strRequest("Introduzca el nombre del producto");
-        this.quantity = quantity;
+        this.quantity = UserInteractions.numRequest("Introduzca la cantidad del producto");
         this.status = UserInteractions.strRequest("Introduzca el estado del producto");
         this.buyDate = UserInteractions.dateRequest();
     }

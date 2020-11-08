@@ -8,24 +8,24 @@ import java.util.ArrayList;
 
 public class VehicleInventory extends Inventory {
 
-    private Vehicle vehicle;  //Vehiculo en cuestion
+    private int vehicle;  //Vehiculo en cuestion
     private ArrayList<Product> products;  //Lista de objetos que tiene en su "inventario"
 
     public VehicleInventory(int idInventory) {
         super(idInventory);
     }
 
-    public VehicleInventory(int idInventory, Vehicle vehicle, ArrayList<Product> products) {
+    public VehicleInventory(int idInventory, int vehicle, ArrayList<Product> products) {
         super(idInventory);
         this.vehicle = vehicle;
         this.products = products;
     }
 
-    public Vehicle getVehicle() {
+    public int getVehicle() {
         return vehicle;
     }
 
-    public void setVehicle(Vehicle vehicle) {
+    public void setVehicle(int vehicle) {
         this.vehicle = vehicle;
     }
 
