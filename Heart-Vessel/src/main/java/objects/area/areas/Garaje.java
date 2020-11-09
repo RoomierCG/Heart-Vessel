@@ -2,6 +2,7 @@ package objects.area.areas;
 
 import objects.area.Area;
 import objects.people.Person;
+import objects.product.Product;
 import objects.transportsystem.transportsystems.vehicle.Vehicle;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ public class Garaje extends Area {
 
     private ArrayList<Vehicle> vehicles; //Los vehiculos que se ubican dentro del garaje en cuestion
 
-    public Garaje(int idArea, ArrayList<Person> personal, String name, String status, int inventory, int floor, int risk, ArrayList<Vehicle> vehicles) {
-        super(idArea, name, personal, status, inventory, floor, risk);
+    public Garaje(int idArea, ArrayList<Person> personal, String name, String status, ArrayList<Product> equipment, int floor, int risk, ArrayList<Vehicle> vehicles) {
+        super(idArea, name, personal, status, equipment, floor, risk);
         this.vehicles = vehicles;
     }
 

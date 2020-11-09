@@ -7,13 +7,12 @@ import java.util.ArrayList;
 
 public abstract class Vehicle extends Transport {
     protected String type;
-    protected ArrayList<Person> personal;
+
     protected int gasTank;
 
-    public Vehicle(int transportId, String status, String type, ArrayList<Person> personal, int gasTank) {
+    public Vehicle(int transportId, String status, String type, int gasTank) {
         super(transportId, status);
         this.type = type;
-        this.personal = personal;
         this.gasTank = gasTank;
     }
 
@@ -23,14 +22,6 @@ public abstract class Vehicle extends Transport {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public ArrayList<Person> getPersonal() {
-        return personal;
-    }
-
-    public void setPersonal(ArrayList<Person> personal) {
-        this.personal = personal;
     }
 
     public int getGasTank() {
