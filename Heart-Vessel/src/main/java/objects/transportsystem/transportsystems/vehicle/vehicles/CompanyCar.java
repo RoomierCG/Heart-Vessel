@@ -8,15 +8,17 @@ import java.util.ArrayList;
 public class CompanyCar extends Vehicle {
     private String model;
     private String make;
+    private  int idPersona;//Dueño
 
-    public CompanyCar(int transportId, String status, String type, ArrayList<Person> personal, int gasTank) {
-        super(transportId, status, type, personal, gasTank);
+    public CompanyCar(int transportId, String status, String type,  int gasTank) {
+        super(transportId, status, type, gasTank);
     }
 
-    public CompanyCar(int transportId, String status, String type, ArrayList<Person> personal, int gasTank, String model, String make) {
-        super(transportId, status, type, personal, gasTank);
+    public CompanyCar(int transportId, String status, String type, int gasTank, String model, String make,int idPersona) {
+        super(transportId, status, type, gasTank);
         this.model = model;
         this.make = make;
+        this.idPersona = idPersona;
     }
 
     public String getModel() {

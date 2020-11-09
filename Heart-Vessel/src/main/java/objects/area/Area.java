@@ -4,6 +4,7 @@ import objects.people.Person;
 
 import java.util.ArrayList;
 
+import objects.product.Product;
 import service.utility.UserInteractions;
 
 public class Area {
@@ -12,21 +13,29 @@ public class Area {
     private String name;
     private ArrayList<Person> personal; //Personas que estan en ese area
     private String status; //Ocupdo, No Ocupada, Desinfectando etc.
-    private int idInventory; //El inventario que tiene asignado
+    private ArrayList<Product> equipment; //inventario que tiene asignado
     private int floor; //En que planta se ubica
     private int risk; //Como de arriesgado es
 
-    public Area(int idArea,String name, ArrayList<Person> personal, String status, int idInventory, int floor, int risk) {
+    public Area(int idArea, String name, ArrayList<Person> personal, String status, ArrayList<Product> equipment, int floor, int risk) {
         this.idArea = idArea;
         this.name = name;
         this.personal = personal;
         this.status = status;
-        this.idInventory = idInventory;
+        this.equipment = equipment;
         this.floor = floor;
         this.risk = risk;
     }
 
     public Area() {}
+
+    public ArrayList<Product> getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(ArrayList<Product> equipment) {
+        this.equipment = equipment;
+    }
 
     public int getIdArea() {
         return idArea;
@@ -60,13 +69,7 @@ public class Area {
         this.status = status;
     }
 
-    public int getIdInventory() {
-        return idInventory;
-    }
 
-    public void setIdInventory(int idInventory) {
-        this.idInventory = idInventory;
-    }
 
     public int getFloor() {
         return floor;
@@ -88,7 +91,7 @@ public class Area {
         this.idArea = 0;
         this.personal = null;
         this.status = UserInteractions.strRequest("Introduzca el estado");
-        this.idInventory = 0;
+        this.equipment = null;
         this.floor = 0;
         //TODO Revisar la categoria de riesgos
         this.risk = UserInteractions.numRequest("Introduzca el numero de riesgo adecuado entre 1 y 10",1,10);

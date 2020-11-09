@@ -4,6 +4,7 @@ import objects.area.Area;
 import objects.people.Person;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import objects.product.Product;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ public class HabitableRoom extends Area {
 
     private int idPatient; //Paciente que habita la habitacion
 
-    public HabitableRoom(int idArea,String name ,ArrayList<Person> personal, String status, int inventory, int floor, int risk, int idPatient) {
-        super(idArea, name,personal, status, inventory, floor, risk);
+    public HabitableRoom(int idArea, String name , ArrayList<Person> personal, String status, ArrayList<Product> equipment, int floor, int risk, int idPatient) {
+        super(idArea, name,personal, status, equipment, floor, risk);
         this.idPatient = idPatient;
     }
 

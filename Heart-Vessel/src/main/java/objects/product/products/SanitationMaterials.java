@@ -1,6 +1,5 @@
 package objects.product.products;
 
-import objects.inventory.Inventory;
 import objects.product.Product;
 
 import java.util.Date;
