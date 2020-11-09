@@ -11,7 +11,6 @@ import objects.people.Person;
 import objects.people.person.Employee;
 import objects.product.Product;
 import objects.product.products.CleaningEquipment;
-import objects.product.products.substance.Substance;
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.vehicle.Vehicle;
@@ -72,11 +71,13 @@ public class QueryDB {
         ArrlTransport = AuxDB.ArrlTransport;
 
         updateAreasBackUp();
-
-
     }
 
     public static void updateAreasBackUp(){
+
+        //Borra todos los datos de la coleccion, por pruebas
+        collectionArea.drop();
+
         Employee aPE = new Employee(101,"Peter","s","Working","Surgeon", "Day",5000, "Yes");
         Employee aPq = new Employee(202,"Juan","GUA","Working","Surgeon", "Day",5000, "Yes");
         Employee aPu = new Employee(303,"asdfasd","Mario","Working","Surgeon", "Day",5000, "Yes");
@@ -106,7 +107,7 @@ public class QueryDB {
         bulbul.add(tres);
 
         HabitableRoom room = new HabitableRoom(100001,"Hcamilla",a,"ocupado",4056,1,0,2);
-        HabitableRoom aasd = new HabitableRoom(200002,"Tumadre",a,"ocupado",5056,1,0,2);
+        Area aasd = new Area(200002,"Tumadre",a,"ocupado",5056,2,3);
         Garaje uff = new Garaje(101000,a,"Kachow","En llamas",6,1,3,bulbul);
         ArrLarea.add(room);
         ArrLarea.add(aasd);
@@ -152,7 +153,7 @@ public class QueryDB {
             if (area instanceof Garaje){
 
                 Document setDataVehicle = new Document();
-
+                prueba1.clear();
 
                 for (Vehicle vehicle: ((Garaje) area).getVehicles()) {
 
@@ -174,20 +175,24 @@ public class QueryDB {
                             setDataVehicleEq.put("Nombre",product.getName());
                             setDataVehicleEq.put("Cantidad",product.getQuantity());
                             setDataVehicleEq.put("Estado",product.getStatus());
-
-
                         }
+
                         setDataVehicle.put("Equipamiento",setDataVehicleEq);
                     }
+
                     prueba1.put("Ambulancia@"+vehicle.getTransportId(),setDataVehicle);
                 }
 
-
                 setDataChild.put("vehiculos", prueba1);
-                prueba1.clear();
+            }else if (area instanceof HabitableRoom){
+
+                setDataChild.put("paciente Nº",((HabitableRoom) area).getIdPatient());
+
+            }else{
+                System.out.println("F en la terminal");
             }
 
-            setData.put(Integer.toString(area.getIdArea()),setDataChild);
+            setData.put("Area@"+Integer.toString(area.getIdArea()),setDataChild);
             collectionArea.insertOne(setData);
         }
 

@@ -18,7 +18,7 @@ public class Area {
 
     public Area(int idArea,String name, ArrayList<Person> personal, String status, int idInventory, int floor, int risk) {
         this.idArea = idArea;
-        this.name = name;
+        this.name = name;t
         this.personal = personal;
         this.status = status;
         this.idInventory = idInventory;
