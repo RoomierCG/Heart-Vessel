@@ -43,11 +43,6 @@ public class QueryDB {
     private static ArrayList<Provider> ArrlProvider;
     private static ArrayList<Transport> ArrlTransport;
 
-    //Declaracion de interables para los Arrayslists
-    private static Document setDataChild = new Document();
-    private static Document setData = new Document();
-    private static Document setDataAux = new Document();
-
     public static void main(String[] args) {
 
         //Inicializacion de conexion BD
@@ -70,13 +65,20 @@ public class QueryDB {
         ArrlProvider = AuxDB.ArrlProvider;
         ArrlTransport = AuxDB.ArrlTransport;
 
-        updateAreasBackUp();
+//      updateAreasBackUp();
+        updateProviderBackUp();
+
     }
 
     public static void updateAreasBackUp(){
 
         //Borra todos los datos de la coleccion, por pruebas
         collectionArea.drop();
+
+        //Declaracion de interables para los Arrayslists
+        Document setData = new Document();
+        Document setDataChild = new Document();
+        Document setDataAux = new Document();
 
         Employee aPE = new Employee(101,"Peter","s","Working","Surgeon", "Day",5000, "Yes");
         Employee aPq = new Employee(202,"Juan","GUA","Working","Surgeon", "Day",5000, "Yes");
@@ -194,6 +196,30 @@ public class QueryDB {
 
             setData.put("Area@"+Integer.toString(area.getIdArea()),setDataChild);
             collectionArea.insertOne(setData);
+        }
+
+    }
+
+    public static void updateProviderBackUp(){
+
+        //Borra todos los datos de la coleccion, por pruebas
+        collectionArea.drop();
+
+        //Declaracion de interables para los Arrayslists
+        Document setData = new Document();
+        Document setDataChild = new Document();
+
+        for (Provider provider: ArrlProvider) {
+
+            setData.clear();
+            setDataChild.clear();
+
+            setDataChild.put("Id del proveedor",provider.getIdProvider());
+            setDataChild.put("Empresa",provider.getName());
+            setDataChild.put("ISBN",provider.getAccount());
+
+            setData.put("Proveedor "+provider.getIdProvider(),setDataChild);
+            collectionProvider.insertOne(setData);
         }
 
     }
