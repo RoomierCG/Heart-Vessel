@@ -1,10 +1,9 @@
 package objects.product.products.substance.substances.consumable;
 
-import objects.inventory.Inventory;
+
 import objects.product.products.substance.Substance;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public abstract class Consumable extends Substance {
     private ArrayList<String> allergyRiskIngredients;  //Lista de ingredientes que pueden causar allergia

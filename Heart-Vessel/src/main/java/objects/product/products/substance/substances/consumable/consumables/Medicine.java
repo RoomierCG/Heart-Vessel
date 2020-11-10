@@ -1,10 +1,8 @@
 package objects.product.products.substance.substances.consumable.consumables;
 
-import objects.inventory.Inventory;
 import objects.product.products.substance.substances.consumable.Consumable;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Medicine extends Consumable {
     private String administered; //Via de administracion eg. oral, injeccion etc

@@ -1,9 +1,7 @@
 package objects.product.products.substance;
 
-import objects.inventory.Inventory;
 import objects.product.Product;
 
-import java.util.Date;
 
 public abstract class Substance extends Product {
     private boolean toxic; //Si es toxico o no

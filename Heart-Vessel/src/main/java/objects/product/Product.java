@@ -3,23 +3,21 @@ package objects.product;
 
 import service.utility.UserInteractions;
 
-import java.util.Date;
-
 public abstract class Product {
     protected int equipmentId;  //Identificador
     protected String name;   //Nombre
     protected int quantity;  //Cantidad que tenemos
-    //TODO: Revisar validez de existencia de variable location, fumarnos otro porro
-    protected int location;
+    //TODO: Revisar validez de existencia de variable location, fumarnos otro porro, another one
+    protected int idArea;
     protected String status; //Variable dependiendo de hijo
     protected String buyDate; //Fecha de compra
 
 
-    public Product(int equipmentId, String name, int quantity, int location, String status, String buyDate) {
+    public Product(int equipmentId, String name, int quantity, int idArea, String status, String buyDate) {
         this.equipmentId = equipmentId;
         this.name = name;
         this.quantity = quantity;
-        this.location = location;
+        this.idArea = idArea;
         this.status = status;
         this.buyDate = buyDate;
     }
@@ -49,12 +47,12 @@ public abstract class Product {
         this.quantity = quantity;
     }
 
-    public int getLocation() {
-        return location;
+    public int getIdArea() {
+        return idArea;
     }
 
-    public void setLocation(int location) {
-        this.location = location;
+    public void setIdArea(int idArea) {
+        this.idArea = idArea;
     }
 
     public String getStatus() {

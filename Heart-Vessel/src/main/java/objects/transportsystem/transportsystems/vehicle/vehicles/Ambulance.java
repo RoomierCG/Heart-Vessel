@@ -7,6 +7,7 @@ import objects.transportsystem.transportsystems.vehicle.Vehicle;
 import java.util.ArrayList;
 
 public class Ambulance extends Vehicle {
+
     private ArrayList<Product> equipment;
     private ArrayList<Person> personal;
 
@@ -34,4 +35,5 @@ public class Ambulance extends Vehicle {
     public void setEquipment(ArrayList<Product> equipment) {
         this.equipment = equipment;
     }
+
 }

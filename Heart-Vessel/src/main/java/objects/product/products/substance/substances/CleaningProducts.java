@@ -1,9 +1,7 @@
 package objects.product.products.substance.substances;
 
-import objects.inventory.Inventory;
 import objects.product.products.substance.Substance;
 
-import java.util.Date;
 
 public class CleaningProducts extends Substance {
     private String make; //Marca del producto
