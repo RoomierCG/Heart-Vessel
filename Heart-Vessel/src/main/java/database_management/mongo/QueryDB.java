@@ -76,13 +76,19 @@ public class QueryDB {
 
     public static void rellenarTest(){
 
+        ArrayList<String> log = new ArrayList<>();
+        log.add("16:43 | Ingresado");
+        log.add("16:50 | Examinacion");
+        log.add("17:30 | Inicio Tratamiento Anti-Zergling de Fanatazil ");
+        log.add("19:34 | Transportado a habitacion 100001 para estancia nocturna");
+
         Employee aPE = new Employee(101,"Peter","s","Working","Surgeon", "Day",5000, "Yes");
         Employee aPq = new Employee(202,"Juan","GUA","Working","Surgeon", "Day",5000, "Yes");
         Employee aPu = new Employee(303,"asdfasd","Mario","Working","Surgeon", "Day",5000, "Yes");
 
         Patient pac1 = new Patient(303,"Edgar","Aiurense","Sin Pilones");
         Patient pac2 = new Patient(303,"Eldon","Calletano","Buscando Hilos");
-        Patient pac3 = new Patient(303,"Lkoraz","Ondeya","Muerto");
+        Patient pac3 = new Patient(303,"Lkoraz","Ondeya","Muerto",true,log,100001);
 
         ArrayList<Person> a = new ArrayList<>();
         a.add(aPE);
@@ -127,7 +133,7 @@ public class QueryDB {
         CleaningEquipment Fregona = new CleaningEquipment(60404,"Fregona",10,20002,"Semi-nuevo","15/04/2015");
         CleaningEquipment Guantes = new CleaningEquipment(60402,"Guantes",56,20002,"Nuevos","15/04/2015");
 
-
+        MovementAid muletas = new MovementAid(403033,"Largos",-1,200002);
 
         Machinery xRay = new Machinery(70030,"Maquina Rayos X",1,12,"En uso","17/05/2005",3003,"Aiur");
         baia.clear();
@@ -157,6 +163,7 @@ public class QueryDB {
         + 1 Machinery
         + 1 Sanitation Materials
         + 1 Proveedor
+        + 1 Movement Aid
          */
         {
             ArrlPerson.add(aPE);
@@ -175,6 +182,7 @@ public class QueryDB {
             ArrlTransport.add(dos);
             ArrlTransport.add(tres);
             ArrlTransport.add(Elbuga);
+            ArrlTransport.add(muletas);
 
             ArrLarea.add(room);
             ArrLarea.add(aasd);
@@ -189,6 +197,7 @@ public class QueryDB {
             ArrlProduct.add(Guantes);
             ArrlProduct.add(xRay);
             ArrlProduct.add(vendas);
+
 
 
             ArrlProvider.add(profesionalVerdor);
@@ -215,7 +224,7 @@ public class QueryDB {
             setDataChild.clear();
             setDataAux.clear();
 
-            setDataChild.put("name", area.getName());
+            setDataChild.put("Nombre", area.getName());
 
             Document setPersonalDataAux = new Document();
             for (Person person : area.getPersonal()) {
@@ -223,9 +232,9 @@ public class QueryDB {
                 setPersonalDataAux.clear();
 
                 //Todas las invididuales
-                setPersonalDataAux.put("personaId", person.getPersonId());
-                setPersonalDataAux.put("nombre", person.getName());
-                setPersonalDataAux.put("apellido", person.getLastName());
+                setPersonalDataAux.put("ID Persona", person.getPersonId());
+                setPersonalDataAux.put("Nombre", person.getName());
+                setPersonalDataAux.put("Apellido", person.getLastName());
 
                 if (person instanceof Employee) {
                     setPersonalDataAux.put("Tipo:", "Empleado");
@@ -238,7 +247,7 @@ public class QueryDB {
             setDataChild.put("Personal", setDataAux);
             setDataChild.put("Estado", area.getStatus());
             setDataChild.put("Planta", area.getFloor());
-            setDataChild.put("riesgo", area.getRisk());
+            setDataChild.put("Riesgo", area.getRisk());
 
 
             Document prueba1 = new Document();
@@ -276,13 +285,11 @@ public class QueryDB {
                     prueba1.put("Ambulancia@" + vehicle.getTransportId(), setDataVehicle);
                 }
 
-                setDataChild.put("vehiculos", prueba1);
+                setDataChild.put("Vehiculos", prueba1);
             } else if (area instanceof HabitableRoom) {
 
-                setDataChild.put("paciente Nº", ((HabitableRoom) area).getIdPatient());
+                setDataChild.put("Nº Paciente", ((HabitableRoom) area).getIdPatient());
 
-            } else {
-                System.out.println("F en la terminal");
             }
 
             setData.put("Area@" + Integer.toString(area.getIdArea()), setDataChild);
@@ -291,7 +298,7 @@ public class QueryDB {
 
     }
 
-    public static void updateProviderBackUp() {
+     public static void updateProviderBackUp() {
 
         //Borra todos los datos de la coleccion, por pruebas
         collectionProvider.drop();
@@ -334,7 +341,7 @@ public class QueryDB {
                 setDataChild = new Document();
 
                 setDataChild.put("Id transporte", transport.getTransportId());
-                setDataChild.put("estado", transport.getStatus());
+                setDataChild.put("Estado", transport.getStatus());
                 setDataChild.put("Id de paciente", (((MovementAid) transport).getPatient()));
 
             } else if (transport instanceof Ambulance) {
@@ -343,7 +350,7 @@ public class QueryDB {
                 Document setDataProduct = new Document();
                 setDataAux.clear();
 
-                setDataChild.put("tipo","ambulancia");
+                setDataChild.put("Tipo","Ambulancia");
 
                 for (Product product : ((Ambulance) transport).getEquipment()) {
 
@@ -371,6 +378,56 @@ public class QueryDB {
         }
 
     }
+
+    public static void updatePeopleBackUp(){
+        //Borra todos los datos de la coleccion, por pruebas
+        collectionArea.drop();
+
+        //Declaracion de interables para los Arrayslists
+        Document setData = new Document();
+        Document setDataChild = new Document();
+        Document setDataAux = new Document();
+
+        for (Person person : ArrlPerson) {
+
+            //Limpiamos buffer para añadirlo a mongo
+            setData.clear();
+            setDataChild.clear();
+            setDataAux.clear();
+
+            setDataChild.put("Nombre", person.getName());
+            setDataChild.put("Apellido", person.getLastName());
+            setDataChild.put("Estado", person.getStatus());
+
+            if (person instanceof Employee) {
+                Document setDataEmployee = new Document();
+                setDataEmployee.put("Tipo", ((Employee) person).getType());
+                setDataEmployee.put("Sueldo", ((Employee) person).getSalary());
+                setDataEmployee.put("Jornada", ((Employee) person).getShift());
+                setDataEmployee.put("Puesto", ((Employee) person).getJob());
+                setDataChild.put("Datos Laborales", setDataEmployee);
+
+            }else if(person instanceof Patient){
+                Document setDataPacient = new Document();
+                if(((Patient)person).isAllowVisitors()){
+                    setDataChild.put("Permite Visitas:", "SI");
+                }else{
+                    setDataChild.put("Permite Visitas:", "NO");
+                }
+                if(((Patient)person).getRoomId()!=-1){
+                    setDataChild.put("Habitacion:",((Patient)person).getRoomId());
+                }
+                if(((Patient)person).getRegistry().size()>0) {
+
+                    for (String a :((Patient)person).getRegistry()) {
+                        setDataPacient.put(a.substring(0,7),a.substring(8));
+                    }
+                    setDataChild.put("Registro", setDataPacient);
+                }
+            }
+        }
+    }
+
 
 }
 
