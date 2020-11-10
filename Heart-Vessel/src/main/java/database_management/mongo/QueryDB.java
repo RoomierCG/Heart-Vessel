@@ -83,9 +83,9 @@ public class QueryDB {
         log.add("17:30 | Inicio Tratamiento Anti-Zergling de Fanatazil ");
         log.add("19:34 | Transportado a habitacion 100001 para estancia nocturna");
 
-        Employee aPE = new Employee(101,"Peter","s","Working","Surgeon", "Day",5000, "Yes");
-        Employee aPq = new Employee(202,"Juan","GUA","Working","Surgeon", "Day",5000, "Yes");
-        Employee aPu = new Employee(303,"asdfasd","Mario","Working","Surgeon", "Day",5000, "Yes");
+        Employee aPE = new Employee(101,"Peter","Sayon","Working","Medico", "Diurno",12500, "Cirujano");
+        Employee aPq = new Employee(202,"Juan","Tuhzree","Working","Medico", "Nocturno",7000, "Enfermero");
+        Employee aPu = new Employee(303,"Mario","Jeepetas","Working","Limpieza", "Diurno",5000, "Limpieza de suelos");
 
         Patient pac1 = new Patient(303,"Edgar","Aiurense","Sin Pilones");
         Patient pac2 = new Patient(303,"Eldon","Calletano","Buscando Hilos");
@@ -97,8 +97,8 @@ public class QueryDB {
         a.add(aPu);
 
         CleaningEquipment ave = new CleaningEquipment(100443,"Fregona",1,101000,"Usado","10/10/1000");
-        CleaningEquipment aver = new CleaningEquipment(100443,"AK-47",10,101000,"Cyka-Blyat","10/10/1000");
-        CleaningEquipment avegetal = new CleaningEquipment(100443,"La billetera",1,101000,"Vacia","10/10/1000");
+        CleaningEquipment aver = new CleaningEquipment(101243,"AK-47",10,101000,"Cyka-Blyat","10/10/1000");
+        CleaningEquipment avegetal = new CleaningEquipment(104043,"La billetera",1,101000,"Vacia","10/10/1000");
         ArrayList<Product> baia = new ArrayList<>();
 
 
@@ -110,20 +110,20 @@ public class QueryDB {
 
 
 
-        Ambulance uno = new Ambulance(45,"maaas","asdasdasd",a,24,baia);
-        Ambulance dos = new Ambulance(55,"maaas","asdasdasd",a,24,baia);
-        Ambulance tres = new Ambulance(35,"maaas","asdasdasd",a,24,baia);
+        Ambulance uno = new Ambulance(45,"Aparcado","Tercera Edad",a,24,baia);
+        Ambulance dos = new Ambulance(55,"En patrulla","Accidentes Traumas y Golpes",a,24,baia);
+        Ambulance tres = new Ambulance(35,"En ruta a llamada de auxilio","Toxicos",a,24,baia);
 
-        ArrayList<Vehicle> bulbul = new ArrayList<>();
-        bulbul.add(uno);
-        bulbul.add(dos);
-        bulbul.add(tres);
+        ArrayList<Vehicle> listaAmbulancias = new ArrayList<>();
+        listaAmbulancias.add(uno);
+        listaAmbulancias.add(dos);
+        listaAmbulancias.add(tres);
 
 
         Area aasd = new Area(200002,"Almacen",a,"vacio",baia,2,1);
 
 
-        Garaje uff = new Garaje(101000,a,"Kachow","En llamas",baia,1,3,bulbul);
+        Garaje uff = new Garaje(101000,a,"Kachow","En llamas",baia,1,3,listaAmbulancias);
 
         FoodMenu peshcao = new FoodMenu(40404,"Menu Pescado",503,200002,"Limpio","10/10/2010",false,null,"20/10/2020");
         Medicine coca = new Medicine(43404,"Morfina",20,200002,"Recibido","10/10/2010",false,null,"20/10/2020");
@@ -251,12 +251,10 @@ public class QueryDB {
             setDataChild.put("Riesgo", area.getRisk());
 
 
-            Document prueba1 = new Document();
 
             if (area instanceof Garaje) {
 
                 Document setDataVehicle = new Document();
-                prueba1.clear();
 
                 for (Vehicle vehicle : ((Garaje) area).getVehicles()) {
 
@@ -293,7 +291,7 @@ public class QueryDB {
 
             }
 
-            setData.put("Area@" + Integer.toString(area.getIdArea()), setDataChild);
+            setData.put("Area@" + area.getIdArea(), setDataChild);
             collectionArea.insertOne(setData);
         }
 
@@ -349,8 +347,6 @@ public class QueryDB {
 
                 Document setDataAux = new Document();
                 Document setDataProduct = new Document();
-                setDataAux.clear();
-
                 setDataChild.put("Tipo","Ambulancia");
 
                 for (Product product : ((Ambulance) transport).getEquipment()) {
@@ -382,7 +378,7 @@ public class QueryDB {
 
     public static void updatePeopleBackUp(){
         //Borra todos los datos de la coleccion, por pruebas
-        collectionArea.drop();
+        collectionPerson.drop();
 
         //Declaracion de interables para los Arrayslists
         Document setData = new Document();
@@ -390,17 +386,18 @@ public class QueryDB {
         Document setDataAux = new Document();
 
         for (Person person : ArrlPerson) {
-
+            String type = "Error";
             //Limpiamos buffer para añadirlo a mongo
             setData.clear();
             setDataChild.clear();
-            setDataAux.clear();
 
             setDataChild.put("Nombre", person.getName());
+            System.out.println(person.getName());
             setDataChild.put("Apellido", person.getLastName());
             setDataChild.put("Estado", person.getStatus());
 
             if (person instanceof Employee) {
+                type = "Empleado";
                 Document setDataEmployee = new Document();
                 setDataEmployee.put("Tipo", ((Employee) person).getType());
                 setDataEmployee.put("Sueldo", ((Employee) person).getSalary());
@@ -409,6 +406,7 @@ public class QueryDB {
                 setDataChild.put("Datos Laborales", setDataEmployee);
 
             }else if(person instanceof Patient){
+                type = "Paciente";
                 Document setDataPacient = new Document();
                 if(((Patient)person).isAllowVisitors()){
                     setDataChild.put("Permite Visitas:", "SI");
@@ -426,11 +424,10 @@ public class QueryDB {
                     setDataChild.put("Registro", setDataPacient);
                 }
             }
-            setData.put("Persona@" + Integer.toString(person.getPersonId()), setDataChild);
-
+            setData.put(type+"@" + person.getPersonId(), setDataChild);
+            collectionPerson.insertOne(setData);
         }
 
-        collectionArea.insertOne(setData);
     }
 
 
