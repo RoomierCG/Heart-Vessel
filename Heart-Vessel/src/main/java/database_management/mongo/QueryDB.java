@@ -69,8 +69,9 @@ public class QueryDB {
         rellenarTest();
 
 //      updateAreasBackUp();
-//        updateProviderBackUp();
-        updateTransportSystemBackUp();
+//      updateProviderBackUp();
+//      updateTransportSystemBackUp();
+        updatePeopleBackUp();
 
     }
 
@@ -425,7 +426,11 @@ public class QueryDB {
                     setDataChild.put("Registro", setDataPacient);
                 }
             }
+            setData.put("Persona@" + Integer.toString(person.getPersonId()), setDataChild);
+
         }
+
+        collectionArea.insertOne(setData);
     }
 
 
