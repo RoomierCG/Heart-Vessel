@@ -70,8 +70,8 @@ public class QueryDB {
 
 //      updateAreasBackUp();
 //      updateProviderBackUp();
-      updateTransportSystemBackUp();
-//        updatePeopleBackUp();
+        updateTransportSystemBackUp();
+//       updatePeopleBackUp();
 
     }
 
@@ -91,22 +91,23 @@ public class QueryDB {
         Patient pac2 = new Patient(303,"Eldon","Calletano","Buscando Hilos");
         Patient pac3 = new Patient(303,"Lkoraz","Ondeya","Muerto",true,log,100001);
 
-        ArrayList<Person> a = new ArrayList<>();
-        a.add(aPE);
-        a.add(aPq);
-        a.add(aPu);
+
 
         CleaningEquipment ave = new CleaningEquipment(100443,"Fregona",1,101000,"Usado","10/10/1000");
         CleaningEquipment aver = new CleaningEquipment(101243,"AK-47",10,101000,"Cyka-Blyat","10/10/1000");
         CleaningEquipment avegetal = new CleaningEquipment(104043,"La billetera",1,101000,"Vacia","10/10/1000");
         ArrayList<Product> baia = new ArrayList<>();
 
-
+        ArrayList<Person> a = new ArrayList<>();
+        a.add(aPE);
+        a.add(aPq);
+        a.add(aPu);
 
         baia.add(avegetal);
         HabitableRoom room = new HabitableRoom(100001, "Hcamilla", a, "ocupado", baia, 1, 0, 2);
         baia.add(ave);
         baia.add(aver);
+
 
 
 
@@ -349,32 +350,33 @@ public class QueryDB {
 
                 Document setDataAux = new Document();
                 Document setDataProduct = new Document();
-
+                System.out.println(transport.getTransportId());
+                System.out.println(((Ambulance) transport).getPersonal());
                 setDataChild.put("Tipo", "Ambulancia");
                 setDataChild.put("Id del transporte", transport.getTransportId());
                 setDataChild.put("Estado", transport.getStatus());
                 setDataChild.put("Tipo", ((Ambulance) transport).getType());
                 setDataChild.put("Gasolina", ((Ambulance) transport).getGasTank() + "L");
 
-//                Document setDataPerson = new Document();
-//                for (Person person : ((Ambulance) transport).getPersonal()) {
-//
-//                    setDataPerson.clear();
-//
-//                    //Todas las invididuales
-//                    setDataPerson.put("ID Persona", person.getPersonId());
-//                    setDataPerson.put("Nombre", person.getName());
-//                    setDataPerson.put("Apellido", person.getLastName());
-//
-//                    if (person instanceof Employee) {
-//                        setDataPerson.put("Tipo:", "Empleado");
-//                    } else {
-//                        setDataPerson.put("Tipo:", "Paciente");
-//                    }
-//                    setDataAux.put((person.getName() + "@" + person.getPersonId()), setDataPerson);
-//                }
-//                setDataChild.put("Personas",setDataAux);
-//                setDataAux.clear();
+                Document setDataPerson = new Document();
+                for (Person person : ((Ambulance) transport).getPersonal()) {
+
+                    setDataPerson.clear();
+
+                    //Todas las invididuales
+                    setDataPerson.put("ID Persona", person.getPersonId());
+                    setDataPerson.put("Nombre", person.getName());
+                    setDataPerson.put("Apellido", person.getLastName());
+
+                    if (person instanceof Employee) {
+                        setDataPerson.put("Tipo:", "Empleado");
+                    } else {
+                        setDataPerson.put("Tipo:", "Paciente");
+                    }
+                    setDataAux.put((person.getName() + "@" + person.getPersonId()), setDataPerson);
+                }
+                setDataChild.put("Personas",setDataAux);
+                setDataAux.clear();
 
                 for (Product product : ((Ambulance) transport).getEquipment()) {
 

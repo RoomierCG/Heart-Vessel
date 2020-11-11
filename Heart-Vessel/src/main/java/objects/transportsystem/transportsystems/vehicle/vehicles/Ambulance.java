@@ -18,6 +18,7 @@ public class Ambulance extends Vehicle {
     public Ambulance(int transportId, String status, String type, ArrayList<Person> personal, int gasTank, ArrayList<Product> equipment) {
         super(transportId, status, type, gasTank);
         this.equipment = equipment;
+        this.personal = personal;
     }
 
     public ArrayList<Person> getPersonal() {
