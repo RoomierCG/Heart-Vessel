@@ -35,6 +35,7 @@ public class Ambulance extends Vehicle {
 
     public void setEquipment(ArrayList<Product> equipment) {
         this.equipment = equipment;
+
     }
 
 }
