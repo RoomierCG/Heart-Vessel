@@ -16,6 +16,10 @@ public abstract class Vehicle extends Transport {
         this.gasTank = gasTank;
     }
 
+    public Vehicle() {
+
+    }
+
     public String getType() {
         return type;
     }

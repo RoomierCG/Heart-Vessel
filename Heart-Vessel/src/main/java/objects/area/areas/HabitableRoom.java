@@ -18,6 +18,10 @@ public class HabitableRoom extends Area {
         this.idPatient = idPatient;
     }
 
+    public HabitableRoom() {
+
+    }
+
     public int getIdPatient() {
         return idPatient;
     }

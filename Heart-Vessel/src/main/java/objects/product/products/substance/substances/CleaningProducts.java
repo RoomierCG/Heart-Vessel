@@ -15,6 +15,10 @@ public class CleaningProducts extends Substance {
         this.make = make;
     }
 
+    public CleaningProducts() {
+
+    }
+
     public String getMake() {
         return make;
     }

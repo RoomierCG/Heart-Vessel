@@ -19,6 +19,10 @@ public class CleaningEquipment extends Product {
         this.type = type;
     }
 
+    public CleaningEquipment() {
+
+    }
+
     public int getRiskFactor() {
         return riskFactor;
     }

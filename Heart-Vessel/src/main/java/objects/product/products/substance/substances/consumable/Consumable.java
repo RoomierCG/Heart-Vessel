@@ -16,6 +16,10 @@ public abstract class Consumable extends Substance {
         this.expirationDate = expirationDate;
     }
 
+    public Consumable() {
+        super();
+    }
+
     public ArrayList<String> getAllergyRiskIngredients() {
         return allergyRiskIngredients;
     }

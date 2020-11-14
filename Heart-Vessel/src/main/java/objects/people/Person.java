@@ -14,6 +14,10 @@ public abstract class Person {
         this.status = status;
     }
 
+    public Person() {
+
+    }
+
 
     public String getPersonId() {
         return personId;

@@ -20,6 +20,10 @@ public class Machinery extends Product {
         this.model = model;
     }
 
+    public Machinery() {
+
+    }
+
     public int getElectricityConsumption() {
         return electricityConsumption;
     }

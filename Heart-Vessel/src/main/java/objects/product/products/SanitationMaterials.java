@@ -18,6 +18,10 @@ public class SanitationMaterials extends Product {
         this.type = type;
     }
 
+    public SanitationMaterials() {
+
+    }
+
     public String getModel() {
         return model;
     }

@@ -19,6 +19,10 @@ public class FoodMenu extends Consumable {
         this.provider = provider;
     }
 
+    public FoodMenu() {
+        super();
+    }
+
     public String getType() {
         return type;
     }

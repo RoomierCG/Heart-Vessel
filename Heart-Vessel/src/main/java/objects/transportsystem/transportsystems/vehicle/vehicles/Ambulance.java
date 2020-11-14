@@ -21,6 +21,10 @@ public class Ambulance extends Vehicle {
         this.personal = personal;
     }
 
+    public Ambulance() {
+        super();
+    }
+
     public ArrayList<String> getPersonal() {
         return personal;
     }

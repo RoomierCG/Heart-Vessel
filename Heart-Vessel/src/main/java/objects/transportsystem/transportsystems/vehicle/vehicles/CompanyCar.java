@@ -21,6 +21,10 @@ public class CompanyCar extends Vehicle {
         this.idPersona = idPersona;
     }
 
+    public CompanyCar() {
+        super();
+    }
+
     public String getModel() {
         return model;
     }

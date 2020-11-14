@@ -23,6 +23,7 @@ import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import org.bson.Document;
 import objects.area.areas.*;
 
+import javax.crypto.Mac;
 import java.util.ArrayList;
 
 public class QueryDB {
@@ -66,8 +67,7 @@ public class QueryDB {
         ArrlTransport = AuxDB.ArrlTransport;
 
         rellenarTest();
-        traducir("PEE#001");
-
+        Employee e = (Employee) traducir("PEE#01");
         /*
         updateAreasBackUp();
         updateProviderBackUp();
@@ -77,37 +77,95 @@ public class QueryDB {
 
     }
 
-    public static void traducir(String id){
-        String inicial = id.substring(0,2);
-        switch(inicial){
-
+    public static Object traducir(String id) {
+        String inicial = id.substring(0, 3);
+        Object resultado = null;
+        switch (inicial.substring(0, 2)) {
             case "PE":
-                System.out.println("PERSONA");
-                break;
+                if (inicial.equals("PEE")) {
+                    resultado = new Employee();
+                } else if (inicial.equals("PEP")) {
+                    resultado = new Patient();
+                }
+                for (Person person : ArrlPerson) {
+                    if (person.getPersonId().equals(id)) {
+                        resultado = person;
+                    }
+                    return resultado;
+                }
+                return null;
 
             case "PR":
-                System.out.println("PRODUCTO");
-                break;
+                if (inicial.equals("PRC")) {
+                    resultado = new FoodMenu();
+                } else if (inicial.equals("PRE")) {
+                    resultado = new CleaningEquipment();
+                } else if (inicial.equals("PRL")) {
+                    resultado = new CleaningProducts();
+                } else if (inicial.equals("PRD")) {
+                    resultado = new Medicine();
+                } else if (inicial.equals("PRS")) {
+                    resultado = new SanitationMaterials();
+                } else if (inicial.equals("PRM")) {
+                    resultado = new Machinery();
+                }
+                for (Product iterator : ArrlProduct) {
+                    if (iterator.getEquipmentId().equals(id)) {
+                        resultado = iterator;
+                    }
+                    return resultado;
+                }
+                return null;
 
             case "TR":
-                System.out.println("TRANSPORTE");
-                break;
+                if (inicial.equals("TRM")) {
+                    resultado = new MovementAid();
+                } else if (inicial.equals("TRA")) {
+                    resultado = new Ambulance();
+                } else if (inicial.equals("TRC")) {
+                    resultado = new CompanyCar();
+                }
+                for (Transport iterator : ArrlTransport) {
+                    if (iterator.getTransportId().equals(id)) {
+                        resultado = iterator;
+                    }
+                    return resultado;
+                }
+                return null;
 
             case "PV":
-                System.out.println("PROVEEDOR");
-                break;
-
+                if (inicial.equals("TRM")) {
+                    resultado = new Provider();
+                }
+                for (Provider iterator : ArrlProvider) {
+                    if (iterator.getIdProvider().equals(id)) {
+                        resultado = iterator;
+                    }
+                    return resultado;
+                }
+                return null;
             case "AR":
-                System.out.println("AREA");
-
-                break;
+                if (inicial.equals("ARR")) {
+                    resultado = new Area();
+                } else if (inicial.equals("ARG")) {
+                    resultado = new Garaje();
+                } else if (inicial.equals("ARH")) {
+                    resultado = new HabitableRoom();
+                }
+                for (Area iterator : ArrLarea) {
+                    if (iterator.getIdArea().equals(id)) {
+                        resultado = iterator;
+                    }
+                    return resultado;
+                }
+                return null;
 
             default:
                 System.out.println("Caso no encontrado");
                 break;
 
         }
-
+        return Object.class;
     }
 
     public static void rellenarTest() {
@@ -170,7 +228,7 @@ public class QueryDB {
 
         MovementAid muletas = new MovementAid("TAM#01", "Adultos", null, "ARR#01");
 
-        Machinery xRay = new Machinery("PRM#01", "Maquina Rayos X", "Almacen", "En uso", "17/05/2005",3000, "Aiur");
+        Machinery xRay = new Machinery("PRM#01", "Maquina Rayos X", "Almacen", "En uso", "17/05/2005", 3000, "Aiur");
         baia.clear();
 
         baia.add(xRay.getEquipmentId());

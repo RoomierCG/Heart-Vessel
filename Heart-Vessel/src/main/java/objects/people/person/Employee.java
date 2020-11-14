@@ -22,6 +22,10 @@ public class Employee extends Person {
         this.job = job;
     }
 
+    public Employee() {
+        super();
+    }
+
     public String getType() {
         return type;
     }

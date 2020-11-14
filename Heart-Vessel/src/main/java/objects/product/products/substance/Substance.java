@@ -11,6 +11,10 @@ public abstract class Substance extends Product {
         this.toxic = toxic;
     }
 
+    public Substance() {
+        super();
+    }
+
     public boolean isToxic() {
         return toxic;
     }

@@ -20,6 +20,18 @@ public abstract class Product {
         this.buyDate = buyDate;
     }
 
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
+    public Product() {
+
+    }
+
 
     public String getEquipmentId() {
         return equipmentId;

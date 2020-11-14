@@ -24,6 +24,10 @@ public class Patient extends Person {
         this.roomId = roomId;
     }
 
+    public Patient() {
+
+    }
+
     public boolean isAllowVisitors() {
         return allowVisitors;
     }

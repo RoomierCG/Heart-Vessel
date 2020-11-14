@@ -16,6 +16,10 @@ public class Garaje extends Area {
         this.vehicles = vehicles;
     }
 
+    public Garaje() {
+
+    }
+
     public ArrayList<String> getVehicles() {
         return vehicles;
     }

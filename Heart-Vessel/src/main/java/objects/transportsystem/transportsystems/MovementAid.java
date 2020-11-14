@@ -14,6 +14,10 @@ public class MovementAid extends Transport {
         this.idArea = idArea;
     }
 
+    public MovementAid() {
+        super();
+    }
+
     public String getPatient() {
         return patient;
     }

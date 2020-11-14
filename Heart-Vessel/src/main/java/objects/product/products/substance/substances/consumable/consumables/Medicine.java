@@ -16,6 +16,10 @@ public class Medicine extends Consumable {
         this.administered = administered;
     }
 
+    public Medicine() {
+
+    }
+
     public String getAdministered() {
         return administered;
     }

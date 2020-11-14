@@ -9,6 +9,10 @@ public abstract class Transport {
         this.status = status;
     }
 
+    public Transport() {
+
+    }
+
     public String getTransportId() {
         return transportId;
     }
