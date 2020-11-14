@@ -10,11 +10,11 @@ public class Employee extends Person {
     private int salary; //Cuanto cobra
     private String job; //Cirujano, anestesista, medico de cabecera, etc.  --- Mas especifico
 
-    public Employee(int personId, String name, String lastName, String status) {
+    public Employee(String personId, String name, String lastName, String status) {
         super(personId, name, lastName, status);
     }
 
-    public Employee(int personId, String name, String lastName, String status, String type, String shift, int salary, String job) {
+    public Employee(String personId, String name, String lastName, String status, String type, String shift, int salary, String job) {
         super(personId, name, lastName, status);
         this.type = type;
         this.shift = shift;

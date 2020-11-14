@@ -10,12 +10,12 @@ public class Machinery extends Product {
 
 
 
-    public Machinery(int equipmentId, String name, int quantity, int location, String status, String buyDate) {
-        super(equipmentId, name, quantity, location, status, buyDate);
+    public Machinery(String equipmentId, String name, String location, String status, String buyDate) {
+        super(equipmentId, name, location, status, buyDate);
     }
 
-    public Machinery(int equipmentId, String name, int quantity, int location, String status, String buyDate, int electricityConsumption, String model) {
-        super(equipmentId, name, quantity, location, status, buyDate);
+    public Machinery(String equipmentId, String name, String location, String status, String buyDate, int electricityConsumption, String model) {
+        super(equipmentId, name, location, status, buyDate);
         this.electricityConsumption = electricityConsumption;
         this.model = model;
     }

@@ -18,7 +18,6 @@ import objects.product.products.substance.substances.consumable.consumables.Medi
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.MovementAid;
-import objects.transportsystem.transportsystems.vehicle.Vehicle;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import org.bson.Document;
@@ -67,11 +66,47 @@ public class QueryDB {
         ArrlTransport = AuxDB.ArrlTransport;
 
         rellenarTest();
+        traducir("PEE#001");
 
-//      updateAreasBackUp();
-//      updateProviderBackUp();
+        /*
+        updateAreasBackUp();
+        updateProviderBackUp();
         updateTransportSystemBackUp();
-//      updatePeopleBackUp();
+        updatePeopleBackUp();
+         */
+
+    }
+
+    public static void traducir(String id){
+        String inicial = id.substring(0,2);
+        switch(inicial){
+
+            case "PE":
+                System.out.println("PERSONA");
+                break;
+
+            case "PR":
+                System.out.println("PRODUCTO");
+                break;
+
+            case "TR":
+                System.out.println("TRANSPORTE");
+                break;
+
+            case "PV":
+                System.out.println("PROVEEDOR");
+                break;
+
+            case "AR":
+                System.out.println("AREA");
+
+                break;
+
+            default:
+                System.out.println("Caso no encontrado");
+                break;
+
+        }
 
     }
 
@@ -83,71 +118,72 @@ public class QueryDB {
         log.add("17:30 | Inicio Tratamiento Anti-Zergling de Fanatazil ");
         log.add("19:34 | Transportado a habitacion 100001 para estancia nocturna");
 
-        Employee aPE = new Employee(101, "Peter", "Sayon", "Working", "Medico", "Diurno", 12500, "Cirujano");
-        Employee aPq = new Employee(202, "Juan", "Tuhzree", "Working", "Medico", "Nocturno", 7000, "Enfermero");
-        Employee aPu = new Employee(303, "Mario", "Jeepetas", "Working", "Limpieza", "Diurno", 5000, "Limpieza de suelos");
+        Employee aPE = new Employee("PEE#04", "Peter", "Yajodeh", "Working", "Medico", "Diurno", 12500, "Cirujano");
+        Employee aPq = new Employee("PEE#01", "Juan", "Tuhzree", "Working", "Medico", "Nocturno", 7000, "Enfermero");
+        Employee aPu = new Employee("PEE#02", "Mario", "Jeepetas", "Working", "Limpieza", "Diurno", 5000, "Limpieza de suelos");
 
-        Patient pac1 = new Patient(303, "Edgar", "Aiurense", "Sin Pilones");
-        Patient pac2 = new Patient(303, "Eldon", "Calletano", "Buscando Hilos");
-        Patient pac3 = new Patient(303, "Lkoraz", "Ondeya", "Muerto", true, log, 100001);
-
-
-        CleaningEquipment ave = new CleaningEquipment(100443, "Fregona", 1, 101000, "Usado", "10/10/1000");
-        CleaningEquipment aver = new CleaningEquipment(101243, "AK-47", 10, 101000, "Cyka-Blyat", "10/10/1000");
-        CleaningEquipment avegetal = new CleaningEquipment(104043, "La billetera", 1, 101000, "Vacia", "10/10/1000");
-        ArrayList<Product> baia = new ArrayList<>();
-
-        ArrayList<Person> a = new ArrayList<>();
-        a.add(aPE);
-        a.add(aPq);
-        a.add(aPu);
-
-        baia.add(avegetal);
-        HabitableRoom room = new HabitableRoom(100001, "Hcamilla", a, "ocupado", baia, 1, 0, 2);
-        baia.add(ave);
-        baia.add(aver);
+        Patient pac1 = new Patient("PEP#01", "Edgar", "Aiurense", "Sin Pilones");
+        Patient pac2 = new Patient("PEP#02", "Eldon", "Calletano", "Buscando Hilos");
+        Patient pac3 = new Patient("PEP#03", "Lkoraz", "Ondeya", "Muerto", true, log, 100001);
 
 
-        Ambulance uno = new Ambulance(45, "Aparcado", "Tercera Edad", a, 24, baia);
-        Ambulance dos = new Ambulance(55, "En patrulla", "Accidentes Traumas y Golpes", a, 24, baia);
-        Ambulance tres = new Ambulance(35, "En ruta a llamada de auxilio", "Toxicos", a, 24, baia);
+        CleaningEquipment ave = new CleaningEquipment("PRE#02", "Fregona", "ARR#01", "Usado", "10/10/1000");
+        CleaningEquipment aver = new CleaningEquipment("PRE#02", "Aspiradora", "ARR#01", "Cyka-Blyat", "10/10/1000");
+        CleaningEquipment avegetal = new CleaningEquipment("PRE#03", "Escoba", "ARR#01", "Vacia", "10/10/1000");
 
-        ArrayList<Vehicle> listaAmbulancias = new ArrayList<>();
-        listaAmbulancias.add(uno);
-        listaAmbulancias.add(dos);
-        listaAmbulancias.add(tres);
+        ArrayList<String> baia = new ArrayList<>();
+
+        ArrayList<String> a = new ArrayList<>();
+        a.add(aPE.getPersonId());
+        a.add(aPq.getPersonId());
+        a.add(aPu.getPersonId());
+
+        baia.add(avegetal.getEquipmentId());
+        HabitableRoom room = new HabitableRoom("ARH#01", "Habitacion 032", a, "ocupado", baia, 1, 0, 2);
+        baia.add(ave.getEquipmentId());
+        baia.add(aver.getEquipmentId());
 
 
-        Area aasd = new Area(200002, "Almacen", a, "vacio", baia, 2, 1);
+        Ambulance uno = new Ambulance("TVA#01", "Aparcado", "Tercera Edad", a, 24, baia);
+        Ambulance dos = new Ambulance("TVA#02", "En patrulla", "Accidentes Traumas y Golpes", a, 24, baia);
+        Ambulance tres = new Ambulance("TVA#03", "En ruta a llamada de auxilio", "Toxicos", a, 24, baia);
+
+        ArrayList<String> listaAmbulancias = new ArrayList<>();
+        listaAmbulancias.add(uno.getTransportId());
+        listaAmbulancias.add(dos.getTransportId());
+        listaAmbulancias.add(tres.getTransportId());
 
 
-        Garaje uff = new Garaje(101000, a, "Kachow", "En llamas", baia, 1, 3, listaAmbulancias);
+        Area aasd = new Area("ARR#01", "Almacen", a, "vacio", baia, 2, 1);
 
-        FoodMenu peshcao = new FoodMenu(40404, "Menu Pescado", 503, 200002, "Limpio", "10/10/2010", false, null, "20/10/2020");
-        Medicine coca = new Medicine(43404, "Morfina", 20, 200002, "Recibido", "10/10/2010", false, null, "20/10/2020");
 
-        CleaningProducts Fairy = new CleaningProducts(50404, "Jabon Multi Usos", 5, 200002, "Recibido", "10/10/2010", false, "Fairy");
-        CleaningProducts Lejia = new CleaningProducts(50304, "Lejia", 10, 200002, "Recibido", "10/10/2010", true, "Lagarto");
+        Garaje uff = new Garaje("ARG", a, "Kachow", "En llamas", baia, 1, 3, listaAmbulancias);
 
-        CleaningEquipment Fregona = new CleaningEquipment(60404, "Fregona", 10, 20002, "Semi-nuevo", "15/04/2015");
-        CleaningEquipment Guantes = new CleaningEquipment(60402, "Guantes", 56, 20002, "Nuevos", "15/04/2015");
+        FoodMenu peshcao = new FoodMenu("PRC#01", "Menu Pescado", "Almacen", "Limpio", "10/10/2010", false, null, "20/10/2020");
+        Medicine coca = new Medicine("PRD#01", "Morfina", "Almacen", "Recibido", "10/10/2010", false, null, "20/10/2020");
 
-        MovementAid muletas = new MovementAid(403033, "Largos", -1, 200002);
+        CleaningProducts Fairy = new CleaningProducts("PRL#01", "Jabon Multi Usos", "Almacen", "Recibido", "10/10/2010", false, "Fairy");
+        CleaningProducts Lejia = new CleaningProducts("PRL#02", "Lejia", "Almacen", "Recibido", "10/10/2010", true, "Lagarto");
 
-        Machinery xRay = new Machinery(70030, "Maquina Rayos X", 1, 12, "En uso", "17/05/2005", 3003, "Aiur");
+        CleaningEquipment Fregona = new CleaningEquipment("PRL#03", "Fregona", "Almacen", "Semi-nuevo", "15/04/2015");
+        CleaningEquipment Guantes = new CleaningEquipment("PRL#04", "Guantes", "Almacen", "Nuevos", "15/04/2015");
+
+        MovementAid muletas = new MovementAid("TAM#01", "Adultos", null, "ARR#01");
+
+        Machinery xRay = new Machinery("PRM#01", "Maquina Rayos X", "Almacen", "En uso", "17/05/2005",3000, "Aiur");
         baia.clear();
 
-        baia.add(xRay);
-        baia.add(coca);
-        baia.add(Fairy);
+        baia.add(xRay.getEquipmentId());
+        baia.add(coca.getEquipmentId());
+        baia.add(Fairy.getEquipmentId());
 
-        Area xrayRoom = new Area(300302, "Sala Rayos X", a, "ocupado", baia, 3, 3);
+        Area xrayRoom = new Area("ARR#02", "Sala Rayos X", a, "ocupado", baia, 3, 3);
 
-        SanitationMaterials vendas = new SanitationMaterials(70034, "Vendas", 500, 200002, "Nuevo", "09/09/2009");
+        SanitationMaterials vendas = new SanitationMaterials("PRS#01", "Vendas", "Almacen", "Nuevo", "09/09/2009");
 
-        Provider profesionalVerdor = new Provider(205343, "VerdorInc", "545855");
+        Provider profesionalVerdor = new Provider("PVP#01", "VerdorInc", "545855");
 
-        CompanyCar Elbuga = new CompanyCar(80349, "Semi-nuevo", "2x4", 30, "Murcielago", "Bugatti", 202);
+        CompanyCar Elbuga = new CompanyCar("TVC#01", "Semi-nuevo", "2x4", 30, "Murcielago", "Bugatti", "PEE#04");
 
          /*
         + 3 Empleados
@@ -206,7 +242,7 @@ public class QueryDB {
         }
 
     }
-
+    /*
     public static void updateAreasBackUp() {
 
         //Borra todos los datos de la coleccion, por pruebas
@@ -221,14 +257,14 @@ public class QueryDB {
 
             setDataChild.put("Nombre", area.getName());
 
-            for (Person person : area.getPersonal()) {
+            for (String person : area.getPersonal()) {
 
                 Document setPersonalDataAux = new Document();
 
 
                 //Todas las invididuales
-                setPersonalDataAux.put("ID Persona", person.getPersonId());
-                setPersonalDataAux.put("Nombre", person.getName());
+                setPersonalDataAux.put("ID Persona", person);
+                setPersonalDataAux.put("Nombre", );
                 setPersonalDataAux.put("Apellido", person.getLastName());
 
                 if (person instanceof Employee) {
@@ -273,7 +309,7 @@ public class QueryDB {
                             setDataVehicleInfoAux.put("Cantidad", product.getQuantity());
                             setDataVehicleInfoAux.put("Estado", product.getStatus());
 
-                            setDataVehicleInfo.put("Producto@"+product.getEquipmentId(),setDataVehicleInfoAux);
+                            setDataVehicleInfo.put("Producto@" + product.getEquipmentId(), setDataVehicleInfoAux);
                         }
 
                         setDataVehicleAux.put("Equipamiento", setDataVehicleInfo);
@@ -409,6 +445,32 @@ public class QueryDB {
 
     }
 
+    public static void updateProductBackUp() {
+
+        //Borra todos los datos de la coleccion, por pruebas
+        collectionProduct.drop();
+
+        //Declaracion de interables para los Arrayslists
+        Document setData = new Document();
+
+        for (Product product : ArrlProduct) {
+
+            Document setDataChild = new Document();
+
+            setDataChild.put("Id Producto", product.getEquipmentId());
+            setDataChild.put("Nombre", product.getName());
+            setDataChild.put("Cantidad", product.getQuantity()+" unidad/es.");
+            Document ubicacion = new Document();
+
+            setDataChild.put("Cantidad", product.getQuantity()+" unidad/es.");
+            setDataChild.put("Cantidad", product.getQuantity()+" unidad/es.");
+
+
+            collectionProvider.insertOne(setData);
+        }
+    }
+
+
     public static void updatePeopleBackUp() {
         //Borra todos los datos de la coleccion, por pruebas
         collectionPerson.drop();
@@ -459,7 +521,7 @@ public class QueryDB {
         }
 
     }
-
+    */
 
 }
 

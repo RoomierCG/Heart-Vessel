@@ -9,15 +9,15 @@ import service.utility.UserInteractions;
 
 public class Area {
 
-    private int idArea; //Identificador
+    private String idArea; //Identificador
     private String name;
-    private ArrayList<Person> personal; //Personas que estan en ese area
+    private ArrayList<String> personal; //Personas que estan en ese area
     private String status; //Ocupdo, No Ocupada, Desinfectando etc.
-    private ArrayList<Product> equipment; //inventario que tiene asignado
+    private ArrayList<String> equipment; //inventario que tiene asignado
     private int floor; //En que planta se ubica
     private int risk; //Como de arriesgado es
 
-    public Area(int idArea, String name, ArrayList<Person> personal, String status, ArrayList<Product> equipment, int floor, int risk) {
+    public Area(String idArea, String name, ArrayList<String> personal, String status, ArrayList<String> equipment, int floor, int risk) {
         this.idArea = idArea;
         this.name = name;
         this.personal = personal;
@@ -29,19 +29,19 @@ public class Area {
 
     public Area() {}
 
-    public ArrayList<Product> getEquipment() {
+    public ArrayList<String> getEquipment() {
         return equipment;
     }
 
-    public void setEquipment(ArrayList<Product> equipment) {
+    public void setEquipment(ArrayList<String> equipment) {
         this.equipment = equipment;
     }
 
-    public int getIdArea() {
+    public String getIdArea() {
         return idArea;
     }
 
-    public void setIdArea(int idArea) {
+    public void setIdArea(String idArea) {
         this.idArea = idArea;
     }
 
@@ -53,11 +53,11 @@ public class Area {
         this.name = name;
     }
 
-    public ArrayList<Person> getPersonal() {
+    public ArrayList<String> getPersonal() {
         return personal;
     }
 
-    public void setPersonal(ArrayList<Person> personal) {
+    public void setPersonal(ArrayList<String> personal) {
         this.personal = personal;
     }
 
@@ -88,7 +88,6 @@ public class Area {
     }
 
     public void askArea(){
-        this.idArea = 0;
         this.personal = null;
         this.status = UserInteractions.strRequest("Introduzca el estado");
         this.equipment = null;

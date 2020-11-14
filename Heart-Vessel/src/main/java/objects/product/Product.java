@@ -4,30 +4,28 @@ package objects.product;
 import service.utility.UserInteractions;
 
 public abstract class Product {
-    protected int equipmentId;  //Identificador
+    protected String equipmentId;  //Identificador
     protected String name;   //Nombre
-    protected int quantity;  //Cantidad que tenemos
     //TODO: Revisar validez de existencia de variable location, fumarnos otro porro, another one
-    protected int idArea;
+    protected String areaName;
     protected String status; //Variable dependiendo de hijo
     protected String buyDate; //Fecha de compra
 
 
-    public Product(int equipmentId, String name, int quantity, int idArea, String status, String buyDate) {
+    public Product(String equipmentId, String name, String areaName, String status, String buyDate) {
         this.equipmentId = equipmentId;
         this.name = name;
-        this.quantity = quantity;
-        this.idArea = idArea;
+        this.areaName = areaName;
         this.status = status;
         this.buyDate = buyDate;
     }
 
 
-    public int getEquipmentId() {
+    public String getEquipmentId() {
         return equipmentId;
     }
 
-    public void setEquipmentId(int equipmentId) {
+    public void setEquipmentId(String equipmentId) {
         this.equipmentId = equipmentId;
     }
 
@@ -39,20 +37,12 @@ public abstract class Product {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getIdArea() {
+        return areaName;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getIdArea() {
-        return idArea;
-    }
-
-    public void setIdArea(int idArea) {
-        this.idArea = idArea;
+    public void setIdArea(String areaName) {
+        this.areaName = areaName;
     }
 
     public String getStatus() {
@@ -72,9 +62,7 @@ public abstract class Product {
     }
 
     public void askProduct() {
-        this.equipmentId = 0;
         this.name = UserInteractions.strRequest("Introduzca el nombre del producto");
-        this.quantity = UserInteractions.numRequest("Introduzca la cantidad del producto");
         this.status = UserInteractions.strRequest("Introduzca el estado del producto");
         this.buyDate = UserInteractions.dateRequest();
     }

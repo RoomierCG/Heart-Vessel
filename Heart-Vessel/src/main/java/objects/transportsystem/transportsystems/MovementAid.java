@@ -5,28 +5,28 @@ import objects.people.Person;
 import objects.transportsystem.Transport;
 
 public class MovementAid extends Transport {
-    private int patient;// -1 significa que no esta asignado a un paciente sino que esta en un area y viceversa
-    private int idArea;
+    private String patient;// -1 significa que no esta asignado a un paciente sino que esta en un area y viceversa
+    private String idArea;
 
-    public MovementAid(int transportId, String status, int patient, int idArea) {
+    public MovementAid(String transportId, String status, String patient, String idArea) {
         super(transportId, status);
         this.patient = patient;
         this.idArea = idArea;
     }
 
-    public int getPatient() {
+    public String getPatient() {
         return patient;
     }
 
-    public void setPatient(int patient) {
+    public void setPatient(String patient) {
         this.patient = patient;
     }
 
-    public int getIdArea() {
+    public String getIdArea() {
         return idArea;
     }
 
-    public void setIdArea(int idArea) {
+    public void setIdArea(String idArea) {
         this.idArea = idArea;
     }
 }

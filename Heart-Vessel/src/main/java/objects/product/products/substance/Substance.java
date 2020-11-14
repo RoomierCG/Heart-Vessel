@@ -6,8 +6,8 @@ import objects.product.Product;
 public abstract class Substance extends Product {
     private boolean toxic; //Si es toxico o no
 
-    public Substance(int equipmentId, String name, int quantity, int location, String status, String buyDate, boolean toxic) {
-        super(equipmentId, name, quantity, location, status, buyDate);
+    public Substance(String equipmentId, String name, String location, String status, String buyDate, boolean toxic) {
+        super(equipmentId, name, location, status, buyDate);
         this.toxic = toxic;
     }
 

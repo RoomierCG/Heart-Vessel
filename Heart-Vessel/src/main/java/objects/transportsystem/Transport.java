@@ -1,19 +1,19 @@
 package objects.transportsystem;
 
 public abstract class Transport {
-    protected int transportId;
+    protected String transportId;
     protected String status;
 
-    public Transport(int transportId, String status) {
+    public Transport(String transportId, String status) {
         this.transportId = transportId;
         this.status = status;
     }
 
-    public int getTransportId() {
+    public String getTransportId() {
         return transportId;
     }
 
-    public void setTransportId(int transportId) {
+    public void setTransportId(String transportId) {
         this.transportId = transportId;
     }
 

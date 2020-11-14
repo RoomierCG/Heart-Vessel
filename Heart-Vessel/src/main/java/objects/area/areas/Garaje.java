@@ -9,18 +9,18 @@ import java.util.ArrayList;
 
 public class Garaje extends Area {
 
-    private ArrayList<Vehicle> vehicles; //Los vehiculos que se ubican dentro del garaje en cuestion
+    private ArrayList<String> vehicles; //Los vehiculos que se ubican dentro del garaje en cuestion
 
-    public Garaje(int idArea, ArrayList<Person> personal, String name, String status, ArrayList<Product> equipment, int floor, int risk, ArrayList<Vehicle> vehicles) {
+    public Garaje(String idArea, ArrayList<String> personal, String name, String status, ArrayList<String> equipment, int floor, int risk, ArrayList<String> vehicles) {
         super(idArea, name, personal, status, equipment, floor, risk);
         this.vehicles = vehicles;
     }
 
-    public ArrayList<Vehicle> getVehicles() {
+    public ArrayList<String> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(ArrayList<Vehicle> vehicles) {
+    public void setVehicles(ArrayList<String> vehicles) {
         this.vehicles = vehicles;
     }
 

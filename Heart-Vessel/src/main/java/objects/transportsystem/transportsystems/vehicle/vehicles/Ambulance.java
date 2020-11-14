@@ -8,32 +8,32 @@ import java.util.ArrayList;
 
 public class Ambulance extends Vehicle {
 
-    private ArrayList<Product> equipment;
-    private ArrayList<Person> personal;
+    private ArrayList<String> equipment;
+    private ArrayList<String> personal;
 
-    public Ambulance(int transportId, String status, String type, int gasTank) {
+    public Ambulance(String transportId, String status, String type, int gasTank) {
         super(transportId, status, type, gasTank);
     }
 
-    public Ambulance(int transportId, String status, String type, ArrayList<Person> personal, int gasTank, ArrayList<Product> equipment) {
+    public Ambulance(String transportId, String status, String type, ArrayList<String> personal, int gasTank, ArrayList<String> equipment) {
         super(transportId, status, type, gasTank);
         this.equipment = equipment;
         this.personal = personal;
     }
 
-    public ArrayList<Person> getPersonal() {
+    public ArrayList<String> getPersonal() {
         return personal;
     }
 
-    public void setPersonal(ArrayList<Person> personal) {
+    public void setPersonal(ArrayList<String> personal) {
         this.personal = personal;
     }
 
-    public ArrayList<Product> getEquipment() {
+    public ArrayList<String> getEquipment() {
         return equipment;
     }
 
-    public void setEquipment(ArrayList<Product> equipment) {
+    public void setEquipment(ArrayList<String> equipment) {
         this.equipment = equipment;
 
     }

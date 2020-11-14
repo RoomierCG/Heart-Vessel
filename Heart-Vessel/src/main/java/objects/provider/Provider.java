@@ -2,11 +2,11 @@ package objects.provider;
 
 public class Provider {
 
-    private int idProvider;
+    private String idProvider;
     private String name;
     private String account;
 
-    public Provider(int idProvider, String name, String account) {
+    public Provider(String idProvider, String name, String account) {
         this.idProvider = idProvider;
         this.name = name;
         this.account = account;
@@ -14,11 +14,11 @@ public class Provider {
 
     public Provider(){}
 
-    public int getIdProvider() {
+    public String getIdProvider() {
         return idProvider;
     }
 
-    public void setIdProvider(int idProvider) {
+    public void setIdProvider(String idProvider) {
         this.idProvider = idProvider;
     }
 

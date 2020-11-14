@@ -2,12 +2,12 @@ package objects.people;
 
 public abstract class Person {
 
-    protected int personId; //Identificador
+    protected String personId; //Identificador
     protected String name; //Nombre
     protected String lastName; //Apellido
     protected String status;  //Variable dependiendo de hijo
 
-    public Person(int personId, String name, String lastName, String status) {
+    public Person(String personId, String name, String lastName, String status) {
         this.personId = personId;
         this.name = name;
         this.lastName = lastName;
@@ -15,11 +15,11 @@ public abstract class Person {
     }
 
 
-    public int getPersonId() {
+    public String getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(String personId) {
         this.personId = personId;
     }
 

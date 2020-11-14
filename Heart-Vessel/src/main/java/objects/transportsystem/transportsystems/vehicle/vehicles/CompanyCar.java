@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class CompanyCar extends Vehicle {
     private String model;
     private String make;
-    private  int idPersona;//Dueño
+    private String idPersona;//Dueño
 
-    public CompanyCar(int transportId, String status, String type,  int gasTank) {
+    public CompanyCar(String transportId, String status, String type,  int gasTank) {
         super(transportId, status, type, gasTank);
     }
 
-    public CompanyCar(int transportId, String status, String type, int gasTank, String model, String make,int idPersona) {
+    public CompanyCar(String transportId, String status, String type, int gasTank, String model, String make,String idPersona) {
         super(transportId, status, type, gasTank);
         this.model = model;
         this.make = make;
