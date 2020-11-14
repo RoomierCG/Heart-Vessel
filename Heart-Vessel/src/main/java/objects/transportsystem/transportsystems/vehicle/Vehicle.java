@@ -6,8 +6,8 @@ import objects.transportsystem.Transport;
 import java.util.ArrayList;
 
 public abstract class Vehicle extends Transport {
-    protected String type;
 
+    protected String type;
     protected int gasTank;
 
     public Vehicle(String transportId, String status, String type, int gasTank) {

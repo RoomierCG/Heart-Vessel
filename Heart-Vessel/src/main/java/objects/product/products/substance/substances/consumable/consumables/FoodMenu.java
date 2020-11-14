@@ -6,6 +6,7 @@ import objects.provider.Provider;
 import java.util.ArrayList;
 
 public class FoodMenu extends Consumable {
+
     private String type;  //
     private Provider provider;
 

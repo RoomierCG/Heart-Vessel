@@ -4,6 +4,7 @@ package objects.product;
 import service.utility.UserInteractions;
 
 public abstract class Product {
+
     protected String equipmentId;  //Identificador
     protected String name;   //Nombre
     //TODO: Revisar validez de existencia de variable location, fumarnos otro porro, another one

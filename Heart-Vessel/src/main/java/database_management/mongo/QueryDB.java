@@ -18,6 +18,7 @@ import objects.product.products.substance.substances.consumable.consumables.Medi
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.MovementAid;
+import objects.transportsystem.transportsystems.vehicle.Vehicle;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import org.bson.Document;
@@ -25,6 +26,8 @@ import objects.area.areas.*;
 
 import javax.crypto.Mac;
 import java.util.ArrayList;
+
+import static java.util.Arrays.asList;
 
 public class QueryDB {
 
@@ -67,14 +70,12 @@ public class QueryDB {
         ArrlTransport = AuxDB.ArrlTransport;
 
         rellenarTest();
-        Employee e = (Employee) traducir("PEE#01");
-        /*
+
         updateAreasBackUp();
         updateProviderBackUp();
         updateTransportSystemBackUp();
+        updateProductBackUp();
         updatePeopleBackUp();
-         */
-
     }
 
     public static Object traducir(String id) {
@@ -300,7 +301,7 @@ public class QueryDB {
         }
 
     }
-    /*
+
     public static void updateAreasBackUp() {
 
         //Borra todos los datos de la coleccion, por pruebas
@@ -308,105 +309,44 @@ public class QueryDB {
 
         for (Area area : ArrLarea) {
 
-            //Declaracion de interables para los Arrayslists
-            Document setData = new Document();
-            Document setDataChild = new Document();
-            Document setDataAux = new Document();
-
-            setDataChild.put("Nombre", area.getName());
-
-            for (String person : area.getPersonal()) {
-
-                Document setPersonalDataAux = new Document();
-
-
-                //Todas las invididuales
-                setPersonalDataAux.put("ID Persona", person);
-                setPersonalDataAux.put("Nombre", );
-                setPersonalDataAux.put("Apellido", person.getLastName());
-
-                if (person instanceof Employee) {
-                    setPersonalDataAux.put("Tipo:", "Empleado");
-                } else {
-                    setPersonalDataAux.put("Tipo:", "Paciente");
-                }
-                setDataAux.put((person.getName() + "@" + person.getPersonId()), setPersonalDataAux);
-            }
-
-            setDataChild.put("Personal", setDataAux);
-            setDataChild.put("Estado", area.getStatus());
-            setDataChild.put("Planta", area.getFloor());
-            setDataChild.put("Riesgo", area.getRisk());
-
-
-            Document setDataVehicle = new Document();
+            Document newArea = new Document()
+                    .append("idArea", area.getIdArea())
+                    .append("Nombre", area.getName())
+                    .append("Personal", area.getPersonal())
+                    .append("Equipamiento", area.getEquipment())
+                    .append("Estado", area.getStatus())
+                    .append("Planta", area.getFloor())
+                    .append("Riesgo", area.getRisk());
 
             if (area instanceof Garaje) {
-                for (Vehicle vehicle : ((Garaje) area).getVehicles()) {
+                newArea.append("Tipo", "Garaje")
+                        .append("Vehiculos",((Garaje) area).getVehicles());
 
-                    Document setDataVehicleAux = new Document();
-
-
-                    setDataVehicleAux.put("TransportID", vehicle.getTransportId());
-                    setDataVehicleAux.put("Gasolina", vehicle.getGasTank());
-                    setDataVehicleAux.put("Tipo", vehicle.getType());
-                    setDataVehicleAux.put("Estado", vehicle.getStatus());
-
-
-                    if (vehicle instanceof Ambulance) {
-
-                        setDataVehicleAux.put("Tipo", "Amblancia");
-
-                        Document setDataVehicleInfo = new Document();
-
-                        for (Product product : ((Ambulance) vehicle).getEquipment()) {
-
-                            Document setDataVehicleInfoAux = new Document();
-
-                            setDataVehicleInfoAux.put("Nombre", product.getName());
-                            setDataVehicleInfoAux.put("Cantidad", product.getQuantity());
-                            setDataVehicleInfoAux.put("Estado", product.getStatus());
-
-                            setDataVehicleInfo.put("Producto@" + product.getEquipmentId(), setDataVehicleInfoAux);
-                        }
-
-                        setDataVehicleAux.put("Equipamiento", setDataVehicleInfo);
-                    }
-
-                    setDataVehicle.put("Ambulancia@" + vehicle.getTransportId(), setDataVehicleAux);
-                }
-
-                setDataChild.put("Vehiculos", setDataVehicle);
             } else if (area instanceof HabitableRoom) {
-
-                setDataChild.put("Nº Paciente", ((HabitableRoom) area).getIdPatient());
+                newArea.append("Tipo","Habitacion")
+                        .append("idPaciente", ((HabitableRoom) area).getIdPatient());
 
             }
 
-            setData.put("Area@" + area.getIdArea(), setDataChild);
-            collectionArea.insertOne(setData);
+            collectionArea.insertOne(newArea);
         }
     }
 
-    public static void updateProviderBackUp() {
+    public static void updateProviderBackUp(){
 
         //Borra todos los datos de la coleccion, por pruebas
         collectionProvider.drop();
 
-        //Declaracion de interables para los Arrayslists
-        Document setData = new Document();
+        for (Provider provider: ArrlProvider) {
 
-        for (Provider provider : ArrlProvider) {
-
-            Document setDataChild = new Document();
-
-            setDataChild.put("Id del proveedor", provider.getIdProvider());
-            setDataChild.put("Empresa", provider.getName());
-            setDataChild.put("ISBN", provider.getAccount());
-
-            setData.put("Proveedor " + provider.getIdProvider(), setDataChild);
-            collectionProvider.insertOne(setData);
+            collectionProvider.insertOne(new Document()
+                    .append("idProveedor", provider.getIdProvider())
+                    .append("Nombre" , provider.getName())
+                    .append("IBAN", provider.getAccount())
+            );
         }
+
+
     }
 
     public static void updateTransportSystemBackUp() {
@@ -414,117 +354,90 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionTransportSystem.drop();
 
+        for (Transport transport: ArrlTransport) {
 
-        for (Transport transport : ArrlTransport) {
+            Document newTranport = new Document()
+                    .append("idTransporte", transport.getTransportId())
+                    .append("Estado", transport.getStatus());
 
-            //Declaracion de interables para los Arrayslists
-            Document setData = new Document();
-            Document setDataChild = new Document();
+            if (transport instanceof MovementAid){
+                newTranport.append("Tipo","Ayuda Movil")
+                            .append("idArea",((MovementAid) transport).getIdArea())
+                            .append("idPaciente", ((MovementAid) transport).getPatient());
 
-            String VehicleType = "Error";
+            }else if (transport instanceof Ambulance){
+                newTranport.append("Tipo", "Ambulancia")
+                            .append("Personal", ((Ambulance) transport).getPersonal())
+                            .append("Productos", ((Ambulance) transport).getEquipment())
+                            .append("Gasolina", ((Ambulance) transport).getGasTank())
+                            .append("Especialidad", ((Ambulance) transport).getType());
 
-            if (transport instanceof MovementAid) {
+            }else if (transport instanceof CompanyCar){
+                newTranport.append("Tipo", "Vehiculo")
+                            .append("Modelo", ((CompanyCar) transport).getModel())
+                            .append("Marca", ((CompanyCar) transport).getMake())
+                            .append("Gasolina", ((CompanyCar) transport).getGasTank())
+                            .append("Especialidad", ((CompanyCar) transport).getType())
+                            .append("Dueño", ((CompanyCar) transport).getIdPersona());
 
-                VehicleType = "Ayuda de movilidad";
-
-                setDataChild.put("Id transporte", transport.getTransportId());
-                setDataChild.put("Estado", transport.getStatus());
-                if (((MovementAid) transport).getPatient() >= 0) {
-                    setDataChild.put("Id de paciente", (((MovementAid) transport).getPatient()));
-                } else {
-                    setDataChild.put("Id de paciente", "<Disponible>");
-                }
-
-            } else if (transport instanceof Ambulance) {
-
-                VehicleType = "Ambulancia";
-
-                setDataChild.put("Tipo", ((Ambulance) transport).getType());
-                setDataChild.put("Id del transporte", transport.getTransportId());
-                setDataChild.put("Estado", transport.getStatus());
-                setDataChild.put("Gasolina", ((Ambulance) transport).getGasTank() + "L");
-
-                Document setDataPerson = new Document();
-
-                for (Person person : ((Ambulance) transport).getPersonal()) {
-
-                    Document setDataPersonAux = new Document();
-
-                    //Todas las invididuales
-                    setDataPersonAux.put("ID Persona", person.getPersonId());
-                    setDataPersonAux.put("Nombre", person.getName());
-                    setDataPersonAux.put("Apellido", person.getLastName());
-
-                    if (person instanceof Employee) {
-                        setDataPerson.put(("Empleado@" + person.getPersonId()), setDataPersonAux);
-                    } else {
-                        setDataPerson.put(("Paciente@" + person.getPersonId()), setDataPersonAux);
-                    }
-                }
-                setDataChild.put("Personas", setDataPerson);
-
-                Document setDataAux = new Document();
-
-                for (Product product : ((Ambulance) transport).getEquipment()) {
-
-                    Document setDataProduct = new Document();
-
-                    setDataProduct.put("Id del producto", product.getEquipmentId());
-                    setDataProduct.put("Nombre", product.getName());
-                    setDataProduct.put("Cantidad", product.getQuantity());
-                    setDataProduct.put("Fecha de compra", product.getBuyDate());
-                    setDataProduct.put("Estado", product.getStatus());
-                    setDataProduct.put("Id del area", product.getIdArea());
-
-                    setDataAux.put("Producto@" + product.getEquipmentId(), setDataProduct);
-                }
-
-                setDataChild.put("Productos", setDataAux);
-
-            } else if (transport instanceof CompanyCar) {
-
-                VehicleType = "Coche de compañia";
-
-                setDataChild.put("tipo", "Coche de la compañia");
-                setDataChild.put("Id de transporte", transport.getTransportId());
-                setDataChild.put("Estado", transport.getStatus());
-                setDataChild.put("Marca", ((CompanyCar) transport).getMake());
-                setDataChild.put("Modelo", ((CompanyCar) transport).getModel());
-                setDataChild.put("Gasolina", ((CompanyCar) transport).getGasTank() + "L");
-                setDataChild.put("Tipo", ((CompanyCar) transport).getType());
-
-            } else {
-                setDataChild.put("Estas jugando a ser DIOS?", "Aquí tendrian que haber datos");
             }
 
-            setData.put(VehicleType + "@" + transport.getTransportId(), setDataChild);
-            collectionTransportSystem.insertOne(setData);
+            collectionTransportSystem.insertOne(newTranport);
         }
-
     }
 
+    //TODO Revisar los atributos Tipo()
     public static void updateProductBackUp() {
 
         //Borra todos los datos de la coleccion, por pruebas
         collectionProduct.drop();
 
-        //Declaracion de interables para los Arrayslists
-        Document setData = new Document();
+        for (Product product: ArrlProduct) {
 
-        for (Product product : ArrlProduct) {
+            Document newProduct = new Document()
+                    .append("idProducto", product.getEquipmentId())
+                    .append("Nombre", product.getName())
+                    .append("Area", product.getIdArea())
+                    .append("Estado", product.getStatus())
+                    .append("FechaDeCompra", product.getBuyDate());
 
-            Document setDataChild = new Document();
+            if (product instanceof SanitationMaterials){
+                newProduct.append("MarcaModelo", ((SanitationMaterials) product).getModel())
+                            .append("Uso", ((SanitationMaterials) product).getType())
+                            .append("Tipo","MaterialSanitario");
 
-            setDataChild.put("Id Producto", product.getEquipmentId());
-            setDataChild.put("Nombre", product.getName());
-            setDataChild.put("Cantidad", product.getQuantity()+" unidad/es.");
-            Document ubicacion = new Document();
+            }else if (product instanceof Machinery){
+                newProduct.append("ConsumicionEnergetica", ((Machinery) product).getElectricityConsumption())
+                            .append("Modelo", ((Machinery) product).getModel())
+                            .append("Tipo", "Maquinaria");
 
-            setDataChild.put("Cantidad", product.getQuantity()+" unidad/es.");
-            setDataChild.put("Cantidad", product.getQuantity()+" unidad/es.");
+            }else if (product instanceof CleaningEquipment){
+                newProduct.append("GradoDeRiesgo", ((CleaningEquipment) product).getRiskFactor())
+                            .append("Uso", ((CleaningEquipment) product).getType())
+                            .append("Tipo","EquipamientoDeLimpieza");
 
+            }else if (product instanceof CleaningProducts){
+                newProduct.append("Marca", ((CleaningProducts) product).getMake())
+                            .append("Toxicidad", ((CleaningProducts) product).isToxic())
+                            .append("Tipo", "ProductoDeLimpieza");
 
-            collectionProvider.insertOne(setData);
+            }else if (product instanceof Medicine){
+                newProduct.append("Toxicidad", ((Medicine) product).isToxic())
+                            .append("RiesgosAlergicos", ((Medicine) product).getAllergyRiskIngredients())
+                            .append("FechaDeCaducidad", ((Medicine) product).getExpirationDate())
+                            .append("ViaDeAdministracion", ((Medicine) product).getAdministered())
+                            .append("Tipo", "Medicinas");
+
+            }else if (product instanceof FoodMenu){
+                newProduct.append("Toxicidad", ((FoodMenu) product).isToxic())
+                        .append("RiesgosAlergicos", ((FoodMenu) product).getAllergyRiskIngredients())
+                        .append("FechaDeCaducidad", ((FoodMenu) product).getExpirationDate())
+                        .append("Uso", ((FoodMenu) product).getType())
+                        .append("Proveedor", ((FoodMenu) product).getProvider())
+                        .append("Tipo", "Comida");
+            }
+
+            collectionProduct.insertOne(newProduct);
         }
     }
 
@@ -533,53 +446,31 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionPerson.drop();
 
-        for (Person person : ArrlPerson) {
+        for (Person person: ArrlPerson) {
 
-            //Limpiamos buffer para añadirlo a mongo
-            Document setData = new Document();
-            Document setDataChild = new Document();
-            String type = "Error";
+            Document newPerson = new Document()
+                    .append("idPersona", person.getPersonId())
+                    .append("Nombre", person.getName())
+                    .append("Apellido", person.getLastName())
+                    .append("Estado", person.getStatus());
 
-            setDataChild.put("Nombre", person.getName());
-            setDataChild.put("Apellido", person.getLastName());
-            setDataChild.put("Estado", person.getStatus());
+            if (person instanceof Patient){
+                newPerson.append("VisitasPermitidas", ((Patient) person).isAllowVisitors())
+                        .append("Registro", ((Patient) person).getRegistry())
+                        .append("idHabitacion", ((Patient) person).getRoomId())
+                        .append("Tipo", "Paciente");
 
-            if (person instanceof Employee) {
-                type = "Empleado";
-                Document setDataEmployee = new Document();
-                setDataEmployee.put("Tipo", ((Employee) person).getType());
-                setDataEmployee.put("Sueldo", ((Employee) person).getSalary());
-                setDataEmployee.put("Jornada", ((Employee) person).getShift());
-                setDataEmployee.put("Puesto", ((Employee) person).getJob());
-                setDataChild.put("Datos Laborales", setDataEmployee);
+            }else if (person instanceof Employee){
+                newPerson.append("Uso", ((Employee) person).getType())
+                        .append("Puesto", ((Employee) person).getJob())
+                        .append("Salario", ((Employee) person).getSalary())
+                        .append("Jornada", ((Employee) person).getShift())
+                        .append("Tipo", "Empleado");
 
-            } else if (person instanceof Patient) {
-
-                type = "Paciente";
-                Document setDataPacient = new Document();
-
-                if (((Patient) person).isAllowVisitors()) {
-                    setDataChild.put("Permite Visitas:", "SI");
-                } else {
-                    setDataChild.put("Permite Visitas:", "NO");
-                }
-                if (((Patient) person).getRoomId() != -1) {
-                    setDataChild.put("Habitacion:", ((Patient) person).getRoomId());
-                }
-                if (((Patient) person).getRegistry().size() > 0) {
-
-                    for (String a : ((Patient) person).getRegistry()) {
-                        setDataPacient.put(a.substring(0, 7), a.substring(8));
-                    }
-                    setDataChild.put("Registro", setDataPacient);
-                }
             }
-            setData.put(type + "@" + person.getPersonId(), setDataChild);
-            collectionPerson.insertOne(setData);
+
+            collectionPerson.insertOne(newPerson);
         }
-
     }
-    */
-
 }
 

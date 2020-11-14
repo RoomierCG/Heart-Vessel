@@ -6,6 +6,7 @@ import objects.transportsystem.transportsystems.vehicle.Vehicle;
 import java.util.ArrayList;
 
 public class CompanyCar extends Vehicle {
+
     private String model;
     private String make;
     private String idPersona;//Dueño
@@ -39,5 +40,13 @@ public class CompanyCar extends Vehicle {
 
     public void setMake(String make) {
         this.make = make;
+    }
+
+    public String getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(String idPersona) {
+        this.idPersona = idPersona;
     }
 }
