@@ -27,6 +27,7 @@ import objects.area.areas.*;
 import javax.crypto.Mac;
 import java.util.ArrayList;
 
+import static database_management.mongo.DownloadBD.downloadAreasBackUp;
 import static java.util.Arrays.asList;
 
 public class QueryDB {
@@ -63,13 +64,14 @@ public class QueryDB {
         collectionTransportSystem = db.getCollection("transportSystem");
 
         //Inializacion de ArrayLists
-        ArrLarea = AuxDB.ArrLarea;
+        ArrLarea = downloadAreasBackUp();
+//        ArrLarea = AuxDB.ArrLarea;
         ArrlPerson = AuxDB.ArrlPerson;
         ArrlProduct = AuxDB.ArrlProduct;
         ArrlProvider = AuxDB.ArrlProvider;
         ArrlTransport = AuxDB.ArrlTransport;
 
-        rellenarTest();
+//        rellenarTest();
 
         updateAreasBackUp();
         updateProviderBackUp();
@@ -169,6 +171,7 @@ public class QueryDB {
         return Object.class;
     }
 
+    //En arreglo
     public static void rellenarTest() {
 
         ArrayList<String> log = new ArrayList<>();
@@ -326,6 +329,8 @@ public class QueryDB {
                 newArea.append("Tipo","Habitacion")
                         .append("idPaciente", ((HabitableRoom) area).getIdPatient());
 
+            }else {
+                newArea.append("Tipo", "Area");
             }
 
             collectionArea.insertOne(newArea);
@@ -386,7 +391,6 @@ public class QueryDB {
         }
     }
 
-    //TODO Revisar los atributos Tipo()
     public static void updateProductBackUp() {
 
         //Borra todos los datos de la coleccion, por pruebas
@@ -443,7 +447,6 @@ public class QueryDB {
             collectionProduct.insertOne(newProduct);
         }
     }
-
 
     public static void updatePeopleBackUp() {
         //Borra todos los datos de la coleccion, por pruebas

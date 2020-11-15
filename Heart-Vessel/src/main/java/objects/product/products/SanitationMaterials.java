@@ -12,6 +12,7 @@ public class SanitationMaterials extends Product {
         super(equipmentId, name, location, status, buyDate);
     }
 
+
     public SanitationMaterials(String equipmentId, String name, String location, String status, String buyDate, String model, String type) {
         super(equipmentId, name, location, status, buyDate);
         this.model = model;

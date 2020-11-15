@@ -7,6 +7,8 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import database_management.AuxDB;
 import objects.area.Area;
+import objects.area.areas.Garaje;
+import objects.area.areas.HabitableRoom;
 import objects.people.Person;
 import objects.product.Product;
 import objects.provider.Provider;
@@ -37,6 +39,15 @@ public class DownloadBD {
 
     public static void main(String[] args) {
 
+        ArrLarea = downloadAreasBackUp();
+        /*ArrlPerson = AuxDB.ArrlPerson;
+        ArrlProduct = AuxDB.ArrlProduct;
+        ArrlProvider = AuxDB.ArrlProvider;
+        ArrlTransport = AuxDB.ArrlTransport;*/
+
+    }
+
+    public static void inicializar(){
         //Inicializacion de conexion BD
         mongoClient = new MongoClient("localhost", 27017);
         db = mongoClient.getDatabase("vessel");
@@ -48,20 +59,11 @@ public class DownloadBD {
         collectionProvider = db.getCollection("provider");
         collectionTransportSystem = db.getCollection("transportSystem");
 
-
-        ArrLarea = downloadAreasBackUp();
-        /*ArrlPerson = AuxDB.ArrlPerson;
-        ArrlProduct = AuxDB.ArrlProduct;
-        ArrlProvider = AuxDB.ArrlProvider;
-        ArrlTransport = AuxDB.ArrlTransport;*/
-
-        /*for (Area a : ArrLarea) {
-            System.out.println(a.getName());
-        }*/
-
     }
 
     public static ArrayList<Area> downloadAreasBackUp(){
+
+        inicializar();
 
         //Tenemos que crear un iterable que sera la coleccion en la que estamos, y el cursos sera la posicion dentro del iterable
         FindIterable<Document> findIterable = collectionArea.find();
@@ -72,20 +74,53 @@ public class DownloadBD {
 
         while(cursor.hasNext()){
 
-            Area area = new Area();
             Document nodoArea = cursor.next();
 
-            nodoArea.getObjectId("_id");
+            switch (nodoArea.getString("Tipo")){
+                case "Area":
+                    Area area = new Area(
+                            nodoArea.getString("idArea"),
+                            nodoArea.getString("Nombre"),
+                            nodoArea.getString("Estado"),
+                            nodoArea.getInteger("Planta"),
+                            nodoArea.getInteger("Riesgo"),
+                            (ArrayList<String>) nodoArea.get("Equipamiento"),
+                            (ArrayList<String>) nodoArea.get("Personal")
+                    );
 
-//            area.setIdArea(nodoArea.getString("idArea"));
-//            area.setName(nodoArea.getString("Nombre"));
-//            area.setStatus(nodoArea.getString("Estado"));
-//            area.setFloor(nodoArea.getInteger("Planta"));
-//            area.setRisk(nodoArea.getInteger("Riesgo"));
-//            area.setPersonal(nodoArea.getString(""));
-//            area.setEquipment();
+                    areas.add(area);
+                    break;
 
-            areas.add(area);
+                case "Habitacion":
+                    HabitableRoom room = new HabitableRoom(
+                            nodoArea.getString("idArea"),
+                            nodoArea.getString("Nombre"),
+                            nodoArea.getString("Estado"),
+                            nodoArea.getInteger("Planta"),
+                            nodoArea.getInteger("Riesgo"),
+                            (ArrayList<String>) nodoArea.get("Equipamiento"),
+                            (ArrayList<String>) nodoArea.get("Personal"),
+                            nodoArea.getString("idPaciente")
+                    );
+
+                    areas.add(room);
+                    break;
+
+                case "Garaje":
+                    Garaje garaje = new Garaje(
+                            nodoArea.getString("idArea"),
+                            nodoArea.getString("Nombre"),
+                            nodoArea.getString("Estado"),
+                            nodoArea.getInteger("Planta"),
+                            nodoArea.getInteger("Riesgo"),
+                            (ArrayList<String>) nodoArea.get("Equipamiento"),
+                            (ArrayList<String>) nodoArea.get("Personal"),
+                            (ArrayList<String>) nodoArea.get("Vehiculos")
+                    );
+
+                    areas.add(garaje);
+                    break;
+            }
         }
 
         //Cerramos el cursor para que no de problemas por no dejarle vacio
@@ -93,4 +128,5 @@ public class DownloadBD {
         return areas;
     }
 
+    //TODO hacer download de People, Produc, Provider, TransportSystem
 }
