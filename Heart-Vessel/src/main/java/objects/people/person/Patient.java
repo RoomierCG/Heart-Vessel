@@ -9,15 +9,14 @@ public class Patient extends Person {
     //Status = Enfermo, recuperando, muerto
     private boolean allowVisitors; //Si se permiten visitas
     private ArrayList<String> registry; //Log de paciente
-    private int roomId; //Habitacion donde esta habitando el paciente (debe existir dentro de la lista de habitaciones)
+    private String roomId; //Habitacion donde esta habitando el paciente (debe existir dentro de la lista de habitaciones)
 
     public Patient(String personId, String name, String lastName, String status) {
         super(personId, name, lastName, status);
-        this.roomId = -1;//Negativo significa que no tiene habitacion
         this.registry = new ArrayList<>();
     }
 
-    public Patient(String personId, String name, String lastName, String status, boolean allowVisitors, ArrayList<String> registry, int roomId) {
+    public Patient(String personId, String name, String lastName, String status, boolean allowVisitors, ArrayList<String> registry, String roomId) {
         super(personId, name, lastName, status);
         this.allowVisitors = allowVisitors;
         this.registry = registry;
@@ -41,14 +40,14 @@ public class Patient extends Person {
     }
 
     public void setRegistry(ArrayList<String> registry) {
-        registry = registry;
+        this.registry = registry;
     }
 
-    public int getRoomId() {
+    public String getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
 

@@ -181,9 +181,9 @@ public class QueryDB {
         Employee aPq = new Employee("PEE#01", "Juan", "Tuhzree", "Working", "Medico", "Nocturno", 7000, "Enfermero");
         Employee aPu = new Employee("PEE#02", "Mario", "Jeepetas", "Working", "Limpieza", "Diurno", 5000, "Limpieza de suelos");
 
-        Patient pac1 = new Patient("PEP#01", "Edgar", "Aiurense", "Sin Pilones");
+        Patient pac1 = new Patient("PEP#01", "Edgar", "Aiurense", "Sin Pilones",true, log,"ARH#01");
         Patient pac2 = new Patient("PEP#02", "Eldon", "Calletano", "Buscando Hilos");
-        Patient pac3 = new Patient("PEP#03", "Lkoraz", "Ondeya", "Muerto", true, log, 100001);
+        Patient pac3 = new Patient("PEP#03", "Lkoraz", "Ondeya", "Muerto", true, log, "ARH#05");
 
 
         CleaningEquipment ave = new CleaningEquipment("PRE#02", "Fregona", "ARR#01", "Usado", "10/10/1000");
@@ -198,7 +198,7 @@ public class QueryDB {
         a.add(aPu.getPersonId());
 
         baia.add(avegetal.getEquipmentId());
-        HabitableRoom room = new HabitableRoom("ARH#01", "Habitacion 032", a, "ocupado", baia, 1, 0, 2);
+        HabitableRoom room = new HabitableRoom("ARH#01", "Habitacion 032", a, "ocupado", baia, 1, 0, "PEP#01");
         baia.add(ave.getEquipmentId());
         baia.add(aver.getEquipmentId());
 
@@ -218,11 +218,11 @@ public class QueryDB {
 
         Garaje uff = new Garaje("ARG", a, "Kachow", "En llamas", baia, 1, 3, listaAmbulancias);
 
-        FoodMenu peshcao = new FoodMenu("PRC#01", "Menu Pescado", "Almacen", "Limpio", "10/10/2010", false, null, "20/10/2020");
-        Medicine coca = new Medicine("PRD#01", "Morfina", "Almacen", "Recibido", "10/10/2010", false, null, "20/10/2020");
+        FoodMenu peshcao = new FoodMenu("PRC#01", "Menu Pescado", "Almacen", "Congelado", "10/10/2010", false, "Solido",null,"20/10/2020","PVP#01");
+        Medicine coca = new Medicine("PRD#01", "Morfina", "Almacen", "En Preparacion", "10/10/2010", false, "Liquido", null,"20/10/2020","Oral");
 
-        CleaningProducts Fairy = new CleaningProducts("PRL#01", "Jabon Multi Usos", "Almacen", "Recibido", "10/10/2010", false, "Fairy");
-        CleaningProducts Lejia = new CleaningProducts("PRL#02", "Lejia", "Almacen", "Recibido", "10/10/2010", true, "Lagarto");
+        CleaningProducts Fairy = new CleaningProducts("PRL#01", "Jabon Multi Usos", "Almacen", "Recibido", "10/10/2010", false, "Gel","Fairy");
+        CleaningProducts Lejia = new CleaningProducts("PRL#02", "Lejia", "Almacen", "Recibido", "10/10/2010", true,"Liquido", "Lagarto");
 
         CleaningEquipment Fregona = new CleaningEquipment("PRL#03", "Fregona", "Almacen", "Semi-nuevo", "15/04/2015");
         CleaningEquipment Guantes = new CleaningEquipment("PRL#04", "Guantes", "Almacen", "Nuevos", "15/04/2015");
@@ -366,19 +366,19 @@ public class QueryDB {
                             .append("idPaciente", ((MovementAid) transport).getPatient());
 
             }else if (transport instanceof Ambulance){
-                newTranport.append("Tipo", "Ambulancia")
-                            .append("Personal", ((Ambulance) transport).getPersonal())
+                newTranport.append("Personal", ((Ambulance) transport).getPersonal())
                             .append("Productos", ((Ambulance) transport).getEquipment())
                             .append("Gasolina", ((Ambulance) transport).getGasTank())
-                            .append("Especialidad", ((Ambulance) transport).getType());
+                            .append("Especialidad", ((Ambulance) transport).getType())
+                            .append("Tipo", "Ambulancia");
 
             }else if (transport instanceof CompanyCar){
-                newTranport.append("Tipo", "Vehiculo")
-                            .append("Modelo", ((CompanyCar) transport).getModel())
+                newTranport.append("Modelo", ((CompanyCar) transport).getModel())
                             .append("Marca", ((CompanyCar) transport).getMake())
                             .append("Gasolina", ((CompanyCar) transport).getGasTank())
                             .append("Especialidad", ((CompanyCar) transport).getType())
-                            .append("Dueño", ((CompanyCar) transport).getIdPersona());
+                            .append("Dueño", ((CompanyCar) transport).getIdPersona())
+                            .append("Tipo", "Vehiculo");
 
             }
 
@@ -403,7 +403,7 @@ public class QueryDB {
 
             if (product instanceof SanitationMaterials){
                 newProduct.append("MarcaModelo", ((SanitationMaterials) product).getModel())
-                            .append("Uso", ((SanitationMaterials) product).getType())
+                            .append("Estado", ((SanitationMaterials) product).getType())
                             .append("Tipo","MaterialSanitario");
 
             }else if (product instanceof Machinery){
@@ -413,27 +413,30 @@ public class QueryDB {
 
             }else if (product instanceof CleaningEquipment){
                 newProduct.append("GradoDeRiesgo", ((CleaningEquipment) product).getRiskFactor())
-                            .append("Uso", ((CleaningEquipment) product).getType())
                             .append("Tipo","EquipamientoDeLimpieza");
 
             }else if (product instanceof CleaningProducts){
                 newProduct.append("Marca", ((CleaningProducts) product).getMake())
-                            .append("Toxicidad", ((CleaningProducts) product).isToxic())
+                            .append("Toxico", ((CleaningProducts) product).isToxic())
+                            .append("Estado",((CleaningProducts) product).getType())
                             .append("Tipo", "ProductoDeLimpieza");
 
             }else if (product instanceof Medicine){
-                newProduct.append("Toxicidad", ((Medicine) product).isToxic())
+                newProduct.append("Toxico", ((Medicine) product).isToxic())
                             .append("RiesgosAlergicos", ((Medicine) product).getAllergyRiskIngredients())
                             .append("FechaDeCaducidad", ((Medicine) product).getExpirationDate())
                             .append("ViaDeAdministracion", ((Medicine) product).getAdministered())
+                            .append("Estado",((Medicine) product).getType())
                             .append("Tipo", "Medicinas");
 
+
             }else if (product instanceof FoodMenu){
-                newProduct.append("Toxicidad", ((FoodMenu) product).isToxic())
+                newProduct.append("Toxico", ((FoodMenu) product).isToxic())
                         .append("RiesgosAlergicos", ((FoodMenu) product).getAllergyRiskIngredients())
                         .append("FechaDeCaducidad", ((FoodMenu) product).getExpirationDate())
-                        .append("Uso", ((FoodMenu) product).getType())
+                        .append("Estado", ((FoodMenu) product).getType())
                         .append("Proveedor", ((FoodMenu) product).getProvider())
+                        .append("Estado",((FoodMenu) product).getType())
                         .append("Tipo", "Comida");
             }
 
@@ -461,7 +464,7 @@ public class QueryDB {
                         .append("Tipo", "Paciente");
 
             }else if (person instanceof Employee){
-                newPerson.append("Uso", ((Employee) person).getType())
+                newPerson.append("Departamento", ((Employee) person).getType())
                         .append("Puesto", ((Employee) person).getJob())
                         .append("Salario", ((Employee) person).getSalary())
                         .append("Jornada", ((Employee) person).getShift())

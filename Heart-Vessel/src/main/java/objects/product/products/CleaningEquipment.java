@@ -6,17 +6,16 @@ import java.util.Date;
 
 public class CleaningEquipment extends Product {
     private int riskFactor; //Grado de riesgo que puede producir, como de arriesgado es vs pacientes con problemas de immunidad etc.
-    private String type;   //Liquido, solido, polvo, etc.
+     //Liquido, solido, polvo, etc.
 
 
     public CleaningEquipment(String equipmentId, String name, String location, String status, String buyDate) {
         super(equipmentId, name, location, status, buyDate);
     }
 
-    public CleaningEquipment(String equipmentId, String name, String location, String status, String buyDate, int riskFactor, String type) {
+    public CleaningEquipment(String equipmentId, String name, String location, String status, String buyDate, int riskFactor) {
         super(equipmentId, name, location, status, buyDate);
         this.riskFactor = riskFactor;
-        this.type = type;
     }
 
     public CleaningEquipment() {
@@ -31,11 +30,5 @@ public class CleaningEquipment extends Product {
         this.riskFactor = riskFactor;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 }

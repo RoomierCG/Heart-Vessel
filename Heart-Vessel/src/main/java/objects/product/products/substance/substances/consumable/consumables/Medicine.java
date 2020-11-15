@@ -7,14 +7,12 @@ import java.util.ArrayList;
 public class Medicine extends Consumable {
     private String administered; //Via de administracion eg. oral, injeccion etc
 
-    public Medicine(String equipmentId, String name, String location, String status, String buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, String expirationDate) {
-        super(equipmentId, name, location, status, buyDate, toxic, allergyRiskIngredients, expirationDate);
-    }
-
-    public Medicine(String equipmentId, String name, String location, String status, String buyDate, boolean toxic, ArrayList<String> allergyRiskIngredients, String expirationDate, String administered) {
-        super(equipmentId, name, location, status, buyDate, toxic, allergyRiskIngredients, expirationDate);
+    public Medicine(String equipmentId, String name, String areaName, String status, String buyDate, boolean toxic, String type, ArrayList<String> allergyRiskIngredients, String expirationDate, String administered) {
+        super(equipmentId, name, areaName, status, buyDate, toxic, type, allergyRiskIngredients, expirationDate);
         this.administered = administered;
     }
+
+
 
     public Medicine() {
 
