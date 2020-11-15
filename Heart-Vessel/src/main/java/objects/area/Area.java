@@ -17,7 +17,7 @@ public class Area {
     private int floor; //En que planta se ubica
     private int risk; //Como de arriesgado es
 
-    public Area(String idArea, String name, ArrayList<String> personal, String status, ArrayList<String> equipment, int floor, int risk) {
+    public Area(String idArea, String name, String status, int floor, int risk, ArrayList<String> equipment,ArrayList<String> personal) {
         this.idArea = idArea;
         this.name = name;
         this.personal = personal;

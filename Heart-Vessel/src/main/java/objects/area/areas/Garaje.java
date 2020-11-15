@@ -11,8 +11,8 @@ public class Garaje extends Area {
 
     private ArrayList<String> vehicles; //Los vehiculos que se ubican dentro del garaje en cuestion
 
-    public Garaje(String idArea, ArrayList<String> personal, String name, String status, ArrayList<String> equipment, int floor, int risk, ArrayList<String> vehicles) {
-        super(idArea, name, personal, status, equipment, floor, risk);
+    public Garaje(String idArea, String name, String status, int floor, int risk, ArrayList<String> equipment, ArrayList<String> personal, ArrayList<String> vehicles) {
+        super(idArea, name, status, floor, risk, equipment, personal);
         this.vehicles = vehicles;
     }
 

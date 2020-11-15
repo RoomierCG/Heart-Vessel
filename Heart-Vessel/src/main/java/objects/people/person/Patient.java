@@ -16,7 +16,7 @@ public class Patient extends Person {
         this.registry = new ArrayList<>();
     }
 
-    public Patient(String personId, String name, String lastName, String status, boolean allowVisitors, ArrayList<String> registry, String roomId) {
+    public Patient(String personId, String name, String lastName, String status, boolean allowVisitors, String roomId, ArrayList<String> registry) {
         super(personId, name, lastName, status);
         this.allowVisitors = allowVisitors;
         this.registry = registry;

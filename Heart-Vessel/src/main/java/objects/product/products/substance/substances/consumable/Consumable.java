@@ -10,22 +10,18 @@ public abstract class Consumable extends Substance {
     private String expirationDate;  //Fecha de caducidad
 
 
-    public Consumable(ArrayList<String> allergyRiskIngredients, String expirationDate) {
+    public Consumable( String expirationDate,ArrayList<String> allergyRiskIngredients) {
         this.allergyRiskIngredients = allergyRiskIngredients;
         this.expirationDate = expirationDate;
     }
 
-    public Consumable(String equipmentId, String name, String areaName, String status, String buyDate, boolean toxic, String type, ArrayList<String> allergyRiskIngredients, String expirationDate) {
+    public Consumable(String equipmentId, String name, String areaName, String status, String buyDate, boolean toxic, String type, String expirationDate,ArrayList<String> allergyRiskIngredients) {
         super(equipmentId, name, areaName, status, buyDate, toxic, type);
         this.allergyRiskIngredients = allergyRiskIngredients;
         this.expirationDate = expirationDate;
     }
 
-    public Consumable(boolean toxic, String type, ArrayList<String> allergyRiskIngredients, String expirationDate) {
-        super(toxic, type);
-        this.allergyRiskIngredients = allergyRiskIngredients;
-        this.expirationDate = expirationDate;
-    }
+
 
     public Consumable() {
         super();
