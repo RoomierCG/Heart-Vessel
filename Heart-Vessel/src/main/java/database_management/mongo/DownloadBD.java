@@ -13,6 +13,12 @@ import objects.people.Person;
 import objects.people.person.Employee;
 import objects.people.person.Patient;
 import objects.product.Product;
+import objects.product.products.CleaningEquipment;
+import objects.product.products.Machinery;
+import objects.product.products.SanitationMaterials;
+import objects.product.products.substance.substances.CleaningProducts;
+import objects.product.products.substance.substances.consumable.consumables.FoodMenu;
+import objects.product.products.substance.substances.consumable.consumables.Medicine;
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.MovementAid;
@@ -20,6 +26,7 @@ import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import org.bson.Document;
 
+import javax.crypto.Mac;
 import java.util.ArrayList;
 
 public class DownloadBD {
@@ -275,4 +282,122 @@ public class DownloadBD {
         cursor.close();
         return Trps;
     }
+
+    public static ArrayList<Product> downloadProductBackUp(){
+
+        inicializar();
+
+        //Tenemos que crear un iterable que sera la coleccion en la que estamos, y el cursos sera la posicion dentro del iterable
+        FindIterable<Document> findIterable = collectionProduct.find();
+        MongoCursor<Document> cursor = findIterable.iterator();
+
+        //Arraylist de retorno
+        ArrayList<Product> Trps = new ArrayList<>();
+
+        while(cursor.hasNext()){
+
+            Document nodoProd = cursor.next();
+
+            switch (nodoProd.getString("Tipo")){
+                case "MaterialSanitario":
+                    SanitationMaterials nuevoProd = new SanitationMaterials(
+                            nodoProd.getString("idProducto"),
+                            nodoProd.getString("Nombre"),
+                            nodoProd.getString("Area"),
+                            nodoProd.getString("Estado"),
+                            nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getString("MarcaModelo"),
+                            nodoProd.getString("Uso")
+                    );
+
+                    Trps.add(nuevoProd);
+                    break;
+
+                case "Maquinaria":
+                    Machinery nuevaMach = new Machinery(
+                            nodoProd.getString("idProducto"),
+                            nodoProd.getString("Nombre"),
+                            nodoProd.getString("Area"),
+                            nodoProd.getString("Estado"),
+                            nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("ConsumoElectrico"),
+                            nodoProd.getString("Marca")
+                    );
+
+                    Trps.add(nuevaMach);
+                    break;
+
+                case "EquipamientoDeLimpieza":
+                    CleaningEquipment nuevoCE = new CleaningEquipment(
+                            nodoProd.getString("idProducto"),
+                            nodoProd.getString("Nombre"),
+                            nodoProd.getString("Area"),
+                            nodoProd.getString("Estado"),
+                            nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("GradoDeRiesgo")
+                    );
+
+                    Trps.add(nuevoCE);
+                    break;
+
+                case "ProductoDeLimpieza":
+                    CleaningProducts nuevoCP = new CleaningProducts(
+                            nodoProd.getString("idProducto"),
+                            nodoProd.getString("Nombre"),
+                            nodoProd.getString("Area"),
+                            nodoProd.getString("Estado"),
+                            nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getBoolean("Toxico"),
+                            nodoProd.getString("Uso"),
+                            nodoProd.getString("Marca")
+                    );
+
+                    Trps.add(nuevoCP);
+                    break;
+
+                case "Medicinas":
+                    Medicine nuevaM = new Medicine(
+                            nodoProd.getString("idProducto"),
+                            nodoProd.getString("Nombre"),
+                            nodoProd.getString("Area"),
+                            nodoProd.getString("Estado"),
+                            nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getBoolean("Toxico"),
+                            nodoProd.getString("Uso"),
+                            nodoProd.getString("ViaDeAdministracion"),
+                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos")
+                    );
+
+                    Trps.add(nuevaM);
+                    break;
+
+                case "Comida":
+                    FoodMenu nuevaF = new FoodMenu(
+                            nodoProd.getString("idProducto"),
+                            nodoProd.getString("Nombre"),
+                            nodoProd.getString("Area"),
+                            nodoProd.getString("Estado"),
+                            nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getBoolean("Toxico"),
+                            nodoProd.getString("Uso"),
+                            nodoProd.getString("Proveedor"),
+                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos")
+                    );
+
+                    Trps.add(nuevaF);
+                    break;
+
+
+            }
+        }
+
+        //Cerramos el cursor para que no de problemas por no dejarle vacio
+        cursor.close();
+        return Trps;
+    }
 }
+
+
+

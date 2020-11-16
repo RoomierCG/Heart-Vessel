@@ -8,25 +8,17 @@ public abstract class Product {
     protected String equipmentId;  //Identificador
     protected String name;   //Nombre
     //TODO: Revisar validez de existencia de variable location, fumarnos otro porro, another one
-    protected String areaName;
+    protected String areaId;
     protected String status; //Variable dependiendo de hijo
     protected String buyDate; //Fecha de compra
 
 
-    public Product(String equipmentId, String name, String areaName, String status, String buyDate) {
+    public Product(String equipmentId, String name, String areaId, String status, String buyDate) {
         this.equipmentId = equipmentId;
         this.name = name;
-        this.areaName = areaName;
+        this.areaId = areaId;
         this.status = status;
         this.buyDate = buyDate;
-    }
-
-    public String getAreaName() {
-        return areaName;
-    }
-
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
     }
 
     public Product() {
@@ -50,12 +42,12 @@ public abstract class Product {
         this.name = name;
     }
 
-    public String getIdArea() {
-        return areaName;
+    public String getAreaId() {
+        return areaId;
     }
 
-    public void setIdArea(String areaName) {
-        this.areaName = areaName;
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     public String getStatus() {

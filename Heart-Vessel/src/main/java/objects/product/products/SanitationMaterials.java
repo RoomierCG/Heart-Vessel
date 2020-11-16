@@ -8,13 +8,11 @@ public class SanitationMaterials extends Product {
     private String model; //Marca/modelo del objeto
     private String type;  //Herramiento, Consumible (eg. escarpelo vs vendas)
 
-    public SanitationMaterials(String equipmentId, String name, String location, String status, String buyDate) {
-        super(equipmentId, name, location, status, buyDate);
-    }
 
 
-    public SanitationMaterials(String equipmentId, String name, String location, String status, String buyDate, String model, String type) {
-        super(equipmentId, name, location, status, buyDate);
+
+    public SanitationMaterials(String equipmentId, String name, String areaId, String status, String buyDate, String model, String type) {
+        super(equipmentId, name, areaId, status, buyDate);
         this.model = model;
         this.type = type;
     }

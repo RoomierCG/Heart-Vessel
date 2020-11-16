@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Medicine extends Consumable {
     private String administered; //Via de administracion eg. oral, injeccion etc
 
-    public Medicine(String equipmentId, String name, String areaName, String status, String buyDate, String expirationDates, boolean toxic, String type, String administered, ArrayList<String> allergyRiskIngredients) {
-        super(equipmentId, name, areaName, status, buyDate, expirationDates, toxic, type, allergyRiskIngredients);
+    public Medicine(String equipmentId, String name, String areaId, String status, String buyDate, String expirationDates, boolean toxic, String type, String administered, ArrayList<String> allergyRiskIngredients) {
+        super(equipmentId, name, areaId, status, buyDate, expirationDates, toxic, type, allergyRiskIngredients);
         this.administered = administered;
     }
 
