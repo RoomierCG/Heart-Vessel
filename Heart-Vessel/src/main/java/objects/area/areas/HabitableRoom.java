@@ -7,7 +7,7 @@ public class HabitableRoom extends Area {
 
     private String idPatient; //Paciente que habita la habitacion
 
-    public HabitableRoom(String idArea, String name, String status, int floor, int risk, ArrayList<String> equipment, ArrayList<String> personal, String idPatient) {
+    public HabitableRoom(String idArea, String name, String status, int floor, int risk, String idPatient, ArrayList<String> equipment, ArrayList<String> personal) {
         super(idArea, name, status, floor, risk, equipment, personal);
         this.idPatient = idPatient;
     }

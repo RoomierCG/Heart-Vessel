@@ -177,52 +177,70 @@ public class QueryDB {
         ArrayList<String> log = new ArrayList<>();
         log.add("16:43 | Ingresado");
         log.add("16:50 | Examinacion");
-        log.add("17:30 | Inicio Tratamiento Anti-Zergling de Fanatazil ");
-        log.add("19:34 | Transportado a habitacion 100001 para estancia nocturna");
+        log.add("17:30 | Inicio Tratamiento Reduccion Zerguna con Fanatazil ");
+        log.add("19:34 | Transportado listaPersonal habitacion 01 para estancia nocturna");
 
         Employee aPE = new Employee("PEE#04", "Peter", "Yajodeh", "Working", "Medico", "Diurno", 12500, "Cirujano");
         Employee aPq = new Employee("PEE#01", "Juan", "Tuhzree", "Working", "Medico", "Nocturno", 7000, "Enfermero");
         Employee aPu = new Employee("PEE#02", "Mario", "Jeepetas", "Working", "Limpieza", "Diurno", 5000, "Limpieza de suelos");
 
-        Patient pac1 = new Patient("PEP#01", "Edgar", "Aiurense", "Sin Pilones",true, log,"ARH#01");
+        Patient pac1 = new Patient("PEP#01", "Edgar", "Aiurense", "Sin Pilones",true, "ARH#01",log);
         Patient pac2 = new Patient("PEP#02", "Eldon", "Calletano", "Buscando Hilos");
-        Patient pac3 = new Patient("PEP#03", "Lkoraz", "Ondeya", "Muerto", true, log, "ARH#05");
+        log.clear();
+        log.add("12:34 | Se murio");
+        log.add("12:35 | F en el chat");
+        Patient pac3 = new Patient("PEP#03", "Lkoraz", "Ondeya", "Muerto", false, "ARH#05", log);
 
 
         CleaningEquipment ave = new CleaningEquipment("PRE#02", "Fregona", "ARR#01", "Usado", "10/10/1000");
         CleaningEquipment aver = new CleaningEquipment("PRE#02", "Aspiradora", "ARR#01", "Cyka-Blyat", "10/10/1000");
         CleaningEquipment avegetal = new CleaningEquipment("PRE#03", "Escoba", "ARR#01", "Vacia", "10/10/1000");
 
-        ArrayList<String> baia = new ArrayList<>();
+        ArrayList<String> listaEquipamiento = new ArrayList<>();
 
-        ArrayList<String> a = new ArrayList<>();
-        a.add(aPE.getPersonId());
-        a.add(aPq.getPersonId());
-        a.add(aPu.getPersonId());
+        ArrayList<String> listaPersonal = new ArrayList<String>(){
+            {
+                add(aPE.getPersonId());
+                add(aPq.getPersonId());
+                add(aPu.getPersonId());
+            }
+        };
 
-        baia.add(avegetal.getEquipmentId());
-        HabitableRoom room = new HabitableRoom("ARH#01", "Habitacion 032", a, "ocupado", baia, 1, 0, "PEP#01");
-        baia.add(ave.getEquipmentId());
-        baia.add(aver.getEquipmentId());
-
-
-        Ambulance uno = new Ambulance("TVA#01", "Aparcado", "Tercera Edad", a, 24, baia);
-        Ambulance dos = new Ambulance("TVA#02", "En patrulla", "Accidentes Traumas y Golpes", a, 24, baia);
-        Ambulance tres = new Ambulance("TVA#03", "En ruta a llamada de auxilio", "Toxicos", a, 24, baia);
-
-        ArrayList<String> listaAmbulancias = new ArrayList<>();
-        listaAmbulancias.add(uno.getTransportId());
-        listaAmbulancias.add(dos.getTransportId());
-        listaAmbulancias.add(tres.getTransportId());
+        listaEquipamiento.add(avegetal.getEquipmentId());
+        HabitableRoom room = new HabitableRoom("ARH#01", "Habitacion 032", "Ocupado", 1,2, "#PEP#01", listaEquipamiento, listaPersonal);
+        listaEquipamiento.add(ave.getEquipmentId());
+        HabitableRoom room2 = new HabitableRoom("ARH#02", "Habitacion 033", "Ocupado", 1,2, "#PEP#02", listaEquipamiento, listaPersonal);
+        listaEquipamiento.add(aver.getEquipmentId());
 
 
-        Area aasd = new Area("ARR#01", "Almacen", a, "vacio", baia, 2, 1);
+        Ambulance uno = new Ambulance("TVA#01", "Aparcado", "Tercera Edad", 24,listaEquipamiento , listaPersonal);
+        Ambulance dos = new Ambulance("TVA#02", "En patrulla", "Accidentes Traumas y Golpes",24 , listaEquipamiento,listaPersonal);
+        Ambulance tres = new Ambulance("TVA#03", "En ruta listaPersonal llamada de auxilio", "Toxicos", 24, listaEquipamiento, listaPersonal);
+
+        ArrayList<String> listaAmbulancias = new ArrayList<String>(){
+            {
+                add(uno.getTransportId());
+                add(dos.getTransportId());
+                add(tres.getTransportId());
+            }
+        };
 
 
-        Garaje uff = new Garaje("ARG", a, "Kachow", "En llamas", baia, 1, 3, listaAmbulancias);
+        Area aasd = new Area("ARR#01", "Almacen","Limpiado", 0,0, listaEquipamiento, listaPersonal);
 
-        FoodMenu peshcao = new FoodMenu("PRC#01", "Menu Pescado", "Almacen", "Congelado", "10/10/2010", false, "Solido",null,"20/10/2020","PVP#01");
-        Medicine coca = new Medicine("PRD#01", "Morfina", "Almacen", "En Preparacion", "10/10/2010", false, "Liquido", null,"20/10/2020","Oral");
+
+        Garaje uff = new Garaje("ARG", "Kachow", "En llamas", 1, 0,listaPersonal,listaEquipamiento,listaAmbulancias);
+
+        ArrayList<String> ingreds = new ArrayList<String>(){
+            {
+                add("Ingrediente 1");
+                add("Ingrediente 2");
+                add("Ingrediente 3");
+            }
+        };
+
+        FoodMenu peshcao = new FoodMenu("PRC#01", "Menu Pescado", "Almacen", "Congelado", "10/10/2010","20/10/2020", false,"Solido","PVP#01",ingreds);
+        Medicine coca = new Medicine("PRD#01", "Morfina", "Almacen", "En Preparacion", "10/10/2010","20/10/2020" ,false , "Liquido","Oral",ingreds);
 
         CleaningProducts Fairy = new CleaningProducts("PRL#01", "Jabon Multi Usos", "Almacen", "Recibido", "10/10/2010", false, "Gel","Fairy");
         CleaningProducts Lejia = new CleaningProducts("PRL#02", "Lejia", "Almacen", "Recibido", "10/10/2010", true,"Liquido", "Lagarto");
@@ -233,13 +251,13 @@ public class QueryDB {
         MovementAid muletas = new MovementAid("TAM#01", "Adultos", null, "ARR#01");
 
         Machinery xRay = new Machinery("PRM#01", "Maquina Rayos X", "Almacen", "En uso", "17/05/2005", 3000, "Aiur");
-        baia.clear();
+        listaEquipamiento.clear();
 
-        baia.add(xRay.getEquipmentId());
-        baia.add(coca.getEquipmentId());
-        baia.add(Fairy.getEquipmentId());
+        listaEquipamiento.add(xRay.getEquipmentId());
+        listaEquipamiento.add(coca.getEquipmentId());
+        listaEquipamiento.add(Fairy.getEquipmentId());
 
-        Area xrayRoom = new Area("ARR#02", "Sala Rayos X", a, "ocupado", baia, 3, 3);
+        Area xrayRoom = new Area("ARR#02", "Sala Rayos X", "ocupado", 3, 3,listaEquipamiento,listaPersonal);
 
         SanitationMaterials vendas = new SanitationMaterials("PRS#01", "Vendas", "Almacen", "Nuevo", "09/09/2009");
 
