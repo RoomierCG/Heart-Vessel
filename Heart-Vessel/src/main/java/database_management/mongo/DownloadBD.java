@@ -98,9 +98,9 @@ public class DownloadBD {
                             nodoArea.getString("Estado"),
                             nodoArea.getInteger("Planta"),
                             nodoArea.getInteger("Riesgo"),
-                            (ArrayList<String>) nodoArea.get("Equipamiento"),
+                            nodoArea.getString("idPaciente"),
                             (ArrayList<String>) nodoArea.get("Personal"),
-                            nodoArea.getString("idPaciente")
+                            (ArrayList<String>) nodoArea.get("Equipamiento")
                     );
 
                     areas.add(room);
@@ -128,5 +128,32 @@ public class DownloadBD {
         return areas;
     }
 
-    //TODO hacer download de People, Produc, Provider, TransportSystem
+    public static ArrayList<Person> downloadPersonBackUp(){
+
+        inicializar();
+
+        //Tenemos que crear un iterable que sera la coleccion en la que estamos, y el cursos sera la posicion dentro del iterable
+        FindIterable<Document> findIterable = collectionPerson.find();
+        MongoCursor<Document> cursor = findIterable.iterator();
+        ArrayList<Person> people = new ArrayList<>();
+
+        while(cursor.hasNext()){
+
+            Document nodoArea = cursor.next();
+
+            switch (nodoArea.getString("Tipo")){
+                case "Paciente":
+
+
+                    break;
+
+                case "Empleado":
+
+                    break;
+            }
+        }
+
+        return people;
+    }
+
 }

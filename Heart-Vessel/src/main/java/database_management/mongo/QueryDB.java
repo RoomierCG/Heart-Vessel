@@ -282,6 +282,7 @@ public class QueryDB {
         + 1 Proveedor
         + 1 Movement Aid
          */
+
         {
             ArrlPerson.add(aPE);
             ArrlPerson.add(aPq);
