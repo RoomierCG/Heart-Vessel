@@ -64,14 +64,14 @@ public class QueryDB {
         collectionTransportSystem = db.getCollection("transportSystem");
 
         //Inializacion de ArrayLists
-        ArrLarea = downloadAreasBackUp();
-//        ArrLarea = AuxDB.ArrLarea;
+//        ArrLarea = downloadAreasBackUp();
+        ArrLarea = AuxDB.ArrLarea;
         ArrlPerson = AuxDB.ArrlPerson;
         ArrlProduct = AuxDB.ArrlProduct;
         ArrlProvider = AuxDB.ArrlProvider;
         ArrlTransport = AuxDB.ArrlTransport;
 
-//        rellenarTest();
+        rellenarTest();
 
         updateAreasBackUp();
         updateProviderBackUp();
