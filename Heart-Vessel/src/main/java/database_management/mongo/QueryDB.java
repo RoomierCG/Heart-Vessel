@@ -18,18 +18,12 @@ import objects.product.products.substance.substances.consumable.consumables.Medi
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.MovementAid;
-import objects.transportsystem.transportsystems.vehicle.Vehicle;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import org.bson.Document;
 import objects.area.areas.*;
-import service.utility.Decoder;
 
-import javax.crypto.Mac;
 import java.util.ArrayList;
-
-import static database_management.mongo.DownloadBD.downloadAreasBackUp;
-import static java.util.Arrays.asList;
 
 public class QueryDB {
 
@@ -44,12 +38,8 @@ public class QueryDB {
     private static MongoCollection<Document> collectionProduct;
     private static MongoCollection<Document> collectionProvider;
 
-    //Declaracion de ArrayLists
-    private static ArrayList<Area> ArrLarea;
-    private static ArrayList<Person> ArrlPerson;
-    private static ArrayList<Product> ArrlProduct;
-    private static ArrayList<Provider> ArrlProvider;
-    private static ArrayList<Transport> ArrlTransport;
+   
+    
 
     public static void main(String[] args) {
 
@@ -65,12 +55,9 @@ public class QueryDB {
         collectionTransportSystem = db.getCollection("transportSystem");
 
         //Inializacion de ArrayLists
-//        ArrLarea = downloadAreasBackUp();
-        ArrLarea = AuxDB.ArrLarea;
-        ArrlPerson = AuxDB.ArrlPerson;
-        ArrlProduct = AuxDB.ArrlProduct;
-        ArrlProvider = AuxDB.ArrlProvider;
-        ArrlTransport = AuxDB.ArrlTransport;
+//        AuxDB.ArrLarea = downloadAreasBackUp();
+       
+
 
         rellenarTest();
 
@@ -196,40 +183,40 @@ public class QueryDB {
          */
 
         {
-            ArrlPerson.add(aPE);
-            ArrlPerson.add(aPq);
-            ArrlPerson.add(aPu);
+            AuxDB.ArrlPerson.add(aPE);
+            AuxDB.ArrlPerson.add(aPq);
+            AuxDB.ArrlPerson.add(aPu);
 
-            ArrlPerson.add(pac1);
-            ArrlPerson.add(pac2);
-            ArrlPerson.add(pac3);
+            AuxDB.ArrlPerson.add(pac1);
+            AuxDB.ArrlPerson.add(pac2);
+            AuxDB.ArrlPerson.add(pac3);
 
-            ArrlProduct.add(ave);
-            ArrlProduct.add(aver);
-            ArrlProduct.add(avegetal);
+            AuxDB.ArrlProduct.add(ave);
+            AuxDB.ArrlProduct.add(aver);
+            AuxDB.ArrlProduct.add(avegetal);
 
-            ArrlTransport.add(uno);
-            ArrlTransport.add(dos);
-            ArrlTransport.add(tres);
-            ArrlTransport.add(Elbuga);
-            ArrlTransport.add(muletas);
+            AuxDB.ArrlTransport.add(uno);
+            AuxDB.ArrlTransport.add(dos);
+            AuxDB.ArrlTransport.add(tres);
+            AuxDB.ArrlTransport.add(Elbuga);
+            AuxDB.ArrlTransport.add(muletas);
 
-            ArrLarea.add(room);
-            ArrLarea.add(aasd);
-            ArrLarea.add(uff);
-            ArrLarea.add(xrayRoom);
+            AuxDB.ArrLarea.add(room);
+            AuxDB.ArrLarea.add(aasd);
+            AuxDB.ArrLarea.add(uff);
+            AuxDB.ArrLarea.add(xrayRoom);
 
-            ArrlProduct.add(peshcao);
-            ArrlProduct.add(coca);
-            ArrlProduct.add(Fairy);
-            ArrlProduct.add(Lejia);
-            ArrlProduct.add(Fregona);
-            ArrlProduct.add(Guantes);
-            ArrlProduct.add(xRay);
-            ArrlProduct.add(vendas);
+            AuxDB.ArrlProduct.add(peshcao);
+            AuxDB.ArrlProduct.add(coca);
+            AuxDB.ArrlProduct.add(Fairy);
+            AuxDB.ArrlProduct.add(Lejia);
+            AuxDB.ArrlProduct.add(Fregona);
+            AuxDB.ArrlProduct.add(Guantes);
+            AuxDB.ArrlProduct.add(xRay);
+            AuxDB.ArrlProduct.add(vendas);
 
 
-            ArrlProvider.add(profesionalVerdor);
+            AuxDB.ArrlProvider.add(profesionalVerdor);
 
 
         }
@@ -241,7 +228,7 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionArea.drop();
 
-        for (Area area : ArrLarea) {
+        for (Area area : AuxDB.ArrLarea) {
 
             Document newArea = new Document()
                     .append("idArea", area.getIdArea())
@@ -273,7 +260,7 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionProvider.drop();
 
-        for (Provider provider: ArrlProvider) {
+        for (Provider provider: AuxDB.ArrlProvider) {
 
             collectionProvider.insertOne(new Document()
                     .append("idProveedor", provider.getIdProvider())
@@ -290,7 +277,7 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionTransportSystem.drop();
 
-        for (Transport transport: ArrlTransport) {
+        for (Transport transport: AuxDB.ArrlTransport) {
 
             Document newTranport = new Document()
                     .append("idTransporte", transport.getTransportId())
@@ -327,7 +314,7 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionProduct.drop();
 
-        for (Product product: ArrlProduct) {
+        for (Product product: AuxDB.ArrlProduct) {
 
             Document newProduct = new Document()
                     .append("idProducto", product.getEquipmentId())
@@ -383,7 +370,7 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionPerson.drop();
 
-        for (Person person: ArrlPerson) {
+        for (Person person: AuxDB.ArrlPerson) {
 
             Document newPerson = new Document()
                     .append("idPersona", person.getPersonId())
