@@ -28,5 +28,6 @@ public class HabitableRoom extends Area {
         super.askArea();
     }
 
+
 }
 
