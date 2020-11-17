@@ -1,5 +1,6 @@
 package service.utility;
 
+import database_management.AuxDB;
 import objects.area.Area;
 import objects.area.areas.Garaje;
 import objects.area.areas.HabitableRoom;
@@ -19,9 +20,15 @@ import objects.transportsystem.transportsystems.MovementAid;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 
+import java.util.ArrayList;
+
 import static database_management.AuxDB.*;
 
-public class Decoder {
+
+public class OpsID {
+
+    public static ArrayList<ID> EmptyIDs = new ArrayList<>();
+
     public static Object decodeID(String id) {
         String inicial = id.substring(0, 3);
         Object resultado = null;
@@ -121,5 +128,22 @@ public class Decoder {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static String generateID(String prefix){
+
+        for(ID a : EmptyIDs) {
+            if (a.getType().equals(prefix)) {
+                EmptyIDs.remove(a);
+                return prefix + a.getNumVal();
+            }
+        }
+        for(ID max : MaxIDs){
+            if(max.getType().equals(prefix)){
+                max.increment();
+                return  prefix + max.getNumVal();
+            }
+        }
+        return prefix+"1";
     }
 }
