@@ -54,8 +54,8 @@ public class DownloadBD {
         ArrLarea = downloadAreasBackUp();
         ArrlPerson = downloadPersonBackUp();
         ArrlProvider = downloadProviderBackUp();
-        /*ArrlProvider = AuxDB.ArrlProvider;
-        ArrlTransport = AuxDB.ArrlTransport;*/
+        ArrlProduct = downloadProductBackUp();
+        ArrlTransport = downloadTransportBackUp();
 
     }
 
@@ -388,8 +388,6 @@ public class DownloadBD {
 
                     Trps.add(nuevaF);
                     break;
-
-
             }
         }
 

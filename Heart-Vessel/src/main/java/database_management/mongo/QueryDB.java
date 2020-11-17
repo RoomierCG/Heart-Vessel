@@ -28,7 +28,7 @@ import service.utility.Decoder;
 import javax.crypto.Mac;
 import java.util.ArrayList;
 
-import static database_management.mongo.DownloadBD.downloadAreasBackUp;
+import static database_management.mongo.DownloadBD.*;
 import static java.util.Arrays.asList;
 
 public class QueryDB {
@@ -65,14 +65,19 @@ public class QueryDB {
         collectionTransportSystem = db.getCollection("transportSystem");
 
         //Inializacion de ArrayLists
-//        ArrLarea = downloadAreasBackUp();
-        ArrLarea = AuxDB.ArrLarea;
+        ArrLarea = downloadAreasBackUp();
+        ArrlPerson = downloadPersonBackUp();
+        ArrlProduct = downloadProductBackUp();
+        ArrlProvider = downloadProviderBackUp();
+        ArrlTransport = downloadTransportBackUp();
+
+        /*ArrLarea = AuxDB.ArrLarea;
         ArrlPerson = AuxDB.ArrlPerson;
         ArrlProduct = AuxDB.ArrlProduct;
         ArrlProvider = AuxDB.ArrlProvider;
-        ArrlTransport = AuxDB.ArrlTransport;
+        ArrlTransport = AuxDB.ArrlTransport;*/
 
-        rellenarTest();
+//        rellenarTest();
 
         updateAreasBackUp();
         updateProviderBackUp();
