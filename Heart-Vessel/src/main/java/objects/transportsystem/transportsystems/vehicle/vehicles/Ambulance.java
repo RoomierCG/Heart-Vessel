@@ -11,9 +11,7 @@ public class Ambulance extends Vehicle {
     private ArrayList<String> equipment;
     private ArrayList<String> personal;
 
-    public Ambulance(String transportId, String status, String type, int gasTank) {
-        super(transportId, status, type, gasTank);
-    }
+
 
     public Ambulance(String transportId, String status, String type, int gasTank,ArrayList<String> personal, ArrayList<String> equipment) {
         super(transportId, status, type, gasTank);

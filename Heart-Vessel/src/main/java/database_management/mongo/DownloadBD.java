@@ -251,7 +251,7 @@ public class DownloadBD {
 
                 case "Ambulancia":
                     Ambulance nuevoAmbu = new Ambulance(
-                            nodoTrp.getString("idArea"),
+                            nodoTrp.getString("idTransporte"),
                             nodoTrp.getString("Estado"),
                             nodoTrp.getString("Especialidad"),
                             nodoTrp.getInteger("Gasolina"),
