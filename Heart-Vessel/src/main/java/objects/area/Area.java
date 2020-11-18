@@ -5,6 +5,7 @@ import objects.people.Person;
 import java.util.ArrayList;
 
 import objects.product.Product;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
 
 public class Area {
@@ -87,14 +88,18 @@ public class Area {
         this.risk = risk;
     }
 
-    public void askArea(){
-        this.personal = null;
-        this.status = UserInteractions.strRequest("Introduzca el estado");
-        this.equipment = null;
-        this.floor = 0;
-        //TODO Revisar la categoria de riesgos
-        this.risk = UserInteractions.numRequest("Introduzca el numero de riesgo adecuado entre 1 y 10",1,10);
+    public static void askArea(){
+        String op = "0";
+        do{
+            op = UserInteractions.strRequest("Introduzca el ID de la persona para añadirle a la lista del personal o nada si desea continuar");
+            System.out.println(OpsID.decodeID(op));
 
+        }while(!op.isEmpty());
+        System.out.println("pen");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(UserInteractions.idRequest());
     }
 
 }

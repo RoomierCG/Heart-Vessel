@@ -1,6 +1,8 @@
 package service.utility;
 
 
+import database_management.AuxDB;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -11,11 +13,14 @@ public class UserInteractions {
 
     public static int numRequest(String prompt){
         int number = 0;
-        System.out.println(prompt);
+        if(!prompt.equals(null)) {
+            System.out.println(prompt);
+        }
         try{
             number = sc.nextInt();
         }catch (Exception e){
             System.out.println("formato incorrecto");
+            sc.nextLine();
             numRequest(prompt);
         }
         return number;
@@ -69,6 +74,21 @@ public class UserInteractions {
 
     }
 
+    public static String idRequest(){
+        int TamMax = AuxDB.MaxIDs.size();
+        for (int i = 0;i<TamMax;i+=2) {
+            if(i==TamMax-1 && (TamMax%2 == 1)) {
+
+                System.out.print((i + 1) + ". " + AuxDB.MaxIDs.get(i).getVisualType());
+            }
+            else{
+                System.out.printf("%-30.30s  %-30.30s%n", ((i + 1) + ". " + AuxDB.MaxIDs.get(i).getVisualType()), ((i + 2) + ". " + AuxDB.MaxIDs.get(i + 1).getVisualType()));
+            }
+        }
+        System.out.println("\nSeleccione el tipo deseado");
+        int opc = UserInteractions.numRequest(null,1,TamMax+1);
+        return "a";
+    }
 
     public static String dateRequest(){
 
