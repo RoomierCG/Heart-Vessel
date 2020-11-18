@@ -23,23 +23,25 @@ public class AuxDB {
 
     public static ArrayList<Transport> ArrlTransport = new ArrayList<>();
 
+    public static ArrayList<ID> EmptyIDs = new ArrayList<>();
+
     public static ArrayList<ID> MaxIDs = new ArrayList<ID>(){
         {
-            add(new ID(0,"PEE"));
-            add(new ID(0,"PEP"));
-            add(new ID(0,"PRS"));
-            add(new ID(0,"PRM"));
-            add(new ID(0,"PRE"));
-            add(new ID(0,"PRL"));
-            add(new ID(0,"PRD"));
-            add(new ID(0,"PRC"));
-            add(new ID(0,"PVP"));
-            add(new ID(0,"TRM"));
-            add(new ID(0,"TRA"));
-            add(new ID(0,"TRC"));
-            add(new ID(0,"ARR"));
-            add(new ID(0,"ARG"));
-            add(new ID(0,"ARH"));
+            add(new ID(0,"PEE","Empleado"));
+            add(new ID(0,"PEP","Paciente"));
+            add(new ID(0,"PRS","Material Sanitario"));
+            add(new ID(0,"PRM","Maquinaria"));
+            add(new ID(0,"PRE","Equipamiento de Limpieza"));
+            add(new ID(0,"PRL","Producto de Limpieza"));
+            add(new ID(0,"PRD","Medicamento"));
+            add(new ID(0,"PRC","Comida"));
+            add(new ID(0,"PVP","Proveedor"));
+            add(new ID(0,"TRM","Ayuda Movil"));
+            add(new ID(0,"TRA","Ambulancia"));
+            add(new ID(0,"TRC","Coche de Compania"));
+            add(new ID(0,"ARR","Area Generica"));
+            add(new ID(0,"ARG","Garaje"));
+            add(new ID(0,"ARH","Habitacion"));
 
         }
     };
