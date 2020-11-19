@@ -13,7 +13,7 @@ public class UserInteractions {
 
     public static int numRequest(String prompt){
         int number = 0;
-        if(!prompt.equals(null)) {
+        if(!(prompt.length()==0)){
             System.out.println(prompt);
         }
         try{
@@ -27,7 +27,7 @@ public class UserInteractions {
     }
 
     public static int numRequest(String prompt,int min, int max){
-        int number = 0;
+        int number;
         number = numRequest(prompt + "\nEl valor debe estar entre " + min + " y " + max);
         if (number < min || number > max){
             System.out.println("Valor no dentro de limites especificados");
@@ -63,8 +63,8 @@ public class UserInteractions {
             }
         } else if (max < 0 && min > 0) {
             output = strRequest(prompt + "\nIntroduzca un minimo de " + min + " caracteres.");
-            if (output.length() > max) {
-                System.out.println("Valor demasiado grande");
+            if (output.length() > min) {
+                System.out.println("Valor demasiado pequeño");
                 output = strRequest(prompt, min, max);
             }
         }else{
@@ -74,21 +74,35 @@ public class UserInteractions {
 
     }
 
+
     public static String idRequest(){
+        String prefijoID = "";
         int TamMax = AuxDB.MaxIDs.size();
         for (int i = 0;i<TamMax;i+=2) {
             if(i==TamMax-1 && (TamMax%2 == 1)) {
-
                 System.out.print((i + 1) + ". " + AuxDB.MaxIDs.get(i).getVisualType());
             }
             else{
                 System.out.printf("%-30.30s  %-30.30s%n", ((i + 1) + ". " + AuxDB.MaxIDs.get(i).getVisualType()), ((i + 2) + ". " + AuxDB.MaxIDs.get(i + 1).getVisualType()));
             }
         }
-        System.out.println("\nSeleccione el tipo deseado");
-        int opc = UserInteractions.numRequest(null,1,TamMax+1);
-        return "a";
+        ID claseSelec = AuxDB.MaxIDs.get(numRequest("\n\nSeleccione el tipo deseado",1,TamMax));
+        prefijoID = prefijoID+claseSelec.getType()+"#";
+        String temporal = prefijoID;
+        do{
+            prefijoID = temporal;
+            prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID");//o -1 si desea salir¿
+            System.out.println(prefijoID.substring(4));/*
+            if(prefijoID.substring(4).equals("-1")){
+                return null;
+            };*/
+        }while(OpsID.decodeID(prefijoID)==null);
+        return prefijoID;
     }
+
+
+    
+
 
     public static String dateRequest(){
 

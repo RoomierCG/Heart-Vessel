@@ -96,8 +96,5 @@ public class Area {
         System.out.println("pen");
     }
 
-    public static void main(String[] args) {
-        System.out.println(UserInteractions.idRequest());
-    }
 
 }
