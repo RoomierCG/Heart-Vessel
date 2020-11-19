@@ -10,9 +10,6 @@ public interface Operations {
         return false;
     }
 
-    static Object search(){
-        return null;
-    }
 
     static boolean delete() {
         return false;

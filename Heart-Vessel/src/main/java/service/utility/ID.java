@@ -1,6 +1,6 @@
 package service.utility;
 
-public class ID {
+public class  ID {
     private int numVal;
     private String type;
     private String visualType;

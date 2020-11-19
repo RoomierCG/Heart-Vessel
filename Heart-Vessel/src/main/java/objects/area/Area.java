@@ -70,8 +70,6 @@ public class Area {
         this.status = status;
     }
 
-
-
     public int getFloor() {
         return floor;
     }

@@ -38,7 +38,7 @@ public class AuxDB {
             add(new ID(0,"PVP","Proveedor"));
             add(new ID(0,"TRM","Ayuda Movil"));
             add(new ID(0,"TRA","Ambulancia"));
-            add(new ID(0,"TRC","Coche de Compania"));
+            add(new ID(0,"TRC","Coche de Compañia"));
             add(new ID(0,"ARR","Area Generica"));
             add(new ID(0,"ARG","Garaje"));
             add(new ID(0,"ARH","Habitacion"));
