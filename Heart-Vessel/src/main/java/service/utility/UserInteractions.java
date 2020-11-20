@@ -5,6 +5,7 @@ import database_management.AuxDB;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInteractions {
@@ -34,12 +35,12 @@ public class UserInteractions {
         }
         return number;
     }
-    public static int numRequest(String prompt,int[] ops){
+    public static int numRequest(String prompt, ArrayList<Integer> ops){
         int response;
         boolean valido = false;
         do{
             response = numRequest(prompt);
-            for(int i : ops){
+            for(Integer i : ops){
                 if (i == response){
                     valido = true;
                 }
@@ -98,7 +99,7 @@ public class UserInteractions {
                 System.out.printf("%-30.30s  %-30.30s%n", ((i + 1) + ". " + AuxDB.MaxIDs.get(i).getVisualType()), ((i + 2) + ". " + AuxDB.MaxIDs.get(i + 1).getVisualType()));
             }
         }
-        ID claseSelec = AuxDB.MaxIDs.get(numRequest("\n\nSeleccione el tipo deseado",1,TamMax));
+        ID claseSelec = AuxDB.MaxIDs.get(numRequest("\n\nSeleccione el tipo deseado",1,TamMax)-1);
         prefijoID = prefijoID+claseSelec.getType()+"#";
         String temporal = prefijoID;
         do{
