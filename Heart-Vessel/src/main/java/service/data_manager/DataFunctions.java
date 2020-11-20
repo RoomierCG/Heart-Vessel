@@ -11,12 +11,17 @@ import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
+import visualInterfaces.Constants;
 
 public class DataFunctions implements Operations{
 
     public static void main(String[] args) {
         QueryDB.rellenarTest();
-        delete();
+
+
+
+        modifyMain();
+
     }
 
     public static boolean delete() {
@@ -53,6 +58,7 @@ public class DataFunctions implements Operations{
         Object modifyObject = OpsID.decodeID(UserInteractions.strRequest("Ingrese el ID de lo que quiera modificar"));
 
         if (modifyObject instanceof Area){
+
             return modifyArea(modifyObject);
 
         }else if(modifyObject instanceof Person){
@@ -71,24 +77,17 @@ public class DataFunctions implements Operations{
 
     public static boolean modifyArea(Object modifyObject){
 
-        int option = -1;
+        int [] options = {1,2,3,4,5,6,7};
+//        System.out.println("Que atributo quieres modificar");
+
+        System.out.println(Constants.Omniclase[1][2].length);
+
+        for (int i = 0; i < Constants.Omniclase[0][2].length; i++){
+            System.out.println(Constants.Omniclase[0][2][i]);
+        }
+
 
         if (modifyObject instanceof Garaje){
-
-            do {
-                System.out.println("=== Que desea modificar ===" +
-                        "-- 1º idGaraje --" +
-                        "-- 2º Nombre --" +
-                        "-- 3º Personal --" +
-                        "-- 4º Equipamiento --" +
-                        "-- 5º Estado --" +
-                        "-- 6º Planta --" +
-                        "-- 7º Riesgo --" +
-                        "-- 8º Vehiculos --");
-
-
-
-            }while (option != 0 && option > 8);
 
         }else if (modifyObject instanceof HabitableRoom){
 

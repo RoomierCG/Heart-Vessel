@@ -25,7 +25,6 @@ public class UserInteractions {
         }
         return number;
     }
-
     public static int numRequest(String prompt,int min, int max){
         int number;
         number = numRequest(prompt + "\nEl valor debe estar entre " + min + " y " + max);
@@ -34,6 +33,19 @@ public class UserInteractions {
             return numRequest(prompt,max, min);
         }
         return number;
+    }
+    public static int numRequest(String prompt,int[] ops){
+        int response;
+        boolean valido = false;
+        do{
+            response = numRequest(prompt);
+            for(int i : ops){
+                if (i == response){
+                    valido = true;
+                }
+            }
+        }while(!valido);
+        return response;
     }
 
     public static String strRequest(String prompt){
