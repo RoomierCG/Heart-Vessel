@@ -13,6 +13,8 @@ import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
+import java.util.ArrayList;
+
 public class DataFunctions implements Operations{
 
     public static void main(String[] args) {
@@ -77,25 +79,43 @@ public class DataFunctions implements Operations{
 
     public static boolean modifyArea(Object modifyObject){
 
-        int [] options = {1,2,3,4,5,6,7};
-//        System.out.println("Que atributo quieres modificar");
+        ArrayList<Integer> options = new ArrayList<>();
 
-        System.out.println(Constants.Omniclase[1][2].length);
+        if (modifyObject instanceof Garaje){
+            options = NumListCreator(Constants.Omniclase[1][2].length);
+        }else if (modifyObject instanceof HabitableRoom){
+            options = NumListCreator(Constants.Omniclase[2][2].length);
+        }else{
+            options = NumListCreator(Constants.Omniclase[2][2].length);
+        }
 
         for (int i = 0; i < Constants.Omniclase[0][2].length; i++){
             System.out.println(Constants.Omniclase[0][2][i]);
+
         }
-
-
         if (modifyObject instanceof Garaje){
 
-        }else if (modifyObject instanceof HabitableRoom){
+            for (int i = Constants.Omniclase[0][2].length; i< Constants.Omniclase[1][2].length; i++){
+                System.out.println(Constants.Omniclase[1][2][i]);
+            }
 
-        } else {
+
+        }else if (modifyObject instanceof HabitableRoom){
+            for (int i = Constants.Omniclase[0][2].length; i< Constants.Omniclase[1][2].length; i++){
+                System.out.println(Constants.Omniclase[1][2][i]);
+            }
 
         }
 
         return false;
     }
 
+    public static ArrayList<Integer> NumListCreator(int tope){
+        ArrayList<Integer> Aiur= new ArrayList<>();
+        for(int pilones = 0;pilones<tope;pilones++){
+            Aiur.add(pilones);
+        }
+
+        return Aiur;
+    }
 }
