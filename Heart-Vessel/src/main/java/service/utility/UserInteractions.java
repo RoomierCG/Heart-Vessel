@@ -102,27 +102,21 @@ public class UserInteractions {
         }
         ID claseSelec = AuxDB.MaxIDs.get(numRequest("\n\nSeleccione el tipo deseado",1,TamMax)-1);
         prefijoID = prefijoID+claseSelec.getType()+"#";
-        String temporal = prefijoID;
-        do{
-            prefijoID = temporal;
-            prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID");//o -1 si desea salir¿
-            System.out.println(prefijoID.substring(4));/*
-            if(prefijoID.substring(4).equals("-1")){
-                return null;
-            };*/
-        }while(OpsID.decodeID(prefijoID)==null);
-        return prefijoID;
+        return idRequest(prefijoID);
     }
     public static String idRequest(String forceType){
         String prefijoID = forceType;
         String temporal = prefijoID;
         do{
-            prefijoID = temporal;
-            prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID");//o -1 si desea salir¿
-            System.out.println(prefijoID.substring(4));/*
-            if(prefijoID.substring(4).equals("-1")){
-                return null;
-            };*/
+            temporal = prefijoID;
+            temporal = prefijoID + numRequest("Introduzca el valor numerico del ID, si desea ayuda introduzca /help");//o -1 si desea salir¿
+            if(prefijoID.substring(4).equals("/help")){
+                switch (prefijoID){
+                    case "ARR#":
+
+//TODO: AUN QUEDA NO RALLES
+                }
+            }
         }while(OpsID.decodeID(prefijoID)==null);
         return prefijoID;
     }

@@ -4,6 +4,7 @@ import objects.area.Area;
 import objects.people.Person;
 import objects.product.Product;
 import objects.transportsystem.transportsystems.vehicle.Vehicle;
+import service.data_manager.DataFunctions;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,13 @@ public class Garaje extends Area {
     public Garaje(String idArea, String name, String status, int floor, int risk, ArrayList<String> equipment, ArrayList<String> personal, ArrayList<String> vehicles) {
         super(idArea, name, status, floor, risk, equipment, personal);
         this.vehicles = vehicles;
+    }
+
+    @Override
+    public String[][] getAll() {
+        String[][] arr = super.getAll();
+        String[][] gar = new String[][]{{null}};
+        return DataFunctions.append(arr,gar);
     }
 
     public Garaje() {
@@ -29,7 +37,7 @@ public class Garaje extends Area {
     }
 
     public void askGaraje(){
-        super.askArea();
+        //super.askArea();
         this.vehicles = null;
     }
 

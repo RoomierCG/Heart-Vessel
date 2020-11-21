@@ -28,7 +28,9 @@ public class Area {
         this.floor = floor;
         this.risk = risk;
     }
-
+    public String[][] getAll(){
+        return new String[][]{{idArea},{name},{status},{null},{null}, {String.valueOf(floor)}, {String.valueOf(risk)}};
+    }
     public Area() {}
 
     public ArrayList<String> getEquipment() {
@@ -95,6 +97,8 @@ public class Area {
 
         return null;
     }
+
+
 
     public static void main(String[] args) {
         askArea();
