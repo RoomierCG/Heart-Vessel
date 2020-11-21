@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import objects.product.Product;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
+import visualInterfaces.Constants;
 
 public class Area {
 
@@ -86,15 +87,17 @@ public class Area {
         this.risk = risk;
     }
 
-    public static void askArea(){
-        String op = "0";
-        do{
-            op = UserInteractions.strRequest("Introduzca el ID de la persona para añadirle a la lista del personal o nada si desea continuar");
-            System.out.println(OpsID.decodeID(op));
+    public static Area askArea(){
+        Area newArea = new Area();
+        newArea.setIdArea(OpsID.generateID("ARR"));
+        newArea.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
+        ArrayList<String> personalNuevo = new ArrayList<>();
 
-        }while(!op.isEmpty());
-        System.out.println("pen");
+        return null;
     }
 
+    public static void main(String[] args) {
+        askArea();
+    }
 
 }

@@ -45,8 +45,9 @@ public class OpsID {
                     for (Person person : ArrlPerson) {
                         if (person.getPersonId().equals(id)) {
                             resultado = person;
+                            return resultado;
                         }
-                        return resultado;
+
                     }
                     return null;
 
@@ -67,8 +68,9 @@ public class OpsID {
                     for (Product iterator : ArrlProduct) {
                         if (iterator.getEquipmentId().equals(id)) {
                             resultado = iterator;
+                            return resultado;
                         }
-                        return resultado;
+
                     }
                     return null;
 
@@ -95,8 +97,8 @@ public class OpsID {
                     for (Provider iterator : ArrlProvider) {
                         if (iterator.getIdProvider().equals(id)) {
                             resultado = iterator;
+                            return resultado;
                         }
-                        return resultado;
                     }
                     return null;
                 case "AR":
@@ -110,10 +112,12 @@ public class OpsID {
                     for (Area iterator : ArrLarea) {
                         if (iterator.getIdArea().equals(id)) {
                             resultado = iterator;
+                            return resultado;
                         }
-                        return resultado;
+
                     }
                     return null;
+
 
                 default:
                     System.out.println("Caso no encontrado");
@@ -139,16 +143,16 @@ public class OpsID {
         for (ID a : EmptyIDs) {
             if (a.getType().equals(prefix)) {
                 EmptyIDs.remove(a);
-                return prefix + a.getNumVal();
+                return prefix+"#" + a.getNumVal();
             }
         }
         for (ID max : MaxIDs) {
             if (max.getType().equals(prefix)) {
                 max.increment();
-                return prefix + max.getNumVal();
+                return prefix +"#"+ max.getNumVal();
             }
         }
-        return prefix + "1";
+        return prefix + "#1";
     }
 
 

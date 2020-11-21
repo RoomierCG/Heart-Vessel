@@ -49,6 +49,7 @@ public class UserInteractions {
         return response;
     }
 
+
     public static String strRequest(String prompt){
         String output;
         System.out.println(prompt);
@@ -112,10 +113,19 @@ public class UserInteractions {
         }while(OpsID.decodeID(prefijoID)==null);
         return prefijoID;
     }
-
-
-    
-
+    public static String idRequest(String forceType){
+        String prefijoID = forceType;
+        String temporal = prefijoID;
+        do{
+            prefijoID = temporal;
+            prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID");//o -1 si desea salir¿
+            System.out.println(prefijoID.substring(4));/*
+            if(prefijoID.substring(4).equals("-1")){
+                return null;
+            };*/
+        }while(OpsID.decodeID(prefijoID)==null);
+        return prefijoID;
+    }
 
     public static String dateRequest(){
 
@@ -150,6 +160,5 @@ public class UserInteractions {
         LocalDateTime now = LocalDateTime.now();
         return (dtf.format(now));
     }
-
 
 }
