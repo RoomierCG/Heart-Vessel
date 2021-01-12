@@ -25,9 +25,9 @@ public class DataFunctions implements Operations {
 
         ArrayList<String> atri = new ArrayList<String>() {
             {
+                add("Estado");
+                add("Nombre");
                 add("idArea");
-                add("Vehiculos");
-                add("Riesgo");
             }
         };
         printAll(atri, "ARG#");
@@ -85,7 +85,6 @@ public class DataFunctions implements Operations {
         return false;
     }
 
-    //TODO Resolver modify problemas de asignacion de valores
     public static boolean modifyArea(Object modifyObject) {
 
         ArrayList<Integer> options;
@@ -126,18 +125,22 @@ public class DataFunctions implements Operations {
         for (Integer opio : optionsSelected) {
             switch (opio) {
                 case 1:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setStatus(UserInteractions.strRequest("Ingrese el nuevo Estado"));
+                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setName(UserInteractions.strRequest("Ingrese el nuevo Nombre"));
                     break;
                 case 2:
-//                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setPersonal();
+                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setStatus(UserInteractions.strRequest("Ingrese el nuevo Estado"));
                     break;
                 case 3:
+//                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setPersonal();
                     break;
                 case 4:
+//                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setEquipment();
                     break;
                 case 5:
+                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setFloor(Integer.parseInt(UserInteractions.strRequest("Ingrese la planta a la que se ha movido el area")));
                     break;
                 case 6:
+                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setRisk(Integer.parseInt(UserInteractions.strRequest("Ingresa el nuevo código de riego")));
                     break;
                 case 7:
                     break;
@@ -163,39 +166,40 @@ public class DataFunctions implements Operations {
         return result;
     }
 
-
-
     public static void printAll(ArrayList<String> atribs, String type) {
         ArrayList<String> responses = new ArrayList<>();
         ArrayList<String> listResponse = new ArrayList<>();
         String[] Header = new String[atribs.size()];
         int HCount = 0;
-        switch (type.substring(0,2)) {
+
+        switch (type.substring(0, 2)) {
             case "AR":
                 for (Area a : AuxDB.ArrLarea) {
-                    if(a.getIdArea().startsWith(type)){
+                    if (a.getIdArea().startsWith(type)) {
                         for (int numAtri = 0; numAtri < Constants.Omniclase[0][0][2].length; numAtri++) {
                             if (numAtri == 3 && atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                if(HCount!=atribs.size()){
+                                responses.add(a.getAllSingles()[numAtri][0]);
+                                if (HCount != atribs.size()) {
                                     Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
                                     HCount++;
                                 }
                             } else if (numAtri == 4 && atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                if(HCount!=atribs.size()){
+                                responses.add(a.getAllSingles()[numAtri][0]);
+                                if (HCount != atribs.size()) {
                                     Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
                                     HCount++;
                                 }
-                            }else if (atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                responses.add(a.getAll()[numAtri][0]);
-                                if(HCount!=atribs.size()){
+                            } else if (atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
+                                responses.add(a.getAllSingles()[numAtri][0]);
+                                if (HCount != atribs.size()) {
                                     Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
                                     HCount++;
                                 }
                             }
                         }
-                        if(type.equals("ARG#") && atribs.contains(Constants.Omniclase[0][1][2][7])){
-                            responses.add(a.getAll()[7][0]);
-                            if(HCount!=atribs.size()){
+                        if (type.equals("ARG#") && atribs.contains(Constants.Omniclase[0][1][2][7])) {
+                            responses.add(a.getAllSingles()[7][0]);
+                            if (HCount != atribs.size()) {
                                 Header[HCount] = Constants.Omniclase[0][1][2][7];
                                 HCount++;
                             }
@@ -214,7 +218,7 @@ public class DataFunctions implements Operations {
                         }
                         break;
                     case 2:
-                        System.out.printf("%-30.30s %-30.30s\n", Header[0],Header[1]);
+                        System.out.printf("%-30.30s %-30.30s\n", Header[0], Header[1]);
 
                         System.out.printf("%-30.30s %-30.30s\n", Constants.separtator, Constants.separtator);
                         for (int i = 0; i < responses.size(); i += 2) {

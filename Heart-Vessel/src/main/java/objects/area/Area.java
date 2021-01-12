@@ -3,6 +3,7 @@ package objects.area;
 import objects.people.Person;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import objects.product.Product;
 import service.utility.OpsID;
@@ -28,9 +29,19 @@ public class Area {
         this.floor = floor;
         this.risk = risk;
     }
-    public String[][] getAll(){
-        return new String[][]{{idArea},{name},{status},{null},{null}, {String.valueOf(floor)}, {String.valueOf(risk)}};
+
+    public String[][] getAllSingles(){
+        return new String[][]{{idArea},{name},{status}, {String.valueOf(floor)}, {String.valueOf(risk)}};
     }
+
+    public String [][] getAllList(){
+
+        String [] personal = this.personal.toArray(new String[this.personal.size()]);
+        String [] equipamiento = this.equipment.toArray(new String[this.equipment.size()]);
+
+        return new String[][]{personal, equipamiento};
+    }
+
     public Area() {}
 
     public ArrayList<String> getEquipment() {

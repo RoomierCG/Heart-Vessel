@@ -125,8 +125,8 @@ public class QueryDB {
         };
 
 
-        Area aasd = new Area("ARR#01", "Almacen","Limpiado", 0,0, listaEquipamiento, listaPersonal);
-        Garaje uff = new Garaje("ARG#01", "Kachow", "En llamas", 1, 0,listaPersonal,listaEquipamiento,listaAmbulancias);
+        Area aasd = new Area("ARR#1", "Almacen","Limpiado", 0,0, listaEquipamiento, listaPersonal);
+        Garaje uff = new Garaje("ARG#1", "Kachow", "En llamas", 1, 0,listaPersonal,listaEquipamiento,listaAmbulancias);
 
         ArrayList<String> ingreds = new ArrayList<String>(){
             {
