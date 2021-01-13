@@ -30,9 +30,11 @@ public class Area {
         this.risk = risk;
     }
 
+
     public String[][] getAllSingles(){
         return new String[][]{{idArea},{name},{status}, {String.valueOf(floor)}, {String.valueOf(risk)}};
     }
+
 
     public String [][] getAllList(){
 
@@ -41,6 +43,7 @@ public class Area {
 
         return new String[][]{personal, equipamiento};
     }
+
 
     public Area() {}
 

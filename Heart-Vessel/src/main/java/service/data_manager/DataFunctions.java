@@ -19,20 +19,10 @@ import java.util.Collections;
 public class DataFunctions implements Operations {
 
     public static void main(String[] args) {
+
         QueryDB.rellenarTest();
-
-        // modifyMain();
-
-        ArrayList<String> atri = new ArrayList<String>() {
-            {
-                add("Estado");
-                add("Nombre");
-                add("idArea");
-            }
-        };
-        printAll(atri, "ARG#");
-
-
+        modifyMain();
+//        System.out.println(OpsID.decodeID("ARR#1"));
     }
 
     public static boolean delete() {
@@ -117,9 +107,10 @@ public class DataFunctions implements Operations {
 
             opcion = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", options);
             optionsSelected.add(opcion);
-            options.remove(opcion);
+            options.remove(options.indexOf(opcion));
 
         } while (opcion != 0);
+
 
         Collections.sort(optionsSelected);
         for (Integer opio : optionsSelected) {
@@ -131,10 +122,10 @@ public class DataFunctions implements Operations {
                     AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setStatus(UserInteractions.strRequest("Ingrese el nuevo Estado"));
                     break;
                 case 3:
-//                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setPersonal();
+                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setPersonal(EditList(AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).getPersonal(), "PEE"));
                     break;
                 case 4:
-//                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setEquipment();
+                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setEquipment(EditList(AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).getEquipment(), "PR"));
                     break;
                 case 5:
                     AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setFloor(Integer.parseInt(UserInteractions.strRequest("Ingrese la planta a la que se ha movido el area")));
@@ -143,11 +134,50 @@ public class DataFunctions implements Operations {
                     AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setRisk(Integer.parseInt(UserInteractions.strRequest("Ingresa el nuevo código de riego")));
                     break;
                 case 7:
+                    if (AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))) instanceof HabitableRoom) {
+                        ((HabitableRoom) AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject)))).setIdPatient(UserInteractions.strRequest("Ingrese el nuevo Id del paciente"));
+                    } else {
+                        ((Garaje) AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject)))).setVehicles(EditList(((Garaje) AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject)))).getVehicles(), "TR"));
+                    }
                     break;
             }
         }
 
         return false;
+    }
+
+    public static ArrayList<String> EditList(ArrayList<String> originList, String originType) {
+        switch (UserInteractions.numRequest("\n1. Añadir\n2. Eliminar\n3. Mostrar Lista\n0. Salir", 0, 3)) {
+            case 1:
+                String newId = UserInteractions.idRequest(originType);
+                System.out.println("sfjlskdjlasñjdlkfjlkfdsjfalksdjñl");
+                if (OpsID.decodeID(newId) == null) {
+                    System.out.println("Este id no existe");
+                } else {
+                    originList.add(newId);
+                }
+                originList = EditList(originList, originType);
+                break;
+
+            case 2:
+                String delId = UserInteractions.idRequest(originType);
+                if (!originList.contains(delId)) {
+                    System.out.println("Este id no existe");
+                } else {
+                    originList.remove(delId);
+                }
+                originList = EditList(originList, originType);
+                break;
+
+            case 3:
+                System.out.println("===== Lista siendo editada =====");
+                for (String a : originList) {
+                    System.out.println("      " + a);
+                }
+                originList = EditList(originList, originType);
+
+        }
+        return originList;
     }
 
     public static ArrayList<Integer> NumListCreator(int tope) {

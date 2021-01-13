@@ -2,6 +2,7 @@ package service.utility;
 
 
 import database_management.AuxDB;
+import visualInterfaces.Constants;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -53,6 +54,7 @@ public class UserInteractions {
     public static String strRequest(String prompt){
         String output;
         System.out.println(prompt);
+        sc.nextLine();
         output = sc.nextLine();
 
         return output;
@@ -84,6 +86,7 @@ public class UserInteractions {
         }else{
             output = strRequest("Prompt");
         }
+
         return output;
 
     }
@@ -104,21 +107,35 @@ public class UserInteractions {
         prefijoID = prefijoID+claseSelec.getType()+"#";
         return idRequest(prefijoID);
     }
+
     public static String idRequest(String forceType){
         String prefijoID = forceType;
         String temporal = prefijoID;
-        do{
-            temporal = prefijoID;
-            temporal = prefijoID + numRequest("Introduzca el valor numerico del ID, si desea ayuda introduzca /help");//o -1 si desea salir¿
-            if(prefijoID.substring(4).equals("/help")){
-                switch (prefijoID){
-                    case "ARR#":
 
-//TODO: AUN QUEDA NO RALLES
+        if(forceType.length()==2){
+            ArrayList<String> typeOp = new ArrayList<>();
+
+            for(String[][][] i : Constants.Omniclase){
+                for(int j = 0;j<i.length;j++){
+                    if(i[j][1][0].substring(0,2).equals(forceType)){
+                        for(int found = 0;found<i.length;found++){
+                            typeOp.add(i[found][1][0]);
+                        }
+                        break;
+                    }
                 }
             }
-        }while(OpsID.decodeID(prefijoID)==null);
-        return prefijoID;
+
+            for(int i = 0;i<typeOp.size();i++){
+                System.out.println(typeOp.get(i)+"#"+(i+1));
+            }
+            prefijoID = typeOp.get(UserInteractions.numRequest("Elige la subclase a la que pertenece el ID",1,typeOp.size())-1)+"#";
+        }
+        do{
+            temporal = prefijoID;
+            temporal = prefijoID + numRequest("Introduzca el valor numerico del ID o -1 para salir");//o -1 si desea salir¿
+        }while(OpsID.decodeID(temporal)==null && !(temporal.substring(4).equals("-1")));
+        return temporal;
     }
 
     public static String dateRequest(){

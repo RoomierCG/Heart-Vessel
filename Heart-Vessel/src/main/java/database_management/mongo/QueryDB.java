@@ -112,9 +112,9 @@ public class QueryDB {
         listaEquipamiento.add(aver.getEquipmentId());
 
 
-        Ambulance uno = new Ambulance("TVA#1", "Aparcado", "Tercera Edad", 24,listaEquipamiento , listaPersonal);
-        Ambulance dos = new Ambulance("TVA#2", "En patrulla", "Accidentes Traumas y Golpes",24 , listaEquipamiento,listaPersonal);
-        Ambulance tres = new Ambulance("TVA#3", "En ruta listaPersonal llamada de auxilio", "Toxicos", 24, listaEquipamiento, listaPersonal);
+        Ambulance uno = new Ambulance("TRA#1", "Aparcado", "Tercera Edad", 24,listaEquipamiento , listaPersonal);
+        Ambulance dos = new Ambulance("TRA#2", "En patrulla", "Accidentes Traumas y Golpes",24 , listaEquipamiento,listaPersonal);
+        Ambulance tres = new Ambulance("TRA#3", "En ruta listaPersonal llamada de auxilio", "Toxicos", 24, listaEquipamiento, listaPersonal);
 
         ArrayList<String> listaAmbulancias = new ArrayList<String>(){
             {
@@ -160,7 +160,7 @@ public class QueryDB {
 
         Provider profesionalVerdor = new Provider("PVP#1", "VerdorInc", "545855");
 
-        CompanyCar Elbuga = new CompanyCar("TVC#1", "Semi-nuevo", "Manual", 30, "Murcielago", "Bugatti", "PEE#4");
+        CompanyCar Elbuga = new CompanyCar("TRC#1", "Semi-nuevo", "Manual", 30, "Murcielago", "Bugatti", "PEE#4");
 
          /*
         + 3 Empleados
