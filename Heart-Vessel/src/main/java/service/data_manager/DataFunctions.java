@@ -122,7 +122,7 @@ public class DataFunctions implements Operations {
                     AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setStatus(UserInteractions.strRequest("Ingrese el nuevo Estado"));
                     break;
                 case 3:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setPersonal(EditList(AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).getPersonal(), "PEE"));
+                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setPersonal(EditList(AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).getPersonal(), "PEE#"));
                     break;
                 case 4:
                     AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setEquipment(EditList(AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).getEquipment(), "PR"));
@@ -150,7 +150,6 @@ public class DataFunctions implements Operations {
         switch (UserInteractions.numRequest("\n1. Añadir\n2. Eliminar\n3. Mostrar Lista\n0. Salir", 0, 3)) {
             case 1:
                 String newId = UserInteractions.idRequest(originType);
-                System.out.println("sfjlskdjlasñjdlkfjlkfdsjfalksdjñl");
                 if (OpsID.decodeID(newId) == null) {
                     System.out.println("Este id no existe");
                 } else {
@@ -202,7 +201,7 @@ public class DataFunctions implements Operations {
         String[] Header = new String[atribs.size()];
         int HCount = 0;
 
-        switch (type.substring(0, 2)) {
+        switch (type.substring(0, 2)) {//TODO REVISAR
             case "AR":
                 for (Area a : AuxDB.ArrLarea) {
                     if (a.getIdArea().startsWith(type)) {

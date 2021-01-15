@@ -31,8 +31,8 @@ public class UserInteractions {
         int number;
         number = numRequest(prompt + "\nEl valor debe estar entre " + min + " y " + max);
         if (number < min || number > max){
-            System.out.println("Valor no dentro de limites especificados");
-            return numRequest(prompt,max, min);
+            System.out.println("Valor no dentro de limites especificados ("+min+" y "+max+")");
+            return numRequest(prompt,min, max);
         }
         return number;
     }
@@ -44,6 +44,7 @@ public class UserInteractions {
             for(Integer i : ops){
                 if (i == response){
                     valido = true;
+                    break;
                 }
             }
         }while(!valido);
@@ -110,7 +111,6 @@ public class UserInteractions {
 
     public static String idRequest(String forceType){
         String prefijoID = forceType;
-        String temporal = prefijoID;
 
         if(forceType.length()==2){
             ArrayList<String> typeOp = new ArrayList<>();
@@ -131,11 +131,12 @@ public class UserInteractions {
             }
             prefijoID = typeOp.get(UserInteractions.numRequest("Elige la subclase a la que pertenece el ID",1,typeOp.size())-1)+"#";
         }
+        String save = prefijoID;
         do{
-            temporal = prefijoID;
-            temporal = prefijoID + numRequest("Introduzca el valor numerico del ID o -1 para salir");//o -1 si desea salir¿
-        }while(OpsID.decodeID(temporal)==null && !(temporal.substring(4).equals("-1")));
-        return temporal;
+            prefijoID = save;
+            prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID o -1 para salir");//o -1 si desea salir¿
+        }while(OpsID.decodeID(prefijoID)==null && !(prefijoID.substring(4).equals("-1")));
+        return prefijoID;
     }
 
     public static String dateRequest(){
@@ -147,11 +148,11 @@ public class UserInteractions {
         int [] months = {31,28,31,30,31,30,31,31,30,31,30,31};
 
         int month = numRequest("Introduzca el mes.",1,12);
-        int year = numRequest(" elIntroduzca año.",0,cYear);
+        int year = numRequest("Introduzca el año.",0,cYear);
         int day;
 
         if(cYear == year && cMonth == month){
-            day = numRequest("Introduca el dia. ",1,cDay);
+            day = numRequest("Introduzca el dia. ",1,cDay);
         }else {
             if (month == 2) {
                 if (year % 4 == 0) {
