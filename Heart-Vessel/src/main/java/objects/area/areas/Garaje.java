@@ -17,11 +17,7 @@ public class Garaje extends Area {
         this.vehicles = vehicles;
     }
 
-    public String[][] getAll() {
-        String[][] arr = super.getAllSingles();
-        String[][] gar = new String[][]{{null}};
-        return DataFunctions.append(arr,gar);
-    }
+
 
     public Garaje() {
 

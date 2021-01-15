@@ -31,18 +31,12 @@ public class Area {
     }
 
 
-    public String[][] getAllSingles(){
-        return new String[][]{{idArea},{name},{status}, {String.valueOf(floor)}, {String.valueOf(risk)}};
+    public String[] gatherInfo(){
+        return new String[]{idArea,name,status,personal.size()+" personas",equipment.size()+" articulos",String.valueOf(floor), String.valueOf(risk)};
     }
 
 
-    public String [][] getAllList(){
 
-        String [] personal = this.personal.toArray(new String[this.personal.size()]);
-        String [] equipamiento = this.equipment.toArray(new String[this.equipment.size()]);
-
-        return new String[][]{personal, equipamiento};
-    }
 
 
     public Area() {}

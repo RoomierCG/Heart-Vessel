@@ -56,7 +56,7 @@ public class DataFunctions implements Operations {
 
     public static boolean modifyMain() {
 
-        Object modifyObject = OpsID.decodeID(UserInteractions.idRequest());
+        Object modifyObject = OpsID.decodeID(UserInteractions.idRequest(true));
 
         if (modifyObject instanceof Area) {
             return modifyArea((modifyObject));
@@ -149,7 +149,7 @@ public class DataFunctions implements Operations {
     public static ArrayList<String> EditList(ArrayList<String> originList, String originType) {
         switch (UserInteractions.numRequest("\n1. Añadir\n2. Eliminar\n3. Mostrar Lista\n0. Salir", 0, 3)) {
             case 1:
-                String newId = UserInteractions.idRequest(originType);
+                String newId = UserInteractions.idRequest(originType,true);
                 if (OpsID.decodeID(newId) == null) {
                     System.out.println("Este id no existe");
                 } else {
@@ -159,7 +159,7 @@ public class DataFunctions implements Operations {
                 break;
 
             case 2:
-                String delId = UserInteractions.idRequest(originType);
+                String delId = UserInteractions.idRequest(originType,true);
                 if (!originList.contains(delId)) {
                     System.out.println("Este id no existe");
                 } else {
@@ -179,13 +179,13 @@ public class DataFunctions implements Operations {
         return originList;
     }
 
-    public static ArrayList<Integer> NumListCreator(int tope) {
-        ArrayList<Integer> Aiur = new ArrayList<>();
-        for (int pilones = 0; pilones < tope; pilones++) {
-            Aiur.add(pilones);
+    public static ArrayList<Integer> NumListCreator(int max) {
+        ArrayList<Integer> newNumList = new ArrayList<>();
+        for (int i = 0; i < max; i++) {
+            newNumList.add(i);
         }
 
-        return Aiur;
+        return newNumList;
     }
 
     public static String[][] append(String[][] a, String[][] b) {
@@ -196,8 +196,21 @@ public class DataFunctions implements Operations {
     }
 
     public static void printAll(ArrayList<String> atribs, String type) {
+        if(atribs.size()>6){
+            do{
+                ArrayList<String> reduced = new ArrayList<>();
+                int cont = 0;
+                do{
+                    reduced.add(atribs.get(0));
+                    System.out.println(atribs.get(0));
+                    atribs.remove(0);
+                    cont++;
+                }while(cont<6 && !atribs.isEmpty());
+                printAll(reduced,type);
+            }while(!atribs.isEmpty());
+        }
         ArrayList<String> responses = new ArrayList<>();
-        ArrayList<String> listResponse = new ArrayList<>();
+        //ArrayList<String> listResponse = new ArrayList<>();
         String[] Header = new String[atribs.size()];
         int HCount = 0;
 
@@ -206,28 +219,29 @@ public class DataFunctions implements Operations {
                 for (Area a : AuxDB.ArrLarea) {
                     if (a.getIdArea().startsWith(type)) {
                         for (int numAtri = 0; numAtri < Constants.Omniclase[0][0][2].length; numAtri++) {
-                            if (numAtri == 3 && atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                responses.add(a.getAllSingles()[numAtri][0]);
+                            /*if (numAtri == 3 && atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
+                                responses.add(a.gatherInfo()[numAtri][0]);
                                 if (HCount != atribs.size()) {
                                     Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
                                     HCount++;
                                 }
                             } else if (numAtri == 4 && atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                responses.add(a.getAllSingles()[numAtri][0]);
+                                responses.add(a.gatherInfo()[numAtri][0]);
                                 if (HCount != atribs.size()) {
                                     Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
                                     HCount++;
                                 }
-                            } else if (atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                responses.add(a.getAllSingles()[numAtri][0]);
-                                if (HCount != atribs.size()) {
+                            } else */if (atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
+                                responses.add(a.gatherInfo()[numAtri]);
+                                if (HCount < atribs.size()) {
                                     Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
                                     HCount++;
+
                                 }
                             }
                         }
                         if (type.equals("ARG#") && atribs.contains(Constants.Omniclase[0][1][2][7])) {
-                            responses.add(a.getAllSingles()[7][0]);
+                            responses.add(a.gatherInfo()[7]);
                             if (HCount != atribs.size()) {
                                 Header[HCount] = Constants.Omniclase[0][1][2][7];
                                 HCount++;
@@ -262,6 +276,31 @@ public class DataFunctions implements Operations {
                             System.out.printf("%-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2));
                         }
                         break;
+                    case 4:
+                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3]);
+
+                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator, Constants.separtator, Constants.separtator);
+                        for (int i = 0; i < responses.size(); i += 4) {
+                            System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2),responses.get(i+3));
+                        }
+                        break;
+                    case 5:
+                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3],Header[4]);
+
+                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator,Constants.separtator, Constants.separtator, Constants.separtator);
+                        for (int i = 0; i < responses.size(); i += 5) {
+                            System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2),responses.get(i+3),responses.get(i+4));
+                        }
+                        break;
+                    case 6:
+                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s  %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3],Header[4],Header[5]);
+
+                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator,Constants.separtator,Constants.separtator, Constants.separtator, Constants.separtator);
+                        for (int i = 0; i < responses.size(); i += 6) {
+                            System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2),responses.get(i+3),responses.get(i+4),responses.get(i+5));
+                        }
+                        break;
+
 
                 }
         }

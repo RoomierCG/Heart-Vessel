@@ -93,7 +93,9 @@ public class UserInteractions {
     }
 
 
-    public static String idRequest(){
+
+
+    public static String idRequest(boolean exists){
         String prefijoID = "";
         int TamMax = AuxDB.MaxIDs.size();
         for (int i = 0;i<TamMax;i+=2) {
@@ -106,10 +108,10 @@ public class UserInteractions {
         }
         ID claseSelec = AuxDB.MaxIDs.get(numRequest("\n\nSeleccione el tipo deseado",1,TamMax)-1);
         prefijoID = prefijoID+claseSelec.getType()+"#";
-        return idRequest(prefijoID);
+        return idRequest(prefijoID,exists);
     }
 
-    public static String idRequest(String forceType){
+    public static String idRequest(String forceType,boolean exists){
         String prefijoID = forceType;
 
         if(forceType.length()==2){
@@ -135,7 +137,7 @@ public class UserInteractions {
         do{
             prefijoID = save;
             prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID o -1 para salir");//o -1 si desea salir¿
-        }while(OpsID.decodeID(prefijoID)==null && !(prefijoID.substring(4).equals("-1")));
+        }while(((OpsID.decodeID(prefijoID)==null && exists==true) && !(prefijoID.substring(4).equals("-1"))));
         return prefijoID;
     }
 
