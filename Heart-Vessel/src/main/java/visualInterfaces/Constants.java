@@ -11,29 +11,29 @@ public class Constants {
 
                 {
                         //Sección de Area
-                        {{"Area"}, {"ARR"}, {"idArea","Nombre", "Estado", "Personal", "Equipamiento", "Planta", "Riesgo"}},
-                        {{"Garaje"}, {"ARG"}, {"idArea","Nombre", "Estado", "Personal", "Equipamiento", "Planta", "Riesgo", "Vehiculos"}},
-                        {{"Habitacion"}, {"ARH"}, {"idArea", "Nombre","Estado", "Personal", "Equipamiento", "Planta", "Riesgo", "idPaciente"}}},
+                        {{"Area"}, {"ARR"}, {"idArea","Nombre", "Estado", "Planta", "Riesgo"},{"Personal", "Equipamiento"}},
+                        {{"Garaje"}, {"ARG"}, {"idArea","Nombre", "Estado",  "Planta", "Riesgo"},{"Personal", "Equipamiento","Vehiculos"}},
+                        {{"Habitacion"}, {"ARH"}, {"idArea", "Nombre","Estado", "Planta", "Riesgo", "idPaciente"},{"Personal", "Equipamiento"}}},
 
                 //Sección de People
-                {{{"Paciente"}, {"PEP"}, {"idPersona", "Nombre", "Apellido", "Estado", "VisitasPermitidas", "Registro", "idHabitacion"}},
-                        {{"Empleado"}, {"PEE"}, {"idPersona", "Nombre", "Apellido", "Estado", "Departamento", "Puesto", "Salario", "Jornada"}}},
+                {{{"Paciente"}, {"PEP"}, {"idPersona", "Nombre", "Apellido", "Estado", "VisitasPermitidas", "idHabitacion"},{"Registro"}},
+                        {{"Empleado"}, {"PEE"}, {"idPersona", "Nombre", "Apellido", "Estado", "Departamento", "Puesto", "Salario", "Jornada"},{null}}},
 
                 //Sección de Provider
-                {{{"Proveedor"}, {"PVP"}, {"idProveedor", "Nombre", "IBAN"}}},
+                {{{"Proveedor"}, {"PVP"}, {"idProveedor", "Nombre", "IBAN"},{null}}},
 
                 //Sección de TransportSystem
-                {{{"AyudaMovil"}, {"TRM"}, {"idTransporte", "Estado", "idArea", "idPaciente"}},
-                        {{"Ambulancia"}, {"TRA"}, {"idTransporte", "Estado", "Personal", "Productos", "Gasolina", "Especialidad"}},
-                        {{"CocheCompañia"}, {"TRC"}, {"idTransporte", "Estado", "Modelo", "Marca", "Gasolina", "Especialidad", "Dueño"}}},
+                {{{"AyudaMovil"}, {"TRM"}, {"idTransporte", "Estado", "idArea", "idPaciente"},{null}},
+                        {{"Ambulancia"}, {"TRA"}, {"idTransporte", "Estado", "Gasolina", "Especialidad"},{"Personal","Equipamiento"}},
+                        {{"CocheCompañia"}, {"TRC"}, {"idTransporte", "Estado", "Modelo", "Marca", "Gasolina", "Especialidad", "Dueño"},{null}}},
 
                 //Sección de Producto
-                {{{"MaterialSanitario"}, {"PRS"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "MarcaModelo", "Uso"}},
-                        {{"Maquinaria"}, {"PRM"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "ConsumoElectrico", "Modelo"}},
-                        {{"EquipamientoLimpieza"}, {"PRE"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "GradoDeRiesgo"}},
-                        {{"ProductoLimpieza"}, {"PRL"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "Marca", "Toxico", "Uso"}},
-                        {{"Medicamento"}, {"PRD"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "RiesgosAlergicos", "FechaDeCaducidad", "ViaDeAdministracion", "Uso"}},
-                        {{"Comida"}, {"PRC"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "RiesgosAlergicos", "FechaDeCaducidad", "Estado", "Proveedor", "Uso"}
+                {{{"MaterialSanitario"}, {"PRS"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "MarcaModelo", "Uso"},{null}},
+                        {{"Maquinaria"}, {"PRM"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "ConsumoElectrico", "Modelo"},{null}},
+                        {{"EquipamientoLimpieza"}, {"PRE"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "GradoDeRiesgo"},{null}},
+                        {{"ProductoLimpieza"}, {"PRL"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "Marca", "Toxico", "Uso"},{null}},
+                        {{"Medicamento"}, {"PRD"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "FechaDeCaducidad", "ViaDeAdministracion", "Uso"},{"RiesgosAlergicos"}},
+                        {{"Comida"}, {"PRC"}, {"idProducto", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "FechaDeCaducidad", "Estado", "Proveedor", "Uso"},{"RiesgosAlergicos"}
                         }}
         };
 
