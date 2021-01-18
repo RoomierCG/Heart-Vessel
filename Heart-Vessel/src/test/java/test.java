@@ -1,11 +1,12 @@
 import database_management.mongo.QueryDB;
-import service.data_manager.DataFunctions;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.Collections;
+
+import static service.data_manager.DataFunctions.NumListCreator;
 
 public class test {
     public static ArrayList<String> EditList(ArrayList<String> originList, String originType) {
@@ -41,22 +42,16 @@ public class test {
         return originList;
     }
 
-    public static void main(String[] args) {
 
-        QueryDB.rellenarTest();
-        ArrayList<String> atrib = new ArrayList<String>(){
-            {
-                add("Nombre");
-                add("Personal");
-                add("Estado");
-                add("idArea");
-                add("Vehiculos");
-                add("Equipamiento");
-                add("Riesgo");
-                add("Planta");
-            }
-        };
-        DataFunctions.modifyMain();
+    /*
+    * Garaje g = new Garaje();
+        g.initArea();
+        System.out.println(g.getName());
+        System.out.println(Constants.Omniclase[3][0][3].);
+     */
+
+
+    public static void main(String[] args) {
 
     }
 }

@@ -1,11 +1,7 @@
 package objects.area;
 
-import objects.people.Person;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import objects.product.Product;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
@@ -34,8 +30,6 @@ public class Area {
     public String[] gatherInfo(){
         return new String[]{idArea,name,status,personal.size()+" personas",equipment.size()+" articulos",String.valueOf(floor), String.valueOf(risk)};
     }
-
-
 
 
 
@@ -97,19 +91,29 @@ public class Area {
         this.risk = risk;
     }
 
-    public static Area askArea(){
-        Area newArea = new Area();
-        newArea.setIdArea(OpsID.generateID("ARR"));
-        newArea.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
-        ArrayList<String> personalNuevo = new ArrayList<>();
+    public void initArea(){
+        this.setIdArea(OpsID.generateID("ARR"));
+        this.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
+        ArrayList<String> atribList = new ArrayList<>();
+        int cont = 0;
+        System.out.println("Introduzca \"/exit\" para terminar.");
+        do{
+            atribList.add(UserInteractions.idRequest("PEE#",true));
 
-        return null;
+            cont++;
+        }while(cont<Constants.personellLimit && !(atribList.get(cont).endsWith("-1")));
+        this.setPersonal(atribList);
+        cont = 0;
+        do{
+            atribList.add(UserInteractions.idRequest("PR",true));
+
+            cont++;
+        }while(cont<Constants.equipmentLimit && !(atribList.get(cont).endsWith("-1")));
+        this.setEquipment(atribList);
+
     }
 
 
 
-    public static void main(String[] args) {
-        askArea();
-    }
 
 }

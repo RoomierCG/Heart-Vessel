@@ -14,6 +14,7 @@ import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class DataFunctions implements Operations {
@@ -21,7 +22,6 @@ public class DataFunctions implements Operations {
     public static void main(String[] args) {
 
         QueryDB.rellenarTest();
-        modifyMain();
 //        System.out.println(OpsID.decodeID("ARR#1"));
     }
 
@@ -53,95 +53,48 @@ public class DataFunctions implements Operations {
             return false;
         }
     }
+    public static boolean modifyGeneric() {
 
-    public static boolean modifyMain() {
-
-        Object modifyObject = OpsID.decodeID(UserInteractions.idRequest(true));
-
-        if (modifyObject instanceof Area) {
-            return modifyArea((modifyObject));
-
-        } else if (modifyObject instanceof Person) {
-
-        } else if (modifyObject instanceof Product) {
-
-        } else if (modifyObject instanceof Provider) {
-
-        } else if (modifyObject instanceof Transport) {
-
-        } else {
-        }
-
-        return false;
-    }
-
-    public static boolean modifyArea(Object modifyObject) {
-
-        ArrayList<Integer> options;
+        int opcion;//Le quite el menos 1, por si te da problemas luego
+        String param = "";
+        ArrayList<String> options = new ArrayList<>();
         ArrayList<Integer> optionsSelected = new ArrayList<>();
-        String idModifyObject = (((Area) modifyObject).getIdArea());
+        ArrayList<Integer> numOptions;
 
 
-        int tipo, opcion;//Le quite el menos 1, por si te da problemas luego
+        String idModifyObject = UserInteractions.idRequest(true);
+        Object modifyObject = OpsID.decodeID(idModifyObject);
 
-        //inicializacion de la lista de opciones a elegir
-        if (modifyObject instanceof Garaje) {
-            options = NumListCreator(Constants.Omniclase[0][1][2].length);
-            tipo = 1;
-        } else if (modifyObject instanceof HabitableRoom) {
-            options = NumListCreator(Constants.Omniclase[0][2][2].length);
-            tipo = 2;
-        } else {
-            options = NumListCreator(Constants.Omniclase[0][0][2].length);
-            tipo = 0;
-        }
+//        System.out.println(idModifyObject.substring(0,3));
 
-        //No queremos permitir que modifiquen el id por eos borramos 0
-        do {
-            String prompt = "";
-            for (int i = 1; i < Constants.Omniclase[0][tipo][2].length; i++) {
-                if (options.contains(i)) {
-                    prompt += "- " + i + "º " + Constants.Omniclase[0][tipo][2][i] + "\n";
+        //Recorremos el array para que funcione la lista de opciones para el numlist
+        for (String[][][] category : Constants.Omniclase) {
+            for (String[][] subcategory : category) {
+                if (idModifyObject.substring(0, 3).equals(subcategory[1][0])) {
+                    options.addAll(Arrays.asList(subcategory[2]));
+                    options.addAll(Arrays.asList(subcategory[3]));
                 }
             }
-
-            opcion = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", options);
-            optionsSelected.add(opcion);
-            options.remove(options.indexOf(opcion));
-
-        } while (opcion != 0);
-
-
-        Collections.sort(optionsSelected);
-        for (Integer opio : optionsSelected) {
-            switch (opio) {
-                case 1:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setName(UserInteractions.strRequest("Ingrese el nuevo Nombre"));
-                    break;
-                case 2:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setStatus(UserInteractions.strRequest("Ingrese el nuevo Estado"));
-                    break;
-                case 3:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setPersonal(EditList(AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).getPersonal(), "PEE#"));
-                    break;
-                case 4:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setEquipment(EditList(AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).getEquipment(), "PR"));
-                    break;
-                case 5:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setFloor(Integer.parseInt(UserInteractions.strRequest("Ingrese la planta a la que se ha movido el area")));
-                    break;
-                case 6:
-                    AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))).setRisk(Integer.parseInt(UserInteractions.strRequest("Ingresa el nuevo código de riego")));
-                    break;
-                case 7:
-                    if (AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject))) instanceof HabitableRoom) {
-                        ((HabitableRoom) AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject)))).setIdPatient(UserInteractions.strRequest("Ingrese el nuevo Id del paciente"));
-                    } else {
-                        ((Garaje) AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject)))).setVehicles(EditList(((Garaje) AuxDB.ArrLarea.get(AuxDB.ArrLarea.indexOf(OpsID.decodeID(idModifyObject)))).getVehicles(), "TR"));
-                    }
-                    break;
-            }
         }
+        numOptions = NumListCreator(0,options.size());
+        do{
+            String prompt = "";
+            for(int i = 0;i<options.size();i++){
+                if(numOptions.contains(i+1))
+                    prompt += "- "+(1+i)+"º " + options.get(i)+"\n";
+            }
+            opcion = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", numOptions);
+            optionsSelected.add(opcion);
+            numOptions.remove(numOptions.indexOf(opcion));
+
+        }while(opcion!=0);
+
+
+        //No queremos permitir que modifiquen el id por eos borramos 0
+
+        optionsSelected.remove(optionsSelected.size()-1);
+        Collections.sort(optionsSelected);
+        System.out.println(optionsSelected);
 
         return false;
     }
@@ -179,9 +132,9 @@ public class DataFunctions implements Operations {
         return originList;
     }
 
-    public static ArrayList<Integer> NumListCreator(int max) {
+    public static ArrayList<Integer> NumListCreator(int min, int max) {
         ArrayList<Integer> newNumList = new ArrayList<>();
-        for (int i = 0; i < max; i++) {
+        for (int i = min; i < max; i++) {
             newNumList.add(i);
         }
 
@@ -285,7 +238,7 @@ public class DataFunctions implements Operations {
                         }
                         break;
                     case 5:
-                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3],Header[4]);
+                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3],Header[4]);
 
                         System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator,Constants.separtator, Constants.separtator, Constants.separtator);
                         for (int i = 0; i < responses.size(); i += 5) {

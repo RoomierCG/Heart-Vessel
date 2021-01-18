@@ -4,6 +4,10 @@ public class Constants {
 
     public static String separtator = "======================================================================================";
 
+    public static int personellLimit = 10;
+
+    public static int equipmentLimit = 50;
+
     public static String[][][][] Omniclase = new String[][][][]{
 
                 //[Clase][InfoDeClase][Posicion en case de Lista//Default 0]

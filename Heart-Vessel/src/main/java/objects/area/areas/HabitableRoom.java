@@ -24,9 +24,7 @@ public class HabitableRoom extends Area {
         this.idPatient = idPatient;
     }
 
-    public void askHabitableRoom(){
-        super.askArea();
-    }
+
 
 
 }

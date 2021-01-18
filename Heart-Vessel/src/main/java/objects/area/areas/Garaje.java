@@ -1,10 +1,6 @@
 package objects.area.areas;
 
 import objects.area.Area;
-import objects.people.Person;
-import objects.product.Product;
-import objects.transportsystem.transportsystems.vehicle.Vehicle;
-import service.data_manager.DataFunctions;
 
 import java.util.ArrayList;
 
@@ -31,9 +27,11 @@ public class Garaje extends Area {
         this.vehicles = vehicles;
     }
 
-    public void askGaraje(){
-        //super.askArea();
-        this.vehicles = null;
+
+
+    public void initArea() {
+        super.initArea();
+
     }
 
 }

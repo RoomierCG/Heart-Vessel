@@ -14,7 +14,7 @@ public class UserInteractions {
     static Scanner sc = new Scanner(System.in);
 
     public static int numRequest(String prompt){
-        int number = 0;
+        int number;
         if(!(prompt.length()==0)){
             System.out.println(prompt);
         }
@@ -23,7 +23,7 @@ public class UserInteractions {
         }catch (Exception e){
             System.out.println("formato incorrecto");
             sc.nextLine();
-            numRequest(prompt);
+            number = numRequest(prompt);
         }
         return number;
     }
@@ -137,7 +137,7 @@ public class UserInteractions {
         do{
             prefijoID = save;
             prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID o -1 para salir");//o -1 si desea salir¿
-        }while(((OpsID.decodeID(prefijoID)==null && exists==true) && !(prefijoID.substring(4).equals("-1"))));
+        }while(((OpsID.decodeID(prefijoID)==null && exists) && !(prefijoID.substring(4).equals("-1"))));
         return prefijoID;
     }
 
