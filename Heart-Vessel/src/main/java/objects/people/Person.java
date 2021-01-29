@@ -1,15 +1,14 @@
 package objects.people;
 
-public abstract class Person {
+import objects.Generic;
 
-    protected String personId; //Identificador
-    protected String name; //Nombre
+public abstract class Person extends Generic {
+
     protected String lastName; //Apellido
     protected String status;  //Variable dependiendo de hijo
 
     public Person(String personId, String name, String lastName, String status) {
-        this.personId = personId;
-        this.name = name;
+        super(personId,name);
         this.lastName = lastName;
         this.status = status;
     }
@@ -19,21 +18,7 @@ public abstract class Person {
     }
 
 
-    public String getPersonId() {
-        return personId;
-    }
 
-    public void setPersonId(String personId) {
-        this.personId = personId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getLastName() {
         return lastName;

@@ -27,4 +27,8 @@ public class CleaningProducts extends Substance {
         this.make = make;
     }
 
+    public String[] gatherInfo() {
+        String toxic = (super.isToxic()) ? "Si" : "No";
+        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(),make,toxic,super.getType()};
+    }
 }

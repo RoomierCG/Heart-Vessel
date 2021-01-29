@@ -4,6 +4,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import database_management.AuxDB;
+import objects.Generic;
 import objects.area.Area;
 import objects.people.Person;
 import objects.people.person.Employee;
@@ -55,7 +56,7 @@ public class QueryDB {
         collectionTransportSystem = db.getCollection("transportSystem");
 
         //Inializacion de ArrayLists
-//        AuxDB.ArrLarea = downloadAreasBackUp();
+//        AuxDB.Complete = downloadAreasBackUp();
        
 
 
@@ -91,7 +92,7 @@ public class QueryDB {
         Patient pac3 = new Patient("PEP#3", "Lkoraz", "Ondeya", "Muerto", false, "ARH#5", log);
 
 
-        CleaningEquipment ave = new CleaningEquipment("PRE#2", "Fregona", "ARR#1", "Usado", "10/10/1000",0);
+        CleaningEquipment ave = new CleaningEquipment("PRE#1", "Fregona", "ARR#1", "Usado", "10/10/1000",0);
         CleaningEquipment aver = new CleaningEquipment("PRE#2", "Aspiradora", "ARR#1", "Cyka-Blyat", "10/10/1000",0);
         CleaningEquipment avegetal = new CleaningEquipment("PRE#3", "Escoba", "ARR#1", "Vacia", "10/10/1000",0);
 
@@ -99,28 +100,28 @@ public class QueryDB {
 
         ArrayList<String> listaPersonal = new ArrayList<String>(){
             {
-                add(aPE.getPersonId());
-                add(aPq.getPersonId());
-                add(aPu.getPersonId());
+                add(aPE.getId());
+                add(aPq.getId());
+                add(aPu.getId());
             }
         };
 
-        listaEquipamiento.add(avegetal.getEquipmentId());
+        listaEquipamiento.add(avegetal.getId());
         HabitableRoom room = new HabitableRoom("ARH#1", "Habitacion 032", "Ocupado", 1,2, "#PEP#1", listaEquipamiento, listaPersonal);
-        listaEquipamiento.add(ave.getEquipmentId());
+        listaEquipamiento.add(ave.getId());
         HabitableRoom room2 = new HabitableRoom("ARH#2", "Habitacion 033", "Ocupado", 1,2, "#PEP#2", listaEquipamiento, listaPersonal);
-        listaEquipamiento.add(aver.getEquipmentId());
+        listaEquipamiento.add(aver.getId());
 
 
-        Ambulance uno = new Ambulance("TRA#1", "Aparcado", "Tercera Edad", 24,listaEquipamiento , listaPersonal);
-        Ambulance dos = new Ambulance("TRA#2", "En patrulla", "Accidentes Traumas y Golpes",24 , listaEquipamiento,listaPersonal);
-        Ambulance tres = new Ambulance("TRA#3", "En ruta listaPersonal llamada de auxilio", "Toxicos", 24, listaEquipamiento, listaPersonal);
+        Ambulance uno = new Ambulance("TRA#1", "Colectivo","Aparcado", "Tercera Edad", 24,listaEquipamiento , listaPersonal);
+        Ambulance dos = new Ambulance("TRA#2", "Individual","En patrulla", "Accidentes Traumas y Golpes",24 , listaEquipamiento,listaPersonal);
+        Ambulance tres = new Ambulance("TRA#3", "Vital Basico","En ruta listaPersonal llamada de auxilio", "Toxicos", 24, listaEquipamiento, listaPersonal);
 
         ArrayList<String> listaAmbulancias = new ArrayList<String>(){
             {
-                add(uno.getTransportId());
-                add(dos.getTransportId());
-                add(tres.getTransportId());
+                add(uno.getId());
+                add(dos.getId());
+                add(tres.getId());
             }
         };
 
@@ -142,17 +143,16 @@ public class QueryDB {
         CleaningProducts Fairy = new CleaningProducts("PRL#1", "Jabon Multi Usos", "ARR#1", "Recibido", "10/10/2010", false, "Gel","Fairy");
         CleaningProducts Lejia = new CleaningProducts("PRL#2", "Lejia", "ARR#1", "Recibido", "10/10/2010", true,"Liquido", "Lagarto");
 
-        CleaningEquipment Fregona = new CleaningEquipment("PRL#3", "Fregona", "ARR#1", "Semi-nuevo", "15/04/2015",0);
-        CleaningEquipment Guantes = new CleaningEquipment("PRL#4", "Guantes", "ARR#1", "Nuevos", "15/04/2015",0);
 
-        MovementAid muletas = new MovementAid("TAM#1", "Adultos", null, "ARR#1");
+
+        MovementAid muletas = new MovementAid("TAM#1","Muletdas", "Adultos", null, "ARR#1");
 
         Machinery xRay = new Machinery("PRM#1", "Maquina Rayos X", "ARR#1", "En uso", "17/05/2005", 3000, "Aiur");
         listaEquipamiento.clear();
 
-        listaEquipamiento.add(xRay.getEquipmentId());
-        listaEquipamiento.add(coca.getEquipmentId());
-        listaEquipamiento.add(Fairy.getEquipmentId());
+        listaEquipamiento.add(xRay.getId());
+        listaEquipamiento.add(coca.getId());
+        listaEquipamiento.add(Fairy.getId());
 
         Area xrayRoom = new Area("ARR#2", "Sala Rayos X", "ocupado", 3, 3,listaEquipamiento,listaPersonal);
 
@@ -160,7 +160,7 @@ public class QueryDB {
 
         Provider profesionalVerdor = new Provider("PVP#1", "VerdorInc", "545855");
 
-        CompanyCar Elbuga = new CompanyCar("TRC#1", "Semi-nuevo", "Manual", 30, "Murcielago", "Bugatti", "PEE#4");
+        CompanyCar Elbuga = new CompanyCar("TRC#1","Fiesta" ,"Semi-nuevo", "Manual", 30, "Ford", "PEE#4");
 
          /*
         + 3 Empleados
@@ -181,40 +181,38 @@ public class QueryDB {
          */
 
         {
-            AuxDB.ArrlPerson.add(aPE);
-            AuxDB.ArrlPerson.add(aPq);
-            AuxDB.ArrlPerson.add(aPu);
+            AuxDB.Complete.add(aPE);
+            AuxDB.Complete.add(aPq);
+            AuxDB.Complete.add(aPu);
 
-            AuxDB.ArrlPerson.add(pac1);
-            AuxDB.ArrlPerson.add(pac2);
-            AuxDB.ArrlPerson.add(pac3);
+            AuxDB.Complete.add(pac1);
+            AuxDB.Complete.add(pac2);
+            AuxDB.Complete.add(pac3);
 
-            AuxDB.ArrlProduct.add(ave);
-            AuxDB.ArrlProduct.add(aver);
-            AuxDB.ArrlProduct.add(avegetal);
+            AuxDB.Complete.add(ave);
+            AuxDB.Complete.add(aver);
+            AuxDB.Complete.add(avegetal);
 
-            AuxDB.ArrlTransport.add(uno);
-            AuxDB.ArrlTransport.add(dos);
-            AuxDB.ArrlTransport.add(tres);
-            AuxDB.ArrlTransport.add(Elbuga);
-            AuxDB.ArrlTransport.add(muletas);
+            AuxDB.Complete.add(uno);
+            AuxDB.Complete.add(dos);
+            AuxDB.Complete.add(tres);
+            AuxDB.Complete.add(Elbuga);
+            AuxDB.Complete.add(muletas);
 
-            AuxDB.ArrLarea.add(room);
-            AuxDB.ArrLarea.add(aasd);
-            AuxDB.ArrLarea.add(uff);
-            AuxDB.ArrLarea.add(xrayRoom);
+            AuxDB.Complete.add(room);
+            AuxDB.Complete.add(aasd);
+            AuxDB.Complete.add(uff);
+            AuxDB.Complete.add(xrayRoom);
 
-            AuxDB.ArrlProduct.add(peshcao);
-            AuxDB.ArrlProduct.add(coca);
-            AuxDB.ArrlProduct.add(Fairy);
-            AuxDB.ArrlProduct.add(Lejia);
-            AuxDB.ArrlProduct.add(Fregona);
-            AuxDB.ArrlProduct.add(Guantes);
-            AuxDB.ArrlProduct.add(xRay);
-            AuxDB.ArrlProduct.add(vendas);
+            AuxDB.Complete.add(peshcao);
+            AuxDB.Complete.add(coca);
+            AuxDB.Complete.add(Fairy);
+            AuxDB.Complete.add(Lejia);
+            AuxDB.Complete.add(xRay);
+            AuxDB.Complete.add(vendas);
 
 
-            AuxDB.ArrlProvider.add(profesionalVerdor);
+            AuxDB.Complete.add(profesionalVerdor);
 
 
         }
@@ -226,30 +224,32 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionArea.drop();
 
-        for (Area area : AuxDB.ArrLarea) {
+        for (Generic area: AuxDB.Complete) {
+            if(area instanceof Area){
+                Document newArea = new Document()
+                        .append("idArea", area.getId())
+                        .append("Nombre", area.getName())
+                        .append("Personal", ((Area) area).getPersonal())
+                        .append("Equipamiento", ((Area) area).getEquipment())
+                        .append("Estado", ((Area) area).getStatus())
+                        .append("Planta",((Area) area).getFloor())
+                        .append("Riesgo", ((Area) area).getRisk());
 
-            Document newArea = new Document()
-                    .append("idArea", area.getIdArea())
-                    .append("Nombre", area.getName())
-                    .append("Personal", area.getPersonal())
-                    .append("Equipamiento", area.getEquipment())
-                    .append("Estado", area.getStatus())
-                    .append("Planta", area.getFloor())
-                    .append("Riesgo", area.getRisk());
+                if (area instanceof Garaje) {
+                    newArea.append("Tipo", "Garaje")
+                            .append("Vehiculos",((Garaje) area).getVehicles());
 
-            if (area instanceof Garaje) {
-                newArea.append("Tipo", "Garaje")
-                        .append("Vehiculos",((Garaje) area).getVehicles());
+                } else if (area instanceof HabitableRoom) {
+                    newArea.append("Tipo","Habitacion")
+                            .append("idPaciente", ((HabitableRoom) area).getIdPatient());
 
-            } else if (area instanceof HabitableRoom) {
-                newArea.append("Tipo","Habitacion")
-                        .append("idPaciente", ((HabitableRoom) area).getIdPatient());
+                }else {
+                    newArea.append("Tipo", "Area");
+                }
 
-            }else {
-                newArea.append("Tipo", "Area");
+                collectionArea.insertOne(newArea);
             }
-
-            collectionArea.insertOne(newArea);
+            
         }
     }
 
@@ -258,13 +258,14 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionProvider.drop();
 
-        for (Provider provider: AuxDB.ArrlProvider) {
-
-            collectionProvider.insertOne(new Document()
-                    .append("idProveedor", provider.getIdProvider())
-                    .append("Nombre" , provider.getName())
-                    .append("IBAN", provider.getAccount())
-            );
+        for (Generic prov: AuxDB.Complete) {
+            if (prov instanceof Provider) {
+                collectionProvider.insertOne(new Document()
+                        .append("idProveedor", prov.getId())
+                        .append("Nombre", prov.getName())
+                        .append("IBAN", ((Provider) prov).getAccount())
+                );
+            }
         }
 
 
@@ -275,35 +276,36 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionTransportSystem.drop();
 
-        for (Transport transport: AuxDB.ArrlTransport) {
+        for (Generic transport: AuxDB.Complete) {
+            if(transport instanceof Transport) {
+                Document newTranport = new Document()
+                        .append("idTransporte", transport.getId())
+                        .append("Estado", ((Transport) transport).getStatus());
 
-            Document newTranport = new Document()
-                    .append("idTransporte", transport.getTransportId())
-                    .append("Estado", transport.getStatus());
-
-            if (transport instanceof MovementAid){
-                newTranport.append("Tipo","Ayuda Movil")
-                            .append("idArea",((MovementAid) transport).getIdArea())
+                if (transport instanceof MovementAid) {
+                    newTranport.append("Tipo", "Ayuda Movil")
+                            .append("idArea", ((MovementAid) transport).getIdArea())
                             .append("idPaciente", ((MovementAid) transport).getPatient());
 
-            }else if (transport instanceof Ambulance){
-                newTranport.append("Personal", ((Ambulance) transport).getPersonal())
+                } else if (transport instanceof Ambulance) {
+                    newTranport.append("Personal", ((Ambulance) transport).getPersonal())
                             .append("Productos", ((Ambulance) transport).getEquipment())
                             .append("Gasolina", ((Ambulance) transport).getGasTank())
                             .append("Especialidad", ((Ambulance) transport).getType())
                             .append("Tipo", "Ambulancia");
 
-            }else if (transport instanceof CompanyCar){
-                newTranport.append("Modelo", ((CompanyCar) transport).getModel())
+                } else if (transport instanceof CompanyCar) {
+                    newTranport.append("Modelo", (transport).getName())
                             .append("Marca", ((CompanyCar) transport).getMake())
                             .append("Gasolina", ((CompanyCar) transport).getGasTank())
                             .append("Especialidad", ((CompanyCar) transport).getType())
                             .append("Dueño", ((CompanyCar) transport).getIdPersona())
                             .append("Tipo", "Vehiculo");
 
-            }
+                }
 
-            collectionTransportSystem.insertOne(newTranport);
+                collectionTransportSystem.insertOne(newTranport);
+            }
         }
     }
 
@@ -312,55 +314,56 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionProduct.drop();
 
-        for (Product product: AuxDB.ArrlProduct) {
+        for (Generic product: AuxDB.Complete) {
+            if(product instanceof Product) {
+                Document newProduct = new Document()
+                        .append("idProducto", product.getId())
+                        .append("Nombre", product.getName())
+                        .append("Area",((Product) product).getAreaId())
+                        .append("Estado",((Product) product).getStatus())
+                        .append("FechaDeCompra",((Product) product).getBuyDate());
 
-            Document newProduct = new Document()
-                    .append("idProducto", product.getEquipmentId())
-                    .append("Nombre", product.getName())
-                    .append("Area", product.getAreaId())
-                    .append("Estado", product.getStatus())
-                    .append("FechaDeCompra", product.getBuyDate());
-
-            if (product instanceof SanitationMaterials){
-                newProduct.append("MarcaModelo", ((SanitationMaterials) product).getModel())
+                if (product instanceof SanitationMaterials) {
+                    newProduct.append("MarcaModelo", ((SanitationMaterials) product).getModel())
                             .append("Uso", ((SanitationMaterials) product).getType())
-                            .append("Tipo","MaterialSanitario");
+                            .append("Tipo", "MaterialSanitario");
 
-            }else if (product instanceof Machinery){
-                newProduct.append("ConsumoElectrico", ((Machinery) product).getElectricityConsumption())
+                } else if (product instanceof Machinery) {
+                    newProduct.append("ConsumoElectrico", ((Machinery) product).getElectricityConsumption())
                             .append("Modelo", ((Machinery) product).getModel())
                             .append("Tipo", "Maquinaria");
 
-            }else if (product instanceof CleaningEquipment){
-                newProduct.append("GradoDeRiesgo", ((CleaningEquipment) product).getRiskFactor())
-                            .append("Tipo","EquipamientoDeLimpieza");
+                } else if (product instanceof CleaningEquipment) {
+                    newProduct.append("GradoDeRiesgo", ((CleaningEquipment) product).getRiskFactor())
+                            .append("Tipo", "EquipamientoDeLimpieza");
 
-            }else if (product instanceof CleaningProducts){
-                newProduct.append("Marca", ((CleaningProducts) product).getMake())
+                } else if (product instanceof CleaningProducts) {
+                    newProduct.append("Marca", ((CleaningProducts) product).getMake())
                             .append("Toxico", ((CleaningProducts) product).isToxic())
-                            .append("Uso",((CleaningProducts) product).getType())
+                            .append("Uso", ((CleaningProducts) product).getType())
                             .append("Tipo", "ProductoDeLimpieza");
 
-            }else if (product instanceof Medicine){
-                newProduct.append("Toxico", ((Medicine) product).isToxic())
+                } else if (product instanceof Medicine) {
+                    newProduct.append("Toxico", ((Medicine) product).isToxic())
                             .append("RiesgosAlergicos", ((Medicine) product).getAllergyRiskIngredients())
                             .append("FechaDeCaducidad", ((Medicine) product).getExpirationDate())
                             .append("ViaDeAdministracion", ((Medicine) product).getAdministered())
-                            .append("Uso",((Medicine) product).getType())
+                            .append("Uso", ((Medicine) product).getType())
                             .append("Tipo", "Medicinas");
 
 
-            }else if (product instanceof FoodMenu){
-                newProduct.append("Toxico", ((FoodMenu) product).isToxic())
-                        .append("RiesgosAlergicos", ((FoodMenu) product).getAllergyRiskIngredients())
-                        .append("FechaDeCaducidad", ((FoodMenu) product).getExpirationDate())
-                        .append("Estado", ((FoodMenu) product).getType())
-                        .append("Proveedor", ((FoodMenu) product).getProvider())
-                        .append("Uso",((FoodMenu) product).getType())
-                        .append("Tipo", "Comida");
-            }
+                } else if (product instanceof FoodMenu) {
+                    newProduct.append("Toxico", ((FoodMenu) product).isToxic())
+                            .append("RiesgosAlergicos", ((FoodMenu) product).getAllergyRiskIngredients())
+                            .append("FechaDeCaducidad", ((FoodMenu) product).getExpirationDate())
+                            .append("Estado", ((FoodMenu) product).getType())
+                            .append("Proveedor", ((FoodMenu) product).getProvider())
+                            .append("Uso", ((FoodMenu) product).getType())
+                            .append("Tipo", "Comida");
+                }
 
-            collectionProduct.insertOne(newProduct);
+                collectionProduct.insertOne(newProduct);
+            }
         }
     }
 
@@ -368,30 +371,31 @@ public class QueryDB {
         //Borra todos los datos de la coleccion, por pruebas
         collectionPerson.drop();
 
-        for (Person person: AuxDB.ArrlPerson) {
+        for (Generic person: AuxDB.Complete) {
+            if(person instanceof Person) {
+                Document newPerson = new Document()
+                        .append("idPersona", person.getId())
+                        .append("Nombre", person.getName())
+                        .append("Apellido", ((Person) person).getLastName())
+                        .append("Estado", ((Person) person).getStatus());
 
-            Document newPerson = new Document()
-                    .append("idPersona", person.getPersonId())
-                    .append("Nombre", person.getName())
-                    .append("Apellido", person.getLastName())
-                    .append("Estado", person.getStatus());
+                if (person instanceof Patient) {
+                    newPerson.append("VisitasPermitidas", ((Patient) person).isAllowedVisitors())
+                            .append("Registro", ((Patient) person).getRegistry())
+                            .append("idHabitacion", ((Patient) person).getRoomId())
+                            .append("Tipo", "Paciente");
 
-            if (person instanceof Patient){
-                newPerson.append("VisitasPermitidas", ((Patient) person).isAllowVisitors())
-                        .append("Registro", ((Patient) person).getRegistry())
-                        .append("idHabitacion", ((Patient) person).getRoomId())
-                        .append("Tipo", "Paciente");
+                } else if (person instanceof Employee) {
+                    newPerson.append("Departamento", ((Employee) person).getType())
+                            .append("Puesto", ((Employee) person).getJob())
+                            .append("Salario", ((Employee) person).getSalary())
+                            .append("Jornada", ((Employee) person).getShift())
+                            .append("Tipo", "Empleado");
 
-            }else if (person instanceof Employee){
-                newPerson.append("Departamento", ((Employee) person).getType())
-                        .append("Puesto", ((Employee) person).getJob())
-                        .append("Salario", ((Employee) person).getSalary())
-                        .append("Jornada", ((Employee) person).getShift())
-                        .append("Tipo", "Empleado");
+                }
 
+                collectionPerson.insertOne(newPerson);
             }
-
-            collectionPerson.insertOne(newPerson);
         }
     }
 }

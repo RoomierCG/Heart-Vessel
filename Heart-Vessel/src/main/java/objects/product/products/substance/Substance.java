@@ -36,4 +36,6 @@ public abstract class Substance extends Product {
         this.toxic = toxic;
         this.type = type;
     }
+
+
 }

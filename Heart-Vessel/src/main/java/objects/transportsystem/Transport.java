@@ -1,25 +1,20 @@
 package objects.transportsystem;
 
-public abstract class Transport {
-    protected String transportId;
+import objects.Generic;
+
+public abstract class Transport extends Generic {
+
     protected String status;
 
-    public Transport(String transportId, String status) {
-        this.transportId = transportId;
+    public Transport(String transportId, String nombre, String status) {
+        super(transportId,nombre);
         this.status = status;
     }
 
     public Transport() {
-
     }
 
-    public String getTransportId() {
-        return transportId;
-    }
 
-    public void setTransportId(String transportId) {
-        this.transportId = transportId;
-    }
 
     public String getStatus() {
         return status;

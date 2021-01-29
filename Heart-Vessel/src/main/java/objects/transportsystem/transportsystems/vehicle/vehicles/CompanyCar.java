@@ -7,31 +7,28 @@ import java.util.ArrayList;
 
 public class CompanyCar extends Vehicle {
 
-    private String model;
     private String make;
     private String idPersona;//Dueño
 
-    public CompanyCar(String transportId, String status, String type,  int gasTank) {
-        super(transportId, status, type, gasTank);
+
+
+    public CompanyCar(String transportId, String transportName, String status, String type,  int gasTank) {
+        super(transportId, transportName,status, type, gasTank);
     }
 
-    public CompanyCar(String transportId, String status, String type, int gasTank, String model, String make,String idPersona) {
-        super(transportId, status, type, gasTank);
-        this.model = model;
+    public CompanyCar(String transportId, String transportName,String status, String type, int gasTank, String make,String idPersona) {
+        super(transportId, transportName,status, type, gasTank);
         this.make = make;
         this.idPersona = idPersona;
     }
 
+    @Override
+    public String[] gatherInfo() {
+        return new String[]{super.getId(),super.getName(),super.getStatus(),super.getType(),make, String.valueOf(super.getGasTank()),idPersona};
+    }
+
     public CompanyCar() {
         super();
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getMake() {

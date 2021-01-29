@@ -57,4 +57,9 @@ public class Employee extends Person {
     public void setJob(String job) {
         this.job = job;
     }
+
+    @Override
+    public String[] gatherInfo() {
+        return new String[]{super.getId(),super.getName(),super.getLastName(),super.getStatus(),type,job,salary+"€",shift};
+    }
 }

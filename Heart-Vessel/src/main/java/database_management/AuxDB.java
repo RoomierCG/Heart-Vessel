@@ -1,5 +1,6 @@
 package database_management;
 
+import objects.Generic;
 import objects.area.Area;
 import objects.area.areas.Garaje;
 import objects.people.Person;
@@ -9,19 +10,12 @@ import objects.provider.Provider;
 import objects.transportsystem.Transport;
 import service.utility.ID;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AuxDB {
 
-    public static ArrayList<Area> ArrLarea = new ArrayList<>();
-
-    public static ArrayList<Person> ArrlPerson = new ArrayList<>();
-
-    public static ArrayList<Product> ArrlProduct = new ArrayList<>();
-
-    public static ArrayList<Provider> ArrlProvider = new ArrayList<>();
-
-    public static ArrayList<Transport> ArrlTransport = new ArrayList<>();
+    public static ArrayList<Generic> Complete = new ArrayList<>();
 
     public static ArrayList<ID> EmptyIDs = new ArrayList<>();
 
@@ -45,6 +39,8 @@ public class AuxDB {
 
         }
     };
+
+
 
 
 }

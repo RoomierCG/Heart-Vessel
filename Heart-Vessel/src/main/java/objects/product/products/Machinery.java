@@ -24,6 +24,8 @@ public class Machinery extends Product {
 
     }
 
+
+
     public int getElectricityConsumption() {
         return electricityConsumption;
     }
@@ -40,4 +42,7 @@ public class Machinery extends Product {
         this.model = model;
     }
 
+
+    public String[] gatherInfo() {
+        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(), String.valueOf(electricityConsumption),model};}
 }

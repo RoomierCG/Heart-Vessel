@@ -36,4 +36,9 @@ public class SanitationMaterials extends Product {
     public void setType(String type) {
         this.type = type;
     }
+
+
+    public String[] gatherInfo() {
+        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(),model,type};
+    }
 }

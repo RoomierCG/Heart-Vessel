@@ -2,23 +2,27 @@ package objects.area;
 
 import java.util.ArrayList;
 
+import objects.Generic;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
-public class Area {
+public class Area extends Generic {
 
-    private String idArea; //Identificador
-    private String name;
+
+    public Area() {
+    }
+
     private ArrayList<String> personal; //Personas que estan en ese area
     private String status; //Ocupdo, No Ocupada, Desinfectando etc.
     private ArrayList<String> equipment; //inventario que tiene asignado
     private int floor; //En que planta se ubica
     private int risk; //Como de arriesgado es
+    
+    
 
-    public Area(String idArea, String name, String status, int floor, int risk, ArrayList<String> equipment,ArrayList<String> personal) {
-        this.idArea = idArea;
-        this.name = name;
+    public Area(String id, String name, String status, int floor, int risk, ArrayList<String> equipment,ArrayList<String> personal) {
+        super(id,name);
         this.personal = personal;
         this.status = status;
         this.equipment = equipment;
@@ -28,12 +32,8 @@ public class Area {
 
 
     public String[] gatherInfo(){
-        return new String[]{idArea,name,status,personal.size()+" personas",equipment.size()+" articulos",String.valueOf(floor), String.valueOf(risk)};
+        return new String[]{super.getId(),super.getName(),status,personal.size()+" personas",equipment.size()+" articulos",String.valueOf(floor), String.valueOf(risk)};
     }
-
-
-
-    public Area() {}
 
     public ArrayList<String> getEquipment() {
         return equipment;
@@ -41,22 +41,6 @@ public class Area {
 
     public void setEquipment(ArrayList<String> equipment) {
         this.equipment = equipment;
-    }
-
-    public String getIdArea() {
-        return idArea;
-    }
-
-    public void setIdArea(String idArea) {
-        this.idArea = idArea;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public ArrayList<String> getPersonal() {
@@ -92,8 +76,8 @@ public class Area {
     }
 
     public void initArea(){
-        this.setIdArea(OpsID.generateID("ARR"));
-        this.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
+        super.setId(OpsID.generateID("ARR"));
+        super.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
         ArrayList<String> atribList = new ArrayList<>();
         int cont = 0;
         System.out.println("Introduzca \"/exit\" para terminar.");

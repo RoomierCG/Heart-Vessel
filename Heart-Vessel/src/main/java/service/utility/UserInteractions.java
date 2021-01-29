@@ -92,7 +92,10 @@ public class UserInteractions {
 
     }
 
+    public static String pickFrom(String[] list){
 
+        return null;
+    }
 
 
     public static String idRequest(boolean exists){

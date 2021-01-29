@@ -1,3 +1,4 @@
+import database_management.AuxDB;
 import database_management.mongo.QueryDB;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
@@ -6,7 +7,7 @@ import visualInterfaces.Constants;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static service.data_manager.DataFunctions.NumListCreator;
+import static service.data_manager.DataFunctions.*;
 
 public class test {
     public static ArrayList<String> EditList(ArrayList<String> originList, String originType) {
@@ -51,7 +52,5 @@ public class test {
      */
 
 
-    public static void main(String[] args) {
 
-    }
 }

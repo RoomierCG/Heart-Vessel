@@ -1,34 +1,17 @@
 package objects.provider;
 
-public class Provider {
+import objects.Generic;
 
-    private String idProvider;
-    private String name;
+public class Provider extends Generic {
+
     private String account;
 
     public Provider(String idProvider, String name, String account) {
-        this.idProvider = idProvider;
-        this.name = name;
+        super(idProvider, name);
         this.account = account;
     }
 
     public Provider(){}
-
-    public String getIdProvider() {
-        return idProvider;
-    }
-
-    public void setIdProvider(String idProvider) {
-        this.idProvider = idProvider;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getAccount() {
         return account;
@@ -37,4 +20,7 @@ public class Provider {
     public void setAccount(String account) {
         this.account = account;
     }
+
+    @Override
+    public String[] gatherInfo() {return new String[]{super.getId(),super.getName(),account};}
 }

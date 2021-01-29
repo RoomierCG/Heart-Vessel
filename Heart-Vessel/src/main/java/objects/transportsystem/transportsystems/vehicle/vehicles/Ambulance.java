@@ -13,8 +13,8 @@ public class Ambulance extends Vehicle {
 
 
 
-    public Ambulance(String transportId, String status, String type, int gasTank,ArrayList<String> personal, ArrayList<String> equipment) {
-        super(transportId, status, type, gasTank);
+    public Ambulance(String transportId,String transportName, String status, String type, int gasTank,ArrayList<String> personal, ArrayList<String> equipment) {
+        super(transportId, transportName,status, type, gasTank);
         this.equipment = equipment;
         this.personal = personal;
     }
@@ -39,4 +39,8 @@ public class Ambulance extends Vehicle {
         this.equipment = equipment;
     }
 
+
+    public String[] gatherInfo() {
+        return new String[]{super.getId(),super.getName(),super.getStatus(), String.valueOf(super.getGasTank()),super.getType(),personal.size()+" personas",equipment.size()+" articulos"};
+    }
 }

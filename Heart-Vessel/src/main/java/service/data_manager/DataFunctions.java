@@ -2,6 +2,7 @@ package service.data_manager;
 
 import database_management.AuxDB;
 import database_management.mongo.QueryDB;
+import objects.Generic;
 import objects.area.Area;
 import objects.area.areas.Garaje;
 import objects.area.areas.HabitableRoom;
@@ -30,29 +31,30 @@ public class DataFunctions implements Operations {
         Object deleteObject = OpsID.decodeID(UserInteractions.strRequest("Ingrese el ID de lo que quiera eliminar"));
 
         if (deleteObject instanceof Area) {
-            AuxDB.ArrLarea.remove(deleteObject);
+            AuxDB.Complete.remove(deleteObject);
             return true;
 
         } else if (deleteObject instanceof Person) {
-            AuxDB.ArrlPerson.remove(deleteObject);
+            AuxDB.Complete.remove(deleteObject);
             return true;
 
         } else if (deleteObject instanceof Product) {
-            AuxDB.ArrlProduct.remove(deleteObject);
+            AuxDB.Complete.remove(deleteObject);
             return true;
 
         } else if (deleteObject instanceof Provider) {
-            AuxDB.ArrlProvider.remove(deleteObject);
+            AuxDB.Complete.remove(deleteObject);
             return true;
 
         } else if (deleteObject instanceof Transport) {
-            AuxDB.ArrlTransport.remove(deleteObject);
+            AuxDB.Complete.remove(deleteObject);
             return true;
 
         } else {
             return false;
         }
     }
+
     public static boolean modifyGeneric() {
 
         int opcion;//Le quite el menos 1, por si te da problemas luego
@@ -76,23 +78,23 @@ public class DataFunctions implements Operations {
                 }
             }
         }
-        numOptions = NumListCreator(0,options.size());
-        do{
+        numOptions = NumListCreator(0, options.size());
+        do {
             String prompt = "";
-            for(int i = 0;i<options.size();i++){
-                if(numOptions.contains(i+1))
-                    prompt += "- "+(1+i)+"º " + options.get(i)+"\n";
+            for (int i = 0; i < options.size(); i++) {
+                if (numOptions.contains(i + 1))
+                    prompt += "- " + (1 + i) + "º " + options.get(i) + "\n";
             }
             opcion = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", numOptions);
             optionsSelected.add(opcion);
             numOptions.remove(numOptions.indexOf(opcion));
 
-        }while(opcion!=0);
+        } while (opcion != 0);
 
 
         //No queremos permitir que modifiquen el id por eos borramos 0
 
-        optionsSelected.remove(optionsSelected.size()-1);
+        optionsSelected.remove(optionsSelected.size() - 1);
         Collections.sort(optionsSelected);
         System.out.println(optionsSelected);
 
@@ -102,7 +104,7 @@ public class DataFunctions implements Operations {
     public static ArrayList<String> EditList(ArrayList<String> originList, String originType) {
         switch (UserInteractions.numRequest("\n1. Añadir\n2. Eliminar\n3. Mostrar Lista\n0. Salir", 0, 3)) {
             case 1:
-                String newId = UserInteractions.idRequest(originType,true);
+                String newId = UserInteractions.idRequest(originType, true);
                 if (OpsID.decodeID(newId) == null) {
                     System.out.println("Este id no existe");
                 } else {
@@ -112,7 +114,7 @@ public class DataFunctions implements Operations {
                 break;
 
             case 2:
-                String delId = UserInteractions.idRequest(originType,true);
+                String delId = UserInteractions.idRequest(originType, true);
                 if (!originList.contains(delId)) {
                     System.out.println("Este id no existe");
                 } else {
@@ -149,114 +151,123 @@ public class DataFunctions implements Operations {
     }
 
     public static void printAll(ArrayList<String> atribs, String type) {
-        if(atribs.size()>6){
-            do{
-                ArrayList<String> reduced = new ArrayList<>();
-                int cont = 0;
-                do{
-                    reduced.add(atribs.get(0));
-                    System.out.println(atribs.get(0));
-                    atribs.remove(0);
-                    cont++;
-                }while(cont<6 && !atribs.isEmpty());
-                printAll(reduced,type);
-            }while(!atribs.isEmpty());
+        ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
+        ArrayList<String> Header = new ArrayList<>();
+
+        for (int i = 0; i < atribs.size(); i += 6) {
+            ArrayList<String> data = new ArrayList<>();
+            DataPacks.add(data);
         }
-        ArrayList<String> responses = new ArrayList<>();
-        //ArrayList<String> listResponse = new ArrayList<>();
-        String[] Header = new String[atribs.size()];
-        int HCount = 0;
+        switch (type.length()) {
+            case 2:
 
-        switch (type.substring(0, 2)) {//TODO REVISAR
-            case "AR":
-                for (Area a : AuxDB.ArrLarea) {
-                    if (a.getIdArea().startsWith(type)) {
-                        for (int numAtri = 0; numAtri < Constants.Omniclase[0][0][2].length; numAtri++) {
-                            /*if (numAtri == 3 && atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                responses.add(a.gatherInfo()[numAtri][0]);
-                                if (HCount != atribs.size()) {
-                                    Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
-                                    HCount++;
-                                }
-                            } else if (numAtri == 4 && atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                responses.add(a.gatherInfo()[numAtri][0]);
-                                if (HCount != atribs.size()) {
-                                    Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
-                                    HCount++;
-                                }
-                            } else */if (atribs.contains(Constants.Omniclase[0][0][2][numAtri])) {
-                                responses.add(a.gatherInfo()[numAtri]);
-                                if (HCount < atribs.size()) {
-                                    Header[HCount] = Constants.Omniclase[0][0][2][numAtri];
-                                    HCount++;
-
+                break;
+            case 3:
+                for (String[][][] Class : Constants.Omniclase) {
+                    for (String[][] Sub : Class) {
+                        if (Sub[1][0].equals(type)) {
+                            if (Sub[2] != null) {
+                                for (int i = 0; i < Sub[2].length; i++) {
+                                    if (atribs.contains(Sub[2][i])) {
+                                        Header.add(Sub[2][i]);
+                                    }
                                 }
                             }
-                        }
-                        if (type.equals("ARG#") && atribs.contains(Constants.Omniclase[0][1][2][7])) {
-                            responses.add(a.gatherInfo()[7]);
-                            if (HCount != atribs.size()) {
-                                Header[HCount] = Constants.Omniclase[0][1][2][7];
-                                HCount++;
+                            if (Sub[3] != null) {
+                                for (int i = 0; i < Sub[3].length; i++) {
+
+                                    if (atribs.contains(Sub[3][i])) {
+                                        Header.add(Sub[3][i]);
+                                    }
+                                }
+                            }
+                            for (Generic g : AuxDB.Complete) {
+                                int PackCount = 0;
+                                if (g.getId().startsWith(type)) {
+
+                                    int Hcount = 0;
+
+                                    int Tlength = (Sub[3][0] == null) ? ((Sub[2][0] == null) ? 0 : Sub[2].length) : Sub[2].length + Sub[3].length;
+                                    //System.out.println(Tlength+"||");
+                                    for (int i = 0; i < Tlength; i++) {
+                                        if (i < Sub[2].length) {
+                                            if (atribs.contains(Sub[2][i])) {
+                                                Hcount++;
+                                                if (Hcount % 7 == 0) {
+                                                    PackCount++;
+                                                }
+
+                                                (DataPacks.get(PackCount)).add((g.gatherInfo()[i]));
+
+                                            }
+                                        } else {
+                                            if (atribs.contains(Sub[3][i - (Sub[2].length)])) {
+                                                Hcount++;
+                                                if (Hcount % 7 == 0) {
+                                                    PackCount++;
+                                                }
+                                                (DataPacks.get(PackCount)).add((g.gatherInfo()[i]));
+
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
 
+                break;
+            default:
+                System.out.println("Error");
+        }
+        for (ArrayList<String> printing : DataPacks) {
+            String output = " ";
+            boolean header = true;
+            int remaining = 0;
+            int current = 0;
+            for (String response : printing) {
+                if (header) {
+                    if (Header.size() > 6) {
+                        remaining = 6;
+                        for (int i = 0; i < 6; i++) {
+                            output += String.format("%-30.30s", Header.get(0));
+                            Header.remove(0);
 
-                switch (atribs.size()) {
-                    case 1:
-                        System.out.printf("%-30.30s\n", Header[0]);
-
-                        System.out.printf("%-30.30s\n", Constants.separtator);
-                        for (String resp : responses) {
-                            System.out.printf("%-30.30s\n", resp);
                         }
-                        break;
-                    case 2:
-                        System.out.printf("%-30.30s %-30.30s\n", Header[0], Header[1]);
 
-                        System.out.printf("%-30.30s %-30.30s\n", Constants.separtator, Constants.separtator);
-                        for (int i = 0; i < responses.size(); i += 2) {
-                            System.out.printf("%-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1));
+                    } else {
+                        remaining = Header.size();
+                        for (int i = 0; i < remaining; i++) {
+                            output += String.format("%-30.30s", Header.get(0));
+                            Header.remove(0);
                         }
-                        break;
-                    case 3:
-                        System.out.printf("%-30.30s %-30.30s %-30.30s\n", Header[0], Header[1], Header[2]);
 
-                        System.out.printf("%-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator, Constants.separtator);
-                        for (int i = 0; i < responses.size(); i += 3) {
-                            System.out.printf("%-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2));
+                    }
+                    output += "\n";
+                    for (int space = 0; space < 29 * (remaining); space++) {
+                        if (space % 29 == 0) {
+                            output += "|";
                         }
-                        break;
-                    case 4:
-                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3]);
+                        output += "=";
 
-                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator, Constants.separtator, Constants.separtator);
-                        for (int i = 0; i < responses.size(); i += 4) {
-                            System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2),responses.get(i+3));
-                        }
-                        break;
-                    case 5:
-                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3],Header[4]);
-
-                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator,Constants.separtator, Constants.separtator, Constants.separtator);
-                        for (int i = 0; i < responses.size(); i += 5) {
-                            System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2),responses.get(i+3),responses.get(i+4));
-                        }
-                        break;
-                    case 6:
-                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s  %-30.30s %-30.30s\n", Header[0], Header[1], Header[2],Header[3],Header[4],Header[5]);
-
-                        System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", Constants.separtator, Constants.separtator,Constants.separtator,Constants.separtator, Constants.separtator, Constants.separtator);
-                        for (int i = 0; i < responses.size(); i += 6) {
-                            System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s %-30.30s %-30.30s\n", responses.get(i), responses.get(i + 1), responses.get(i + 2),responses.get(i+3),responses.get(i+4),responses.get(i+5));
-                        }
-                        break;
-
-
+                    }
+                    output += "|\n";
+                    header = false;
                 }
+                output += String.format("%-30.30s", response);
+                current++;
+                if (current % remaining == 0) {
+                    output += "\n";
+                }
+
+
+            }
+            System.out.println(output);
+            System.out.println("\n");
+
         }
     }
+
 
 }

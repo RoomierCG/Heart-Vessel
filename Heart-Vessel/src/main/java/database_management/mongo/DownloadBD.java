@@ -82,7 +82,7 @@ public class DownloadBD {
         MongoCursor<Document> cursor = findIterable.iterator();
 
         //Arraylist de retorno
-        ArrayList<Area> areas = new ArrayList<Area>();
+        ArrayList<Area> areas = new ArrayList<>();
 
         while(cursor.hasNext()){
 
@@ -240,7 +240,8 @@ public class DownloadBD {
             switch (nodoTrp.getString("Tipo")){
                 case "Ayuda Movil":
                     MovementAid nuevoAM = new MovementAid(
-                            nodoTrp.getString("idTransporte"),
+                            nodoTrp.getString("id"),
+                            nodoTrp.getString("Name"),
                             nodoTrp.getString("Estado"),
                             nodoTrp.getString("idPaciente"),
                             nodoTrp.getString("idArea")
@@ -252,6 +253,7 @@ public class DownloadBD {
                 case "Ambulancia":
                     Ambulance nuevoAmbu = new Ambulance(
                             nodoTrp.getString("idTransporte"),
+                            nodoTrp.getString("Name"),
                             nodoTrp.getString("Estado"),
                             nodoTrp.getString("Especialidad"),
                             nodoTrp.getInteger("Gasolina"),
@@ -265,10 +267,10 @@ public class DownloadBD {
                 case "CocheCorporativo":
                     CompanyCar nuevoCC = new CompanyCar(
                             nodoTrp.getString("idTransporte"),
+                            nodoTrp.getString("Modelo"),
                             nodoTrp.getString("Estado"),
                             nodoTrp.getString("Transmision"),
                             nodoTrp.getInteger("Gasolina"),
-                            nodoTrp.getString("Modelo"),
                             nodoTrp.getString("Marca"),
                             nodoTrp.getString("Dueño")
                     );

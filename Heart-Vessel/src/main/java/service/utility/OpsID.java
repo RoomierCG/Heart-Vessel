@@ -1,6 +1,7 @@
 package service.utility;
 
 import database_management.AuxDB;
+import objects.Generic;
 import objects.area.Area;
 import objects.area.areas.Garaje;
 import objects.area.areas.HabitableRoom;
@@ -19,6 +20,7 @@ import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.MovementAid;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
+import visualInterfaces.Constants;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ import static database_management.AuxDB.*;
 
 public class OpsID {
 
-
+/*
     public static Object decodeID(String id) {
         if (id.length() < 4) {
             //ID no valido
@@ -42,8 +44,9 @@ public class OpsID {
                     } else if (inicial.equals("PEP")) {
                         resultado = new Patient();
                     }
-                    for (Person person : ArrlPerson) {
-                        if (person.getPersonId().equals(id)) {
+                    for (Generic a : Complete) {
+                        if(a instanceof Person)
+                        if (a.getId().equals(id)) {
                             resultado = person;
                             return resultado;
                         }
@@ -127,7 +130,15 @@ public class OpsID {
             return Object.class;
         }
     }
-
+*/
+    public static Object decodeID(String id){
+        for(Generic a : Complete){
+            if(a.getId().equals(id)){
+                return a;
+            }
+        }
+        return null;
+    }
     public static int retrieveIDValue(String id) {
         int result = 0;
         try {

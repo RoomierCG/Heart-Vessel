@@ -10,8 +10,8 @@ public abstract class Vehicle extends Transport {
     protected String type;
     protected int gasTank;
 
-    public Vehicle(String transportId, String status, String type, int gasTank) {
-        super(transportId, status);
+    public Vehicle(String transportId,String transportName, String status, String type, int gasTank) {
+        super(transportId,transportName, status);
         this.type = type;
         this.gasTank = gasTank;
     }

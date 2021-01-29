@@ -27,7 +27,7 @@ public class Patient extends Person {
 
     }
 
-    public boolean isAllowVisitors() {
+    public boolean isAllowedVisitors() {
         return allowVisitors;
     }
 
@@ -53,4 +53,9 @@ public class Patient extends Person {
 
     public void askAllowVisitors(){}
 
+    @Override
+    public String[] gatherInfo() {
+        String visit = (isAllowedVisitors()) ? "Si" : "No";
+        return new String[]{super.getId(),super.getName(),super.getLastName(),super.getStatus(),visit,roomId, registry.size()+" entradas"};
+    }
 }
