@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Heart-Vessel" />
+        <module name="TFG" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Heart-Vessel" target="1.8" />
+      <module name="TFG" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
