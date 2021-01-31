@@ -1,3 +1,4 @@
+import database_management.AuxDB;
 import objects.area.Area;
 import visualInterfaces.Constants;
 
@@ -21,8 +22,6 @@ public class OmniRequest {
         }
         ArrayList<String> singles = new ArrayList<>();
         ArrayList<ArrayList<String>> multis = new ArrayList<>();
-
-
 
        //for(int i=0;i<o[0].length);
 
