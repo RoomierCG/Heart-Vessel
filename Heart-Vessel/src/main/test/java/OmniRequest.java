@@ -27,4 +27,8 @@ public class OmniRequest {
 
 
     }
+
+    static boolean stop(boolean status){
+        return status;
+    }
 }
