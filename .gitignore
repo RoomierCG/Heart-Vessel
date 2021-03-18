@@ -151,3 +151,4 @@ buildNumber.properties
 
 # Manually adds
 Heart-Vessel/src/main/resources/FirebaseKey/serviceAccountKey.json
+Heart-Vessel/gs-spring-boot/

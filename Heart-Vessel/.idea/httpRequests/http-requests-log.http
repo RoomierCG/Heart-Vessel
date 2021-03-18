@@ -1,0 +1,36 @@
+GET http://localhost:8070
+
+<> 2021-03-09T175728.200.html
+
+###
+
+GET http://localhost:8070/hola
+
+<> 2021-03-09T175643.404.json
+
+###
+
+GET http://localhost:8070/hola
+
+<> 2021-03-09T175638.404.json
+
+###
+
+GET http://localhost:8070/hola
+
+###
+
+GET http://localhost:8070/hola
+
+###
+
+GET http://localhost:8070/hola
+
+###
+
+GET http://localhost:8070/hola
+
+<> 2021-03-09T174132.200.html
+
+###
+

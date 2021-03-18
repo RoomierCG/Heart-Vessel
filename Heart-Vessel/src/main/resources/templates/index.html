@@ -1,12 +1,143 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <meta charset="UTF-8"/>
-    <title>Hola mundo</title>
+    <title>Heart Vessel</title>
+    <meta charset="UTF-8" />
+
+    <!-- Links-->
+    <link th:href="@{/ThirdParty/css/bootstrap.min.css}" href="../Static/ThirdParty/css/bootstrap.min.css"
+        rel="stylesheet" />
+    <link th:href="@{/indexCss.css}" href="../Static/indexCss.css" rel="stylesheet" />
+
+    <!-- Scripts -->
+    <script th:src="@{/ThirdParty/js/jquery-3.6.0.min.js}" src="../Static/ThirdParty/js/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/ThirdParty/js/bootstrap.min.js}" src="../Static/ThirdParty/js/bootstrap.min.js"></script>
+    <script>
+
+        //Inicializacion de acciones y registro
+        var arryBreadCrumb = [];
+        $(document).ready(function () {
+            $("#colum-1 div:first").show();
+            arryBreadCrumb.push(
+                $("#liHome", this)
+            );
+
+            //Ocultamos el bloque que llama a la funcion y ejecutamos el siguiente
+            $(".btnTrigger", this).click(function () {
+                $(this).parent("div").attr('style', 'display:none !important');
+            });
+
+        });
+
+        //Mostramos el bloque siguiente tras ocultar el anterior
+        function displayDiv(hvDiv) {
+            $(hvDiv).show();
+
+            //modificamos la etiquete del ultimo elemento activo
+            $(arryBreadCrumb[arryBreadCrumb.length - 1]).removeAttr("aria-current")
+
+            arryBreadCrumb.push(
+                $('<li>', {
+                    'class': 'breadcrumb-item',
+                    'aria-current': 'page'
+                }).append(
+                    $('<a/>', {
+                        'href': '#',
+                        'text': hvDiv.substring(4)
+                    })
+                )
+            );
+
+            $(".breadcrumb").append(arryBreadCrumb[arryBreadCrumb.length - 1])
+        }
+    </script>
 </head>
-<body>
-<h1>Soy Edgar JEJE, Ella no me quiere</h1>
+
+<body style="background-color: #0B0E11;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Heart Vessel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+
+            <!-- breadcrumb para el menú de acciones, en revision -->
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="my-2 p-0">
+                <ol class="breadcrumb">
+                    <li id="liHome" class="breadcrumb-item" aria-current="page"><a href="#" >Home</a></li>
+                </ol>
+            </nav>
+
+            <div class="col-sm-12 col-md-6 border border-1 bg-dark p-0">
+
+                <!-- Columna 1 - Placeholder de acciones-->
+                <div id="colum-1" class="container-flow">
+
+                    <div id="hv-Home" class="d-grid gap-2 m-2" style="display: none !important;">
+                        <button gw onclick="displayDiv('#hv-Entrar')" class="btn btn-outline-success btnTrigger"
+                            type="button">Entrar</button>
+                        <button onclick="displayDiv('#hv-CargarDatos')" class="btn btn-outline-success btnTrigger"
+                            type="button">Cargar Datos</button>
+                        <button onclick="displayDiv('#hv-Salir')" class="btn btn-outline-danger btnTrigger"
+                            type="button">Salir</button>
+                    </div>
+
+                    <div id="hv-CargarDatos" class="d-grid gap-2 m-2" style="display: none !important;">
+                        <button class="btn btn-primary" type="button">Base de Datos</button>
+                        <button class="btn btn-primary" type="button">Local</button>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <!-- Columna 2 - Registro de respuestas-->
+            <div id="colum-2" class="col-sm-12 col-md-6 border border-1 bg-dark">
+                helo
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
