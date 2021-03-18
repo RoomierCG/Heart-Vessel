@@ -3,6 +3,7 @@ package objects.area;
 import java.util.ArrayList;
 
 import objects.Generic;
+import org.apache.catalina.User;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
@@ -17,11 +18,11 @@ public class Area extends Generic {
     private String status; //Ocupdo, No Ocupada, Desinfectando etc.
     private ArrayList<String> equipment; //inventario que tiene asignado
     private int floor; //En que planta se ubica
-    private int risk; //Como de arriesgado es
+    private String risk; //Como de arriesgado es
     
     
 
-    public Area(String id, String name, String status, int floor, int risk, ArrayList<String> equipment,ArrayList<String> personal) {
+    public Area(String id, String name, String status, int floor, String risk, ArrayList<String> equipment,ArrayList<String> personal) {
         super(id,name);
         this.personal = personal;
         this.status = status;
@@ -67,11 +68,11 @@ public class Area extends Generic {
         this.floor = floor;
     }
 
-    public int getRisk() {
+    public String getRisk() {
         return risk;
     }
 
-    public void setRisk(int risk) {
+    public void setRisk(String risk) {
         this.risk = risk;
     }
 
@@ -80,20 +81,19 @@ public class Area extends Generic {
         super.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
         ArrayList<String> atribList = new ArrayList<>();
         int cont = 0;
-        System.out.println("Introduzca \"/exit\" para terminar.");
+        //System.out.println("Introduzca \"/exit\" para terminar.");
         do{
             atribList.add(UserInteractions.idRequest("PEE#",true));
-
             cont++;
         }while(cont<Constants.personellLimit && !(atribList.get(cont).endsWith("-1")));
         this.setPersonal(atribList);
         cont = 0;
         do{
             atribList.add(UserInteractions.idRequest("PR",true));
-
             cont++;
         }while(cont<Constants.equipmentLimit && !(atribList.get(cont).endsWith("-1")));
         this.setEquipment(atribList);
+        this.risk = UserInteractions.pickFrom(Constants.riesgos);
 
     }
 

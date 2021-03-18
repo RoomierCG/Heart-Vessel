@@ -55,7 +55,7 @@ public class UserInteractions {
     public static String strRequest(String prompt){
         String output;
         System.out.println(prompt);
-        sc.nextLine();
+        //sc.nextLine();
         output = sc.nextLine();
 
         return output;
@@ -92,9 +92,33 @@ public class UserInteractions {
 
     }
 
-    public static String pickFrom(String[] list){
+    public static String pickFrom(ArrayList<String> list){
+        for(String op : list){
+            System.out.println("-" + op);
+        }
+        String resp = "";
+        int numresp = -1;
+        do{
+            resp = UserInteractions.strRequest("Introduzca la opcion deseada de la lista anterior o el numero correspondiente.");
+            try{
+                numresp = Integer.parseInt(resp);
+                resp = list.get(numresp-1);
+                System.out.println("h");
+            }catch (Exception e){
+                numresp = -1;
+            }
 
-        return null;
+        }while(!list.contains(resp) && numresp!=-1 && resp.length()<0 || resp.length()==0);
+
+        return resp;
+    }
+
+    public static String pickFrom(String[] list){
+        ArrayList<String> temporal = new ArrayList<>();
+        for(String a: list){
+            temporal.add(a);
+        }
+        return pickFrom(temporal);
     }
 
 
@@ -177,5 +201,7 @@ public class UserInteractions {
         LocalDateTime now = LocalDateTime.now();
         return (dtf.format(now));
     }
+
+
 
 }

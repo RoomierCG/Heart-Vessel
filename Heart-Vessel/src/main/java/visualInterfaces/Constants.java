@@ -1,16 +1,21 @@
 package visualInterfaces;
 
+import java.util.ArrayList;
+
 public class Constants {
 
-    public static String separtator = "========================================================================================================================";
+    public static final String separtator = "========================================================================================================================";
 
-    public static int personellLimit = 10;
+    public static final int personellLimit = 10;
 
-    public static int equipmentLimit = 50;
+    public static final int equipmentLimit = 50;
 
-    public static String[] estados= new String[]{"Estado1","Estado2"};
+    public static final ArrayList<String> estados= new ArrayList<String>(){{add("Estado1");add("Estado2");}};
 
-    public static String[][][][] Omniclase = new String[][][][]{
+    public static final ArrayList<String> riesgos= new ArrayList<String>(){{add("Sin Riesgo");add("No Critico");add("Semicritico");add("Critico");}};
+
+
+    public static final String[][][][] Omniclase = new String[][][][]{
 
                 //[Clase][InfoDeClase][Posicion en case de Lista//Default 0]
                 //Info clase: 0 = Nombre de clase, 1 = Prefijo de clase, 2 = Lista de atributos
