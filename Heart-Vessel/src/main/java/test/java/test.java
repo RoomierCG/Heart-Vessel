@@ -1,3 +1,5 @@
+package test.java;
+
 import database_management.AuxDB;
 import database_management.mongo.QueryDB;
 import service.utility.OpsID;

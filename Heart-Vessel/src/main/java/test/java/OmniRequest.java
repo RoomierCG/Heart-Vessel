@@ -1,3 +1,5 @@
+package test.java;
+
 import database_management.AuxDB;
 import objects.area.Area;
 import visualInterfaces.Constants;

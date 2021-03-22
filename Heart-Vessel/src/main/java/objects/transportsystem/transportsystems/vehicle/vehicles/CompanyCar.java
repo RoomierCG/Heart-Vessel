@@ -22,9 +22,13 @@ public class CompanyCar extends Vehicle {
         this.idPersona = idPersona;
     }
 
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
     @Override
-    public String[] gatherInfo() {
-        return new String[]{super.getId(),super.getName(),super.getStatus(),super.getType(),make, String.valueOf(super.getGasTank()),idPersona};
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 
     public CompanyCar() {

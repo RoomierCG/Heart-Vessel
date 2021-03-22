@@ -95,7 +95,7 @@ public class DownloadBD {
                             nodo.getString("Nombre"),
                             nodo.getString("Estado"),
                             nodo.getInteger("Planta"),
-                            nodo.getInteger("Riesgo"),
+                            nodo.getString("Riesgo"),
                             (ArrayList<String>) nodo.get("Equipamiento"),
                             (ArrayList<String>) nodo.get("Personal")
                     );
@@ -109,7 +109,7 @@ public class DownloadBD {
                             nodo.getString("Nombre"),
                             nodo.getString("Estado"),
                             nodo.getInteger("Planta"),
-                            nodo.getInteger("Riesgo"),
+                            nodo.getString("Riesgo"),
                             nodo.getString("idPaciente"),
                             (ArrayList<String>) nodo.get("Personal"),
                             (ArrayList<String>) nodo.get("Equipamiento")
@@ -124,7 +124,7 @@ public class DownloadBD {
                             nodo.getString("Nombre"),
                             nodo.getString("Estado"),
                             nodo.getInteger("Planta"),
-                            nodo.getInteger("Riesgo"),
+                            nodo.getString("Riesgo"),
                             (ArrayList<String>) nodo.get("Equipamiento"),
                             (ArrayList<String>) nodo.get("Personal"),
                             (ArrayList<String>) nodo.get("Vehiculos")

@@ -14,6 +14,7 @@ import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -143,16 +144,23 @@ public class DataFunctions implements Operations {
         return newNumList;
     }
 
-    public static String[][] append(String[][] a, String[][] b) {
+
+    //Nose si aun necesitamos esto
+    /*public static String[][] append(String[][] a, String[][] b) {
         String[][] result = new String[a.length + b.length][];
         System.arraycopy(a, 0, result, 0, a.length);
         System.arraycopy(b, 0, result, a.length, b.length);
         return result;
-    }
+    }*/
 
     public static void printAll(ArrayList<String> atribs, String type) {
         ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
         ArrayList<String> Header = new ArrayList<>();
+        if(type.length()==4){
+            if(type.startsWith("#")){
+                type = type.substring(1);
+            }
+        }
 
         for (int i = 0; i < atribs.size(); i += 6) {
             ArrayList<String> data = new ArrayList<>();
@@ -160,6 +168,11 @@ public class DataFunctions implements Operations {
         }
         switch (type.length()) {
             case 2:
+                ArrayList<String> children = prefixDescendant(type);
+                for(String child : children){
+                    System.out.println(Constants.separtator+"\n"+decodePrefix(child)+"\n"+Constants.separtator);
+                    printAll(atribs,child);
+                }
 
                 break;
             case 3:
@@ -197,7 +210,7 @@ public class DataFunctions implements Operations {
                                                     PackCount++;
                                                 }
 
-                                                (DataPacks.get(PackCount)).add((g.gatherInfo()[i]));
+                                                (DataPacks.get(PackCount)).add((g.gatherInfo().get(i)));
 
                                             }
                                         } else {
@@ -206,7 +219,7 @@ public class DataFunctions implements Operations {
                                                 if (Hcount % 7 == 0) {
                                                     PackCount++;
                                                 }
-                                                (DataPacks.get(PackCount)).add((g.gatherInfo()[i]));
+                                                (DataPacks.get(PackCount)).add((g.gatherInfo().get(i)));
 
                                             }
                                         }
@@ -233,7 +246,6 @@ public class DataFunctions implements Operations {
                         for (int i = 0; i < 6; i++) {
                             output += String.format("%-30.30s", Header.get(0));
                             Header.remove(0);
-
                         }
 
                     } else {
@@ -255,7 +267,7 @@ public class DataFunctions implements Operations {
                     output += "|\n";
                     header = false;
                 }
-                output += String.format("%-30.30s", response);
+                output += String.format("%-30.30s", "- "+response);
                 current++;
                 if (current % remaining == 0) {
                     output += "\n";
@@ -267,6 +279,170 @@ public class DataFunctions implements Operations {
             System.out.println("\n");
 
         }
+    }
+
+    public static void printAllRemaster(ArrayList<String> atribs, String type) {
+        ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<String>>> DataListPacks = new ArrayList<>();
+        ArrayList<String> Header = new ArrayList<>();
+        ArrayList<String> HeaderListed = new ArrayList<>();
+
+        ArrayList<Integer> atributePos = new ArrayList<>();
+        //////////////////////////////////////////////////
+        if (type.length() == 4) {
+            if (type.startsWith("#")) {
+                type = type.substring(1);
+            }
+        }
+        //////////////////////////////////////////////////
+
+
+        switch (type.length()) {
+            case 2:
+                ArrayList<String> children = DataFunctions.prefixDescendant(type);
+                for (String child : children) {
+                    System.out.println(Constants.separtator + "\n" + DataFunctions.decodePrefix(child) + "\n" + Constants.separtator);
+                    printAllRemaster(atribs, child);
+                }
+
+                break;
+            case 3:
+                for (String[][][] Class : Constants.Omniclase) {
+                    for (String[][] Sub : Class) {
+                        if (Sub[1][0].equals(type)) {
+                            if (Sub[2] != null) {
+                                for (int i = 0; i < Sub[2].length; i++) {
+                                    if (atribs.contains(Sub[2][i])) {
+                                        Header.add(Sub[2][i]);
+                                        ArrayList<String> head = new ArrayList<>();
+                                        DataPacks.add(head);
+                                        atributePos.add(i);
+                                    }
+                                }
+                            }
+
+                            if (Sub[3] != null) {
+                                for (int i = 0; i < Sub[3].length; i++) {
+                                    if (atribs.contains(Sub[3][i])) {
+                                        HeaderListed.add(Sub[3][i]);
+                                        ArrayList<ArrayList<String>> ListedAtr = new ArrayList<>();
+                                        DataListPacks.add(ListedAtr);
+                                        atributePos.add(i);
+                                    }
+                                }
+                            }
+                            for (Generic g : AuxDB.Complete) {
+                                if (g.getId().startsWith(type)) {
+                                    int dealtAtrs = 0;
+                                    for (String s : Header) {
+                                        DataPacks.get(dealtAtrs).add(g.gatherInfo().get(atributePos.get(dealtAtrs)));
+                                        dealtAtrs++;
+                                    }
+                                    dealtAtrs = 0;
+                                    for (String s : HeaderListed) {
+                                        DataListPacks.get(dealtAtrs).add(g.gatherListedInfo().get(atributePos.get(dealtAtrs)));
+                                        dealtAtrs++;
+                                    }
+                                }
+                            }
+                            /////////////////Print Head
+                            String headers = "";
+                            for (String header : Header) {
+                                String replacement = "";
+                                for(int left = 0;left<((29-header.length())/2);left++){
+                                    replacement += " ";
+                                }
+                                replacement += header;
+                                for(int left = 0;left<((29-header.length())/2);left++){
+                                    replacement += " ";
+                                }
+                                headers += String.format("%-30.30s", " " +replacement);
+                            }
+                            for (String header : HeaderListed) {
+                                String replacement = "";
+                                for(int left = 0;left<((29-header.length())/2);left++){
+                                    replacement += " ";
+                                }
+                                replacement += header;
+                                for(int left = 0;left<((29-header.length())/2);left++){
+                                    replacement += " ";
+                                }
+                                headers += String.format("%-30.30s"," " + replacement);
+                            }
+                            headers+="\n";
+                            for (int space = 0; space < 29 * (Header.size()+HeaderListed.size()); space++) {
+                                if (space % 29 == 0) {
+                                    headers += "|";
+                                }
+                                headers += "=";
+
+                            }
+                            System.out.println(headers);
+
+                            /////////////////////////////////Body
+                            for (int i = 0; i < DataPacks.get(0).size(); i++) {
+                                String pL = "";
+                                int cap = 1;
+                                for (ArrayList<ArrayList<String>> listed : DataListPacks) {
+                                    if (cap < listed.get(i).size()) {
+                                        cap = listed.get(i).size();
+                                    }
+                                }
+                                for (int j = 0; j < cap; j++) {
+                                    if (j == 0) {
+                                        for (ArrayList<String> genericAtr : DataPacks) {
+
+                                            pL = pL + String.format("%-30.30s", "- " + genericAtr.get(i));
+                                        }
+                                    } else {
+                                        for (ArrayList<String> genericAtr : DataPacks) {
+                                            pL = pL + String.format("%-30.30s", "- " + "");
+
+                                        }
+                                    }
+
+                                        for (ArrayList<ArrayList<String>> listed : DataListPacks) {
+                                            try {
+                                                pL = pL + String.format("%-30.30s","- "+ listed.get(i).get(j));
+                                            } catch (Exception e) {
+                                                pL = pL + String.format("%-30.30s", "- " + "");
+                                            }
+                                        }
+                                        pL += "\n";
+
+
+
+
+                                }
+                                System.out.println(pL);
+                            }
+                        }
+                    }
+                }
+        }
+    }
+
+    public static ArrayList<String> prefixDescendant(String prefix) {
+        ArrayList<String> prefixDescendants = new ArrayList<>();
+        for (String[][][] Class : Constants.Omniclase) {
+            for (String[][] Sub : Class) {
+                if(Sub[1][0].startsWith(prefix)){
+                    prefixDescendants.add(Sub[1][0]);
+                }
+            }
+        }
+        return prefixDescendants;
+    }
+
+    public static String decodePrefix(String prefix) {
+        for (String[][][] Class : Constants.Omniclase) {
+            for (String[][] Sub : Class) {
+                if(Sub[1][0].equals(prefix)){
+                    return Sub[0][0];
+                }
+            }
+        }
+        return "Invalido";
     }
 
 

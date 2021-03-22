@@ -42,6 +42,7 @@ public class OpsID {
             result = Integer.parseInt(id.substring(4));
         } catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
         return result;
     }
@@ -61,6 +62,10 @@ public class OpsID {
             }
         }
         return prefix + "#1";
+    }
+
+    public static void printType(String prefix){
+
     }
 
 

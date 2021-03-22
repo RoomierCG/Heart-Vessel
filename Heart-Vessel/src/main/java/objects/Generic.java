@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.ArrayList;
+
 public abstract class Generic {
     String id;
     String Name;
@@ -8,7 +10,8 @@ public abstract class Generic {
     public Generic() {
     }
 
-    public abstract String[] gatherInfo();
+    public abstract ArrayList<String> gatherInfo();
+    public abstract ArrayList<ArrayList<String>> gatherListedInfo();
 
     public  Generic(String id, String name) {
         this.id = id;

@@ -2,6 +2,7 @@ package service.utility;
 
 
 import database_management.AuxDB;
+import objects.Generic;
 import visualInterfaces.Constants;
 
 import java.time.LocalDateTime;
@@ -120,6 +121,7 @@ public class UserInteractions {
         }
         return pickFrom(temporal);
     }
+
 
 
     public static String idRequest(boolean exists){

@@ -4,6 +4,8 @@ package objects.transportsystem.transportsystems;
 import objects.people.Person;
 import objects.transportsystem.Transport;
 
+import java.util.ArrayList;
+
 public class MovementAid extends Transport {
     private String patient;// -1 significa que no esta asignado a un paciente sino que esta en un area y viceversa
     private String idArea;
@@ -14,9 +16,15 @@ public class MovementAid extends Transport {
         this.idArea = idArea;
     }
 
-    public String[] gatherInfo() {
-        return new String[]{super.getId(),super.getName(),super.getStatus(),patient,idArea};
+    public ArrayList<String> gatherInfo() {
+        return null;
     }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
+    }
+
 
     public MovementAid() {
         super();

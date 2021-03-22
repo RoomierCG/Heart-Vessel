@@ -2,6 +2,7 @@ package objects.product.products;
 
 import objects.product.Product;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CleaningEquipment extends Product {
@@ -24,8 +25,12 @@ public class CleaningEquipment extends Product {
         this.riskFactor = riskFactor;
     }
 
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
     @Override
-    public String[] gatherInfo() {
-        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(), String.valueOf(riskFactor)};
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 }

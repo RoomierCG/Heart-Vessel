@@ -2,6 +2,8 @@ package objects.people.person;
 
 import objects.people.Person;
 
+import java.util.ArrayList;
+
 public class Employee extends Person {
 
     //Status = Trabajando, En descanso, de vacaciones etc?
@@ -58,8 +60,12 @@ public class Employee extends Person {
         this.job = job;
     }
 
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
     @Override
-    public String[] gatherInfo() {
-        return new String[]{super.getId(),super.getName(),super.getLastName(),super.getStatus(),type,job,salary+"€",shift};
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 }

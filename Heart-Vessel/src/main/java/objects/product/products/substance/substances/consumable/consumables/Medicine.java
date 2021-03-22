@@ -17,9 +17,13 @@ public class Medicine extends Consumable {
     }
 
 
-    public String[] gatherInfo() {
-        String toxic = (super.isToxic()) ? "Si" : "No";
-        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(),toxic,super.getExpirationDate(),administered,super.getType(),getAllergyRiskIngredients().size()+" alérgenos"};
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 
     public String getAdministered() {

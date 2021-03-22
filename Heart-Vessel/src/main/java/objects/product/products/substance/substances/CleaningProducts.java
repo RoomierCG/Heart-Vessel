@@ -2,6 +2,8 @@ package objects.product.products.substance.substances;
 
 import objects.product.products.substance.Substance;
 
+import java.util.ArrayList;
+
 
 public class CleaningProducts extends Substance {
     private String make; //Marca del producto
@@ -27,8 +29,12 @@ public class CleaningProducts extends Substance {
         this.make = make;
     }
 
-    public String[] gatherInfo() {
-        String toxic = (super.isToxic()) ? "Si" : "No";
-        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(),make,toxic,super.getType()};
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 }

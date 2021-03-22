@@ -2,6 +2,8 @@ package objects.provider;
 
 import objects.Generic;
 
+import java.util.ArrayList;
+
 public class Provider extends Generic {
 
     private String account;
@@ -21,6 +23,12 @@ public class Provider extends Generic {
         this.account = account;
     }
 
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
     @Override
-    public String[] gatherInfo() {return new String[]{super.getId(),super.getName(),account};}
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
+    }
 }

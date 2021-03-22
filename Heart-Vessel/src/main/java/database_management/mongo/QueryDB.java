@@ -23,6 +23,7 @@ import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import org.bson.Document;
 import objects.area.areas.*;
+import visualInterfaces.Constants;
 
 import java.util.ArrayList;
 
@@ -107,9 +108,9 @@ public class QueryDB {
         };
 
         listaEquipamiento.add(avegetal.getId());
-        HabitableRoom room = new HabitableRoom("ARH#1", "Habitacion 032", "Ocupado", 1,2, "#PEP#1", listaEquipamiento, listaPersonal);
+        HabitableRoom room = new HabitableRoom("ARH#1", "Habitacion 032", "Ocupado", 1,Constants.riesgos.get(2), "#PEP#1", listaEquipamiento, listaPersonal);
         listaEquipamiento.add(ave.getId());
-        HabitableRoom room2 = new HabitableRoom("ARH#2", "Habitacion 033", "Ocupado", 1,2, "#PEP#2", listaEquipamiento, listaPersonal);
+        HabitableRoom room2 = new HabitableRoom("ARH#2", "Habitacion 033", "Ocupado", 1,Constants.riesgos.get(1), "#PEP#2", listaEquipamiento, listaPersonal);
         listaEquipamiento.add(aver.getId());
 
 
@@ -126,8 +127,8 @@ public class QueryDB {
         };
 
 
-        Area aasd = new Area("ARR#1", "Almacen","Limpiado", 0,0, listaEquipamiento, listaPersonal);
-        Garaje uff = new Garaje("ARG#1", "Kachow", "En llamas", 1, 0,listaPersonal,listaEquipamiento,listaAmbulancias);
+        Area aasd = new Area("ARR#1", "Almacen","Limpiado", 0, Constants.riesgos.get(0), listaEquipamiento, listaPersonal);
+        Garaje uff = new Garaje("ARG#1", "Kachow", "En llamas", 1, Constants.riesgos.get(0),listaPersonal,listaEquipamiento,listaAmbulancias);
 
         ArrayList<String> ingreds = new ArrayList<String>(){
             {
@@ -154,7 +155,7 @@ public class QueryDB {
         listaEquipamiento.add(coca.getId());
         listaEquipamiento.add(Fairy.getId());
 
-        Area xrayRoom = new Area("ARR#2", "Sala Rayos X", "ocupado", 3, 3,listaEquipamiento,listaPersonal);
+        Area xrayRoom = new Area("ARR#2", "Sala Rayos X", "ocupado", 3, Constants.riesgos.get(2),listaEquipamiento,listaPersonal);
 
         SanitationMaterials vendas = new SanitationMaterials("PRS#1", "Vendas", "ARR#1", "Nuevo", "09/09/2009","Sanitas","Tela");
 

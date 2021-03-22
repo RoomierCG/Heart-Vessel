@@ -3,8 +3,8 @@ package visualInterfaces;
 import java.util.ArrayList;
 
 public class Constants {
-
-    public static final String separtator = "========================================================================================================================";
+//=============================
+    public static final String separtator = "=====================================================================================================================================================";
 
     public static final int personellLimit = 10;
 

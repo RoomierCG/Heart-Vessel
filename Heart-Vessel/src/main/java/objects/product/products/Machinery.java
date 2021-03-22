@@ -2,6 +2,8 @@ package objects.product.products;
 
 import objects.product.Product;
 
+import java.util.ArrayList;
+
 
 public class Machinery extends Product {
     private int electricityConsumption; //Cuanta electricidad consume
@@ -43,6 +45,12 @@ public class Machinery extends Product {
     }
 
 
-    public String[] gatherInfo() {
-        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(), String.valueOf(electricityConsumption),model};}
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
+    }
 }

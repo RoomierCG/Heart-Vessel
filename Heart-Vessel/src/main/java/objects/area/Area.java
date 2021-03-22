@@ -32,8 +32,23 @@ public class Area extends Generic {
     }
 
 
-    public String[] gatherInfo(){
-        return new String[]{super.getId(),super.getName(),status,personal.size()+" personas",equipment.size()+" articulos",String.valueOf(floor), String.valueOf(risk)};
+    public ArrayList<String> gatherInfo(){
+        return new ArrayList<String>(){{
+            add(Area.super.getId());
+            add(Area.super.getName());
+            add(status);
+            add(String.valueOf(floor));
+            add(risk);
+            }
+        };
+    }
+
+    public ArrayList<ArrayList<String>> gatherListedInfo(){
+        return new ArrayList<ArrayList<String>>(){{
+            add(personal);
+            add(equipment);
+        }
+        };
     }
 
     public ArrayList<String> getEquipment() {

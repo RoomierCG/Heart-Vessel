@@ -53,9 +53,12 @@ public class Patient extends Person {
 
     public void askAllowVisitors(){}
 
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
     @Override
-    public String[] gatherInfo() {
-        String visit = (isAllowedVisitors()) ? "Si" : "No";
-        return new String[]{super.getId(),super.getName(),super.getLastName(),super.getStatus(),visit,roomId, registry.size()+" entradas"};
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package objects.product.products;
 
 import objects.product.Product;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SanitationMaterials extends Product {
@@ -38,7 +39,12 @@ public class SanitationMaterials extends Product {
     }
 
 
-    public String[] gatherInfo() {
-        return new String[]{super.getId(),super.getName(),super.getAreaId(),super.getStatus(),super.getBuyDate(),model,type};
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 }

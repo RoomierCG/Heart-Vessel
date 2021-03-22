@@ -40,7 +40,12 @@ public class Ambulance extends Vehicle {
     }
 
 
-    public String[] gatherInfo() {
-        return new String[]{super.getId(),super.getName(),super.getStatus(), String.valueOf(super.getGasTank()),super.getType(),personal.size()+" personas",equipment.size()+" articulos"};
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
 }

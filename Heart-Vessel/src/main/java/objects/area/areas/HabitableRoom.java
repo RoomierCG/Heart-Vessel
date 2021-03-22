@@ -7,7 +7,7 @@ public class HabitableRoom extends Area {
 
     private String idPatient; //Paciente que habita la habitacion
 
-    public HabitableRoom(String idArea, String name, String status, int floor, int risk, String idPatient, ArrayList<String> equipment, ArrayList<String> personal) {
+    public HabitableRoom(String idArea, String name, String status, int floor, String risk, String idPatient, ArrayList<String> equipment, ArrayList<String> personal) {
         super(idArea, name, status, floor, risk, equipment, personal);
         this.idPatient = idPatient;
     }
@@ -25,7 +25,14 @@ public class HabitableRoom extends Area {
     }
 
 
+    public ArrayList<String> gatherInfo() {
+        ArrayList<String> s = super.gatherInfo();
+        s.add(idPatient);
+        return s;
+    }
 
-
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return super.gatherListedInfo();
+    }
 }
 
