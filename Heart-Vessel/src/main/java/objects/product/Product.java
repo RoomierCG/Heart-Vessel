@@ -6,7 +6,7 @@ import service.utility.UserInteractions;
 
 public abstract class Product extends Generic {
 
-
+/////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     protected String areaId;
     protected String status; //Variable dependiendo de hijo
     protected String buyDate; //Fecha de compra

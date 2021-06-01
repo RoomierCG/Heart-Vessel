@@ -5,12 +5,13 @@ import objects.people.Person;
 import java.util.ArrayList;
 
 public class Patient extends Person {
-
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     //Status = Enfermo, recuperando, muerto
     private boolean allowVisitors; //Si se permiten visitas
     private ArrayList<String> registry; //Log de paciente
     private String roomId; //Habitacion donde esta habitando el paciente (debe existir dentro de la lista de habitaciones)
 
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
     public Patient(String personId, String name, String lastName, String status) {
         super(personId, name, lastName, status);
         this.registry = new ArrayList<>();
@@ -27,6 +28,18 @@ public class Patient extends Person {
 
     }
 
+
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
+    }
+
+    /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
     public boolean isAllowedVisitors() {
         return allowVisitors;
     }
@@ -51,14 +64,4 @@ public class Patient extends Person {
         this.roomId = roomId;
     }
 
-    public void askAllowVisitors(){}
-
-    public ArrayList<String> gatherInfo() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
-    }
 }

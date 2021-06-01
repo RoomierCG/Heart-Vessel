@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 public class Employee extends Person {
 
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     //Status = Trabajando, En descanso, de vacaciones etc?
     private String type; //Medicina, Limpieza, Admin?, Conductores, +?
     private String shift; //Dia, noche, guardia
     private int salary; //Cuanto cobra
     private String job; //Cirujano, anestesista, medico de cabecera, etc.  --- Mas especifico
 
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
     public Employee(String personId, String name, String lastName, String status) {
         super(personId, name, lastName, status);
     }
@@ -28,6 +30,17 @@ public class Employee extends Person {
         super();
     }
 
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
+    public ArrayList<String> gatherInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
+    }
+
+    /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
     public String getType() {
         return type;
     }
@@ -58,14 +71,5 @@ public class Employee extends Person {
 
     public void setJob(String job) {
         this.job = job;
-    }
-
-    public ArrayList<String> gatherInfo() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
     }
 }

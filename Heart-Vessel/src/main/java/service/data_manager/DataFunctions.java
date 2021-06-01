@@ -4,8 +4,6 @@ import database_management.AuxDB;
 import database_management.mongo.QueryDB;
 import objects.Generic;
 import objects.area.Area;
-import objects.area.areas.Garaje;
-import objects.area.areas.HabitableRoom;
 import objects.people.Person;
 import objects.product.Product;
 import objects.provider.Provider;
@@ -14,7 +12,6 @@ import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -153,133 +150,7 @@ public class DataFunctions implements Operations {
         return result;
     }*/
 
-    public static void printAll(ArrayList<String> atribs, String type) {
-        ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
-        ArrayList<String> Header = new ArrayList<>();
-        if(type.length()==4){
-            if(type.startsWith("#")){
-                type = type.substring(1);
-            }
-        }
 
-        for (int i = 0; i < atribs.size(); i += 6) {
-            ArrayList<String> data = new ArrayList<>();
-            DataPacks.add(data);
-        }
-        switch (type.length()) {
-            case 2:
-                ArrayList<String> children = prefixDescendant(type);
-                for(String child : children){
-                    System.out.println(Constants.separtator+"\n"+decodePrefix(child)+"\n"+Constants.separtator);
-                    printAll(atribs,child);
-                }
-
-                break;
-            case 3:
-                for (String[][][] Class : Constants.Omniclase) {
-                    for (String[][] Sub : Class) {
-                        if (Sub[1][0].equals(type)) {
-                            if (Sub[2] != null) {
-                                for (int i = 0; i < Sub[2].length; i++) {
-                                    if (atribs.contains(Sub[2][i])) {
-                                        Header.add(Sub[2][i]);
-                                    }
-                                }
-                            }
-                            if (Sub[3] != null) {
-                                for (int i = 0; i < Sub[3].length; i++) {
-
-                                    if (atribs.contains(Sub[3][i])) {
-                                        Header.add(Sub[3][i]);
-                                    }
-                                }
-                            }
-                            for (Generic g : AuxDB.Complete) {
-                                int PackCount = 0;
-                                if (g.getId().startsWith(type)) {
-
-                                    int Hcount = 0;
-
-                                    int Tlength = (Sub[3][0] == null) ? ((Sub[2][0] == null) ? 0 : Sub[2].length) : Sub[2].length + Sub[3].length;
-                                    //System.out.println(Tlength+"||");
-                                    for (int i = 0; i < Tlength; i++) {
-                                        if (i < Sub[2].length) {
-                                            if (atribs.contains(Sub[2][i])) {
-                                                Hcount++;
-                                                if (Hcount % 7 == 0) {
-                                                    PackCount++;
-                                                }
-
-                                                (DataPacks.get(PackCount)).add((g.gatherInfo().get(i)));
-
-                                            }
-                                        } else {
-                                            if (atribs.contains(Sub[3][i - (Sub[2].length)])) {
-                                                Hcount++;
-                                                if (Hcount % 7 == 0) {
-                                                    PackCount++;
-                                                }
-                                                (DataPacks.get(PackCount)).add((g.gatherInfo().get(i)));
-
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                break;
-            default:
-                System.out.println("Error");
-        }
-        for (ArrayList<String> printing : DataPacks) {
-            String output = " ";
-            boolean header = true;
-            int remaining = 0;
-            int current = 0;
-            for (String response : printing) {
-                if (header) {
-                    if (Header.size() > 6) {
-                        remaining = 6;
-                        for (int i = 0; i < 6; i++) {
-                            output += String.format("%-30.30s", Header.get(0));
-                            Header.remove(0);
-                        }
-
-                    } else {
-                        remaining = Header.size();
-                        for (int i = 0; i < remaining; i++) {
-                            output += String.format("%-30.30s", Header.get(0));
-                            Header.remove(0);
-                        }
-
-                    }
-                    output += "\n";
-                    for (int space = 0; space < 29 * (remaining); space++) {
-                        if (space % 29 == 0) {
-                            output += "|";
-                        }
-                        output += "=";
-
-                    }
-                    output += "|\n";
-                    header = false;
-                }
-                output += String.format("%-30.30s", "- "+response);
-                current++;
-                if (current % remaining == 0) {
-                    output += "\n";
-                }
-
-
-            }
-            System.out.println(output);
-            System.out.println("\n");
-
-        }
-    }
 
     public static void printAllRemaster(ArrayList<String> atribs, String type) {
         ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
@@ -289,13 +160,12 @@ public class DataFunctions implements Operations {
 
         ArrayList<Integer> atributePos = new ArrayList<>();
         //////////////////////////////////////////////////
-        if (type.length() == 4) {
+
             if (type.startsWith("#")) {
                 type = type.substring(1);
             }
-        }
-        //////////////////////////////////////////////////
 
+        //////////////////////////////////////////////////
 
         switch (type.length()) {
             case 2:
@@ -388,6 +258,7 @@ public class DataFunctions implements Operations {
                                         cap = listed.get(i).size();
                                     }
                                 }
+                                /////////////////////Print
                                 for (int j = 0; j < cap; j++) {
                                     if (j == 0) {
                                         for (ArrayList<String> genericAtr : DataPacks) {
@@ -423,6 +294,12 @@ public class DataFunctions implements Operations {
     }
 
     public static ArrayList<String> prefixDescendant(String prefix) {
+        //Correcion de entrada humana
+        if(prefix.startsWith("#")){
+            prefix = prefix.substring(1);
+        }
+        prefix = prefix.toUpperCase();
+
         ArrayList<String> prefixDescendants = new ArrayList<>();
         for (String[][][] Class : Constants.Omniclase) {
             for (String[][] Sub : Class) {

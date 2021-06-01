@@ -12,29 +12,15 @@ import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class Garaje extends Area {
-
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     private ArrayList<String> vehicles; //Los vehiculos que se ubican dentro del garaje en cuestion
 
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
     public Garaje(String idArea, String name, String status, int floor, String risk, ArrayList<String> equipment, ArrayList<String> personal, ArrayList<String> vehicles) {
         super(idArea, name, status, floor, risk, equipment, personal);
         this.vehicles = vehicles;
     }
-
-
-
-    public Garaje() {
-
-    }
-
-    public ArrayList<String> getVehicles() {
-        return vehicles;
-    }
-
-    public void setVehicles(ArrayList<String> vehicles) {
-        this.vehicles = vehicles;
-    }
-
-
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public ArrayList<String> gatherInfo() {
         return super.gatherInfo();
     }
@@ -43,6 +29,14 @@ public class Garaje extends Area {
         ArrayList<ArrayList<String>> s = super.gatherListedInfo();
         s.add(vehicles);
         return s;
+    }
+    /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
+    public ArrayList<String> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(ArrayList<String> vehicles) {
+        this.vehicles = vehicles;
     }
 
     public void initArea() {

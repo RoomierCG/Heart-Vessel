@@ -64,9 +64,7 @@ public class OpsID {
         return prefix + "#1";
     }
 
-    public static void printType(String prefix){
 
-    }
 
 
 }

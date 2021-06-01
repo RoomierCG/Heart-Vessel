@@ -3,7 +3,6 @@ package objects.area;
 import java.util.ArrayList;
 
 import objects.Generic;
-import org.apache.catalina.User;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
@@ -14,14 +13,16 @@ public class Area extends Generic {
     public Area() {
     }
 
+
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     private ArrayList<String> personal; //Personas que estan en ese area
     private String status; //Ocupdo, No Ocupada, Desinfectando etc.
     private ArrayList<String> equipment; //inventario que tiene asignado
     private int floor; //En que planta se ubica
     private String risk; //Como de arriesgado es
-    
-    
 
+
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
     public Area(String id, String name, String status, int floor, String risk, ArrayList<String> equipment,ArrayList<String> personal) {
         super(id,name);
         this.personal = personal;
@@ -31,7 +32,7 @@ public class Area extends Generic {
         this.risk = risk;
     }
 
-
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public ArrayList<String> gatherInfo(){
         return new ArrayList<String>(){{
             add(Area.super.getId());
@@ -50,6 +51,9 @@ public class Area extends Generic {
         }
         };
     }
+
+
+    /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
 
     public ArrayList<String> getEquipment() {
         return equipment;
