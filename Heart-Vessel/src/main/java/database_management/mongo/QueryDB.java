@@ -58,8 +58,6 @@ public class QueryDB {
 
         //Inializacion de ArrayLists
 //        AuxDB.Complete = downloadAreasBackUp();
-       
-
 
         rellenarTest();
 
@@ -126,7 +124,6 @@ public class QueryDB {
             }
         };
 
-
         Area aasd = new Area("ARR#1", "Almacen","Limpiado", 0, Constants.riesgos.get(0), listaEquipamiento, listaPersonal);
         Garaje uff = new Garaje("ARG#1", "Kachow", "En llamas", 1, Constants.riesgos.get(0),listaPersonal,listaEquipamiento,listaAmbulancias);
 
@@ -182,8 +179,8 @@ public class QueryDB {
          */
 
         {
-            AuxDB.Complete.add(aPE);
             AuxDB.Complete.add(aPq);
+            AuxDB.Complete.add(aPE);
             AuxDB.Complete.add(aPu);
 
             AuxDB.Complete.add(pac1);

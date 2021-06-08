@@ -21,37 +21,14 @@ public class DataFunctions implements Operations {
     public static void main(String[] args) {
 
         QueryDB.rellenarTest();
-//        System.out.println(OpsID.decodeID("ARR#1"));
+        //delete();
+        //modifyGeneric();
     }
 
-    public static boolean delete() {
-
-        Object deleteObject = OpsID.decodeID(UserInteractions.strRequest("Ingrese el ID de lo que quiera eliminar"));
-
-        if (deleteObject instanceof Area) {
-            AuxDB.Complete.remove(deleteObject);
-            return true;
-
-        } else if (deleteObject instanceof Person) {
-            AuxDB.Complete.remove(deleteObject);
-            return true;
-
-        } else if (deleteObject instanceof Product) {
-            AuxDB.Complete.remove(deleteObject);
-            return true;
-
-        } else if (deleteObject instanceof Provider) {
-            AuxDB.Complete.remove(deleteObject);
-            return true;
-
-        } else if (deleteObject instanceof Transport) {
-            AuxDB.Complete.remove(deleteObject);
-            return true;
-
-        } else {
-            return false;
-        }
+    public static void delete() {
+        AuxDB.Complete.remove(OpsID.decodeID(UserInteractions.idRequest(true)));
     }
+
 
     public static boolean modifyGeneric() {
 
@@ -63,7 +40,8 @@ public class DataFunctions implements Operations {
 
 
         String idModifyObject = UserInteractions.idRequest(true);
-        Object modifyObject = OpsID.decodeID(idModifyObject);
+        Generic modifyObject = OpsID.decodeID(idModifyObject);
+
 
 //        System.out.println(idModifyObject.substring(0,3));
 
@@ -76,14 +54,18 @@ public class DataFunctions implements Operations {
                 }
             }
         }
+
         numOptions = NumListCreator(0, options.size());
+
         do {
             String prompt = "";
             for (int i = 0; i < options.size(); i++) {
                 if (numOptions.contains(i + 1))
                     prompt += "- " + (1 + i) + "º " + options.get(i) + "\n";
             }
+
             opcion = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", numOptions);
+
             optionsSelected.add(opcion);
             numOptions.remove(numOptions.indexOf(opcion));
 
@@ -91,10 +73,12 @@ public class DataFunctions implements Operations {
 
 
         //No queremos permitir que modifiquen el id por eos borramos 0
-
         optionsSelected.remove(optionsSelected.size() - 1);
         Collections.sort(optionsSelected);
         System.out.println(optionsSelected);
+
+        //Modificar al usuario seleccionado
+        //Modifyme en generic, metodos para modificar directamente un los artibutos de un objeto
 
         return false;
     }
@@ -141,7 +125,6 @@ public class DataFunctions implements Operations {
         return newNumList;
     }
 
-
     //Nose si aun necesitamos esto
     /*public static String[][] append(String[][] a, String[][] b) {
         String[][] result = new String[a.length + b.length][];
@@ -149,8 +132,6 @@ public class DataFunctions implements Operations {
         System.arraycopy(b, 0, result, a.length, b.length);
         return result;
     }*/
-
-
 
     public static void printAllRemaster(ArrayList<String> atribs, String type) {
         ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
@@ -161,9 +142,9 @@ public class DataFunctions implements Operations {
         ArrayList<Integer> atributePos = new ArrayList<>();
         //////////////////////////////////////////////////
 
-            if (type.startsWith("#")) {
-                type = type.substring(1);
-            }
+        if (type.startsWith("#")) {
+            type = type.substring(1);
+        }
 
         //////////////////////////////////////////////////
 
@@ -219,28 +200,28 @@ public class DataFunctions implements Operations {
                             String headers = "";
                             for (String header : Header) {
                                 String replacement = "";
-                                for(int left = 0;left<((29-header.length())/2);left++){
+                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
                                     replacement += " ";
                                 }
                                 replacement += header;
-                                for(int left = 0;left<((29-header.length())/2);left++){
+                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
                                     replacement += " ";
                                 }
-                                headers += String.format("%-30.30s", " " +replacement);
+                                headers += String.format("%-30.30s", " " + replacement);
                             }
                             for (String header : HeaderListed) {
                                 String replacement = "";
-                                for(int left = 0;left<((29-header.length())/2);left++){
+                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
                                     replacement += " ";
                                 }
                                 replacement += header;
-                                for(int left = 0;left<((29-header.length())/2);left++){
+                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
                                     replacement += " ";
                                 }
-                                headers += String.format("%-30.30s"," " + replacement);
+                                headers += String.format("%-30.30s", " " + replacement);
                             }
-                            headers+="\n";
-                            for (int space = 0; space < 29 * (Header.size()+HeaderListed.size()); space++) {
+                            headers += "\n";
+                            for (int space = 0; space < 29 * (Header.size() + HeaderListed.size()); space++) {
                                 if (space % 29 == 0) {
                                     headers += "|";
                                 }
@@ -272,16 +253,14 @@ public class DataFunctions implements Operations {
                                         }
                                     }
 
-                                        for (ArrayList<ArrayList<String>> listed : DataListPacks) {
-                                            try {
-                                                pL = pL + String.format("%-30.30s","- "+ listed.get(i).get(j));
-                                            } catch (Exception e) {
-                                                pL = pL + String.format("%-30.30s", "- " + "");
-                                            }
+                                    for (ArrayList<ArrayList<String>> listed : DataListPacks) {
+                                        try {
+                                            pL = pL + String.format("%-30.30s", "- " + listed.get(i).get(j));
+                                        } catch (Exception e) {
+                                            pL = pL + String.format("%-30.30s", "- " + "");
                                         }
-                                        pL += "\n";
-
-
+                                    }
+                                    pL += "\n";
 
 
                                 }
@@ -295,7 +274,7 @@ public class DataFunctions implements Operations {
 
     public static ArrayList<String> prefixDescendant(String prefix) {
         //Correcion de entrada humana
-        if(prefix.startsWith("#")){
+        if (prefix.startsWith("#")) {
             prefix = prefix.substring(1);
         }
         prefix = prefix.toUpperCase();
@@ -303,7 +282,7 @@ public class DataFunctions implements Operations {
         ArrayList<String> prefixDescendants = new ArrayList<>();
         for (String[][][] Class : Constants.Omniclase) {
             for (String[][] Sub : Class) {
-                if(Sub[1][0].startsWith(prefix)){
+                if (Sub[1][0].startsWith(prefix)) {
                     prefixDescendants.add(Sub[1][0]);
                 }
             }
@@ -314,7 +293,7 @@ public class DataFunctions implements Operations {
     public static String decodePrefix(String prefix) {
         for (String[][][] Class : Constants.Omniclase) {
             for (String[][] Sub : Class) {
-                if(Sub[1][0].equals(prefix)){
+                if (Sub[1][0].equals(prefix)) {
                     return Sub[0][0];
                 }
             }

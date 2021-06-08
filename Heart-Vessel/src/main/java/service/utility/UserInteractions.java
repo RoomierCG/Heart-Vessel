@@ -51,7 +51,6 @@ public class UserInteractions {
         return response;
     }
 
-
     public static String strRequest(String prompt){
         String output;
         System.out.println(prompt);
@@ -91,7 +90,6 @@ public class UserInteractions {
         return output;
 
     }
-
 
     public static String pickFrom(ArrayList<String> list){
         int cont = 1;
@@ -191,7 +189,4 @@ public class UserInteractions {
         LocalDateTime now = LocalDateTime.now();
         return (dtf.format(now));
     }
-
-
-
 }
