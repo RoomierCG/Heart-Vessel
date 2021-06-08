@@ -1,6 +1,8 @@
 package objects.people.person;
 
 import objects.people.Person;
+import service.utility.UserInteractions;
+import visualInterfaces.Constants;
 
 import java.util.ArrayList;
 
@@ -8,19 +10,20 @@ public class Employee extends Person {
 
     /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     //Status = Trabajando, En descanso, de vacaciones etc?
-    private String type; //Medicina, Limpieza, Admin?, Conductores, +?
+    private String department; //Medicina, Limpieza, Admin?, Conductores, +?
     private String shift; //Dia, noche, guardia
     private int salary; //Cuanto cobra
     private String job; //Cirujano, anestesista, medico de cabecera, etc.  --- Mas especifico
 
     /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
-    public Employee(String personId, String name, String lastName, String status) {
+    public Employee(String personId, String name, String lastName,
+                    String status) {
         super(personId, name, lastName, status);
     }
 
     public Employee(String personId, String name, String lastName, String status, String type, String shift, int salary, String job) {
         super(personId, name, lastName, status);
-        this.type = type;
+        this.department = type;
         this.shift = shift;
         this.salary = salary;
         this.job = job;
@@ -32,21 +35,31 @@ public class Employee extends Person {
 
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public ArrayList<String> gatherInfo() {
-        return null;
+        ArrayList<String> s = super.gatherInfo();
+        s.add(department);
+        s.add(job);
+        s.add(String.valueOf(salary));
+        s.add(shift);
+        return s;
     }
 
-    @Override
     public ArrayList<ArrayList<String>> gatherListedInfo() {
         return null;
     }
 
+
+
+
+
+
     /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
-    public String getType() {
-        return type;
+
+    public String getDepartment() {
+        return department;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getShift() {

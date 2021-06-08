@@ -151,6 +151,15 @@ public class DataFunctions implements Operations {
     }*/
 
 
+    public static String formalisePrefix(String prefix){
+        if(prefix.startsWith("#")){
+            prefix = prefix.substring(1);
+        }
+        if(prefix.length()>3 || prefix.length()<2){
+            throw new IllegalArgumentException();
+        }
+        return prefix.toUpperCase();
+    }
 
     public static void printAllRemaster(ArrayList<String> atribs, String type) {
         ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();

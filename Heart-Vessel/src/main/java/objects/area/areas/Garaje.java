@@ -7,6 +7,7 @@ import org.thymeleaf.util.ArrayUtils;
 import service.data_manager.DataFunctions;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
+import visualInterfaces.Constants;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
@@ -30,6 +31,15 @@ public class Garaje extends Area {
         s.add(vehicles);
         return s;
     }
+
+    public void modifyMe(ArrayList<String> atribMod) {
+        super.modifyMe(atribMod);
+        if(atribMod.contains("Vehiculos")){
+            this.setVehicles(UserInteractions.formIDList(this.vehicles,"TR"));
+        }
+
+    }
+
     /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
     public ArrayList<String> getVehicles() {
         return vehicles;
@@ -39,15 +49,6 @@ public class Garaje extends Area {
         this.vehicles = vehicles;
     }
 
-    public void initArea() {
-        super.initArea();
-        String resp;
-        do{
-            resp = UserInteractions.strRequest("Introduzca el ID de un vehiculo que desea añadir, o \"exit\" para continuar");
-            if(!resp.equals("exit")){
-                OpsID.decodeID(resp);
-            }
-        }while(true);
-    }
+
 
 }

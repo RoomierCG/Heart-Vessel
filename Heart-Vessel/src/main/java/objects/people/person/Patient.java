@@ -1,6 +1,9 @@
 package objects.people.person;
 
 import objects.people.Person;
+import service.utility.OpsID;
+import service.utility.UserInteractions;
+import visualInterfaces.Constants;
 
 import java.util.ArrayList;
 
@@ -31,16 +34,44 @@ public class Patient extends Person {
 
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public ArrayList<String> gatherInfo() {
-        return null;
+        ArrayList<String> s = super.gatherInfo();
+        s.add(String.valueOf(allowVisitors));
+        s.add(roomId);
+        return s;
     }
 
-    @Override
     public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+        ArrayList<ArrayList<String>> s = super.gatherListedInfo();
+        s.add(registry);
+        return s;
     }
+
+    public void modifyMe(ArrayList<String> atribMod) {
+        super.modifyMe(atribMod);
+        if (atribMod.contains("Visitas")) {
+            if (this.isAllowVisitors()) {
+                this.setAllowVisitors(false);
+            } else {
+                this.setAllowVisitors(true);
+            }
+        }
+        if (atribMod.contains("Estado")) {
+            this.setStatus(UserInteractions.pickFrom(Constants.estadosPaciente, "Seleccione un estado nuevo"));
+        }
+        if (atribMod.contains("idHabitacion")) {
+            this.setStatus(UserInteractions.idRequest("ARH", true));
+        }
+    }
+
+    ;
 
     /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
+
     public boolean isAllowedVisitors() {
+        return allowVisitors;
+    }
+
+    public boolean isAllowVisitors() {
         return allowVisitors;
     }
 
@@ -63,5 +94,4 @@ public class Patient extends Person {
     public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
-
 }

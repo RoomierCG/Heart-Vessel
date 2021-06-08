@@ -1,5 +1,7 @@
 package objects;
 
+import service.utility.UserInteractions;
+
 import java.util.ArrayList;
 
 public abstract class Generic {
@@ -32,5 +34,12 @@ public abstract class Generic {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public void modifyMe(ArrayList<String> atribMod){
+        if(atribMod.contains("Nombre")){
+            this.setName(UserInteractions.strRequest("Introduzca el nuevo nombre"));
+        }
+
     }
 }

@@ -230,7 +230,7 @@ public class QueryDB {
                 Document newArea = new Document()
                         .append("idArea", area.getId())
                         .append("Nombre", area.getName())
-                        .append("Personal", ((Area) area).getPersonal())
+                        .append("Personal", ((Area) area).getStaff())
                         .append("Equipamiento", ((Area) area).getEquipment())
                         .append("Estado", ((Area) area).getStatus())
                         .append("Planta",((Area) area).getFloor())

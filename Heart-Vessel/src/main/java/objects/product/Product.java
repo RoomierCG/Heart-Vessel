@@ -2,15 +2,21 @@ package objects.product;
 
 
 import objects.Generic;
+import objects.area.Area;
+import objects.people.Person;
 import service.utility.UserInteractions;
+import visualInterfaces.Constants;
+
+import java.util.ArrayList;
 
 public abstract class Product extends Generic {
 
-/////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     protected String areaId;
     protected String status; //Variable dependiendo de hijo
     protected String buyDate; //Fecha de compra
 
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
 
     public Product(String equipmentId, String name, String areaId, String status, String buyDate) {
         super(equipmentId,name);
@@ -19,9 +25,17 @@ public abstract class Product extends Generic {
         this.buyDate = buyDate;
     }
 
+
     public Product() {
 
     }
+
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
+
+
+
+    /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
+
 
     public String getAreaId() {
         return areaId;
@@ -50,5 +64,4 @@ public abstract class Product extends Generic {
 
 
 }
-
 

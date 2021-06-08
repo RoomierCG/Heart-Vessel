@@ -10,8 +10,9 @@ public class Constants {
 
     public static final int equipmentLimit = 50;
 
-    public static final ArrayList<String> estados= new ArrayList<String>(){{add("Estado1");add("Estado2");}};
-
+    public static final ArrayList<String> estadosPaciente= new ArrayList<String>(){{add("Estado1");add("Estado2");}};
+    public static final ArrayList<String> estados2= new ArrayList<String>(){{add("Estado1");add("Estado2");}};
+    public static final ArrayList<String> departamentos= new ArrayList<String>(){{add("Dep1");add("Dep2");}};
     public static final ArrayList<String> riesgos= new ArrayList<String>(){{add("Sin Riesgo");add("No Critico");add("Semicritico");add("Critico");}};
 
 

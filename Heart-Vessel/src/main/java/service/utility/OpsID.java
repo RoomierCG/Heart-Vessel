@@ -28,7 +28,7 @@ import static database_management.AuxDB.*;
 
 
 public class OpsID {
-    public static Object decodeID(String id){
+    public static Generic decodeID(String id){
         for(Generic a : Complete){
             if(a.getId().equals(id)){
                 return a;

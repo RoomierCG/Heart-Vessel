@@ -1,6 +1,9 @@
 package objects.area.areas;
 
 import objects.area.Area;
+import service.utility.UserInteractions;
+import visualInterfaces.Constants;
+
 import java.util.ArrayList;
 
 public class HabitableRoom extends Area {
@@ -30,6 +33,14 @@ public class HabitableRoom extends Area {
         return super.gatherListedInfo();
     }
 
+    public void modifyMe(ArrayList<String> atribMod) {
+        super.modifyMe(atribMod);
+        if(atribMod.contains("idPaciente")){
+            this.setIdPatient(UserInteractions.strRequest("Introduzca el nuevo paciente"));
+        }
+
+
+    }
 
     /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     public String getIdPatient() {

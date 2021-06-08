@@ -15,7 +15,7 @@ public class Area extends Generic {
 
 
     /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
-    private ArrayList<String> personal; //Personas que estan en ese area
+    private ArrayList<String> staff; //Personas que estan en ese area
     private String status; //Ocupdo, No Ocupada, Desinfectando etc.
     private ArrayList<String> equipment; //inventario que tiene asignado
     private int floor; //En que planta se ubica
@@ -23,12 +23,15 @@ public class Area extends Generic {
 
 
     /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
-    public Area(String id, String name, String status, int floor, String risk, ArrayList<String> equipment,ArrayList<String> personal) {
+    public Area(String id, String name, String status, int floor, String risk, ArrayList<String> equipment,ArrayList<String> staff) {
         super(id,name);
-        this.personal = personal;
+        this.staff = staff;
         this.status = status;
         this.equipment = equipment;
         this.floor = floor;
+        if(!Constants.riesgos.contains(risk)){
+            throw new IllegalArgumentException("Riesgo no valido");
+        }
         this.risk = risk;
     }
 
@@ -46,11 +49,52 @@ public class Area extends Generic {
 
     public ArrayList<ArrayList<String>> gatherListedInfo(){
         return new ArrayList<ArrayList<String>>(){{
-            add(personal);
+            add(staff);
             add(equipment);
         }
         };
     }
+
+    public void modifyMe(ArrayList<String> atribMod) {
+        super.modifyMe(atribMod);
+        if(atribMod.contains("Estado")){
+            this.setStatus(UserInteractions.strRequest("Introduzca el estado"));
+        }
+        if(atribMod.contains("Planta")){
+            this.setFloor(Integer.parseInt(UserInteractions.strRequest("Introduzca la planta")));
+        }
+        if(atribMod.contains("Riesgo")){
+            this.setRisk(UserInteractions.pickFrom(Constants.riesgos,"Seleccione una categirio de riesgo nuevo"));
+        }
+        if(atribMod.contains("Staff")){
+            this.setStaff(UserInteractions.formIDList(this.staff,"PEE"));
+        }
+        if(atribMod.contains("Equipamiento")){
+            this.setStaff(UserInteractions.formIDList(this.equipment,"PR"));
+        }
+
+    }
+
+    /*public void initArea(){
+        super.setId(OpsID.generateID("ARR"));
+        super.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
+        ArrayList<String> atribList = new ArrayList<>();
+        int cont = 0;
+        //System.out.println("Introduzca \"/exit\" para terminar.");
+        do{
+            atribList.add(UserInteractions.idRequest("PEE#",true));
+            cont++;
+        }while(cont<Constants.personellLimit && !(atribList.get(cont).endsWith("-1")));
+        this.setStaff(atribList);
+        cont = 0;
+        do{
+            atribList.add(UserInteractions.idRequest("PR",true));
+            cont++;
+        }while(cont<Constants.equipmentLimit && !(atribList.get(cont).endsWith("-1")));
+        this.setEquipment(atribList);
+        this.risk = UserInteractions.pickFrom(Constants.riesgos,null);
+
+    }*/
 
 
     /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
@@ -63,12 +107,12 @@ public class Area extends Generic {
         this.equipment = equipment;
     }
 
-    public ArrayList<String> getPersonal() {
-        return personal;
+    public ArrayList<String> getStaff() {
+        return staff;
     }
 
-    public void setPersonal(ArrayList<String> personal) {
-        this.personal = personal;
+    public void setStaff(ArrayList<String> staff) {
+        this.staff = staff;
     }
 
     public String getStatus() {
@@ -95,26 +139,7 @@ public class Area extends Generic {
         this.risk = risk;
     }
 
-    public void initArea(){
-        super.setId(OpsID.generateID("ARR"));
-        super.setName(UserInteractions.strRequest("Introduzca el nombre del area"));
-        ArrayList<String> atribList = new ArrayList<>();
-        int cont = 0;
-        //System.out.println("Introduzca \"/exit\" para terminar.");
-        do{
-            atribList.add(UserInteractions.idRequest("PEE#",true));
-            cont++;
-        }while(cont<Constants.personellLimit && !(atribList.get(cont).endsWith("-1")));
-        this.setPersonal(atribList);
-        cont = 0;
-        do{
-            atribList.add(UserInteractions.idRequest("PR",true));
-            cont++;
-        }while(cont<Constants.equipmentLimit && !(atribList.get(cont).endsWith("-1")));
-        this.setEquipment(atribList);
-        this.risk = UserInteractions.pickFrom(Constants.riesgos);
 
-    }
 
 
 
