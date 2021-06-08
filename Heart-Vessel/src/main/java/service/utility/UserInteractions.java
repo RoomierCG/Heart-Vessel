@@ -56,7 +56,6 @@ public class UserInteractions {
         return response;
     }
 
-
     public static String strRequest(String prompt) {
         String output;
         System.out.println(prompt);
