@@ -1,47 +1,50 @@
 package objects.transportsystem.transportsystems.vehicle.vehicles;
 
-import objects.people.Person;
 import objects.transportsystem.transportsystems.vehicle.Vehicle;
+import service.utility.UserInteractions;
 
 import java.util.ArrayList;
 
 public class CompanyCar extends Vehicle {
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
 
-    private String make;
     private String idPersona;//Dueño
 
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
 
-
-    public CompanyCar(String transportId, String transportName, String status, String type,  int gasTank) {
-        super(transportId, transportName,status, type, gasTank);
-    }
-
-    public CompanyCar(String transportId, String transportName,String status, String type, int gasTank, String make,String idPersona) {
-        super(transportId, transportName,status, type, gasTank);
-        this.make = make;
+    public CompanyCar(String transportId, String transportName, String status, int gasTank, String make, String model, String idPersona) {
+        super(transportId, transportName, status, gasTank, make, model);
         this.idPersona = idPersona;
     }
 
-    public ArrayList<String> gatherInfo() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+    public CompanyCar(String idPersona) {
+        this.idPersona = idPersona;
     }
 
     public CompanyCar() {
         super();
     }
 
-    public String getMake() {
-        return make;
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
+
+    public ArrayList<String> gatherInfo() {
+        ArrayList<String> s = super.gatherInfo();
+        s.add(idPersona);
+
+        return s;
     }
 
-    public void setMake(String make) {
-        this.make = make;
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
     }
+
+    public void modifyMe(ArrayList<String> atribMod) {
+        if (atribMod.contains("Dueño")) {
+            this.setIdPersona(UserInteractions.idRequest("PEE",true));
+        }
+    }
+
+    /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
 
     public String getIdPersona() {
         return idPersona;

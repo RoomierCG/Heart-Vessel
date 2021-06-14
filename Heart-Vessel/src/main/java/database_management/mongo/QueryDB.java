@@ -40,8 +40,8 @@ public class QueryDB {
     private static MongoCollection<Document> collectionProduct;
     private static MongoCollection<Document> collectionProvider;
 
-   
-    
+
+
 
     public static void main(String[] args) {
 
@@ -112,9 +112,9 @@ public class QueryDB {
         listaEquipamiento.add(aver.getId());
 
 
-        Ambulance uno = new Ambulance("TRA#1", "Colectivo","Aparcado", "Tercera Edad", 24,listaEquipamiento , listaPersonal);
-        Ambulance dos = new Ambulance("TRA#2", "Individual","En patrulla", "Accidentes Traumas y Golpes",24 , listaEquipamiento,listaPersonal);
-        Ambulance tres = new Ambulance("TRA#3", "Vital Basico","En ruta listaPersonal llamada de auxilio", "Toxicos", 24, listaEquipamiento, listaPersonal);
+        Ambulance uno = new Ambulance();
+        Ambulance dos = new Ambulance();
+        Ambulance tres = new Ambulance();
 
         ArrayList<String> listaAmbulancias = new ArrayList<String>(){
             {
@@ -158,7 +158,7 @@ public class QueryDB {
 
         Provider profesionalVerdor = new Provider("PVP#1", "VerdorInc", "545855");
 
-        CompanyCar Elbuga = new CompanyCar("TRC#1","Fiesta" ,"Semi-nuevo", "Manual", 30, "Ford", "PEE#4");
+        CompanyCar Elbuga = new CompanyCar();
 
          /*
         + 3 Empleados
@@ -247,7 +247,7 @@ public class QueryDB {
 
                 collectionArea.insertOne(newArea);
             }
-            
+
         }
     }
 
@@ -289,14 +289,12 @@ public class QueryDB {
                     newTranport.append("Personal", ((Ambulance) transport).getPersonal())
                             .append("Productos", ((Ambulance) transport).getEquipment())
                             .append("Gasolina", ((Ambulance) transport).getGasTank())
-                            .append("Especialidad", ((Ambulance) transport).getType())
                             .append("Tipo", "Ambulancia");
 
                 } else if (transport instanceof CompanyCar) {
                     newTranport.append("Modelo", (transport).getName())
                             .append("Marca", ((CompanyCar) transport).getMake())
                             .append("Gasolina", ((CompanyCar) transport).getGasTank())
-                            .append("Especialidad", ((CompanyCar) transport).getType())
                             .append("Dueño", ((CompanyCar) transport).getIdPersona())
                             .append("Tipo", "Vehiculo");
 
@@ -384,8 +382,7 @@ public class QueryDB {
                             .append("Tipo", "Paciente");
 
                 } else if (person instanceof Employee) {
-                    newPerson.append("Departamento", ((Employee) person).getType())
-                            .append("Puesto", ((Employee) person).getJob())
+                    newPerson.append("Puesto", ((Employee) person).getJob())
                             .append("Salario", ((Employee) person).getSalary())
                             .append("Jornada", ((Employee) person).getShift())
                             .append("Tipo", "Empleado");

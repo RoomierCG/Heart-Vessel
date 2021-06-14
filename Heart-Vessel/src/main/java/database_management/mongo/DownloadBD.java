@@ -251,29 +251,13 @@ public class DownloadBD {
                     break;
 
                 case "Ambulancia":
-                    Ambulance nuevoAmbu = new Ambulance(
-                            nodoTrp.getString("idTransporte"),
-                            nodoTrp.getString("Name"),
-                            nodoTrp.getString("Estado"),
-                            nodoTrp.getString("Especialidad"),
-                            nodoTrp.getInteger("Gasolina"),
-                            (ArrayList<String>) nodoTrp.get("Equipamiento"),
-                            (ArrayList<String>) nodoTrp.get("Personal")
-                    );
+                    Ambulance nuevoAmbu = new Ambulance();
 
                     Trps.add(nuevoAmbu);
                     break;
 
                 case "CocheCorporativo":
-                    CompanyCar nuevoCC = new CompanyCar(
-                            nodoTrp.getString("idTransporte"),
-                            nodoTrp.getString("Modelo"),
-                            nodoTrp.getString("Estado"),
-                            nodoTrp.getString("Transmision"),
-                            nodoTrp.getInteger("Gasolina"),
-                            nodoTrp.getString("Marca"),
-                            nodoTrp.getString("Dueño")
-                    );
+                    CompanyCar nuevoCC = new CompanyCar();
 
                     Trps.add(nuevoCC);
                     break;

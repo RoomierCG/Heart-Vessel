@@ -1,6 +1,7 @@
 package objects.provider;
 
 import objects.Generic;
+import service.utility.UserInteractions;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,8 @@ public class Provider extends Generic {
         this.account = account;
     }
 
-    public Provider(){}
+    public Provider() {
+    }
 
     public String getAccount() {
         return account;
@@ -24,11 +26,19 @@ public class Provider extends Generic {
     }
 
     public ArrayList<String> gatherInfo() {
+        ArrayList<String> s = super.gatherInfo();
+        s.add(account);
+
+        return s;
+    }
+
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
         return null;
     }
 
-    @Override
-    public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+    public void modifyMe(ArrayList<String> atribMod) {
+        if (atribMod.contains("IBAN")) {
+            this.setAccount(UserInteractions.strRequest("Seleccione una categirio de riesgo nuevo"));
+        }
     }
 }

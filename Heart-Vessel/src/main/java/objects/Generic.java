@@ -12,10 +12,18 @@ public abstract class Generic {
     public Generic() {
     }
 
-    public abstract ArrayList<String> gatherInfo();
+    public ArrayList<String> gatherInfo() {
+        return new ArrayList<String>() {
+            {
+                add(id);
+                add(Name);
+            }
+        };
+    }
+
     public abstract ArrayList<ArrayList<String>> gatherListedInfo();
 
-    public  Generic(String id, String name) {
+    public Generic(String id, String name) {
         this.id = id;
         Name = name;
     }
@@ -36,8 +44,8 @@ public abstract class Generic {
         Name = name;
     }
 
-    public void modifyMe(ArrayList<String> atribMod){
-        if(atribMod.contains("Nombre")){
+    public void modifyMe(ArrayList<String> atribMod) {
+        if (atribMod.contains("Nombre")) {
             this.setName(UserInteractions.strRequest("Introduzca el nuevo nombre"));
         }
 

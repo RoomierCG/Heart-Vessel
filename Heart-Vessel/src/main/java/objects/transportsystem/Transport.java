@@ -1,20 +1,47 @@
 package objects.transportsystem;
 
 import objects.Generic;
+import service.utility.UserInteractions;
+import visualInterfaces.Constants;
+
+import java.util.ArrayList;
 
 public abstract class Transport extends Generic {
 
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
+
     protected String status;
 
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
+
     public Transport(String transportId, String nombre, String status) {
-        super(transportId,nombre);
+        super(transportId, nombre);
         this.status = status;
     }
 
     public Transport() {
     }
 
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
 
+    public ArrayList<String> gatherInfo() {
+        ArrayList<String> s = super.gatherInfo();
+        s.add(status);
+
+        return s;
+    }
+
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
+    }
+
+    public void modifyMe(ArrayList<String> atribMod) {
+        if (atribMod.contains("Estado")) {
+            this.setStatus(UserInteractions.pickFrom(Constants.estadosVehiculos, "Seleccione un estado de vehiculo nuevo"));
+        }
+    }
+
+    /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
 
     public String getStatus() {
         return status;
@@ -23,4 +50,5 @@ public abstract class Transport extends Generic {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }
