@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public class Constants {
     //=============================
-    public static final String separtator = "=====================================================================================================================================================";
+    public static final String separtator = "\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n";
+
+
 
     public static final int personellLimit = 10;
 
@@ -19,11 +21,11 @@ public class Constants {
         add("Sin gasolina");
         add("En el paro");
     }};
-    public static final ArrayList<String> estados2 = new ArrayList<String>() {{
-        add("Estado1");
-        add("Estado2");
-    }};
     public static final ArrayList<String> departamentos = new ArrayList<String>() {{
+        add("Dep1");
+        add("Dep2");
+    }};
+    public static final ArrayList<String> puestosTrabajo = new ArrayList<String>() {{
         add("Dep1");
         add("Dep2");
     }};
@@ -33,6 +35,26 @@ public class Constants {
         add("Semicritico");
         add("Critico");
     }};
+    public static final ArrayList<String> viasDeAdministracion = new ArrayList<String>() {{
+        add("Via_Oral");
+        add("Via_Nasal");
+        add("Via_");
+    }};
+    public static final ArrayList<String> estadosProducto = new ArrayList<String>() {{
+        add("Estado1");
+        add("Estado2");
+    }};
+    public static final ArrayList<String> tipoSustancia = new ArrayList<String>() {{
+        add("Polvo");
+        add("Liquido");
+        add("Pastilla");
+        add("Gas");
+        add("Capsula");
+    }};
+
+    public static final String LargeFormat = "%-30.30s";
+    public static final String MediumFormat = "%-20.20s";
+
 
     public static final String[][][][] Omniclase = new String[][][][]{
 
@@ -57,17 +79,17 @@ public class Constants {
             //Sección de TransportSystem
             {
                     {{"AyudaMovil"}, {"TRM"}, {"id", "Nombre", "Estado", "idArea", "idPaciente"}, {null}},
-                    {{"Ambulancia"}, {"TRA"}, {"id", "Nombre", "Estado", "Gasolina", "Marca", "Modelo"}, {"Personal", "Equipamiento"}},
-                    {{"CocheCompañia"}, {"TRC"}, {"id", "Nombre", "Estado", "Gasolina","Marca", "Modelo", "Dueño"}, {null}}},
+                    {{"Ambulancia"}, {"TRA"}, {"id", "Nombre", "Estado", "Gasolina", "Especialidad"}, {"Personal", "Equipamiento"}},
+                    {{"CocheCompañia"}, {"TRC"}, {"id", "Nombre", "Estado", "Modelo", "Marca", "Gasolina", "Dueño"}, {null}}},
 
             //Sección de Producto
             {
                     {{"MaterialSanitario"}, {"PRS"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "MarcaModelo", "Uso"}, {null}},
                     {{"Maquinaria"}, {"PRM"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "ConsumoElectrico", "Modelo"}, {null}},
                     {{"EquipamientoLimpieza"}, {"PRE"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "GradoDeRiesgo"}, {null}},
-                    {{"ProductoLimpieza"}, {"PRL"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Marca", "Toxico", "Uso"}, {null}},
-                    {{"Medicamento"}, {"PRD"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "FechaDeCaducidad", "ViaDeAdministracion", "Uso"}, {"RiesgosAlergicos"}},
-                    {{"Comida"}, {"PRC"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "FechaDeCaducidad", "Proveedor", "Uso"}, {"RiesgosAlergicos"}
+                    {{"ProductoLimpieza"}, {"PRL"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "Marca"}, {null}},
+                    {{"Medicamento"}, {"PRD"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "FechaDeCaducidad", "ViaDeAdministracion"}, {"RiesgosAlergicos"}},
+                    {{"Comida"}, {"PRC"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "FechaDeCaducidad", "Proveedor"}, {"RiesgosAlergicos"}
                     }}
     };
 

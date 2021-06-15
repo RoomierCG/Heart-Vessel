@@ -21,7 +21,9 @@ public abstract class Generic {
         };
     }
 
-    public abstract ArrayList<ArrayList<String>> gatherListedInfo();
+    public ArrayList<ArrayList<String>> gatherListedInfo() {
+        return null;
+    }
 
     public Generic(String id, String name) {
         this.id = id;

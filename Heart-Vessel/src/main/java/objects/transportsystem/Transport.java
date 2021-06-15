@@ -32,7 +32,7 @@ public abstract class Transport extends Generic {
     }
 
     public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+        return new ArrayList<ArrayList<String>>();
     }
 
     public void modifyMe(ArrayList<String> atribMod) {

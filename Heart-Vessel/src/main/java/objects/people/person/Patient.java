@@ -49,11 +49,7 @@ public class Patient extends Person {
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
         if (atribMod.contains("Visitas")) {
-            if (this.isAllowVisitors()) {
-                this.setAllowVisitors(false);
-            } else {
-                this.setAllowVisitors(true);
-            }
+            this.setAllowVisitors(!this.isAllowVisitors());
         }
         if (atribMod.contains("Estado")) {
             this.setStatus(UserInteractions.pickFrom(Constants.estadosPaciente, "Seleccione un estado nuevo"));
@@ -63,7 +59,7 @@ public class Patient extends Person {
         }
     }
 
-    ;
+
 
     /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
 

@@ -17,35 +17,32 @@ import java.util.ArrayList;
  */
 public class cable {
     public static void main(String[] args) {
-        AuxDB.Complete.remove(null);
+        //AuxDB.Complete.remove(null);
 
-        /*
-        QueryDB.rellenarTest();/*
-        for (String[][][] Class : Constants.Omniclase) {
+
+        QueryDB.rellenarTest();
+        /*for (String[][][] Class : Constants.Omniclase) {
             for (String[][] Sub : Class) {
                 if (Sub[1][0].startsWith("AR")) {
                     System.out.println(Sub[0][0]);
                 }
-            }*/
+            }
+        }*/
 
+        ArrayList<String> atr = new ArrayList<String>() {
+            {
+                add("*");
 
-/*
-            ArrayList<String> atr = new ArrayList<String>() {
-                {
-                    add("id");
-                    add("Nombre");
-                    add("Estado");
-                    add("Riesgo");
-
-                }
-            };
+            }
+        };
 
         //System.out.println(UserInteractions.pickFrom(atr));
-        DataFunctions.printAllRemaster(atr, "AR");
-*/
+        DataFunctions.printAllRemaster(atr, "PVP");
 
-        }
+
     }
+}
+
 
 
 

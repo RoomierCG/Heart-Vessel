@@ -99,7 +99,7 @@ public class QueryDB {
 
         ArrayList<String> listaPersonal = new ArrayList<String>(){
             {
-                add(aPE.getId());
+                add(aPE.getId()+" | "+aPE.getName());
                 add(aPq.getId());
                 add(aPu.getId());
             }
@@ -112,9 +112,9 @@ public class QueryDB {
         listaEquipamiento.add(aver.getId());
 
 
-        Ambulance uno = new Ambulance();
-        Ambulance dos = new Ambulance();
-        Ambulance tres = new Ambulance();
+        Ambulance uno = new Ambulance("TRA#1", "Colectiva","Aparcado",54,"Mercedes-Benz","Sprinter319",listaEquipamiento,listaPersonal);
+        Ambulance dos = new Ambulance("TRA#2", "Colectiva","Aparcado",12,"Mercedes-Benz","Sprinter319",listaEquipamiento,listaPersonal);
+        Ambulance tres = new Ambulance("TRA#3", "Personal","En Ruta",100,"Fiat","Ducato A&E",listaEquipamiento,listaPersonal);
 
         ArrayList<String> listaAmbulancias = new ArrayList<String>(){
             {
@@ -143,7 +143,7 @@ public class QueryDB {
 
 
 
-        MovementAid muletas = new MovementAid("TAM#1","Muletdas", "Adultos", null, "ARR#1");
+        MovementAid muletas = new MovementAid("TRM#1","Muletdas", "Adultos", null, "ARR#1");
 
         Machinery xRay = new Machinery("PRM#1", "Maquina Rayos X", "ARR#1", "En uso", "17/05/2005", 3000, "Aiur");
         listaEquipamiento.clear();
@@ -158,7 +158,7 @@ public class QueryDB {
 
         Provider profesionalVerdor = new Provider("PVP#1", "VerdorInc", "545855");
 
-        CompanyCar Elbuga = new CompanyCar();
+        CompanyCar Elbuga = new CompanyCar("TRC#1","Automatico" ,"Semi-nuevo", 30, "Ford", "Fiesta","PEE#4");
 
          /*
         + 3 Empleados
@@ -321,7 +321,7 @@ public class QueryDB {
 
                 if (product instanceof SanitationMaterials) {
                     newProduct.append("MarcaModelo", ((SanitationMaterials) product).getModel())
-                            .append("Uso", ((SanitationMaterials) product).getType())
+                            .append("Uso", ((SanitationMaterials) product).getUse())
                             .append("Tipo", "MaterialSanitario");
 
                 } else if (product instanceof Machinery) {
@@ -382,7 +382,8 @@ public class QueryDB {
                             .append("Tipo", "Paciente");
 
                 } else if (person instanceof Employee) {
-                    newPerson.append("Puesto", ((Employee) person).getJob())
+                    newPerson.append("Departamento", ((Employee) person).getDepartment())
+                            .append("Puesto", ((Employee) person).getJob())
                             .append("Salario", ((Employee) person).getSalary())
                             .append("Jornada", ((Employee) person).getShift())
                             .append("Tipo", "Empleado");

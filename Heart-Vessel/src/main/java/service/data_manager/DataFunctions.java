@@ -58,16 +58,16 @@ public class DataFunctions implements Operations {
         numOptions = NumListCreator(0, options.size());
 
         do {
-            String prompt = "";
+            StringBuilder prompt = new StringBuilder();
             for (int i = 0; i < options.size(); i++) {
                 if (numOptions.contains(i + 1))
-                    prompt += "- " + (1 + i) + "º " + options.get(i) + "\n";
+                    prompt.append("- ").append(1 + i).append("º ").append(options.get(i)).append("\n");
             }
 
             opcion = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", numOptions);
 
             optionsSelected.add(opcion);
-            numOptions.remove(numOptions.indexOf(opcion));
+            numOptions.remove((Integer) opcion);
 
         } while (opcion != 0);
 
@@ -136,11 +136,11 @@ public class DataFunctions implements Operations {
     }*/
 
 
-    public static String formalisePrefix(String prefix){
-        if(prefix.startsWith("#")){
+    public static String formalisePrefix(String prefix) {
+        if (prefix.startsWith("#")) {
             prefix = prefix.substring(1);
         }
-        if(prefix.length()>3 || prefix.length()<2){
+        if (prefix.length() > 3 || prefix.length() < 2) {
             throw new IllegalArgumentException();
         }
         return prefix.toUpperCase();
@@ -171,13 +171,15 @@ public class DataFunctions implements Operations {
 
                 break;
             case 3:
+                int headerCount = 0;
                 for (String[][][] Class : Constants.Omniclase) {
                     for (String[][] Sub : Class) {
                         if (Sub[1][0].equals(type)) {
                             if (Sub[2] != null) {
                                 for (int i = 0; i < Sub[2].length; i++) {
-                                    if (atribs.contains(Sub[2][i])) {
+                                    if (atribs.contains(Sub[2][i]) || atribs.contains("*")) {
                                         Header.add(Sub[2][i]);
+                                        headerCount++;
                                         ArrayList<String> head = new ArrayList<>();
                                         DataPacks.add(head);
                                         atributePos.add(i);
@@ -187,8 +189,9 @@ public class DataFunctions implements Operations {
 
                             if (Sub[3] != null) {
                                 for (int i = 0; i < Sub[3].length; i++) {
-                                    if (atribs.contains(Sub[3][i])) {
+                                    if (atribs.contains(Sub[3][i]) || (atribs.contains("*") && Sub[3][i]!=null)) {
                                         HeaderListed.add(Sub[3][i]);
+                                        headerCount++;
                                         ArrayList<ArrayList<String>> ListedAtr = new ArrayList<>();
                                         DataListPacks.add(ListedAtr);
                                         atributePos.add(i);
@@ -210,82 +213,84 @@ public class DataFunctions implements Operations {
                                 }
                             }
                             /////////////////Print Head
-                            String headers = "";
+                            StringBuilder headers = new StringBuilder();
                             for (String header : Header) {
-                                String replacement = "";
+                                StringBuilder replacement = new StringBuilder();
                                 for (int left = 0; left < ((29 - header.length()) / 2); left++) {
-                                    replacement += " ";
+                                    replacement.append(" ");
                                 }
-                                replacement += header;
+                                replacement.append(header);
                                 for (int left = 0; left < ((29 - header.length()) / 2); left++) {
-                                    replacement += " ";
+                                    replacement.append(" ");
                                 }
-                                headers += String.format("%-30.30s", " " + replacement);
+                                headers.append(String.format(Constants.LargeFormat, " " + replacement));
                             }
                             for (String header : HeaderListed) {
-                                String replacement = "";
+                                StringBuilder replacement = new StringBuilder();
                                 for (int left = 0; left < ((29 - header.length()) / 2); left++) {
-                                    replacement += " ";
+                                    replacement.append(" ");
                                 }
-                                replacement += header;
+                                replacement.append(header);
                                 for (int left = 0; left < ((29 - header.length()) / 2); left++) {
-                                    replacement += " ";
+                                    replacement.append(" ");
                                 }
-                                headers += String.format("%-30.30s", " " + replacement);
+                                headers.append(String.format(Constants.LargeFormat, " " + replacement));
                             }
-                            headers += "\n";
+                            headers.append("\n");
                             for (int space = 0; space < 29 * (Header.size() + HeaderListed.size()); space++) {
                                 if (space % 29 == 0) {
-                                    headers += "|";
+                                    headers.append("|");
                                 }
-                                headers += "=";
+                                headers.append("=");
 
                             }
                             System.out.println(headers);
 
                             /////////////////////////////////Body
-                            for (int i = 0; i < DataPacks.get(0).size(); i++) {
-                                String pL = "";
-                                int cap = 1;
-                                for (ArrayList<ArrayList<String>> listed : DataListPacks) {
-                                    if (cap < listed.get(i).size()) {
-                                        cap = listed.get(i).size();
-                                    }
-                                }
-                                /////////////////////Print
-                                for (int j = 0; j < cap; j++) {
-                                    if (j == 0) {
-                                        for (ArrayList<String> genericAtr : DataPacks) {
-
-                                            pL = pL + String.format("%-30.30s", "- " + genericAtr.get(i));
-                                        }
-                                    } else {
-                                        for (ArrayList<String> genericAtr : DataPacks) {
-                                            pL = pL + String.format("%-30.30s", "- " + "");
-
-                                        }
-                                    }
-
+                            try {
+                                for (int i = 0; i < DataPacks.get(0).size(); i++) {
+                                    StringBuilder pL = new StringBuilder();
+                                    int cap = 1;
                                     for (ArrayList<ArrayList<String>> listed : DataListPacks) {
-                                        try {
-                                            pL = pL + String.format("%-30.30s", "- " + listed.get(i).get(j));
-                                        } catch (Exception e) {
-                                            pL = pL + String.format("%-30.30s", "- " + "");
+                                        if (cap < listed.get(i).size()) {
+                                            cap = listed.get(i).size();
                                         }
                                     }
-                                    pL += "\n";
+                                    /////////////////////Print
+                                    for (int j = 0; j < cap; j++) {
+                                        if (j == 0) {
+                                            for (ArrayList<String> genericAtr : DataPacks) {
+                                                pL.append(String.format(Constants.LargeFormat, "- " + genericAtr.get(i)));
+                                            }
+                                        } else {
+                                            for (ArrayList<String> genericAtr : DataPacks) {
+                                                pL.append(String.format(Constants.LargeFormat, "- " + ""));
+
+                                            }
+                                        }
+
+                                        for (ArrayList<ArrayList<String>> listed : DataListPacks) {
+                                            try {
+                                                pL.append(String.format(Constants.LargeFormat, "- " + listed.get(i).get(j)));
+                                            } catch (Exception e) {
+                                                pL.append(String.format(Constants.LargeFormat, "- " + ""));
+                                            }
+                                        }
+                                        pL.append("\n");
 
 
-
-
+                                    }
+                                    System.out.println(pL);
                                 }
-                                System.out.println(pL);
+                            } catch (IndexOutOfBoundsException er12) {
+                                System.out.println("Faltan atributos o los atributos introducidos son invalidos");
                             }
                         }
                     }
                 }
         }
     }
+
 
     public static ArrayList<String> prefixDescendant(String prefix) {
         //Correcion de entrada humana
@@ -318,3 +323,5 @@ public class DataFunctions implements Operations {
 
 
 }
+
+

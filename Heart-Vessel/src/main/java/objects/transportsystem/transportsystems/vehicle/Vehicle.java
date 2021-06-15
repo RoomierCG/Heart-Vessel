@@ -38,7 +38,7 @@ public abstract class Vehicle extends Transport {
     }
 
     public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+        return super.gatherListedInfo();
     }
 
     public void modifyMe(ArrayList<String> atribMod) {

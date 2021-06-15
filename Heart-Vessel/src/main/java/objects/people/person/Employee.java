@@ -16,14 +16,11 @@ public class Employee extends Person {
     private String job; //Cirujano, anestesista, medico de cabecera, etc.  --- Mas especifico
 
     /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
-    public Employee(String personId, String name, String lastName,
-                    String status) {
-        super(personId, name, lastName, status);
-    }
 
-    public Employee(String personId, String name, String lastName, String status, String type, String shift, int salary, String job) {
+
+    public Employee(String personId, String name, String lastName, String status, String department, String shift, int salary, String job) {
         super(personId, name, lastName, status);
-        this.department = type;
+        this.department = department;
         this.shift = shift;
         this.salary = salary;
         this.job = job;
@@ -44,10 +41,25 @@ public class Employee extends Person {
     }
 
     public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+        return new ArrayList<>();
     }
 
+    public void modifyMe(ArrayList<String> atribMod) {
+        super.modifyMe(atribMod);
+        if (atribMod.contains("Departamento")) {
+            this.setDepartment(UserInteractions.pickFrom(Constants.departamentos, "Seleccione un departamento nuevo"));
+        }
+        if (atribMod.contains("Jornada")) {
+            this.setShift(UserInteractions.strRequest("Introduzca la jornada del empleado"));
+        }
+        if (atribMod.contains("Salario")) {
+            this.setSalary(UserInteractions.numRequest("Introduzca el salario del empleado"));
+        }
+        if (atribMod.contains("Puesto")) {
+            this.setJob(UserInteractions.pickFrom(Constants.puestosTrabajo, "Seleccione el puesto del empleado"));
+        }
 
+    }
 
 
 

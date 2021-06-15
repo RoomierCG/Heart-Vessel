@@ -32,7 +32,31 @@ public abstract class Product extends Generic {
 
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
 
+    public ArrayList<String> gatherInfo() {
+        ArrayList<String> s = super.gatherInfo();
+        s.add(areaId);
+        s.add(status);
+        s.add(buyDate);
+        return s;
+    }
 
+    public ArrayList<ArrayList<String>> gatherListedInfo(){
+        ArrayList<ArrayList<String>> s = super.gatherListedInfo();
+        return s;
+    }
+
+    public void modifyMe(ArrayList<String> atribMod) {
+        super.modifyMe(atribMod);
+        if (atribMod.contains("idArea")) {
+            this.setId(UserInteractions.idRequest("AR", true));
+        }
+        if (atribMod.contains("Estado")) {
+            this.setStatus(UserInteractions.pickFrom(Constants.estadosProducto, "Seleccione una categirio de riesgo nuevo"));
+        }
+        if (atribMod.contains("FechaDeCompra")) {
+            this.setBuyDate(UserInteractions.dateRequest());
+        }
+    }
 
     /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////
 

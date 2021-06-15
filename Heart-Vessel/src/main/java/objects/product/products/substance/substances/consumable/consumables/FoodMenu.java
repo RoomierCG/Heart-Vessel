@@ -2,31 +2,42 @@ package objects.product.products.substance.substances.consumable.consumables;
 
 import objects.product.products.substance.substances.consumable.Consumable;
 import objects.provider.Provider;
+import service.utility.UserInteractions;
 
 import java.util.ArrayList;
 
 public class FoodMenu extends Consumable {
+    /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
 
     private String provider;
 
+    /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
     public FoodMenu(String equipmentId, String name, String areaId, String status, String buyDate, String expirationDates, boolean toxic, String type, String provider, ArrayList<String> allergyRiskIngredients) {
         super(equipmentId, name, areaId, status, buyDate, expirationDates, toxic, type, allergyRiskIngredients);
         this.provider = provider;
     }
 
-    public FoodMenu() {
-        super();
-    }
-
-
+    /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public ArrayList<String> gatherInfo() {
-        return null;
+        ArrayList<String> s = super.gatherInfo();
+        s.add(provider);
+        return s;
     }
 
-    @Override
-    public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+    public ArrayList<ArrayList<String>> gatherListedInfo(){
+        ArrayList<ArrayList<String>> s = super.gatherListedInfo();
+        return s;
     }
+
+    public void modifyMe(ArrayList<String> atribMod) {
+        super.modifyMe(atribMod);
+        if (atribMod.contains("Proveedor")) {
+            this.setProvider(UserInteractions.idRequest("PVP", true));
+        }
+
+
+    }
+    /////////////////////////////////////////////////////AUTOGEN/////////////////////////////////////////////////////////
 
     public String getProvider() {
         return provider;
