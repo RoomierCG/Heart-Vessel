@@ -42,6 +42,10 @@ public class HabitableRoom extends Area {
 
     }
 
+    public boolean isEmpty(){
+        return idPatient == null;
+    }
+
     /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     public String getIdPatient() {
         return idPatient;

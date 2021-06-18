@@ -36,6 +36,8 @@ public class Area extends Generic {
     }
 
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
+
+
     public ArrayList<String> gatherInfo(){
         return new ArrayList<String>(){{
             add(Area.super.getId());

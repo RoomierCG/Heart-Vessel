@@ -56,6 +56,8 @@ public class Constants {
     public static final String MediumFormat = "%-20.20s";
 
 
+
+
     public static final String[][][][] Omniclase = new String[][][][]{
 
             //[Clase][InfoDeClase][Posicion en case de Lista//Default 0]

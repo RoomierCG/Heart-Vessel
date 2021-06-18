@@ -2,12 +2,16 @@ package objects.people;
 
 import objects.Generic;
 import objects.area.Area;
+import service.background_sim.Simulator;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
 import java.util.ArrayList;
 
 public abstract class Person extends Generic {
+    ///////////////////////SIM///////////////////////
+    private ArrayList<String> nombresR = new ArrayList<String>(){{add("Juan");add("Pepe");add("Julian");add("Elena");add("Sofia");add("Carmen");}};
+    private ArrayList<String> apellidosR = new ArrayList<String>(){{add("Mendoza");add("Herrero");add("Carpintero");add("Torres");add("Lopez");add("Garcia");}};
     /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     protected String lastName; //Apellido
     protected String status;  //Variable dependiendo de hijo
@@ -24,6 +28,11 @@ public abstract class Person extends Generic {
     }
 
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
+    public void genMe(String ID){
+        super.setName(nombresR.get(Simulator.randomNum(0,nombresR.size())));
+        this.setLastName(apellidosR.get(Simulator.randomNum(0,apellidosR.size())));
+        this.setStatus(Constants.estadosPaciente.get(Simulator.randomNum(0,Constants.estadosPaciente.size())));
+    }
     public ArrayList<String> gatherInfo(){
         return new ArrayList<String>(){{
             add(Person.super.getId());
@@ -35,9 +44,7 @@ public abstract class Person extends Generic {
     }
 
     public ArrayList<ArrayList<String>> gatherListedInfo(){
-        return new ArrayList<ArrayList<String>>(){{
-        }
-        };
+        return new ArrayList<>();
     }
 
     public void modifyMe(ArrayList<String> atribMod) {
