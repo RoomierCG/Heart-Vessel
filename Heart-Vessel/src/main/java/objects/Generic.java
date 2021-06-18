@@ -22,7 +22,7 @@ public abstract class Generic {
     }
 
     public ArrayList<ArrayList<String>> gatherListedInfo() {
-        return null;
+        return new ArrayList<>();
     }
 
     public Generic(String id, String name) {

@@ -8,6 +8,7 @@ import objects.people.Person;
 import objects.product.Product;
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
+import org.apache.catalina.User;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
@@ -19,16 +20,13 @@ import java.util.Collections;
 public class DataFunctions implements Operations {
 
     public static void main(String[] args) {
-
         QueryDB.rellenarTest();
-        //delete();
-        //modifyGeneric();
+        printSpecifObject();
     }
 
     public static void delete() {
         AuxDB.Complete.remove(OpsID.decodeID(UserInteractions.idRequest(true)));
     }
-
 
     public static boolean modifyGeneric() {
 
@@ -189,7 +187,7 @@ public class DataFunctions implements Operations {
 
                             if (Sub[3] != null) {
                                 for (int i = 0; i < Sub[3].length; i++) {
-                                    if (atribs.contains(Sub[3][i]) || (atribs.contains("*") && Sub[3][i]!=null)) {
+                                    if (atribs.contains(Sub[3][i]) || (atribs.contains("*") && Sub[3][i] != null)) {
                                         HeaderListed.add(Sub[3][i]);
                                         headerCount++;
                                         ArrayList<ArrayList<String>> ListedAtr = new ArrayList<>();
@@ -291,7 +289,6 @@ public class DataFunctions implements Operations {
         }
     }
 
-
     public static ArrayList<String> prefixDescendant(String prefix) {
         //Correcion de entrada humana
         if (prefix.startsWith("#")) {
@@ -321,7 +318,109 @@ public class DataFunctions implements Operations {
         return "Invalido";
     }
 
+    public static void printSpecifObject() {
+        int seleccionAttr = 0;
+        int iteradorCont = 0;
+        int continueOption = 0;
 
+        ArrayList<ArrayList<ArrayList<String>>> opcion = new ArrayList<>();
+
+        ArrayList<String> prefijos = gatherPrefixList();
+        ArrayList<String> nombre = gatherNameList();
+
+        do {
+            ArrayList<ArrayList<String>> subpcion = new ArrayList<>();
+
+            for (int i = 0; i < prefijos.size(); i += 2) {
+
+                if (i == prefijos.size() - 1) {
+                    System.out.print((i + 1) + ". " + nombre.get(i));
+                } else {
+                    System.out.printf("%-30.30s  %-30.30s%n", ((i + 1) + ". " + nombre.get(i)), ((i + 2) + ". " + nombre.get(i + 1)));
+                }
+            }
+
+            int seleccion = UserInteractions.numRequest("", 1, nombre.size()) - 1;
+            opcion.add(new ArrayList<ArrayList<String>>() {{
+                add(new ArrayList<String>() {{
+                    add(prefijos.get(seleccion));
+                }});
+                add(new ArrayList<>());
+            }});
+            prefijos.remove(seleccion);
+            nombre.remove(seleccion);
+
+            ArrayList<String> attrOption = new ArrayList<>();
+            ArrayList<Integer> numOptions;
+
+
+            //Recorremos el array para que funcione la lista de opciones para el numlist
+            for (String[][][] category : Constants.Omniclase) {
+                for (String[][] subcategory : category) {
+                    if (opcion.get(iteradorCont).get(0).get(0).equals(subcategory[1][0])) {
+                        attrOption.addAll(Arrays.asList(subcategory[2]));
+                        attrOption.addAll(Arrays.asList(subcategory[3]));
+                    }
+                }
+            }
+
+            numOptions = NumListCreator(0, attrOption.size());
+            attrOption.remove(0);
+            attrOption.remove(null);
+
+            do {
+                StringBuilder prompt = new StringBuilder();
+                for (int i = 0; i < attrOption.size(); i++) {
+                    prompt.append("- ").append(i + 1).append("º ").append(attrOption.get(i)).append("\n");
+                }
+
+                seleccionAttr = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", 0, attrOption.size()) - 1;
+
+                if (seleccionAttr != -1){
+                    opcion.get(iteradorCont).get(1).add(attrOption.get(seleccionAttr));
+                    numOptions.remove(seleccionAttr);
+                    attrOption.remove(seleccionAttr);
+                }
+
+                if (attrOption.isEmpty())
+                    seleccionAttr = -1;
+
+            } while (seleccionAttr != -1);
+
+            iteradorCont++;
+
+            continueOption = UserInteractions.numRequest("Quieres seguir\n1º Si \n2º No",1,2);
+
+        } while (continueOption != 2);
+
+
+        //pintar los atributos de las opciones que nos ha dado el usuario
+        for (ArrayList<ArrayList<String>> iterator :opcion) {
+            printAllRemaster(iterator.get(1),iterator.get(0).get(0));
+        }
+
+    }
+
+
+    public static ArrayList<String> gatherPrefixList() {
+        ArrayList<String> prefijos = new ArrayList<>();
+        for (int j = 0; j < Constants.Omniclase.length; j++) {
+            for (int i = 0; i < Constants.Omniclase[j].length; i++) {
+                prefijos.add(Constants.Omniclase[j][i][1][0]);
+            }
+        }
+        return prefijos;
+    }
+
+    public static ArrayList<String> gatherNameList() {
+        ArrayList<String> nombre = new ArrayList<>();
+        for (int j = 0; j < Constants.Omniclase.length; j++) {
+            for (int i = 0; i < Constants.Omniclase[j].length; i++) {
+                nombre.add(Constants.Omniclase[j][i][0][0]);
+            }
+        }
+        return nombre;
+    }
 }
 
 
