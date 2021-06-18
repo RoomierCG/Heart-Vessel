@@ -1,6 +1,11 @@
 package objects.people.person;
 
+import database_management.AuxDB;
+import objects.area.areas.HabitableRoom;
 import objects.people.Person;
+import service.background_sim.Simulator;
+import service.data_manager.DataFunctions;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
@@ -11,7 +16,7 @@ public class Employee extends Person {
     /////////////////////////////////////////////////////ATTRIB/////////////////////////////////////////////////////////
     //Status = Trabajando, En descanso, de vacaciones etc?
     private String department; //Medicina, Limpieza, Admin?, Conductores, +?
-    private String shift; //Dia, noche, guardia
+    private String shift; //Dia, noche
     private int salary; //Cuanto cobra
     private String job; //Cirujano, anestesista, medico de cabecera, etc.  --- Mas especifico
 
@@ -31,6 +36,20 @@ public class Employee extends Person {
     }
 
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
+    @Override
+    public void genMe(String ID) {
+        super.genMe(ID);
+        this.department = Constants.departamentos.get(Simulator.randomNum(0,Constants.departamentos.size()));
+        this.job = Constants.puestosTrabajo.get(Simulator.randomNum(0,Constants.puestosTrabajo.size()));
+        if(this.job.equals("Medico")){
+            this.shift = "Guardia";
+            this.salary = 1500;
+        }else{
+            this.shift = (Simulator.randomNum(0,1) == 0) ? "Dia" : "Noche";
+        }
+        this.salary += Simulator.randomNum(1000,1500);
+
+    }
     public ArrayList<String> gatherInfo() {
         ArrayList<String> s = super.gatherInfo();
         s.add(department);

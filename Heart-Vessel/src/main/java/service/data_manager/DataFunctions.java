@@ -3,16 +3,11 @@ package service.data_manager;
 import database_management.AuxDB;
 import database_management.mongo.QueryDB;
 import objects.Generic;
-import objects.area.Area;
-import objects.people.Person;
-import objects.product.Product;
-import objects.provider.Provider;
-import objects.transportsystem.Transport;
-import org.apache.catalina.User;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,8 +15,10 @@ import java.util.Collections;
 public class DataFunctions implements Operations {
 
     public static void main(String[] args) {
+
         QueryDB.rellenarTest();
-        printSpecifObject();
+        //delete();
+        //modifyGeneric();
     }
 
     public static void delete() {
@@ -134,7 +131,7 @@ public class DataFunctions implements Operations {
     }*/
 
 
-    public static String formalisePrefix(String prefix) {
+    public static String formalisePrefix(String prefix) throws IllegalArgumentException {
         if (prefix.startsWith("#")) {
             prefix = prefix.substring(1);
         }
@@ -142,6 +139,44 @@ public class DataFunctions implements Operations {
             throw new IllegalArgumentException();
         }
         return prefix.toUpperCase();
+    }
+
+
+
+
+    public static ArrayList<ArrayList<String>> getData(ArrayList<String> atribs, String type) {
+        ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
+        ArrayList<String> Header = new ArrayList<>();
+
+        ArrayList<Integer> atributePos = new ArrayList<>();
+        for (String[][][] Class : Constants.Omniclase) {
+            for (String[][] Sub : Class) {
+                if (Sub[1][0].equals(type)) {
+                    if (Sub[2] != null) {
+                        for (int i = 0; i < Sub[2].length; i++) {
+                            if (atribs.contains(Sub[2][i]) || atribs.contains("*")) {
+                                Header.add(Sub[2][i]);
+                                ArrayList<String> head = new ArrayList<>();
+                                DataPacks.add(head);
+                                atributePos.add(i);
+                            }
+                        }
+                    }
+
+                    for (Generic g : AuxDB.Complete) {
+                        if (g.getId().startsWith(type)) {
+                            int dealtAtrs = 0;
+                            for (String s : Header) {
+                                DataPacks.get(dealtAtrs).add(g.gatherInfo().get(atributePos.get(dealtAtrs)));
+                                dealtAtrs++;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        return DataPacks;
     }
 
     public static void printAllRemaster(ArrayList<String> atribs, String type) {
@@ -395,6 +430,7 @@ public class DataFunctions implements Operations {
 
 
         //pintar los atributos de las opciones que nos ha dado el usuario
+        //TODO pintar lo que el nombre de la clase que el usuario esta viendo
         for (ArrayList<ArrayList<String>> iterator :opcion) {
             printAllRemaster(iterator.get(1),iterator.get(0).get(0));
         }

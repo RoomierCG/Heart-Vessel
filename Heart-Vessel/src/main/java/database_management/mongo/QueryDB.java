@@ -88,7 +88,7 @@ public class QueryDB {
         log.clear();
         log.add("12:34 | Se murio");
         log.add("12:35 | F en el chat");
-        Patient pac3 = new Patient("PEP#3", "Lkoraz", "Ondeya", "Muerto", false, "ARH#5", log);
+        Patient pac3 = new Patient("PEP#3", "Lkoraz", "Ondeya", "Muerto", false, "ARH#2", log);
 
 
         CleaningEquipment ave = new CleaningEquipment("PRE#1", "Fregona", "ARR#1", "Usado", "10/10/1000",0);
@@ -198,6 +198,7 @@ public class QueryDB {
             AuxDB.Complete.add(muletas);
 
             AuxDB.Complete.add(room);
+            AuxDB.Complete.add(room2);
             AuxDB.Complete.add(aasd);
             AuxDB.Complete.add(uff);
             AuxDB.Complete.add(xrayRoom);
