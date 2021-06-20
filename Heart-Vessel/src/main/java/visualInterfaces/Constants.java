@@ -86,12 +86,12 @@ public class Constants {
 
             //Sección de Producto
             {
-                    {{"MaterialSanitario"}, {"PRS"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "MarcaModelo", "Uso"}, {null}},
-                    {{"Maquinaria"}, {"PRM"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "ConsumoElectrico", "Modelo"}, {null}},
-                    {{"EquipamientoLimpieza"}, {"PRE"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "GradoDeRiesgo"}, {null}},
-                    {{"ProductoLimpieza"}, {"PRL"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "Marca"}, {null}},
-                    {{"Medicamento"}, {"PRD"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "FechaDeCaducidad", "ViaDeAdministracion"}, {"RiesgosAlergicos"}},
-                    {{"Comida"}, {"PRC"}, {"id", "Nombre", "Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "FechaDeCaducidad", "Proveedor"}, {"RiesgosAlergicos"}
+                    {{"MaterialSanitario"}, {"PRS"}, {"id", "Nombre","Cantidad", "Area", "Estado", "FechaDeCompra", "MarcaModelo", "Uso"}, {null}},
+                    {{"Maquinaria"}, {"PRM"}, {"id", "Nombre","Cantidad", "Area", "Estado", "FechaDeCompra", "ConsumoElectrico", "Modelo"}, {null}},
+                    {{"EquipamientoLimpieza"}, {"PRE"}, {"id", "Nombre","Cantidad", "Area", "Estado", "FechaDeCompra", "GradoDeRiesgo"}, {null}},
+                    {{"ProductoLimpieza"}, {"PRL"}, {"id", "Nombre","Cantidad", "Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "Marca"}, {null}},
+                    {{"Medicamento"}, {"PRD"}, {"id", "Nombre", "Cantidad","Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "FechaDeCaducidad", "ViaDeAdministracion"}, {"RiesgosAlergicos"}},
+                    {{"Comida"}, {"PRC"}, {"id", "Nombre", "Cantidad","Area", "Estado", "FechaDeCompra", "Toxico", "Tipo", "FechaDeCaducidad", "Proveedor"}, {"RiesgosAlergicos"}
                     }}
     };
 

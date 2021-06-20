@@ -15,16 +15,18 @@ public abstract class Product extends Generic {
     protected String areaId;
     protected String status; //Variable dependiendo de hijo
     protected String buyDate; //Fecha de compra
+    protected int quantity;
 
     /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
 
-    public Product(String equipmentId, String name, String areaId, String status, String buyDate) {
-        super(equipmentId,name);
+
+    public Product(String id, String name, String areaId, String status, String buyDate, int quantity) {
+        super(id, name);
         this.areaId = areaId;
         this.status = status;
         this.buyDate = buyDate;
+        this.quantity = quantity;
     }
-
 
     public Product() {
 
@@ -34,6 +36,7 @@ public abstract class Product extends Generic {
 
     public ArrayList<String> gatherInfo() {
         ArrayList<String> s = super.gatherInfo();
+        s.add(String.valueOf(quantity));
         s.add(areaId);
         s.add(status);
         s.add(buyDate);
@@ -49,6 +52,9 @@ public abstract class Product extends Generic {
         super.modifyMe(atribMod);
         if (atribMod.contains("idArea")) {
             this.setId(UserInteractions.idRequest("AR", true));
+        }
+        if (atribMod.contains("Cantidad")) {
+            this.setQuantity(UserInteractions.numRequest("Introduzca la nueva cantidad del producto"));
         }
         if (atribMod.contains("Estado")) {
             this.setStatus(UserInteractions.pickFrom(Constants.estadosProducto, "Seleccione una categirio de riesgo nuevo"));
@@ -85,7 +91,12 @@ public abstract class Product extends Generic {
         this.buyDate = buyDate;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
 
-
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
 
