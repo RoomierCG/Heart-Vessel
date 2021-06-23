@@ -1,8 +1,8 @@
 package objects.people;
 
 import objects.Generic;
-import objects.area.Area;
-import service.background_sim.Simulator;
+import service.background_sim.SimulatorThread;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
@@ -29,9 +29,10 @@ public abstract class Person extends Generic {
 
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public void genMe(String ID){
-        super.setName(nombresR.get(Simulator.randomNum(0,nombresR.size())));
-        this.setLastName(apellidosR.get(Simulator.randomNum(0,apellidosR.size())));
-        this.setStatus(Constants.estadosPaciente.get(Simulator.randomNum(0,Constants.estadosPaciente.size())));
+        super.setId(OpsID.generateID(ID));
+        super.setName(nombresR.get(SimulatorThread.randomNum(0,nombresR.size())));
+        this.setLastName(apellidosR.get(SimulatorThread.randomNum(0,apellidosR.size())));
+        this.setStatus(Constants.estadosPaciente.get(SimulatorThread.randomNum(0,Constants.estadosPaciente.size())));
     }
     public ArrayList<String> gatherInfo(){
         return new ArrayList<String>(){{

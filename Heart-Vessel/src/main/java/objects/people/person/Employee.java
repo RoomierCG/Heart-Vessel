@@ -1,11 +1,7 @@
 package objects.people.person;
 
-import database_management.AuxDB;
-import objects.area.areas.HabitableRoom;
 import objects.people.Person;
-import service.background_sim.Simulator;
-import service.data_manager.DataFunctions;
-import service.utility.OpsID;
+import service.background_sim.SimulatorThread;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
@@ -39,15 +35,15 @@ public class Employee extends Person {
     @Override
     public void genMe(String ID) {
         super.genMe(ID);
-        this.department = Constants.departamentos.get(Simulator.randomNum(0,Constants.departamentos.size()));
-        this.job = Constants.puestosTrabajo.get(Simulator.randomNum(0,Constants.puestosTrabajo.size()));
+        this.department = Constants.departamentos.get(SimulatorThread.randomNum(0,Constants.departamentos.size()));
+        this.job = Constants.puestosTrabajo.get(SimulatorThread.randomNum(0,Constants.puestosTrabajo.size()));
         if(this.job.equals("Medico")){
             this.shift = "Guardia";
             this.salary = 1500;
         }else{
-            this.shift = (Simulator.randomNum(0,1) == 0) ? "Dia" : "Noche";
+            this.shift = (SimulatorThread.randomNum(0,1) == 0) ? "Dia" : "Noche";
         }
-        this.salary += Simulator.randomNum(1000,1500);
+        this.salary += SimulatorThread.randomNum(1000,1500);
 
     }
     public ArrayList<String> gatherInfo() {

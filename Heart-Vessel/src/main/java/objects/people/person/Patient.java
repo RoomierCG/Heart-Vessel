@@ -3,7 +3,7 @@ package objects.people.person;
 import database_management.AuxDB;
 import objects.area.areas.HabitableRoom;
 import objects.people.Person;
-import service.background_sim.Simulator;
+import service.background_sim.SimulatorThread;
 import service.data_manager.DataFunctions;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
@@ -41,8 +41,8 @@ public class Patient extends Person {
     @Override
     public void genMe(String ID) {
         super.genMe(ID);
-        this.allowVisitors = Simulator.randomNum(0, 1) != 0;
-        this.registry = new ArrayList<String>(){{add(Simulator.randomNum(1,23)+" : "+Simulator.randomNum(1,59)+ "| Fue ingresado en el hospital.");}};
+        this.allowVisitors = SimulatorThread.randomNum(0, 1) != 0;
+        this.registry = new ArrayList<String>(){{add(String.valueOf(java.time.LocalTime.now()).substring(0, 8)+ "| Fue ingresado en el hospital.");}};
         ArrayList<ArrayList<String>> habitaciones = DataFunctions.getData(new ArrayList<String>(){{add("id");add("idPaciente");}},"ARH");
         for(int i = 0;i<habitaciones.get(0).size();i++) {
             if (habitaciones.get(1).get(i) == null) {

@@ -21,6 +21,7 @@ import objects.transportsystem.Transport;
 import objects.transportsystem.transportsystems.MovementAid;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
+import org.apache.tomcat.util.bcel.Const;
 import org.bson.Document;
 import objects.area.areas.*;
 import visualInterfaces.Constants;
@@ -91,9 +92,9 @@ public class QueryDB {
         Patient pac3 = new Patient("PEP#3", "Lkoraz", "Ondeya", "Muerto", false, "ARH#2", log);
 
 
-        CleaningEquipment ave = new CleaningEquipment("PRE#1", "Fregona", "ARR#1", "Usado", "10/10/1000",0);
-        CleaningEquipment aver = new CleaningEquipment("PRE#2", "Aspiradora", "ARR#1", "Cyka-Blyat", "10/10/1000",0);
-        CleaningEquipment avegetal = new CleaningEquipment("PRE#3", "Escoba", "ARR#1", "Vacia", "10/10/1000",0);
+        CleaningEquipment ave = new CleaningEquipment("PRE#1", "Fregona", "ARR#1", "Usado", "10/10/1000",20,0);
+        CleaningEquipment aver = new CleaningEquipment("PRE#2", "Aspiradora", "ARR#1", "Cyka-Blyat", "10/10/1000",5,0);
+        CleaningEquipment avegetal = new CleaningEquipment("PRE#3", "Escoba", "ARR#1", "Vacia", "10/10/1000",20,0);
 
         ArrayList<String> listaEquipamiento = new ArrayList<>();
 
@@ -129,32 +130,32 @@ public class QueryDB {
 
         ArrayList<String> ingreds = new ArrayList<String>(){
             {
-                add("Ingrediente 1");
-                add("Ingrediente 2");
-                add("Ingrediente 3");
+                add("Nueces");
+                add("Capriomina");
+                add("Leche");
             }
         };
 
-        FoodMenu peshcao = new FoodMenu("PRC#1", "Menu Pescado", "ARR#1", "Congelado", "10/10/2010","20/10/2020", false,"Solido","PVP#1",ingreds);
-        Medicine coca = new Medicine("PRD#1", "Morfina", "ARR#1", "En Preparacion", "10/10/2010","20/10/2020" ,false , "Liquido","Oral",ingreds);
+        FoodMenu peshcao = new FoodMenu("PRC#1", "Menu Pescado", "ARR#1", "Congelado", "10/10/2010",50, false,ingreds,"20/10/2020","PVP#01");
+        Medicine morf = new Medicine("PRC#1", "Morfina", "ARR#1", Constants.tipoSustancia.get(1), "10/10/2010",5, false,null,"10/5/2023", Constants.viasDeAdministracion.get(2));
 
-        CleaningProducts Fairy = new CleaningProducts("PRL#1", "Jabon Multi Usos", "ARR#1", "Recibido", "10/10/2010", false, "Gel","Fairy");
-        CleaningProducts Lejia = new CleaningProducts("PRL#2", "Lejia", "ARR#1", "Recibido", "10/10/2010", true,"Liquido", "Lagarto");
+        CleaningProducts Fairy = new CleaningProducts("PRL#1", "Jabon Multi Usos", "ARR#1", "Recibido", "10/10/2010",30, false,"Fairy");
+        CleaningProducts Lejia = new CleaningProducts("PRL#2", "Lejia", "ARR#1", "Recibido", "10/10/2010", 40,true,"Lagarto");
 
 
 
-        MovementAid muletas = new MovementAid("TRM#1","Muletdas", "Adultos", null, "ARR#1");
+        MovementAid muletas = new MovementAid("TRM#1","Muletas", "Adultos", null, "ARR#1");
 
-        Machinery xRay = new Machinery("PRM#1", "Maquina Rayos X", "ARR#1", "En uso", "17/05/2005", 3000, "Aiur");
+        Machinery xRay = new Machinery("PRM#1", "Maquina Rayos X", "ARR#1", "En uso", "17/05/2005",2, 3000, "Aiur");
         listaEquipamiento.clear();
 
         listaEquipamiento.add(xRay.getId());
-        listaEquipamiento.add(coca.getId());
+        listaEquipamiento.add(morf.getId());
         listaEquipamiento.add(Fairy.getId());
 
         Area xrayRoom = new Area("ARR#2", "Sala Rayos X", "ocupado", 3, Constants.riesgos.get(2),listaEquipamiento,listaPersonal);
 
-        SanitationMaterials vendas = new SanitationMaterials("PRS#1", "Vendas", "ARR#1", "Nuevo", "09/09/2009","Sanitas","Tela");
+        SanitationMaterials vendas = new SanitationMaterials("PRS#1", "Vendas", "ARR#1", "Nuevo", "09/09/2009",5,"Sanitas");
 
         Provider profesionalVerdor = new Provider("PVP#1", "VerdorInc", "545855");
 
@@ -204,7 +205,7 @@ public class QueryDB {
             AuxDB.Complete.add(xrayRoom);
 
             AuxDB.Complete.add(peshcao);
-            AuxDB.Complete.add(coca);
+            AuxDB.Complete.add(morf);
             AuxDB.Complete.add(Fairy);
             AuxDB.Complete.add(Lejia);
             AuxDB.Complete.add(xRay);

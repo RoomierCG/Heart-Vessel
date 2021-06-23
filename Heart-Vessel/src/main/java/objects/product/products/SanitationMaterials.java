@@ -13,10 +13,13 @@ public class SanitationMaterials extends Product {
 /////////////////////////////////////////////////////Construc/////////////////////////////////////////////////////////
 
 
-    public SanitationMaterials(String equipmentId, String name, String areaId, String status, String buyDate, String model, String type) {
-        super(equipmentId, name, areaId, status, buyDate);
+    public SanitationMaterials(String id, String name, String areaId, String status, String buyDate, int quantity, String model) {
+        super(id, name, areaId, status, buyDate, quantity);
         this.model = model;
-        this.use = type;
+    }
+
+    public SanitationMaterials(String model) {
+        this.model = model;
     }
 
     public SanitationMaterials() {

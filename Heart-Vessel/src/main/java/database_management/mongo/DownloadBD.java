@@ -59,7 +59,7 @@ public class DownloadBD {
 
     }
 
-    public static void inicializar(){
+    public static void inicializar() {
         //Inicializacion de conexion BD
         mongoClient = new MongoClient("localhost", 27017);
         db = mongoClient.getDatabase("vessel");
@@ -73,7 +73,7 @@ public class DownloadBD {
 
     }
 
-    public static ArrayList<Area> downloadAreasBackUp(){
+    public static ArrayList<Area> downloadAreasBackUp() {
 
         inicializar();
 
@@ -84,11 +84,11 @@ public class DownloadBD {
         //Arraylist de retorno
         ArrayList<Area> areas = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodo = cursor.next();
 
-            switch (nodo.getString("Tipo")){
+            switch (nodo.getString("Tipo")) {
                 case "Area":
                     Area area = new Area(
                             nodo.getString("idArea"),
@@ -144,7 +144,7 @@ public class DownloadBD {
         return areas;
     }
 
-    public static ArrayList<Person> downloadPersonBackUp(){
+    public static ArrayList<Person> downloadPersonBackUp() {
 
         inicializar();
 
@@ -153,11 +153,11 @@ public class DownloadBD {
         MongoCursor<Document> cursor = findIterable.iterator();
         ArrayList<Person> people = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodo = cursor.next();
 
-            switch (nodo.getString("Tipo")){
+            switch (nodo.getString("Tipo")) {
                 case "Paciente":
 
                     Patient patient = new Patient(
@@ -167,7 +167,7 @@ public class DownloadBD {
                             nodo.getString("Estado"),
                             nodo.getBoolean("VisitasPermitidas"),
                             nodo.getString("idHabitacion"),
-                            (ArrayList<String>)nodo.get("Registro")
+                            (ArrayList<String>) nodo.get("Registro")
                     );
 
                     people.add(patient);
@@ -198,7 +198,7 @@ public class DownloadBD {
         return people;
     }
 
-    public static ArrayList<Provider> downloadProviderBackUp(){
+    public static ArrayList<Provider> downloadProviderBackUp() {
 
         inicializar();
 
@@ -207,7 +207,7 @@ public class DownloadBD {
         MongoCursor<Document> cursor = findIterable.iterator();
         ArrayList<Provider> providers = new ArrayList<>();
 
-        while (cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodo = cursor.next();
 
@@ -222,7 +222,7 @@ public class DownloadBD {
         return providers;
     }
 
-    public static ArrayList<Transport> downloadTransportBackUp(){
+    public static ArrayList<Transport> downloadTransportBackUp() {
 
         inicializar();
 
@@ -233,11 +233,11 @@ public class DownloadBD {
         //Arraylist de retorno
         ArrayList<Transport> Trps = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodoTrp = cursor.next();
 
-            switch (nodoTrp.getString("Tipo")){
+            switch (nodoTrp.getString("Tipo")) {
                 case "Ayuda Movil":
                     MovementAid nuevoAM = new MovementAid(
                             nodoTrp.getString("id"),
@@ -269,7 +269,7 @@ public class DownloadBD {
         return Trps;
     }
 
-    public static ArrayList<Product> downloadProductBackUp(){
+    public static ArrayList<Product> downloadProductBackUp() {
 
         inicializar();
 
@@ -280,11 +280,11 @@ public class DownloadBD {
         //Arraylist de retorno
         ArrayList<Product> Trps = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodoProd = cursor.next();
 
-            switch (nodoProd.getString("Tipo")){
+            switch (nodoProd.getString("Tipo")) {
                 case "MaterialSanitario":
                     SanitationMaterials nuevoProd = new SanitationMaterials(
                             nodoProd.getString("idProducto"),
@@ -292,7 +292,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
-                            nodoProd.getString("MarcaModelo"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getString("Uso")
                     );
 
@@ -306,6 +306,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getInteger("ConsumoElectrico"),
                             nodoProd.getString("Marca")
                     );
@@ -320,6 +321,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getInteger("GradoDeRiesgo")
                     );
 
@@ -333,8 +335,8 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getBoolean("Toxico"),
-                            nodoProd.getString("Uso"),
                             nodoProd.getString("Marca")
                     );
 
@@ -348,11 +350,12 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
-                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getBoolean("Toxico"),
-                            nodoProd.getString("Uso"),
-                            nodoProd.getString("ViaDeAdministracion"),
-                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos")
+                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos"),
+                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getString("ViaDeAdministracion")
+
                     );
 
                     Trps.add(nuevaM);
@@ -365,11 +368,11 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
-                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getBoolean("Toxico"),
-                            nodoProd.getString("Uso"),
-                            nodoProd.getString("Proveedor"),
-                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos")
+                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos"),
+                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getString("Proveedor")
                     );
 
                     Trps.add(nuevaF);
