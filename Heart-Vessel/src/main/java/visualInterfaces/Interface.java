@@ -1,6 +1,7 @@
 package visualInterfaces;
 
 import database_management.AuxDB;
+import database_management.mongo.DownloadBD;
 import database_management.mongo.QueryDB;
 import service.data_manager.DataFunctions;
 import service.utility.UserInteractions;
@@ -81,6 +82,13 @@ public class Interface {
                     "\t1º Descargar\n" +
                     "\t2º Guardar\n" +
                     "\t3º Salir");
+
+            if (opcion==1){
+                DownloadBD.descargar();
+            }
+            if (opcion==2){
+                QueryDB.guardar();
+            }
 
         } while (opcion != 3);
 

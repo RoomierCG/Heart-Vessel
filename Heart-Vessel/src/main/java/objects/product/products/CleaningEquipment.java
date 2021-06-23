@@ -12,8 +12,8 @@ public class CleaningEquipment extends Product {
     private int riskFactor;
 
     /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
-    public CleaningEquipment(String equipmentId, String name, String areaId, String status, String buyDate, int riskFactor) {
-        super(equipmentId, name, areaId, status, buyDate);
+    public CleaningEquipment(String equipmentId, String name, String areaId, String status, String buyDate,int quantity, int riskFactor) {
+        super(equipmentId, name, areaId, status, buyDate,quantity);
         this.riskFactor = riskFactor;
     }
 

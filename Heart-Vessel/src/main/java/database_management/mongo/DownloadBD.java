@@ -6,6 +6,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import database_management.AuxDB;
+import objects.Generic;
 import objects.area.Area;
 import objects.area.areas.Garaje;
 import objects.area.areas.HabitableRoom;
@@ -42,22 +43,13 @@ public class DownloadBD {
     private static MongoCollection<Document> collectionProduct;
     private static MongoCollection<Document> collectionProvider;
 
-    //Declaracion de ArrayLists
-    private static ArrayList<Area> ArrLarea;
-    private static ArrayList<Person> ArrlPerson;
-    private static ArrayList<Product> ArrlProduct;
-    private static ArrayList<Provider> ArrlProvider;
-    private static ArrayList<Transport> ArrlTransport;
-
-    public static void main(String[] args) {
-
-        ArrLarea = downloadAreasBackUp();
-        ArrlPerson = downloadPersonBackUp();
-        ArrlProvider = downloadProviderBackUp();
-        ArrlProduct = downloadProductBackUp();
-        ArrlTransport = downloadTransportBackUp();
-
-    }
+   public static void descargar(){
+       AuxDB.Complete.addAll(downloadAreasBackUp());
+       AuxDB.Complete.addAll(downloadPersonBackUp());
+       AuxDB.Complete.addAll(downloadProviderBackUp());
+       AuxDB.Complete.addAll(downloadProductBackUp());
+       AuxDB.Complete.addAll(downloadTransportBackUp());
+   }
 
     public static void inicializar(){
         //Inicializacion de conexion BD
@@ -73,7 +65,7 @@ public class DownloadBD {
 
     }
 
-    public static ArrayList<Area> downloadAreasBackUp(){
+    public static ArrayList<Generic> downloadAreasBackUp(){
 
         inicializar();
 
@@ -82,7 +74,7 @@ public class DownloadBD {
         MongoCursor<Document> cursor = findIterable.iterator();
 
         //Arraylist de retorno
-        ArrayList<Area> areas = new ArrayList<>();
+        ArrayList<Generic> areas = new ArrayList<>();
 
         while(cursor.hasNext()){
 
@@ -144,14 +136,14 @@ public class DownloadBD {
         return areas;
     }
 
-    public static ArrayList<Person> downloadPersonBackUp(){
+    public static ArrayList<Generic> downloadPersonBackUp(){
 
         inicializar();
 
         //Tenemos que crear un iterable que sera la coleccion en la que estamos, y el cursos sera la posicion dentro del iterable
         FindIterable<Document> findIterable = collectionPerson.find();
         MongoCursor<Document> cursor = findIterable.iterator();
-        ArrayList<Person> people = new ArrayList<>();
+        ArrayList<Generic> people = new ArrayList<>();
 
         while(cursor.hasNext()){
 
@@ -198,14 +190,14 @@ public class DownloadBD {
         return people;
     }
 
-    public static ArrayList<Provider> downloadProviderBackUp(){
+    public static ArrayList<Generic> downloadProviderBackUp(){
 
         inicializar();
 
         //Tenemos que crear un iterable que sera la coleccion en la que estamos, y el cursos sera la posicion dentro del iterable
         FindIterable<Document> findIterable = collectionProvider.find();
         MongoCursor<Document> cursor = findIterable.iterator();
-        ArrayList<Provider> providers = new ArrayList<>();
+        ArrayList<Generic> providers = new ArrayList<>();
 
         while (cursor.hasNext()){
 
@@ -222,7 +214,7 @@ public class DownloadBD {
         return providers;
     }
 
-    public static ArrayList<Transport> downloadTransportBackUp(){
+    public static ArrayList<Generic> downloadTransportBackUp(){
 
         inicializar();
 
@@ -231,7 +223,7 @@ public class DownloadBD {
         MongoCursor<Document> cursor = findIterable.iterator();
 
         //Arraylist de retorno
-        ArrayList<Transport> Trps = new ArrayList<>();
+        ArrayList<Generic> Trps = new ArrayList<>();
 
         while(cursor.hasNext()){
 
@@ -240,24 +232,42 @@ public class DownloadBD {
             switch (nodoTrp.getString("Tipo")){
                 case "Ayuda Movil":
                     MovementAid nuevoAM = new MovementAid(
-                            nodoTrp.getString("id"),
-                            nodoTrp.getString("Name"),
+                            nodoTrp.getString("idTransporte"),
                             nodoTrp.getString("Estado"),
-                            nodoTrp.getString("idPaciente"),
-                            nodoTrp.getString("idArea")
+                            nodoTrp.getString("Nombre"),
+                            nodoTrp.getString("idArea"),
+                            nodoTrp.getString("idPaciente")
                     );
 
                     Trps.add(nuevoAM);
                     break;
 
                 case "Ambulancia":
-                    Ambulance nuevoAmbu = new Ambulance();
+                    Ambulance nuevoAmbu = new Ambulance(
+                            nodoTrp.getString("idTransporte"),
+                            nodoTrp.getString("Nombre"),
+                            nodoTrp.getString("Status"),
+                            nodoTrp.getInteger("Gasolina"),
+                            nodoTrp.getString("Marca"),
+                            nodoTrp.getString("Modelo"),
+                            (ArrayList<String>) nodoTrp.get("Personal"),
+                            (ArrayList<String>) nodoTrp.get("Equipamiento")
+
+                    );
 
                     Trps.add(nuevoAmbu);
                     break;
 
                 case "CocheCorporativo":
-                    CompanyCar nuevoCC = new CompanyCar();
+                    CompanyCar nuevoCC = new CompanyCar(
+                            nodoTrp.getString("idTransporte"),
+                            nodoTrp.getString("Nombre"),
+                            nodoTrp.getString("Status"),
+                            nodoTrp.getInteger("Gasolina"),
+                            nodoTrp.getString("Marca"),
+                            nodoTrp.getString("Modelo"),
+                            nodoTrp.getString("idPersona")
+                    );
 
                     Trps.add(nuevoCC);
                     break;
@@ -269,7 +279,7 @@ public class DownloadBD {
         return Trps;
     }
 
-    public static ArrayList<Product> downloadProductBackUp(){
+    public static ArrayList<Generic> downloadProductBackUp(){
 
         inicializar();
 
@@ -278,7 +288,7 @@ public class DownloadBD {
         MongoCursor<Document> cursor = findIterable.iterator();
 
         //Arraylist de retorno
-        ArrayList<Product> Trps = new ArrayList<>();
+        ArrayList<Generic> Trps = new ArrayList<>();
 
         while(cursor.hasNext()){
 
@@ -292,6 +302,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getString("MarcaModelo"),
                             nodoProd.getString("Uso")
                     );
@@ -307,6 +318,7 @@ public class DownloadBD {
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
                             nodoProd.getInteger("ConsumoElectrico"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getString("Marca")
                     );
 
@@ -320,6 +332,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getInteger("GradoDeRiesgo")
                     );
 
@@ -333,6 +346,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getBoolean("Toxico"),
                             nodoProd.getString("Uso"),
                             nodoProd.getString("Marca")
@@ -348,6 +362,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getString("FechaDeCaducidad"),
                             nodoProd.getBoolean("Toxico"),
                             nodoProd.getString("Uso"),
@@ -365,6 +380,7 @@ public class DownloadBD {
                             nodoProd.getString("Area"),
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
+                            nodoProd.getInteger("Cantidad"),
                             nodoProd.getString("FechaDeCaducidad"),
                             nodoProd.getBoolean("Toxico"),
                             nodoProd.getString("Uso"),

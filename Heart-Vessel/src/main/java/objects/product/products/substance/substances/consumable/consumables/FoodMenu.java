@@ -12,8 +12,8 @@ public class FoodMenu extends Consumable {
     private String provider;
 
     /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
-    public FoodMenu(String equipmentId, String name, String areaId, String status, String buyDate, String expirationDates, boolean toxic, String type, String provider, ArrayList<String> allergyRiskIngredients) {
-        super(equipmentId, name, areaId, status, buyDate, expirationDates, toxic, type, allergyRiskIngredients);
+    public FoodMenu(String equipmentId, String name, String areaId, String status, String buyDate, int quantity,String expirationDates, boolean toxic, String type, String provider, ArrayList<String> allergyRiskIngredients) {
+        super(equipmentId, name, areaId, status, buyDate,quantity,expirationDates, toxic, type, allergyRiskIngredients);
         this.provider = provider;
     }
 

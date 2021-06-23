@@ -16,8 +16,8 @@ public abstract class Substance extends Product {
     public Substance() {
     }
 
-    public Substance(String equipmentId, String name, String areaId, String status, String buyDate, boolean toxic, String type) {
-        super(equipmentId, name, areaId, status, buyDate);
+    public Substance(String equipmentId, String name, String areaId, String status, String buyDate, int quantity, boolean toxic, String type) {
+        super(equipmentId, name, areaId, status, buyDate, quantity);
         this.toxic = toxic;
         this.type = type;
     }
