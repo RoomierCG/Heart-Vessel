@@ -11,8 +11,10 @@ public class Medicine extends Consumable {
     private String administered; //Via de administracion eg. oral, injeccion etc
 
     /////////////////////////////////////////////////////CONSTR/////////////////////////////////////////////////////////
-    public Medicine(String equipmentId, String name, String areaId, String status, String buyDate,int quantity, String expirationDates, boolean toxic, String type, String administered, ArrayList<String> allergyRiskIngredients) {
-        super(equipmentId, name, areaId, status, buyDate,quantity, expirationDates, toxic, type, allergyRiskIngredients);
+
+
+    public Medicine(String id, String name, String areaId, String status, String buyDate, int quantity, boolean toxic, ArrayList<String> allergyRiskIngredients, String expirationDate, String administered) {
+        super(id, name, areaId, status, buyDate, quantity, toxic, allergyRiskIngredients, expirationDate);
         this.administered = administered;
     }
 

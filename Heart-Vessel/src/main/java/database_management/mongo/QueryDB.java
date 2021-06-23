@@ -59,7 +59,7 @@ public class QueryDB {
         rellenarTest();
     }
 
-    public static void  guardar(){
+    public static void guardar() {
         updateAreasBackUp();
         updateProviderBackUp();
         updateTransportSystemBackUp();
@@ -126,17 +126,16 @@ public class QueryDB {
 
         ArrayList<String> ingreds = new ArrayList<String>() {
             {
-                add("Ingrediente 1");
-                add("Ingrediente 2");
-                add("Ingrediente 3");
+                add("Nueces");
+                add("Capriomina");
+                add("Leche");
             }
         };
 
-        FoodMenu peshcao = new FoodMenu("PRC#1", "Menu Pescado", "ARR#1", "Congelado", "10/10/2010", 1, "20/10/2020", false, "Solido", "PVP#1", ingreds);
-        Medicine coca = new Medicine("PRD#1", "Morfina", "ARR#1", "En Preparacion", "10/10/2010", 1, "20/10/2020", false, "Liquido", "Oral", ingreds);
-
-        CleaningProducts Fairy = new CleaningProducts("PRL#1", "Jabon Multi Usos", "ARR#1", "Recibido", "10/10/2010", 1, false, "Gel", "Fairy");
-        CleaningProducts Lejia = new CleaningProducts("PRL#2", "Lejia", "ARR#1", "Recibido", "10/10/2010", 1, true, "Liquido", "Lagarto");
+        FoodMenu peshcao = new FoodMenu("PRC#1", "Menu Pescado", "ARR#1", "Congelado", "10/10/2010", 50, false, ingreds, "20/10/2020", "PVP#01");
+        Medicine morf = new Medicine("PRC#1", "Morfina", "ARR#1", Constants.tipoSustancia.get(1), "10/10/2010", 5, false, null, "10/5/2023", Constants.viasDeAdministracion.get(2));
+        CleaningProducts Fairy = new CleaningProducts("PRL#1", "Jabon Multi Usos", "ARR#1", "Recibido", "10/10/2010", 30, false, "Fairy");
+        CleaningProducts Lejia = new CleaningProducts("PRL#2", "Lejia", "ARR#1", "Recibido", "10/10/2010", 40, true, "Lagarto");
 
 
         MovementAid muletas = new MovementAid("TRM#1", "Muletdas", "Adultos", null, "ARR#1");
@@ -145,12 +144,12 @@ public class QueryDB {
         listaEquipamiento.clear();
 
         listaEquipamiento.add(xRay.getId());
-        listaEquipamiento.add(coca.getId());
+        listaEquipamiento.add(morf.getId());
         listaEquipamiento.add(Fairy.getId());
 
         Area xrayRoom = new Area("ARR#2", "Sala Rayos X", "ocupado", 3, Constants.riesgos.get(2), listaEquipamiento, listaPersonal);
 
-        SanitationMaterials vendas = new SanitationMaterials("PRS#1", "Vendas", "ARR#1", "Nuevo", "09/09/2009", 1, "Sanitas", "Tela");
+        SanitationMaterials vendas = new SanitationMaterials("PRS#1", "Vendas", "ARR#1", "Nuevo", "09/09/2009",5,"Sanitas");
 
         Provider profesionalVerdor = new Provider("PVP#1", "VerdorInc", "545855");
 
@@ -200,7 +199,7 @@ public class QueryDB {
             AuxDB.Complete.add(xrayRoom);
 
             AuxDB.Complete.add(peshcao);
-            AuxDB.Complete.add(coca);
+            AuxDB.Complete.add(morf);
             AuxDB.Complete.add(Fairy);
             AuxDB.Complete.add(Lejia);
             AuxDB.Complete.add(xRay);

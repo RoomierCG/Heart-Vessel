@@ -1,29 +1,37 @@
 package test.java;
 
+
 import database_management.AuxDB;
 import database_management.mongo.QueryDB;
-import objects.area.Area;
-import objects.people.person.Employee;
-import objects.people.person.Patient;
-import org.apache.catalina.User;
-import org.apache.tomcat.util.bcel.Const;
-import service.data_manager.DataFunctions;
-import service.utility.OpsID;
+import service.background_sim.SimulatorThread;
 import service.utility.UserInteractions;
-import visualInterfaces.Constants;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
-
-import static service.background_sim.Simulator.randomNum;
-
+import java.util.concurrent.TimeUnit;
 
 /* Proceso
         Añadir ModifyMe [ Crear metodos de modificar en cada clase, heredando de las clases padres. Reciben lista (String) de parametros a cambiar
         Añadir GatherInfo/GatherListedInfo a las clases que falten para poder imprimirlo bien
  */
 public class cable {
-    public static void main(String[] args) {/*
+    public static void main(String[] args) throws InterruptedException {
+        QueryDB.rellenarTest();
+        Thread t = new SimulatorThread();
+        t.start();
+        do{
+            int g = UserInteractions.numRequest("asd");
+            System.out.println("oh yea");
+            t.sleep(500);
+            ArrayList<String> logPrint = new ArrayList<>(SimulatorThread.log);
+            System.out.println("yes");
+            for(String r : logPrint){
+                System.out.println(r);
+            }
+        }while (t.isAlive());
+        System.out.println("End");
+
+
+        /*
         //AuxDB.Complete.remove(null);
 
 

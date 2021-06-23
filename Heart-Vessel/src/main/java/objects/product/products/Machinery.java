@@ -15,8 +15,14 @@ public class Machinery extends Product {
 
     /////////////////////////////////////////////////////Constr/////////////////////////////////////////////////////////
 
-    public Machinery(String equipmentId, String name, String areaId, String status, String buyDate, int quantity, int electricityConsumption, String model) {
-        super(equipmentId, name, areaId, status, buyDate, quantity);
+
+    public Machinery(String id, String name, String areaId, String status, String buyDate, int quantity, int electricityConsumption, String model) {
+        super(id, name, areaId, status, buyDate, quantity);
+        this.electricityConsumption = electricityConsumption;
+        this.model = model;
+    }
+
+    public Machinery(int electricityConsumption, String model) {
         this.electricityConsumption = electricityConsumption;
         this.model = model;
     }

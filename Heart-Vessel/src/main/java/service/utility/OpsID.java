@@ -51,7 +51,7 @@ public class OpsID {
     public static String generateID(String prefix) {//Nos genera un ID que no este siendo utilizado/no exista
         //Para evitar la creacion de un ID invalido
         if(prefix.length()!=3){
-            return null;
+            prefix = prefix.substring(0,3);
         }
         //Solo en el caso de que queramos reciclar los IDs
         for (ID a : EmptyIDs) {

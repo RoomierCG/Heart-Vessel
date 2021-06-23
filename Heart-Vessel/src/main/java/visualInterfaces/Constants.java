@@ -17,17 +17,28 @@ public class Constants {
         add("Estado2");
     }};
     public static final ArrayList<String> estadosVehiculos = new ArrayList<String>() {{
-        add("En llamas");
-        add("Sin gasolina");
-        add("En el paro");
+        add("Listo Para Salir");
+        add("Averiado");
+        add("En Transito");
     }};
     public static final ArrayList<String> departamentos = new ArrayList<String>() {{
-        add("Dep1");
-        add("Dep2");
+        add("Medico");
+        add("Enfermero");
+        add("Especialista");
+        add("Dietista");
+        add("Optico");
+        add("Auxiliar");
+        add("Biomedico");
+        add("Fisioterapeuta");
     }};
     public static final ArrayList<String> puestosTrabajo = new ArrayList<String>() {{
-        add("Dep1");
-        add("Dep2");
+        add("Pedagologia");
+        add("Hematologia");
+        add("CuidadoIntensivo");
+        add("Farmacia");
+        add("Dermatologia");
+        add("Oftalmologia");
+        add("Ginecologia Y Obstetricia");
     }};
     public static final ArrayList<String> riesgos = new ArrayList<String>() {{
         add("Sin Riesgo");
@@ -38,11 +49,12 @@ public class Constants {
     public static final ArrayList<String> viasDeAdministracion = new ArrayList<String>() {{
         add("Via_Oral");
         add("Via_Nasal");
-        add("Via_");
+        add("Via_Sanguinea");
     }};
     public static final ArrayList<String> estadosProducto = new ArrayList<String>() {{
-        add("Estado1");
-        add("Estado2");
+        add("PerfectoEstado");
+        add("Usable");
+        add("RequiereCambio");
     }};
     public static final ArrayList<String> tipoSustancia = new ArrayList<String>() {{
         add("Polvo");
@@ -52,6 +64,7 @@ public class Constants {
         add("Capsula");
     }};
 
+    public static final String RegistryFormat = "%-80.80s";
     public static final String LargeFormat = "%-30.30s";
     public static final String MediumFormat = "%-20.20s";
 

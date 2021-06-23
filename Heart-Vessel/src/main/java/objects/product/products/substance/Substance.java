@@ -16,11 +16,13 @@ public abstract class Substance extends Product {
     public Substance() {
     }
 
-    public Substance(String equipmentId, String name, String areaId, String status, String buyDate, int quantity, boolean toxic, String type) {
-        super(equipmentId, name, areaId, status, buyDate, quantity);
+    public Substance(String id, String name, String areaId, String status, String buyDate, int quantity, boolean toxic) {
+        super(id, name, areaId, status, buyDate, quantity);
         this.toxic = toxic;
-        this.type = type;
     }
+
+
+
     public Substance(boolean toxic, String type) {
         this.toxic = toxic;
         this.type = type;

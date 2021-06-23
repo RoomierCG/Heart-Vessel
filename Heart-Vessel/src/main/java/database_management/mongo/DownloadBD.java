@@ -51,7 +51,7 @@ public class DownloadBD {
        AuxDB.Complete.addAll(downloadTransportBackUp());
    }
 
-    public static void inicializar(){
+    public static void inicializar() {
         //Inicializacion de conexion BD
         mongoClient = new MongoClient("localhost", 27017);
         db = mongoClient.getDatabase("vessel");
@@ -76,11 +76,11 @@ public class DownloadBD {
         //Arraylist de retorno
         ArrayList<Generic> areas = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodo = cursor.next();
 
-            switch (nodo.getString("Tipo")){
+            switch (nodo.getString("Tipo")) {
                 case "Area":
                     Area area = new Area(
                             nodo.getString("idArea"),
@@ -145,11 +145,11 @@ public class DownloadBD {
         MongoCursor<Document> cursor = findIterable.iterator();
         ArrayList<Generic> people = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodo = cursor.next();
 
-            switch (nodo.getString("Tipo")){
+            switch (nodo.getString("Tipo")) {
                 case "Paciente":
 
                     Patient patient = new Patient(
@@ -159,7 +159,7 @@ public class DownloadBD {
                             nodo.getString("Estado"),
                             nodo.getBoolean("VisitasPermitidas"),
                             nodo.getString("idHabitacion"),
-                            (ArrayList<String>)nodo.get("Registro")
+                            (ArrayList<String>) nodo.get("Registro")
                     );
 
                     people.add(patient);
@@ -225,11 +225,11 @@ public class DownloadBD {
         //Arraylist de retorno
         ArrayList<Generic> Trps = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodoTrp = cursor.next();
 
-            switch (nodoTrp.getString("Tipo")){
+            switch (nodoTrp.getString("Tipo")) {
                 case "Ayuda Movil":
                     MovementAid nuevoAM = new MovementAid(
                             nodoTrp.getString("idTransporte"),
@@ -290,11 +290,11 @@ public class DownloadBD {
         //Arraylist de retorno
         ArrayList<Generic> Trps = new ArrayList<>();
 
-        while(cursor.hasNext()){
+        while (cursor.hasNext()) {
 
             Document nodoProd = cursor.next();
 
-            switch (nodoProd.getString("Tipo")){
+            switch (nodoProd.getString("Tipo")) {
                 case "MaterialSanitario":
                     SanitationMaterials nuevoProd = new SanitationMaterials(
                             nodoProd.getString("idProducto"),
@@ -348,7 +348,6 @@ public class DownloadBD {
                             nodoProd.getString("FechaDeCompra"),
                             nodoProd.getInteger("Cantidad"),
                             nodoProd.getBoolean("Toxico"),
-                            nodoProd.getString("Uso"),
                             nodoProd.getString("Marca")
                     );
 
