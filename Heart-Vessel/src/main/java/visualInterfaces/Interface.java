@@ -19,7 +19,7 @@ public class Interface {
         int opcion = 0;
         String[] textInicio = {"Inicializando", ".", ".", ".", ".", ".", ".", "."};
 
-        QueryDB.rellenarTest();
+        QueryDB.rellenarTest(); //Cambiar en un futuro
 
         for (String s : textInicio) {
             try {

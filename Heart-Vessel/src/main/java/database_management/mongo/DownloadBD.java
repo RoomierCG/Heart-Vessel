@@ -303,11 +303,9 @@ public class DownloadBD {
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
                             nodoProd.getInteger("Cantidad"),
-                            nodoProd.getString("MarcaModelo"),
-                            nodoProd.getString("Uso")
+                            nodoProd.getString("MarcaModelo")
                     );
-
-                    Trps.add(nuevoProd);
+                            Trps.add(nuevoProd);
                     break;
 
                 case "Maquinaria":
@@ -362,14 +360,12 @@ public class DownloadBD {
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
                             nodoProd.getInteger("Cantidad"),
-                            nodoProd.getString("FechaDeCaducidad"),
                             nodoProd.getBoolean("Toxico"),
-                            nodoProd.getString("Uso"),
-                            nodoProd.getString("ViaDeAdministracion"),
-                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos")
+                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos"),
+                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getString("ViaDeAdministracion")
                     );
-
-                    Trps.add(nuevaM);
+                            Trps.add(nuevaM);
                     break;
 
                 case "Comida":
@@ -380,14 +376,13 @@ public class DownloadBD {
                             nodoProd.getString("Estado"),
                             nodoProd.getString("FechaDeCompra"),
                             nodoProd.getInteger("Cantidad"),
-                            nodoProd.getString("FechaDeCaducidad"),
                             nodoProd.getBoolean("Toxico"),
-                            nodoProd.getString("Uso"),
-                            nodoProd.getString("Proveedor"),
-                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos")
+                            (ArrayList<String>) nodoProd.get("RiesgosAlergicos"),
+                            nodoProd.getString("FechaDeCaducidad"),
+                            nodoProd.getString("Proveedor")
                     );
 
-                    Trps.add(nuevaF);
+                            Trps.add(nuevaF);
                     break;
             }
         }

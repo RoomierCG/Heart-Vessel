@@ -33,14 +33,15 @@ public class DataFunctions implements Operations {
         ArrayList<Integer> optionsSelected = new ArrayList<>();
         ArrayList<Integer> numOptions;
 
-
+        // pediremos que id queremos modificar y despues cogeremos el objecto en si para su uso en modificacion de atrib
         String idModifyObject = UserInteractions.idRequest(true);
         Generic modifyObject = OpsID.decodeID(idModifyObject);
 
 
 //        System.out.println(idModifyObject.substring(0,3));
 
-        //Recorremos el array para que funcione la lista de opciones para el numlist
+        /*Recorremos el array para que funcione la lista de opciones para el numlist, generamos los textos que
+        apareceran en los atributos a elegir*/
         for (String[][][] category : Constants.Omniclase) {
             for (String[][] subcategory : category) {
                 if (idModifyObject.substring(0, 3).equals(subcategory[1][0])) {
@@ -50,8 +51,11 @@ public class DataFunctions implements Operations {
             }
         }
 
+        options.remove(0); //eliminamos la opcion de modificar el id
         numOptions = NumListCreator(0, options.size());
 
+        /*Pintamos la lista de atributos y por cada opcion que nos marca el usuario esta lista se vuelve a pintar sin
+        la opcion marcada por el usuario*/
         do {
             StringBuilder prompt = new StringBuilder();
             for (int i = 0; i < options.size(); i++) {
@@ -68,13 +72,24 @@ public class DataFunctions implements Operations {
 
 
         //No queremos permitir que modifiquen el id por eos borramos 0
-
         optionsSelected.remove(optionsSelected.size() - 1);
-        Collections.sort(optionsSelected);
-        System.out.println(optionsSelected);
 
-        //Modificar al usuario seleccionado
-        //Modifyme en generic, metodos para modificar directamente un los artibutos de un objeto
+        /*Orgnizamos la lista para poder compararla con la de los atributos para despues mandarla al arraylist de strings
+        donde se dira que atributos quiso modificar el usuario*/
+        Collections.sort(optionsSelected);
+        ArrayList<String> atribModme = new ArrayList<>();
+
+        for (Integer opcionS:optionsSelected) {
+            for (int i = 0; i < options.size(); i++) {
+                if (i == opcionS-1){
+                    atribModme.add(options.get(i));
+                }
+            }
+        }
+
+        //Una vez ya tenemos la lista de nombres, llamamos al contructor modifyme para poder modificar el objeto segun los atributos
+        assert modifyObject != null;
+        modifyObject.modifyMe(atribModme);
 
         return false;
     }
@@ -121,16 +136,6 @@ public class DataFunctions implements Operations {
         return newNumList;
     }
 
-
-    //Nose si aun necesitamos esto
-    /*public static String[][] append(String[][] a, String[][] b) {
-        String[][] result = new String[a.length + b.length][];
-        System.arraycopy(a, 0, result, 0, a.length);
-        System.arraycopy(b, 0, result, a.length, b.length);
-        return result;
-    }*/
-
-
     public static String formalisePrefix(String prefix) throws IllegalArgumentException {
         if (prefix.startsWith("#")) {
             prefix = prefix.substring(1);
@@ -140,9 +145,6 @@ public class DataFunctions implements Operations {
         }
         return prefix.toUpperCase();
     }
-
-
-
 
     public static ArrayList<ArrayList<String>> getData(ArrayList<String> atribs, String type) {
         ArrayList<ArrayList<String>> DataPacks = new ArrayList<>();
@@ -359,7 +361,6 @@ public class DataFunctions implements Operations {
         int continueOption = 0;
 
         ArrayList<ArrayList<ArrayList<String>>> opcion = new ArrayList<>();
-
         ArrayList<String> prefijos = gatherPrefixList();
         ArrayList<String> nombre = gatherNameList();
 
@@ -411,7 +412,7 @@ public class DataFunctions implements Operations {
 
                 seleccionAttr = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", 0, attrOption.size()) - 1;
 
-                if (seleccionAttr != -1){
+                if (seleccionAttr != -1) {
                     opcion.get(iteradorCont).get(1).add(attrOption.get(seleccionAttr));
                     numOptions.remove(seleccionAttr);
                     attrOption.remove(seleccionAttr);
@@ -424,19 +425,18 @@ public class DataFunctions implements Operations {
 
             iteradorCont++;
 
-            continueOption = UserInteractions.numRequest("Quieres seguir\n1º Si \n2º No",1,2);
+            continueOption = UserInteractions.numRequest("Quieres seguir\n1º Si \n2º No", 1, 2);
 
         } while (continueOption != 2);
 
 
         //pintar los atributos de las opciones que nos ha dado el usuario
-        //TODO pintar lo que el nombre de la clase que el usuario esta viendo
-        for (ArrayList<ArrayList<String>> iterator :opcion) {
-            printAllRemaster(iterator.get(1),iterator.get(0).get(0));
+
+        for (ArrayList<ArrayList<String>> iterator : opcion) {
+            printAllRemaster(iterator.get(1), iterator.get(0).get(0));
         }
 
     }
-
 
     public static ArrayList<String> gatherPrefixList() {
         ArrayList<String> prefijos = new ArrayList<>();
