@@ -375,10 +375,7 @@ public class DataFunctions implements Operations {
     }
 
     public static Generic determineGeneration(String prefix) {
-        ArrayList<String> all = new ArrayList<String>() {{
-            add("*");
-        }};
-        prefix = prefix.substring(0,3);
+        prefix = prefix.substring(0, 3);
         switch (prefix) {
             case "ARR":
                 return new Area();
@@ -416,27 +413,27 @@ public class DataFunctions implements Operations {
     }
 
     public static void printSpecifObject() {
-        int seleccionAttr = 0;
+        int seleccionAttr;
         int iteradorCont = 0;
-        int continueOption = 0;
+        int continueOption;
 
         ArrayList<ArrayList<ArrayList<String>>> opcion = new ArrayList<>();
         ArrayList<String> prefijos = gatherPrefixList();
         ArrayList<String> nombre = gatherNameList();
 
         do {
-            ArrayList<ArrayList<String>> subpcion = new ArrayList<>();
-
+            StringBuilder promptClase = new StringBuilder();
+            promptClase.append("\nSobre que elementos quieres buscar informacion?\n");
             for (int i = 0; i < prefijos.size(); i += 2) {
 
                 if (i == prefijos.size() - 1) {
-                    System.out.print((i + 1) + ". " + nombre.get(i));
+                    promptClase.append((i + 1) + ". " + nombre.get(i));
                 } else {
-                    System.out.printf("%-30.30s  %-30.30s%n", ((i + 1) + ". " + nombre.get(i)), ((i + 2) + ". " + nombre.get(i + 1)));
+                    promptClase.append(String.format("%-30.30s  %-30.30s%n", ((i + 1) + ". " + nombre.get(i)), ((i + 2) + ". " + nombre.get(i + 1))));
                 }
             }
 
-            int seleccion = UserInteractions.numRequest("", 1, nombre.size()) - 1;
+            int seleccion = UserInteractions.numRequest(String.valueOf(promptClase), 1, nombre.size()) - 1;
             opcion.add(new ArrayList<ArrayList<String>>() {{
                 add(new ArrayList<String>() {{
                     add(prefijos.get(seleccion));
@@ -451,6 +448,7 @@ public class DataFunctions implements Operations {
 
 
             //Recorremos el array para que funcione la lista de opciones para el numlist
+            attrOption.add("*");
             for (String[][][] category : Constants.Omniclase) {
                 for (String[][] subcategory : category) {
                     if (opcion.get(iteradorCont).get(0).get(0).equals(subcategory[1][0])) {
@@ -461,22 +459,32 @@ public class DataFunctions implements Operations {
             }
 
             numOptions = NumListCreator(0, attrOption.size());
-            attrOption.remove(0);
             attrOption.remove(null);
 
             do {
                 StringBuilder prompt = new StringBuilder();
                 for (int i = 0; i < attrOption.size(); i++) {
-                    prompt.append("- ").append(i + 1).append("º ").append(attrOption.get(i)).append("\n");
+                    if (attrOption.get(i).equals("*")) {
+                        prompt.append("- ").append(i + 1).append("º ").append("|| TODOS ||\nO especificamente: ").append("\n");
+                    } else {
+                        prompt.append("- ").append(i + 1).append("º ").append(attrOption.get(i)).append("\n");
+                    }
                 }
 
                 seleccionAttr = UserInteractions.numRequest(prompt + "=== 0  Salir de las opciones ===", 0, attrOption.size()) - 1;
 
                 if (seleccionAttr != -1) {
+                    if (attrOption.get(seleccionAttr).equals("*")) {
+                        opcion.get(iteradorCont).get(1).add(attrOption.get(seleccionAttr));
+                        seleccionAttr = -1;
+                    }
+                }
+                if (seleccionAttr != -1) {
                     opcion.get(iteradorCont).get(1).add(attrOption.get(seleccionAttr));
                     numOptions.remove(seleccionAttr);
                     attrOption.remove(seleccionAttr);
                 }
+
 
                 if (attrOption.isEmpty())
                     seleccionAttr = -1;
@@ -485,7 +493,7 @@ public class DataFunctions implements Operations {
 
             iteradorCont++;
 
-            continueOption = UserInteractions.numRequest("Quieres seguir\n1º Si \n2º No", 1, 2);
+            continueOption = UserInteractions.numRequest("Quieres añadir mas a la busqueda?\n1º Si \n2º No", 1, 2);
 
         } while (continueOption != 2);
 
@@ -496,6 +504,34 @@ public class DataFunctions implements Operations {
             printAllRemaster(iterator.get(1), iterator.get(0).get(0));
         }
 
+    }
+
+    public static void printAllCall() {
+        int opcion = 0;
+        ArrayList<String> list = new ArrayList<String>();
+
+        do {
+            opcion = UserInteractions.numRequest("" +
+                    "\n\t --- Que accion quieres realizar ---\n\n" +
+                    "\t1º Consultar toda la lista\n" +
+                    "\t2º Consultar una especifica\n" +
+                    "\t3º Salir", 1, 3);
+
+            if (opcion == 1) {
+                list.add("*");
+                for (String[][][] category : Constants.Omniclase) {
+                    for (String[][] subcategory : category) {
+                        System.out.println(Constants.separtator + "\t\t\t\t" + subcategory[0][0] + Constants.separtator);
+                        DataFunctions.printAllRemaster(list, subcategory[1][0]);
+                    }
+                }
+            }
+
+            if (opcion == 2) {
+                DataFunctions.printSpecifObject();
+            }
+
+        } while (opcion != 3);
     }
 
     public static ArrayList<String> gatherPrefixList() {

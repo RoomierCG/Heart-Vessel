@@ -69,7 +69,6 @@ public class QueryDB {
 
     //En arreglo
     public static void rellenarTest() {
-
         ArrayList<String> log = new ArrayList<>();
         log.add("16:43 | Ingresado");
         log.add("16:50 | Examinacion");
@@ -83,8 +82,8 @@ public class QueryDB {
         Patient pac1 = new Patient("PEP#1", "Edgar", "Aiurense", "Sin Pilones", true, "ARH#1", log);
         Patient pac2 = new Patient("PEP#2", "Eldon", "Calletano", "Buscando Hilos");
         log.clear();
-        log.add("12:34 | Se murio");
-        log.add("12:35 | F en el chat");
+        log.add("12:34 | Ingresado al hospital");
+            log.add("12:35 | Le atendieron los medicos.");
         Patient pac3 = new Patient("PEP#3", "Lkoraz", "Ondeya", "Muerto", false, "ARH#2", log);
 
 
@@ -133,7 +132,7 @@ public class QueryDB {
         };
 
         FoodMenu peshcao = new FoodMenu("PRC#1", "Menu Pescado", "ARR#1", "Congelado", "10/10/2010", 50, false, ingreds, "20/10/2020", "PVP#01");
-        Medicine morf = new Medicine("PRC#1", "Morfina", "ARR#1", Constants.tipoSustancia.get(1), "10/10/2010", 5, false, null, "10/5/2023", Constants.viasDeAdministracion.get(2));
+        Medicine morf = new Medicine("PRD#1", "Morfina", "ARR#1", Constants.tipoSustancia.get(1), "10/10/2010", 5, false, new ArrayList<>(), "10/5/2023", Constants.viasDeAdministracion.get(2));
         CleaningProducts Fairy = new CleaningProducts("PRL#1", "Jabon Multi Usos", "ARR#1", "Recibido", "10/10/2010", 30, false, "Fairy");
         CleaningProducts Lejia = new CleaningProducts("PRL#2", "Lejia", "ARR#1", "Recibido", "10/10/2010", 40, true, "Lagarto");
 
@@ -275,7 +274,7 @@ public class QueryDB {
                 Document newTranport = new Document()
                         .append("idTransporte", transport.getId())
                         .append("Estado", ((Transport) transport).getStatus())
-                        .append("Nombre", ((Transport) transport).getName());
+                        .append("Nombre", (transport).getName());
 
                 if (transport instanceof MovementAid) {
                     newTranport.append("idArea", ((MovementAid) transport).getIdArea())

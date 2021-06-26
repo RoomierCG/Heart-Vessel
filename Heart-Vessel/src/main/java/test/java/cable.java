@@ -6,6 +6,7 @@ import database_management.mongo.QueryDB;
 import objects.Generic;
 import service.background_sim.SimulatorThread;
 import service.data_manager.DataFunctions;
+import service.utility.ID;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 
@@ -18,8 +19,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class cable {
     public static void main(String[] args) throws InterruptedException {
-
-        System.out.println(UserInteractions.idRequest(false).substring(0,3));
+        QueryDB.rellenarTest();
+        AuxDB.initMaxID();
+        System.out.println((DataFunctions.getData(new ArrayList<String>(){{add("id");}}, "PEP")).get(0).size());
+        for(ID a : AuxDB.MaxIDs){
+            System.out.println(a.getType()+"|"+a.getNumVal());
+        }
 
 
         /*

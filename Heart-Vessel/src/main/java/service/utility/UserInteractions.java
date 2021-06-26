@@ -28,6 +28,7 @@ public class UserInteractions {
         System.out.println(prompt);
         try {
             number = sc.nextInt();
+            sc.nextLine();
         } catch (Exception e) {//Comprobamos que el format sea numerico, es decir solo contiene digitos
             System.out.println("formato incorrecto");
             sc.nextLine();
@@ -71,9 +72,7 @@ public class UserInteractions {
 
     public static String strRequest(String prompt) {//Pedimos un string cualquiera.
         System.out.println(prompt);
-        sc.nextLine();
-        String result = sc.nextLine();
-        return result;
+        return sc.nextLine();
     }
 
     public static String strRequest(String prompt, int size) {//Pedimos un string de longitud exacta
@@ -88,6 +87,7 @@ public class UserInteractions {
     }
 
     public static boolean boolRequest(String prompt) {//Pedida que devuelve un Si o No, usando la pedida de numero anterior
+        prompt = prompt+"\n1. Si\n2. No";
         return numRequest(prompt, 1, 2) == 1;
     }
 

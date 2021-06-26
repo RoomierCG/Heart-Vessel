@@ -13,9 +13,15 @@ public class Constants {
     public static final int personellLimitAMB = 10;
     public static final int equipmentLimitAMB = 50;
 
+    public static final int SimSpeedMS = 5000;//Velocidad del simulador en milisegundos (cada x tiempo actividad nueva)
+
     public static final ArrayList<String> estadosPaciente = new ArrayList<String>() {{
-        add("Estado1");
-        add("Estado2");
+        add("Sin Diagnosticar");
+        add("Urgencia");
+        add("Diagnosticado - Recuperandose");
+        add("Diagnosticado - Enfermo");
+        add("Diagnosticado - Terminal");
+
     }};
     public static final ArrayList<String> estadosVehiculos = new ArrayList<String>() {{
         add("Listo Para Salir");

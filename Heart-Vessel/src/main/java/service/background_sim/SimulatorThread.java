@@ -59,10 +59,16 @@ public class SimulatorThread extends Thread implements Runnable {
 
     public void run() {
         try {
+            int last=0;
+            int newNum;
             do {
-                Thread.sleep(5000);
+                Thread.sleep(Constants.SimSpeedMS);
                 ArrayList<ArrayList<String>> temporal;
-                switch (randomNum(1, 8)) {
+                do{
+                    newNum = randomNum(1,8);
+                }while (newNum==last);
+                last = newNum;
+                switch (last) {
                     case 1://Genera Nuevo Paciente
                         Patient newPat = new Patient();
                         newPat.genMe(OpsID.generateID("PEP"));
@@ -107,7 +113,7 @@ public class SimulatorThread extends Thread implements Runnable {
                                                 log.add(String.format(Constants.RegistryFormat, "Aviso de escasez imminente de " + prod.getName() + " | Actualmente: " + prod.getQuantity()) + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                             }
                                             if (prod.getQuantity() < 0) {
-                                                hab.getEquipment().remove(OpsID.decodeID(prod.getId()));
+                                                hab.getEquipment().remove((prod.getId()));
                                                 log.add(String.format(Constants.RegistryFormat, "El producto " + prod.getName() + " se ha agotado en la habitacion " + hab.getId()) + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                             }
                                         }

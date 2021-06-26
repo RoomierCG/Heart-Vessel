@@ -8,7 +8,9 @@ import objects.people.person.Employee;
 import objects.product.Product;
 import objects.provider.Provider;
 import objects.transportsystem.Transport;
+import service.data_manager.DataFunctions;
 import service.utility.ID;
+import service.utility.OpsID;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -18,6 +20,13 @@ public class AuxDB {
     public static ArrayList<Generic> Complete = new ArrayList<>();
 
     public static ArrayList<ID> EmptyIDs = new ArrayList<>();
+
+    public static void initMaxID(){
+        for(ID id : MaxIDs){
+            ArrayList<ArrayList<String>> node = DataFunctions.getData(new ArrayList<String>(){{add("*");}},id.getType());
+            id.setNumVal(node.get(0).size());
+        }
+    }
 
     public static ArrayList<ID> MaxIDs = new ArrayList<ID>(){
         {

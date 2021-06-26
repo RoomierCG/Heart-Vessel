@@ -53,13 +53,13 @@ public class OpsID {
         if(prefix.length()!=3){
             prefix = prefix.substring(0,3);
         }
-        //Solo en el caso de que queramos reciclar los IDs
+        /*Solo en el caso de que queramos reciclar los IDs
         for (ID a : EmptyIDs) {
             if (a.getType().equals(prefix)) {
                 EmptyIDs.remove(a);
                 return prefix+"#" + a.getNumVal();
             }
-        }
+        }*/
         //Tenemos guardado el id mas alto y lo incrementamos cada vez que creamos uno nuevo (asumiendo que no se recicla)
         for (ID max : MaxIDs) {
             if (max.getType().equals(prefix)) {

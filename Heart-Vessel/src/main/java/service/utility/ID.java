@@ -27,6 +27,10 @@ public class  ID {
         return visualType;
     }
 
+    public void setNumVal(int numVal) {
+        this.numVal = numVal;
+    }
+
     public void increment(){
         this.numVal++;
     }

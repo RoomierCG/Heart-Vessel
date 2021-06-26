@@ -19,11 +19,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Interface {
 
-    public static void main(String[] args) throws InterruptedException {
-        int opcion = 0;
+    public static void main(String[] args) {
+        int opcion;
         String[] textInicio = {"Inicializando", ".", ".", ".", ".", ".", ".", "."};
 
         QueryDB.rellenarTest(); //Cambiar en un futuro
+        AuxDB.initMaxID();
         SimulatorThread sim = new SimulatorThread();
         sim.start();
 
@@ -47,15 +48,17 @@ public class Interface {
                             "\t\t2º Borrar\n" +
                             "\t\t3º Modificar\n" +
                             "\t\t4º Interacciones con la BD\n" +
-                            "\t\t5º Mostrar estado del hospital\n" +
+                            "\t\t5º Mostrar informacion\n" +
                             "\t\t6º Mostrar actividad del hospital\n" +
                             "\t\t7º Salir\n\n",
-                    1, 6);
+                    1, 7);
 
             switch (opcion) {
                 case 1:
                     System.out.println("||||||||||||||||||Que quieres crear?||||||||||||||||||\n");
-                    Generic g = DataFunctions.determineGeneration(UserInteractions.idRequest(false));
+                    String prefix = UserInteractions.idRequest(false);
+                    Generic g = DataFunctions.determineGeneration(prefix);
+                    g.setId(OpsID.generateID(prefix));
                     g.modifyMe(new ArrayList<String>(){{add("*");}});
                     AuxDB.Complete.add(g);
                     break;
@@ -73,7 +76,7 @@ public class Interface {
                     break;
                 case 5:
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                    printAllCall();
+                    DataFunctions.printAllCall();
                     break;
                 case 6:
                     sim.showActivity();
@@ -87,7 +90,7 @@ public class Interface {
     }
 
     private static void MongoDB() {
-        int opcion = 0;
+        int opcion;
 
         do {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -109,31 +112,5 @@ public class Interface {
         //TODO que mongodb funcione de verdad
     }
 
-    private static void printAllCall() {
-        int opcion = 0;
-        ArrayList<String> list = new ArrayList<String>();
 
-        do {
-            opcion = UserInteractions.numRequest("" +
-                    "\n\t --- Que accion quieres realizar ---\n\n" +
-                    "\t1º Consultar toda la lista\n" +
-                    "\t2º Consultar una especifica\n" +
-                    "\t3º Salir", 1, 3);
-
-            if (opcion == 1) {
-                list.add("*");
-                for (String[][][] category : Constants.Omniclase) {
-                    for (String[][] subcategory : category) {
-                        System.out.println(Constants.separtator + "\t\t\t\t" + subcategory[0][0] + Constants.separtator);
-                        DataFunctions.printAllRemaster(list, subcategory[1][0]);
-                    }
-                }
-            }
-
-            if (opcion == 2) {
-                DataFunctions.printSpecifObject();
-            }
-
-        } while (opcion != 3);
-    }
 }
