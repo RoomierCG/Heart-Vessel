@@ -43,11 +43,11 @@ public abstract class Substance extends Product {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("Toxico")) {
-            this.setToxic(UserInteractions.boolRequest("Introduzca 1 si es toxico o 2 si no"));
+        if (atribMod.contains("Toxico")|| atribMod.contains("*")) {
+            this.setToxic(UserInteractions.boolRequest("El producto es toxico?"));
         }
-        if (atribMod.contains("Tipo")) {
-            this.setStatus(UserInteractions.pickFrom(Constants.tipoSustancia, "Seleccione una categirio de riesgo nuevo"));
+        if (atribMod.contains("Tipo")|| atribMod.contains("*")) {
+            this.setStatus(UserInteractions.pickFrom(Constants.tipoSustancia, "Seleccione una categiria de riesgo"));
         }
 
     }

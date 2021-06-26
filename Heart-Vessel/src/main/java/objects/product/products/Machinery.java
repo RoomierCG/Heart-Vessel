@@ -46,11 +46,11 @@ public class Machinery extends Product {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("ConsumoElectrico")) {
-            this.setElectricityConsumption(UserInteractions.numRequest("Introduzca el nuevo nivel de consumo"));
+        if (atribMod.contains("ConsumoElectrico")|| atribMod.contains("*")) {
+            this.setElectricityConsumption(UserInteractions.numRequest("Introduzca el nivel de consumo"));
         }
-        if (atribMod.contains("Modelo")) {
-            this.setStatus(UserInteractions.strRequest("Introduzca el nuevo modelo"));
+        if (atribMod.contains("Modelo")|| atribMod.contains("*")) {
+            this.setStatus(UserInteractions.strRequest("Introduzca el modelo"));
         }
 
     }

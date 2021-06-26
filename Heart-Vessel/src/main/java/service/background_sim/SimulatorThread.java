@@ -11,6 +11,7 @@ import objects.product.products.substance.Substance;
 import objects.provider.Provider;
 import objects.transportsystem.transportsystems.MovementAid;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
+import org.apache.catalina.User;
 import service.data_manager.DataFunctions;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
@@ -47,24 +48,32 @@ public class SimulatorThread extends Thread implements Runnable {
         return num.nextInt((max - min)) + min;
     }
 
+    public void showActivity()  {
+        int cap = log.size()-1;
+        int quant = UserInteractions.numRequest("Introduzca cuantas entradas de actividad desea ver (nuevas iran primero)",1,cap+1);
+        for(int i = 0;i<quant;i++){
+            System.out.println(log.get(cap-i));
+        }
+    }
+
 
     public void run() {
         try {
             do {
-                Thread.sleep(500);
+                Thread.sleep(5000);
                 ArrayList<ArrayList<String>> temporal;
                 switch (randomNum(1, 8)) {
                     case 1://Genera Nuevo Paciente
                         Patient newPat = new Patient();
                         newPat.genMe(OpsID.generateID("PEP"));
                         AuxDB.Complete.add(newPat);
-                        log.add(String.format(Constants.RegistryFormat, "Paciente : " + newPat.getId() + " ingresado.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                        log.add(String.format(Constants.RegistryFormat, "Paciente  : " + newPat.getId() + " ingresado.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                         break;
                     case 2://Genera Nuevo Empleado
                         Employee newEmple = new Employee();
                         newEmple.genMe(OpsID.generateID("PEE"));
                         AuxDB.Complete.add(newEmple);
-                        log.add(String.format(Constants.RegistryFormat, "Empleado : " + newEmple.getId() + " contratado.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                        log.add(String.format(Constants.RegistryFormat, "Empleado  : " + newEmple.getId() + " contratado.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                         break;
                     case 3://Cambios de Paciente/Empleado
                         if (randomNum(0, 1) == 0) {
@@ -75,10 +84,10 @@ public class SimulatorThread extends Thread implements Runnable {
                             int dif = emple.getSalary() * ((randomNum(1, 20)) / 10);
                             if (randomNum(0, 1) == 0) {
                                 emple.setSalary(emple.getSalary() + dif);
-                                log.add(String.format(Constants.RegistryFormat, "Empleado : " + emple.getId() + " incremento de salario en " + dif + " euros.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                log.add(String.format(Constants.RegistryFormat, "Empleado  : " + emple.getId() + " incremento de salario en " + dif + " euros.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                             } else {
                                 emple.setSalary(emple.getSalary() + dif);
-                                log.add(String.format(Constants.RegistryFormat, "Empleado : " + emple.getId() + " decremento de salario en " + dif + " euros.   " ) + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                log.add(String.format(Constants.RegistryFormat, "Empleado  : " + emple.getId() + " decremento de salario en " + dif + " euros.   " ) + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                             }
                         } else {
                             temporal = DataFunctions.getData(new ArrayList<String>() {{
@@ -89,7 +98,7 @@ public class SimulatorThread extends Thread implements Runnable {
 
                                 if (paci.getRoomId().startsWith("ARH")) {
                                     HabitableRoom hab = (HabitableRoom) OpsID.decodeID(paci.getRoomId());
-                                    log.add(String.format(Constants.RegistryFormat, "Paciente : " + paci.getId() + " ha sido atendida por los medicos.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                    log.add(String.format(Constants.RegistryFormat, "Paciente  : " + paci.getId() + " ha sido atendida por los medicos.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                     if (randomNum(0, 2) == 0) {
                                         if (!hab.getEquipment().isEmpty()) {
                                             Product prod = (Product) OpsID.decodeID(hab.getEquipment().get(randomNum(0, temporal.get(0).size())));
@@ -116,10 +125,10 @@ public class SimulatorThread extends Thread implements Runnable {
                                         }
                                     }
                                     if (nuevaHabit == null) {
-                                        log.add(String.format(Constants.RegistryFormat, "Paciente : " + paci.getId() + " ha sido transportada a otro hospital for falta de habitaciones.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                        log.add(String.format(Constants.RegistryFormat, "Paciente  :  " + paci.getId() + " ha sido transportada a otro hospital for falta de habitaciones.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                         AuxDB.Complete.remove(paci);
                                     } else {
-                                        log.add(String.format(Constants.RegistryFormat, "Paciente : " + paci.getId() + " ha sido trasladada a la habitacion " + nuevaHabit.getId()  ) + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                        log.add(String.format(Constants.RegistryFormat, "Paciente  :  " + paci.getId() + " ha sido trasladada a la habitacion " + nuevaHabit.getId()  ) + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                         paci.setRoomId(nuevaHabit.getId());
                                     }
                                 }
@@ -133,7 +142,7 @@ public class SimulatorThread extends Thread implements Runnable {
                             }}, "PEE");
                             if(temporal.size()>2) {
                                 String elim = temporal.get(0).get(randomNum(0, temporal.get(0).size()));
-                                log.add(String.format(Constants.RegistryFormat, "Empleado : " + elim + " despedido.") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                log.add(String.format(Constants.RegistryFormat, "Empleado  : " + elim + " despedido.") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                 AuxDB.Complete.remove(OpsID.decodeID(elim));
                             }
                         } else {
@@ -143,10 +152,10 @@ public class SimulatorThread extends Thread implements Runnable {
                             if(temporal.size()>2) {
                                 String elim = temporal.get(0).get(randomNum(0, temporal.get(0).size()));
                                 if (randomNum(0, 1) == 0) {
-                                    log.add(String.format(Constants.RegistryFormat, "Paciente : " + elim + " ha fallecido.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                    log.add(String.format(Constants.RegistryFormat, "Paciente  :  " + elim + " ha fallecido.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                     AuxDB.Complete.remove(OpsID.decodeID(elim));
                                 } else {
-                                    log.add(String.format(Constants.RegistryFormat, "Paciente : " + elim + " ha sido dado de alta.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                    log.add(String.format(Constants.RegistryFormat, "Paciente  :  " + elim + " ha sido dado de alta.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                     AuxDB.Complete.remove(OpsID.decodeID(elim));
                                 }
                             }
@@ -172,7 +181,7 @@ public class SimulatorThread extends Thread implements Runnable {
                                     pacienteAmbu.getRegistry().clear();
                                     pacienteAmbu.getRegistry().add(String.valueOf(java.time.LocalTime.now()).substring(0, 8) + "   Ha llegado en malas condiciones de Ambulancia");
                                     AuxDB.Complete.add(pacienteAmbu);
-                                    log.add(String.format(Constants.RegistryFormat, "Paciente : " + pacienteAmbu.getId() + " llega en Ambulancia.") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                    log.add(String.format(Constants.RegistryFormat, "Paciente  :  " + pacienteAmbu.getId() + " llega en Ambulancia.") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                     log.add(String.format(Constants.RegistryFormat,"Ambulancia : " + ambulancia.getId() + " ha regresado al hospital.")+String.valueOf(java.time.LocalTime.now()).substring(0, 8));
                                     if (ambulancia.getGasTank() < 5) {
                                         ambulancia.setGasTank(50);
@@ -238,7 +247,7 @@ public class SimulatorThread extends Thread implements Runnable {
                                 ingresadoPandemia.setRoomId(quarent.getId());
                                 ingresadoPandemia.getRegistry().add(String.valueOf(java.time.LocalTime.now()).substring(0, 8) + " | Trasladado al ala en cuarentena.");
                                 AuxDB.Complete.add(ingresadoPandemia);
-                                log.add(String.format(Constants.RegistryFormat, "Paciente : " + ingresadoPandemia.getId() + " tiene el virus pandemico.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
+                                log.add(String.format(Constants.RegistryFormat, "Paciente  :  " + ingresadoPandemia.getId() + " tiene el virus pandemico.   ") + String.valueOf(java.time.LocalTime.now()).substring(0, 8));
 
                             }
                         }

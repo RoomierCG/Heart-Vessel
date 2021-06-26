@@ -36,8 +36,8 @@ public abstract class Transport extends Generic {
     }
 
     public void modifyMe(ArrayList<String> atribMod) {
-        if (atribMod.contains("Estado")) {
-            this.setStatus(UserInteractions.pickFrom(Constants.estadosVehiculos, "Seleccione un estado de vehiculo nuevo"));
+        if (atribMod.contains("Estado")|| atribMod.contains("*")) {
+            this.setStatus(UserInteractions.pickFrom(Constants.estadosVehiculos, "Seleccione un estado de vehiculo"));
         }
     }
 

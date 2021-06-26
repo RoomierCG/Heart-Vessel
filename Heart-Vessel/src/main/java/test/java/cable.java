@@ -3,7 +3,10 @@ package test.java;
 
 import database_management.AuxDB;
 import database_management.mongo.QueryDB;
+import objects.Generic;
 import service.background_sim.SimulatorThread;
+import service.data_manager.DataFunctions;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
 
 import java.util.ArrayList;
@@ -15,20 +18,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class cable {
     public static void main(String[] args) throws InterruptedException {
-        QueryDB.rellenarTest();
-        Thread t = new SimulatorThread();
-        t.start();
-        do{
-            int g = UserInteractions.numRequest("asd");
-            System.out.println("oh yea");
-            t.sleep(500);
-            ArrayList<String> logPrint = new ArrayList<>(SimulatorThread.log);
-            System.out.println("yes");
-            for(String r : logPrint){
-                System.out.println(r);
-            }
-        }while (t.isAlive());
-        System.out.println("End");
+
+        System.out.println(UserInteractions.idRequest(false).substring(0,3));
 
 
         /*

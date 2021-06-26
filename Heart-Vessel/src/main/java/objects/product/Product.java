@@ -50,17 +50,19 @@ public abstract class Product extends Generic {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("idArea")) {
-            this.setId(UserInteractions.idRequest("AR", true));
+        if (atribMod.contains("idArea")|| atribMod.contains("*")) {
+            System.out.println("Introduzca el area donde se almacenan existencias del producto");
+            this.setId(UserInteractions.idRequest("ARR", true));
         }
-        if (atribMod.contains("Cantidad")) {
+        if (atribMod.contains("Cantidad")|| atribMod.contains("*")) {
             this.setQuantity(UserInteractions.numRequest("Introduzca la nueva cantidad del producto"));
         }
-        if (atribMod.contains("Estado")) {
+        if (atribMod.contains("Estado")|| atribMod.contains("*")) {
             this.setStatus(UserInteractions.pickFrom(Constants.estadosProducto, "Seleccione una categirio de riesgo nuevo"));
         }
-        if (atribMod.contains("FechaDeCompra")) {
-            this.setBuyDate(UserInteractions.dateRequest());
+        if (atribMod.contains("FechaDeCompra")|| atribMod.contains("*")) {
+            System.out.println("Introduzca la fecha de compra");
+            this.setBuyDate(UserInteractions.dateRequest(0));
         }
     }
 

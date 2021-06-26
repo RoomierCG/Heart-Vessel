@@ -4,7 +4,9 @@ import objects.people.Person;
 import objects.product.Product;
 import objects.transportsystem.transportsystems.vehicle.Vehicle;
 import org.apache.catalina.User;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
+import visualInterfaces.Constants;
 
 import java.util.ArrayList;
 
@@ -46,11 +48,17 @@ public class Ambulance extends Vehicle {
     }
 
     public void modifyMe(ArrayList<String> atribMod) {
-        if (atribMod.contains("Equipamiento")) {
-            this.setEquipment(UserInteractions.formIDList(this.equipment, "PR"));
+        if (atribMod.contains("Equipamiento")|| atribMod.contains("*")) {
+            System.out.printf("Esta es la lista de equipamiento de la ambulancia");
+            this.setEquipment(UserInteractions.formIDList(this.equipment, "PR",Constants.equipmentLimitAMB));
+            for(String p : this.getEquipment()){
+                Product prod = (Product) OpsID.decodeID(p);
+                prod.setAreaId(this.getId());
+            }
         }
-        if (atribMod.contains("Personal")) {
-            this.setPersonal(UserInteractions.formIDList(this.personal, "PEE"));
+        if (atribMod.contains("Personal")|| atribMod.contains("*")) {
+            System.out.printf("Esta es la lista de personal de la ambulancia");
+            this.setPersonal(UserInteractions.formIDList(this.personal, "PEE", Constants.personellLimitAMB));
         }
     }
 

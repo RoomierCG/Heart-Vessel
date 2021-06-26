@@ -74,14 +74,18 @@ public class Patient extends Person {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("Visitas")) {
-            this.setAllowVisitors(!this.isAllowVisitors());
+        if (atribMod.contains("Visitas")|| atribMod.contains("*")) {
+            this.setAllowVisitors(UserInteractions.boolRequest("Se le permiten visitas?"));
         }
-        if (atribMod.contains("Estado")) {
-            this.setStatus(UserInteractions.pickFrom(Constants.estadosPaciente, "Seleccione un estado nuevo"));
+        if (atribMod.contains("Estado")|| atribMod.contains("*")) {
+            this.setStatus(UserInteractions.pickFrom(Constants.estadosPaciente, "Seleccione un estado"));
         }
-        if (atribMod.contains("idHabitacion")) {
-            this.setStatus(UserInteractions.idRequest("ARH", true));
+        if (atribMod.contains("idHabitacion")|| atribMod.contains("*")) {
+            if(UserInteractions.boolRequest("Tiene una habitacion designada")) {
+                this.setRoomId(UserInteractions.idRequest("ARH", true));
+            }else{
+                this.setRoomId(null);
+            }
         }
     }
 

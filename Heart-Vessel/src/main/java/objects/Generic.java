@@ -47,8 +47,8 @@ public abstract class Generic {
     }
 
     public void modifyMe(ArrayList<String> atribMod) {
-        if (atribMod.contains("Nombre")) {
-            this.setName(UserInteractions.strRequest("Introduzca el nuevo nombre"));
+        if (atribMod.contains("Nombre") || atribMod.contains("*")) {
+            this.setName(UserInteractions.strRequest("Introduzca el nombre a usar"));
         }
 
     }

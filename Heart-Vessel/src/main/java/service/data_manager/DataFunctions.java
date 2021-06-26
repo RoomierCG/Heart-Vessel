@@ -3,6 +3,22 @@ package service.data_manager;
 import database_management.AuxDB;
 import database_management.mongo.QueryDB;
 import objects.Generic;
+import objects.area.Area;
+import objects.area.areas.Garaje;
+import objects.area.areas.HabitableRoom;
+import objects.people.person.Employee;
+import objects.people.person.Patient;
+import objects.product.Product;
+import objects.product.products.CleaningEquipment;
+import objects.product.products.Machinery;
+import objects.product.products.SanitationMaterials;
+import objects.product.products.substance.substances.CleaningProducts;
+import objects.product.products.substance.substances.consumable.consumables.FoodMenu;
+import objects.product.products.substance.substances.consumable.consumables.Medicine;
+import objects.provider.Provider;
+import objects.transportsystem.transportsystems.MovementAid;
+import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
+import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
@@ -35,6 +51,9 @@ public class DataFunctions implements Operations {
 
         // pediremos que id queremos modificar y despues cogeremos el objecto en si para su uso en modificacion de atrib
         String idModifyObject = UserInteractions.idRequest(true);
+        if (idModifyObject.endsWith("-1")) {
+            return false;
+        }
         Generic modifyObject = OpsID.decodeID(idModifyObject);
 
 
@@ -79,9 +98,9 @@ public class DataFunctions implements Operations {
         Collections.sort(optionsSelected);
         ArrayList<String> atribModme = new ArrayList<>();
 
-        for (Integer opcionS:optionsSelected) {
+        for (Integer opcionS : optionsSelected) {
             for (int i = 0; i < options.size(); i++) {
-                if (i == opcionS-1){
+                if (i == opcionS - 1) {
                     atribModme.add(options.get(i));
                 }
             }
@@ -353,6 +372,47 @@ public class DataFunctions implements Operations {
             }
         }
         return "Invalido";
+    }
+
+    public static Generic determineGeneration(String prefix) {
+        ArrayList<String> all = new ArrayList<String>() {{
+            add("*");
+        }};
+        prefix = prefix.substring(0,3);
+        switch (prefix) {
+            case "ARR":
+                return new Area();
+            case "ARG":
+                return new Garaje();
+            case "ARH":
+                return new HabitableRoom();
+            case "PEP":
+                return new Patient();
+            case "PEE":
+                return new Employee();
+            case "PVP":
+                return new Provider();
+            case "TRM":
+                return new MovementAid();
+            case "TRA":
+                return new Ambulance();
+            case "TRC":
+                return new CompanyCar();
+            case "PRS":
+                return new SanitationMaterials();
+            case "PRM":
+                return new Machinery();
+            case "PRE":
+                return new CleaningEquipment();
+            case "PRL":
+                return new CleaningProducts();
+            case "PRD":
+                return new Medicine();
+            case "PRC":
+                return new FoodMenu();
+            default:
+                return null;
+        }
     }
 
     public static void printSpecifObject() {

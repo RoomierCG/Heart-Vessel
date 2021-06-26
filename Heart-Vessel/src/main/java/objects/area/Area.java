@@ -59,20 +59,20 @@ public class Area extends Generic {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if(atribMod.contains("Estado")){
-            this.setStatus(UserInteractions.strRequest("Introduzca el estado"));
+        if(atribMod.contains("Estado")|| atribMod.contains("*")){
+            this.setStatus(UserInteractions.pickFrom(Constants.estadosArea,"Seleccione el estado del Area"));
         }
-        if(atribMod.contains("Planta")){
+        if(atribMod.contains("Planta")|| atribMod.contains("*")){
             this.setFloor(Integer.parseInt(UserInteractions.strRequest("Introduzca la planta")));
         }
-        if(atribMod.contains("Riesgo")){
-            this.setRisk(UserInteractions.pickFrom(Constants.riesgos,"Seleccione una categirio de riesgo nuevo"));
+        if(atribMod.contains("Riesgo")|| atribMod.contains("*")){
+            this.setRisk(UserInteractions.pickFrom(Constants.riesgos,"Seleccione una categoria de riesgo"));
         }
-        if(atribMod.contains("Staff")){
-            this.setStaff(UserInteractions.formIDList(this.staff,"PEE"));
+        if(atribMod.contains("Staff")|| atribMod.contains("*")){
+            this.setStaff(UserInteractions.formIDList(this.staff,"PEE",0));
         }
-        if(atribMod.contains("Equipamiento")){
-            this.setStaff(UserInteractions.formIDList(this.equipment,"PR"));
+        if(atribMod.contains("Equipamiento")|| atribMod.contains("*")){
+            this.setStaff(UserInteractions.formIDList(this.equipment,"PR",0));
         }
 
     }

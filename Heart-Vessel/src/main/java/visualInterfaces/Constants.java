@@ -8,9 +8,10 @@ public class Constants {
 
 
 
-    public static final int personellLimit = 10;
+    public static final int garageVehicleLimit = 20;
 
-    public static final int equipmentLimit = 50;
+    public static final int personellLimitAMB = 10;
+    public static final int equipmentLimitAMB = 50;
 
     public static final ArrayList<String> estadosPaciente = new ArrayList<String>() {{
         add("Estado1");
@@ -21,6 +22,16 @@ public class Constants {
         add("Averiado");
         add("En Transito");
     }};
+    public static final ArrayList<String> estadosEmpleado = new ArrayList<String>() {{
+        add("Trabajando");
+        add("En Espera");
+        add("En Descanso");
+    }};
+    public static final ArrayList<String> estadosArea = new ArrayList<String>() {{
+        add("Limpiando");
+        add("Ocupado");
+        add("Disponible");
+    }};
     public static final ArrayList<String> departamentos = new ArrayList<String>() {{
         add("Medico");
         add("Enfermero");
@@ -30,6 +41,12 @@ public class Constants {
         add("Auxiliar");
         add("Biomedico");
         add("Fisioterapeuta");
+    }};
+    public static final ArrayList<String> jornada = new ArrayList<String>() {{
+        add("Ordinaria - Diurna");
+        add("Ordinaria - Nocturna");
+        add("Complementaria");
+        add("Especial");
     }};
     public static final ArrayList<String> puestosTrabajo = new ArrayList<String>() {{
         add("Pedagologia");

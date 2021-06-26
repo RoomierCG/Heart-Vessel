@@ -1,6 +1,8 @@
 package objects.area.areas;
 
 import objects.area.Area;
+import objects.people.person.Patient;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
@@ -35,8 +37,14 @@ public class HabitableRoom extends Area {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if(atribMod.contains("idPaciente")){
-            this.setIdPatient(UserInteractions.strRequest("Introduzca el nuevo paciente"));
+        if(atribMod.contains("idPaciente")||atribMod.contains("*")){
+            if(UserInteractions.boolRequest("Tiene un paciente designado")) {
+                this.setIdPatient(UserInteractions.strRequest("Introduzca el paciente de la habitacion"));
+                Patient t = (Patient) OpsID.decodeID(this.idPatient);
+                t.setRoomId(this.getId());
+            }else{
+                this.setIdPatient(null);
+            }
         }
 
 

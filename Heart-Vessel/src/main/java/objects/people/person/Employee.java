@@ -61,17 +61,20 @@ public class Employee extends Person {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("Departamento")) {
+        if (atribMod.contains("Departamento")|| atribMod.contains("*")) {
             this.setDepartment(UserInteractions.pickFrom(Constants.departamentos, "Seleccione un departamento nuevo"));
         }
-        if (atribMod.contains("Jornada")) {
-            this.setShift(UserInteractions.strRequest("Introduzca la jornada del empleado"));
+        if (atribMod.contains("Jornada")|| atribMod.contains("*")) {
+            this.setShift(UserInteractions.pickFrom(Constants.jornada, "Seleccione la jornada del empleado"));
         }
-        if (atribMod.contains("Salario")) {
+        if (atribMod.contains("Salario")|| atribMod.contains("*")) {
             this.setSalary(UserInteractions.numRequest("Introduzca el salario del empleado"));
         }
-        if (atribMod.contains("Puesto")) {
+        if (atribMod.contains("Puesto")|| atribMod.contains("*")) {
             this.setJob(UserInteractions.pickFrom(Constants.puestosTrabajo, "Seleccione el puesto del empleado"));
+        }
+        if (atribMod.contains("Estado")|| atribMod.contains("*")) {
+            this.setStatus(UserInteractions.pickFrom(Constants.estadosEmpleado, "Seleccione el estado del empleado"));
         }
 
     }

@@ -50,12 +50,10 @@ public abstract class Person extends Generic {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if(atribMod.contains("Apellido")){
-            this.setLastName(UserInteractions.strRequest("Introduzca el apellido nuevo"));
+        if(atribMod.contains("Apellido")|| atribMod.contains("*")){
+            this.setLastName(UserInteractions.strRequest("Introduzca el apellido"));
         }
-        if(atribMod.contains("Estado")){
-            this.setStatus(UserInteractions.pickFrom(Constants.estadosPaciente,null));
-        }
+
 
 
     }

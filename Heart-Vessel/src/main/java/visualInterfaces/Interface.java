@@ -1,9 +1,13 @@
 package visualInterfaces;
 
+
 import database_management.AuxDB;
 import database_management.mongo.DownloadBD;
 import database_management.mongo.QueryDB;
+import objects.Generic;
+import service.background_sim.SimulatorThread;
 import service.data_manager.DataFunctions;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
 
 
@@ -15,11 +19,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Interface {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         int opcion = 0;
         String[] textInicio = {"Inicializando", ".", ".", ".", ".", ".", ".", "."};
 
         QueryDB.rellenarTest(); //Cambiar en un futuro
+        SimulatorThread sim = new SimulatorThread();
+        sim.start();
 
         for (String s : textInicio) {
             try {
@@ -42,12 +48,16 @@ public class Interface {
                             "\t\t3º Modificar\n" +
                             "\t\t4º Interacciones con la BD\n" +
                             "\t\t5º Mostrar estado del hospital\n" +
-                            "\t\t6º Salir\n\n",
+                            "\t\t6º Mostrar actividad del hospital\n" +
+                            "\t\t7º Salir\n\n",
                     1, 6);
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Work in progress");
+                    System.out.println("||||||||||||||||||Que quieres crear?||||||||||||||||||\n");
+                    Generic g = DataFunctions.determineGeneration(UserInteractions.idRequest(false));
+                    g.modifyMe(new ArrayList<String>(){{add("*");}});
+                    AuxDB.Complete.add(g);
                     break;
 
                 case 2:
@@ -65,10 +75,14 @@ public class Interface {
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     printAllCall();
                     break;
+                case 6:
+                    sim.showActivity();
+                    UserInteractions.strRequest("Pulse enter para continuar");
+                    break;
 
             }
 
-        } while (opcion != 6);
+        } while (opcion != 7);
 
     }
 
@@ -83,10 +97,10 @@ public class Interface {
                     "\t2º Guardar\n" +
                     "\t3º Salir");
 
-            if (opcion==1){
+            if (opcion == 1) {
                 DownloadBD.descargar();
             }
-            if (opcion==2){
+            if (opcion == 2) {
                 QueryDB.guardar();
             }
 
@@ -95,7 +109,7 @@ public class Interface {
         //TODO que mongodb funcione de verdad
     }
 
-    private static void printAllCall(){
+    private static void printAllCall() {
         int opcion = 0;
         ArrayList<String> list = new ArrayList<String>();
 
@@ -104,22 +118,22 @@ public class Interface {
                     "\n\t --- Que accion quieres realizar ---\n\n" +
                     "\t1º Consultar toda la lista\n" +
                     "\t2º Consultar una especifica\n" +
-                    "\t3º Salir", 1,3);
+                    "\t3º Salir", 1, 3);
 
             if (opcion == 1) {
                 list.add("*");
                 for (String[][][] category : Constants.Omniclase) {
                     for (String[][] subcategory : category) {
-                        System.out.println(Constants.separtator+"\t\t\t\t"+subcategory[0][0]+Constants.separtator);
+                        System.out.println(Constants.separtator + "\t\t\t\t" + subcategory[0][0] + Constants.separtator);
                         DataFunctions.printAllRemaster(list, subcategory[1][0]);
                     }
                 }
             }
 
-            if (opcion == 2){
+            if (opcion == 2) {
                 DataFunctions.printSpecifObject();
             }
 
-        }while(opcion != 3);
+        } while (opcion != 3);
     }
 }

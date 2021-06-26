@@ -39,8 +39,12 @@ public class CompanyCar extends Vehicle {
     }
 
     public void modifyMe(ArrayList<String> atribMod) {
-        if (atribMod.contains("Dueño")) {
-            this.setIdPersona(UserInteractions.idRequest("PEE",true));
+        if (atribMod.contains("Dueño") || atribMod.contains("*")) {
+            if (UserInteractions.boolRequest("El coche tiene un dueño asignado?")) {
+                this.setIdPersona(null);
+            } else {
+                this.setIdPersona(UserInteractions.idRequest("PEE", true));
+            }
         }
     }
 

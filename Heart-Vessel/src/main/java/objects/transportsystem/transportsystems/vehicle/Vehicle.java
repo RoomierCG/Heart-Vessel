@@ -42,13 +42,13 @@ public abstract class Vehicle extends Transport {
     }
 
     public void modifyMe(ArrayList<String> atribMod) {
-        if (atribMod.contains("Gasolina")) {
-            this.setGasTank(UserInteractions.numRequest("Seleccione nivel de gasolina"));
+        if (atribMod.contains("Gasolina")|| atribMod.contains("*")) {
+            this.setGasTank(UserInteractions.numRequest("Introduzca nivel de gasolina"));
         }
-        if (atribMod.contains("Marca")) {
+        if (atribMod.contains("Marca")|| atribMod.contains("*")) {
             this.setMake(UserInteractions.strRequest("Seleccione el modelo del vehiculo"));
         }
-        if (atribMod.contains("Modelo")) {
+        if (atribMod.contains("Modelo")|| atribMod.contains("*")) {
             this.setModel(UserInteractions.strRequest("Seleccione la marca del vehiculo"));
         }
     }

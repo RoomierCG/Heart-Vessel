@@ -37,7 +37,7 @@ public class CleaningProducts extends Substance {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("Marca")) {
+        if (atribMod.contains("Marca")|| atribMod.contains("*")) {
             this.setId(UserInteractions.strRequest("Introduzca la marca del producto"));
         }
     }

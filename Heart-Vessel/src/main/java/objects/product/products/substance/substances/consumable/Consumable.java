@@ -32,11 +32,12 @@ public abstract class Consumable extends Substance {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("FechaDeCaducidad")) {
+        if (atribMod.contains("FechaDeCaducidad")|| atribMod.contains("*")) {
             System.out.println("Introduzca la fecha de caducidad");
-            this.setExpirationDate(UserInteractions.dateRequest());
+            this.setExpirationDate(UserInteractions.dateRequest(20));
         }
-        if (atribMod.contains("RiesgosAlergicos")) {
+        if (atribMod.contains("RiesgosAlergicos")|| atribMod.contains("*")) {
+            System.out.println("Esta es la lista de alergenos");
             this.setAllergyRiskIngredients(UserInteractions.formList(this.allergyRiskIngredients));
         }
 

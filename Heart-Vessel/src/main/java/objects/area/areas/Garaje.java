@@ -21,6 +21,11 @@ public class Garaje extends Area {
         super(idArea, name, status, floor, risk, equipment, personal);
         this.vehicles = vehicles;
     }
+
+    public Garaje() {
+
+    }
+
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public ArrayList<String> gatherInfo() {
         return super.gatherInfo();
@@ -34,8 +39,9 @@ public class Garaje extends Area {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if(atribMod.contains("Vehiculos")){
-            this.setVehicles(UserInteractions.formIDList(this.vehicles,"TR"));
+        if(atribMod.contains("Vehiculos")||atribMod.contains("*")){
+            System.out.println("Esta es la lista de vehiculos del garaje");
+            this.setVehicles(UserInteractions.formIDList(this.vehicles,"TR",Constants.garageVehicleLimit));
         }
 
     }

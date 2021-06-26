@@ -2,7 +2,9 @@ package objects.transportsystem.transportsystems;
 
 
 import objects.people.Person;
+import objects.people.person.Patient;
 import objects.transportsystem.Transport;
+import service.utility.OpsID;
 import service.utility.UserInteractions;
 import visualInterfaces.Constants;
 
@@ -42,11 +44,16 @@ public class MovementAid extends Transport {
     }
 
     public void modifyMe(ArrayList<String> atribMod) {
-        if (atribMod.contains("idArea")) {
+        if (atribMod.contains("idArea")|| atribMod.contains("*")) {
+            System.out.println("Introduzca el area donde se ubica");
             this.setIdArea(UserInteractions.idRequest("AR",true));
         }
-        if (atribMod.contains("idPaciente")) {
-            this.setPatient(UserInteractions.idRequest("PEP",true));
+        if (atribMod.contains("idPaciente")|| atribMod.contains("*")) {
+            if(!UserInteractions.boolRequest("Tiene un paciente asignado?")){
+                this.patient = null;
+            }else {
+                this.setPatient(UserInteractions.idRequest("PEP", true));
+            }
         }
     }
 

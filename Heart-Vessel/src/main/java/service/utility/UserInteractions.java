@@ -38,6 +38,9 @@ public class UserInteractions {
 
     public static int numRequest(String prompt, int min, int max) {//Pedida de un numero dentro de un rango
         int number;
+        if(min>max){
+            return 0;
+        }
         //Utilizamos la pedida normal para verificar el formato de nuevo, sin re-usar codigo.
         number = numRequest(prompt + "\nEl valor debe estar entre " + min + " y " + max);
         //Comprobamos que el numero esta dentro de nuestros rangos
@@ -218,8 +221,14 @@ public class UserInteractions {
 
     //Ya que hemos optado por guardar solo los IDs en varias listas de nuestras clases usamos esto para modificarlas
     //Es muy similar a la lista anterior pero mas restrictiva ya que solo trabajamos con IDs.
-    public static ArrayList<String> formIDList(ArrayList<String> actual, String type) {
-        ArrayList<String> copia = new ArrayList<>(actual);
+    public static ArrayList<String> formIDList(ArrayList<String> actual, String type,int maxLength) {
+        ArrayList<String> copia;
+        if(actual != null) {
+            copia = new ArrayList<>(actual);
+        }else{
+            copia = new ArrayList<>();
+            actual = new ArrayList<>();
+        }
         int choice;
         while (true) {
             try {
@@ -232,12 +241,16 @@ public class UserInteractions {
 
                 switch (choice) {
                     case 1:
-                        String tempID = UserInteractions.idRequest(type, true);
-                        try {
-                            OpsID.decodeID(tempID);
-                            actual.add(tempID);
-                        } catch (NullPointerException e) {
-                            System.out.println("El ID " + tempID + " no coincide con ninguno existente.");
+                        if(!(actual.size()==maxLength) && maxLength!=0) {
+                            String tempID = UserInteractions.idRequest(type, true);
+                            try {
+                                OpsID.decodeID(tempID);
+                                actual.add(tempID);
+                            } catch (NullPointerException e) {
+                                System.out.println("El ID " + tempID + " no coincide con ninguno existente.");
+                            }
+                        }else{
+                            System.out.println("Has llegado ya a la capacidad maxima");
                         }
 
                         break;
@@ -247,6 +260,9 @@ public class UserInteractions {
                         break;
 
                     case 3:
+                        if(actual.size()==0){
+                            System.out.println("\n\nLa lista esta vacia\n\n");
+                        }
                         for (String id : actual) {
                             System.out.println(id);
                         }
@@ -257,15 +273,17 @@ public class UserInteractions {
                          nuestra arrayList nueva.
                          */
                         actual = new ArrayList<>((actual.stream().distinct().collect(Collectors.toList())));
-                        actual.removeIf(purgando -> OpsID.decodeID(purgando) == null);
+                        actual.removeIf(purging -> OpsID.decodeID(purging) == null);
+                        /*
+                         * Aqui estamos usando una lambda simple, la cual comprime un iterador de la lista que hemos recogido
+                         * y borra todos los IDs los cuales decodeID devuelva como nulo
+                         */
 
 
                 }
             } while (choice != 0);
-            ArrayList<String> result = ConfirmStringList(copia, actual);
-            if (result != null) {
-                return result;
-            }
+             return ConfirmStringList(copia, actual);//Aqui confirmamos los cambios
+            
         }
 
     }
@@ -337,40 +355,52 @@ public class UserInteractions {
             prefijoID += "#";
         }
         String save = prefijoID;
-        do {
-            prefijoID = save;
-            prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID o -1 para salir");//o -1 si desea salir¿
-            System.out.println(prefijoID);
-            if (OpsID.decodeID(prefijoID) == null && exists) {
-                System.out.println("El ID que has introducido no existe, se requiere uno existente.");
-            }
-        } while (((OpsID.decodeID(prefijoID) == null && exists) && !(prefijoID.substring(4).equals("-1"))));
+        if(exists) {
+            do {
+                prefijoID = save;
+                prefijoID = prefijoID + numRequest("Introduzca el valor numerico del ID o -1 para salir");//o -1 si desea salir¿
+                System.out.println(prefijoID);
+                if (OpsID.decodeID(prefijoID) == null) {
+                    System.out.println("El ID que has introducido no existe, se requiere uno existente.");
+                }
+                /*
+                 * Consideramos incluir un "Desea ver todos los IDs disponibles", pero alfinal decidimos en contra de ello
+                 * Si quisiesemos hacerlo seria simple:
+                 * ArrayList<ArrayList<String>> datos = DataFunctions.getData(new ArrayList<String>(){{add("id");add("nombre) [Esto opcional]}};
+                 * for(int i = 0; i< datos[0].size() ; i++){
+                 * sout(datos[0][i] + " | " +datos[1][i];
+                 * y nos imprimiria una lista de ids (y nombres si lo incluimos)
+                 */
+            } while (((OpsID.decodeID(prefijoID) == null) && !(prefijoID.substring(4).equals("-1"))));
+        }
         return prefijoID;
     }
 
-    public static String dateRequest() {
+    public static String dateRequest(int futureLimit) {
 
-        int cDay = Integer.parseInt(getCurrentDate().substring(0, 2));
-        int cMonth = Integer.parseInt(getCurrentDate().substring(3, 5));
-        int cYear = Integer.parseInt(getCurrentDate().substring(6, 10));
+        //Aqui recogemos el dia, mes y año actual y lo guardamos en variables propias
+        String actual = getCurrentDate();
+        int cDay = Integer.parseInt(actual.substring(0, 2)); 
+        int cMonth = Integer.parseInt(actual.substring(3, 5));
+        int cYear = Integer.parseInt(actual.substring(6, 10));
 
-        int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};//Esto establece los dias maximos de cada mes
 
-        int month = numRequest("Introduzca el mes.", 1, 12);
-        int year = numRequest("Introduzca el año.", 0, cYear);
+        int month = numRequest("Introduzca el mes.", 1, 12);//Pedimos el mes
+        int year = numRequest("Introduzca el año.", 0, cYear+futureLimit);//Pedimos el año
         int day;
 
-        if (cYear == year && cMonth == month) {
+        if (cYear == year && cMonth == month && futureLimit == 0) {//Si nos ubicamos en el mes y año actual la fecha limite es la de hoy
             day = numRequest("Introduzca el dia. ", 1, cDay);
         } else {
-            if (month == 2) {
+            if (month == 2) {//Si el mes es febrero hacemos una comprobacion de si es visiesto para proporcionar un dia addicional
                 if (year % 4 == 0) {
                     day = numRequest("Introduca el dia. ", 1, 29);
                 } else {
                     day = numRequest("Introduca el dia. ", 1, 28);
                 }
             } else {
-                day = numRequest("Introduca el dia. ", 1, months[month - 1]);
+                day = numRequest("Introduca el dia. ", 1, months[month - 1]);//Sino pedimos el dia de forma normal
             }
         }
         return day + "/" + month + "/" + year;

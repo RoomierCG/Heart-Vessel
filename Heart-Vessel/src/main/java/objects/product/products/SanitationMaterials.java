@@ -40,11 +40,11 @@ public class SanitationMaterials extends Product {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("MarcaModelo")) {
-            this.setModel(UserInteractions.strRequest("Introduzca el nuevo modelo"));
+        if (atribMod.contains("MarcaModelo")|| atribMod.contains("*")) {
+            this.setModel(UserInteractions.strRequest("Introduzca el modelo"));
         }
-        if (atribMod.contains("Uso")) {
-            this.setModel(UserInteractions.strRequest("Introduzca el nuevo uso"));
+        if (atribMod.contains("Uso")|| atribMod.contains("*")) {
+            this.setModel(UserInteractions.strRequest("Introduzca el uso"));
         }
     }
     /////////////////////////////////////////////////////AUTOGEN////////////////////////////////////////////////////////

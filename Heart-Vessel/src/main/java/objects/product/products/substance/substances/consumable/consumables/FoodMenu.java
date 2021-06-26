@@ -19,6 +19,10 @@ public class FoodMenu extends Consumable {
         this.provider = provider;
     }
 
+    public FoodMenu() {
+
+    }
+
     /////////////////////////////////////////////////////METHOD/////////////////////////////////////////////////////////
     public ArrayList<String> gatherInfo() {
         ArrayList<String> s = super.gatherInfo();
@@ -33,7 +37,8 @@ public class FoodMenu extends Consumable {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("Proveedor")) {
+        if (atribMod.contains("Proveedor")|| atribMod.contains("*")) {
+            System.out.println("Introduzca el ID del proveedor de esta comida");
             this.setProvider(UserInteractions.idRequest("PVP", true));
         }
 

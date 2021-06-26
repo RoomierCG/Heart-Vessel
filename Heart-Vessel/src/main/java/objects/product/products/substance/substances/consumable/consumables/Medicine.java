@@ -37,8 +37,8 @@ public class Medicine extends Consumable {
 
     public void modifyMe(ArrayList<String> atribMod) {
         super.modifyMe(atribMod);
-        if (atribMod.contains("ViaDeAdministracion")) {
-            this.setAdministered(UserInteractions.pickFrom(Constants.viasDeAdministracion,"Elige la nueva via de administracion"));
+        if (atribMod.contains("ViaDeAdministracion")|| atribMod.contains("*")) {
+            this.setAdministered(UserInteractions.pickFrom(Constants.viasDeAdministracion,"Elige la via de administracion"));
         }
 
     }
