@@ -9,10 +9,8 @@ public class Constants {
 
 
     public static final int garageVehicleLimit = 20;
-
     public static final int personellLimitAMB = 10;
     public static final int equipmentLimitAMB = 50;
-
     public static final int SimSpeedMS = 5000;//Velocidad del simulador en milisegundos (cada x tiempo actividad nueva)
 
     public static final ArrayList<String> estadosPaciente = new ArrayList<String>() {{
