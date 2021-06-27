@@ -102,7 +102,8 @@ public class DownloadBD {
                             (ArrayList<String>) nodo.get("Personal")
                     );
 
-                    areas.add(area);
+                    if (OpsID.decodeID(area.getId())==null)
+                        areas.add(area);
                     break;
 
                 case "Habitacion":
@@ -117,7 +118,8 @@ public class DownloadBD {
                             (ArrayList<String>) nodo.get("Equipamiento")
                     );
 
-                    areas.add(room);
+                    if (!AuxDB.Complete.contains(room))
+                        areas.add(room);
                     break;
 
                 case "Garaje":
@@ -132,6 +134,7 @@ public class DownloadBD {
                             (ArrayList<String>) nodo.get("Vehiculos")
                     );
 
+                    if (OpsID.decodeID(garaje.getId())==null)
                     areas.add(garaje);
                     break;
 
@@ -172,7 +175,9 @@ public class DownloadBD {
                             (ArrayList<String>) nodo.get("Registro")
                     );
 
-                    people.add(patient);
+                    if (OpsID.decodeID(patient.getId())==null)
+                        people.add(patient);
+
                     break;
 
                 case "Empleado":
@@ -182,12 +187,14 @@ public class DownloadBD {
                             nodo.getString("Apellido"),
                             nodo.getString("Estado"),
                             nodo.getString("Departamento"),
-                            nodo.getString("Puesto"),
+                            nodo.getString("Jornada"),
                             nodo.getInteger("Salario"),
-                            nodo.getString("Jornada")
+                            nodo.getString("Puesto")
                     );
 
-                    people.add(employee);
+                    if (OpsID.decodeID(employee.getId())==null)
+                        people.add(employee);
+
                     break;
 
                 default:
@@ -251,7 +258,8 @@ public class DownloadBD {
                             nodoTrp.getString("idPaciente")
                     );
 
-                    Trps.add(nuevoAM);
+                    if (OpsID.decodeID(nuevoAM.getId())==null)
+                        Trps.add(nuevoAM);
                     break;
 
                 case "Ambulancia":
@@ -267,7 +275,8 @@ public class DownloadBD {
 
                     );
 
-                    Trps.add(nuevoAmbu);
+                    if (OpsID.decodeID(nuevoAmbu.getId())==null)
+                        Trps.add(nuevoAmbu);
                     break;
 
                 case "CocheCorporativo":
@@ -281,7 +290,8 @@ public class DownloadBD {
                             nodoTrp.getString("idPersona")
                     );
 
-                    Trps.add(nuevoCC);
+                    if (OpsID.decodeID(nuevoCC.getId())==null)
+                        Trps.add(nuevoCC);
                     break;
             }
         }
@@ -317,7 +327,8 @@ public class DownloadBD {
                             nodoProd.getInteger("Cantidad"),
                             nodoProd.getString("MarcaModelo")
                     );
-                            Trps.add(nuevoProd);
+                    if (OpsID.decodeID(nuevoProd.getId())==null)
+                        Trps.add(nuevoProd);
                     break;
 
                 case "Maquinaria":
@@ -332,7 +343,8 @@ public class DownloadBD {
                             nodoProd.getString("Marca")
                     );
 
-                    Trps.add(nuevaMach);
+                    if (OpsID.decodeID(nuevaMach.getId())==null)
+                        Trps.add(nuevaMach);
                     break;
 
                 case "EquipamientoDeLimpieza":
@@ -346,7 +358,8 @@ public class DownloadBD {
                             nodoProd.getInteger("GradoDeRiesgo")
                     );
 
-                    Trps.add(nuevoCE);
+                    if (OpsID.decodeID(nuevoCE.getId())==null)
+                        Trps.add(nuevoCE);
                     break;
 
                 case "ProductoDeLimpieza":
@@ -361,6 +374,7 @@ public class DownloadBD {
                             nodoProd.getString("Marca")
                     );
 
+                    if (OpsID.decodeID(nuevoCP.getId())==null)
                     Trps.add(nuevoCP);
                     break;
 
@@ -377,7 +391,8 @@ public class DownloadBD {
                             nodoProd.getString("FechaDeCaducidad"),
                             nodoProd.getString("ViaDeAdministracion")
                     );
-                            Trps.add(nuevaM);
+                    if (OpsID.decodeID(nuevaM.getId())==null)
+                        Trps.add(nuevaM);
                     break;
 
                 case "Comida":
@@ -394,7 +409,8 @@ public class DownloadBD {
                             nodoProd.getString("Proveedor")
                     );
 
-                            Trps.add(nuevaF);
+                    if (OpsID.decodeID(nuevaF.getId())==null)
+                        Trps.add(nuevaF);
                     break;
             }
         }

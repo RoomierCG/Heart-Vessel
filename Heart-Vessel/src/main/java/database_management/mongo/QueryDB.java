@@ -42,6 +42,15 @@ public class QueryDB {
 
     public static void main(String[] args) {
 
+
+
+        //Inializacion de ArrayLists
+//        AuxDB.Complete = downloadAreasBackUp();
+
+        rellenarTest();
+    }
+
+    public static void guardar() {
         //Inicializacion de conexion BD
         mongoClient = new MongoClient("localhost", 27017);
         db = mongoClient.getDatabase("vessel");
@@ -53,18 +62,13 @@ public class QueryDB {
         collectionProvider = db.getCollection("provider");
         collectionTransportSystem = db.getCollection("transportSystem");
 
-        //Inializacion de ArrayLists
-//        AuxDB.Complete = downloadAreasBackUp();
-
-        rellenarTest();
-    }
-
-    public static void guardar() {
         updateAreasBackUp();
         updateProviderBackUp();
         updateTransportSystemBackUp();
         updateProductBackUp();
         updatePeopleBackUp();
+
+        mongoClient.close();
     }
 
     //En arreglo
@@ -388,7 +392,6 @@ public class QueryDB {
                             .append("Salario", ((Employee) person).getSalary())
                             .append("Jornada", ((Employee) person).getShift())
                             .append("Tipo", "Empleado");
-
                 }
 
                 collectionPerson.insertOne(newPerson);
