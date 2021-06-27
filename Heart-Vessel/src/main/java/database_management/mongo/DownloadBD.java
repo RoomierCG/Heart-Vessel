@@ -295,11 +295,13 @@ public class DownloadBD {
                     break;
             }
         }
-
+        //ADIOS TFG :)
         //Cerramos el cursor para que no de problemas por no dejarle vacio
         cursor.close();
         return Trps;
     }
+
+
 
     public static ArrayList<Generic> downloadProductBackUp(){
 
