@@ -41,18 +41,15 @@ public class Provider extends Generic {
 
     public boolean checkAccNum(){
         if(this.account.length()!=24){
-            System.out.println("aqui wey 1");
             return false;
         }
         if(!Character.isLetter(this.getAccount().charAt(0)) || !Character.isLetter(this.getAccount().charAt(1))){
-            System.out.println("aqui wey 2");
             return false;
         }
         for(int i = 2;i<24;i++){
             try{
                 Integer.parseInt(this.getAccount().substring(i,i+1));
             }catch (NumberFormatException e){
-                System.out.println("aqui wey 3");
                 return false;
             }
         }

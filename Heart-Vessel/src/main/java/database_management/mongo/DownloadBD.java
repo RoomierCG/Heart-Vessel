@@ -30,6 +30,8 @@ import org.bson.Document;
 import javax.crypto.Mac;
 import java.util.ArrayList;
 
+import static database_management.AuxDB.initMaxID;
+
 public class DownloadBD {
 
     //Declaracion de Conexion a BD
@@ -44,24 +46,31 @@ public class DownloadBD {
     private static MongoCollection<Document> collectionProvider;
 
    public static void descargar(){
+       //Inicializacion de conexion BD
+       mongoClient = new MongoClient("localhost", 27017);
+       db = mongoClient.getDatabase("vessel");
+
+       //Inializacion de colecciones mongo
+       collectionArea = db.getCollection("area");
+       collectionPerson = db.getCollection("person");
+       collectionProduct = db.getCollection("product");
+       collectionProvider = db.getCollection("provider");
+       collectionTransportSystem = db.getCollection("transportSystem");
+
+
        AuxDB.Complete.addAll(downloadAreasBackUp());
        AuxDB.Complete.addAll(downloadPersonBackUp());
        AuxDB.Complete.addAll(downloadProviderBackUp());
        AuxDB.Complete.addAll(downloadProductBackUp());
        AuxDB.Complete.addAll(downloadTransportBackUp());
+
+       initMaxID();
+
+       mongoClient.close();
+
    }
 
     public static void inicializar() {
-        //Inicializacion de conexion BD
-        mongoClient = new MongoClient("localhost", 27017);
-        db = mongoClient.getDatabase("vessel");
-
-        //Inializacion de colecciones mongo
-        collectionArea = db.getCollection("area");
-        collectionPerson = db.getCollection("person");
-        collectionProduct = db.getCollection("product");
-        collectionProvider = db.getCollection("provider");
-        collectionTransportSystem = db.getCollection("transportSystem");
 
     }
 

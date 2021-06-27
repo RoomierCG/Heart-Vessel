@@ -5,9 +5,6 @@ import java.util.ArrayList;
 public class Constants {
     //=============================
     public static final String separtator = "\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n";
-
-
-
     public static final int garageVehicleLimit = 20;
     public static final int personellLimitAMB = 10;
     public static final int equipmentLimitAMB = 50;
