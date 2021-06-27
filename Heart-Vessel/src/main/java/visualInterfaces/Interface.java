@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Interface {
 
-    public static void main(String[] args) {
+    public static void HeartVessel() {
         int opcion;
         String[] textInicio = {"Inicializando", ".", ".", ".", ".", ".", ".", "."};
 

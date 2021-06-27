@@ -270,29 +270,29 @@ public class DataFunctions implements Operations {
                             StringBuilder headers = new StringBuilder();
                             for (String header : Header) {
                                 StringBuilder replacement = new StringBuilder();
-                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
+                                for (int left = 0; left < ((Constants.HalfSizer - header.length()) / 2); left++) {
                                     replacement.append(" ");
                                 }
                                 replacement.append(header);
-                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
+                                for (int left = 0; left < ((Constants.HalfSizer - header.length()) / 2); left++) {
                                     replacement.append(" ");
                                 }
                                 headers.append(String.format(Constants.LargeFormat, " " + replacement));
                             }
                             for (String header : HeaderListed) {
                                 StringBuilder replacement = new StringBuilder();
-                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
+                                for (int left = 0; left < ((Constants.HalfSizer - header.length()) / 2); left++) {
                                     replacement.append(" ");
                                 }
                                 replacement.append(header);
-                                for (int left = 0; left < ((29 - header.length()) / 2); left++) {
+                                for (int left = 0; left < ((Constants.HalfSizer - header.length()) / 2); left++) {
                                     replacement.append(" ");
                                 }
                                 headers.append(String.format(Constants.LargeFormat, " " + replacement));
                             }
                             headers.append("\n");
-                            for (int space = 0; space < 29 * (Header.size() + HeaderListed.size()); space++) {
-                                if (space % 29 == 0) {
+                            for (int space = 0; space < Constants.HalfSizer * (Header.size() + HeaderListed.size()); space++) {
+                                if (space % Constants.HalfSizer == 0) {
                                     headers.append("|");
                                 }
                                 headers.append("=");

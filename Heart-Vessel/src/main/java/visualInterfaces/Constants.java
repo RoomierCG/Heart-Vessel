@@ -88,8 +88,9 @@ public class Constants {
     }};
 
     public static final String RegistryFormat = "%-80.80s";
-    public static final String LargeFormat = "%-30.30s";
+    public static final String LargeFormat = "%-45.45s";
     public static final String MediumFormat = "%-20.20s";
+    public static final int HalfSizer = 44;
 
 
 
