@@ -1,5 +1,5 @@
 package database_management.mongo;
-
+import java.util.stream.Collectors;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -26,6 +26,7 @@ import objects.transportsystem.transportsystems.MovementAid;
 import objects.transportsystem.transportsystems.vehicle.vehicles.Ambulance;
 import objects.transportsystem.transportsystems.vehicle.vehicles.CompanyCar;
 import org.bson.Document;
+import service.utility.OpsID;
 
 import javax.crypto.Mac;
 import java.util.ArrayList;
@@ -212,11 +213,13 @@ public class DownloadBD {
 
             Document nodo = cursor.next();
 
-            providers.add(new Provider(
-                    nodo.getString("idProveedor"),
-                    nodo.getString("Nombre"),
-                    nodo.getString("IBAN")
-            ));
+            if (OpsID.decodeID(nodo.getString("idProveedor"))==null) {
+                providers.add(new Provider(
+                        nodo.getString("idProveedor"),
+                        nodo.getString("Nombre"),
+                        nodo.getString("IBAN")
+                ));
+            }
         }
 
         cursor.close();

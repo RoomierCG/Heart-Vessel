@@ -32,7 +32,6 @@ public abstract class Person extends Generic {
         super.setId(OpsID.generateID(ID));
         super.setName(nombresR.get(SimulatorThread.randomNum(0,nombresR.size())));
         this.setLastName(apellidosR.get(SimulatorThread.randomNum(0,apellidosR.size())));
-        this.setStatus(Constants.estadosPaciente.get(SimulatorThread.randomNum(0,Constants.estadosPaciente.size())));
     }
     public ArrayList<String> gatherInfo(){
         return new ArrayList<String>(){{

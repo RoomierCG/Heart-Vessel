@@ -34,14 +34,13 @@ public class Constants {
         add("Disponible");
     }};
     public static final ArrayList<String> departamentos = new ArrayList<String>() {{
-        add("Medico");
-        add("Enfermero");
-        add("Especialista");
-        add("Dietista");
-        add("Optico");
-        add("Auxiliar");
-        add("Biomedico");
-        add("Fisioterapeuta");
+        add("Pedagologia");
+        add("Hematologia");
+        add("CuidadoIntensivo");
+        add("Farmacia");
+        add("Dermatologia");
+        add("Oftalmologia");
+        add("Ginecologia Y Obstetricia");
     }};
     public static final ArrayList<String> jornada = new ArrayList<String>() {{
         add("Ordinaria - Diurna");
@@ -50,13 +49,14 @@ public class Constants {
         add("Especial");
     }};
     public static final ArrayList<String> puestosTrabajo = new ArrayList<String>() {{
-        add("Pedagologia");
-        add("Hematologia");
-        add("CuidadoIntensivo");
-        add("Farmacia");
-        add("Dermatologia");
-        add("Oftalmologia");
-        add("Ginecologia Y Obstetricia");
+        add("Medico");
+        add("Enfermero");
+        add("Especialista");
+        add("Dietista");
+        add("Optico");
+        add("Auxiliar");
+        add("Biomedico");
+        add("Fisioterapeuta");
     }};
     public static final ArrayList<String> riesgos = new ArrayList<String>() {{
         add("Sin Riesgo");

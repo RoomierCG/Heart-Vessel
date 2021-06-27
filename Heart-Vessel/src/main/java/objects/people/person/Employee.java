@@ -37,11 +37,12 @@ public class Employee extends Person {
         super.genMe(ID);
         this.department = Constants.departamentos.get(SimulatorThread.randomNum(0,Constants.departamentos.size()));
         this.job = Constants.puestosTrabajo.get(SimulatorThread.randomNum(0,Constants.puestosTrabajo.size()));
+        this.setStatus(Constants.estadosEmpleado.get(SimulatorThread.randomNum(0,Constants.estadosEmpleado.size())));
         if(this.job.equals("Medico")){
             this.shift = "Guardia";
             this.salary = 1500;
         }else{
-            this.shift = (SimulatorThread.randomNum(0,1) == 0) ? "Dia" : "Noche";
+            this.shift = (SimulatorThread.randomNum(0,1) == 0) ? "Diurno" : "Nocturno";
         }
         this.salary += SimulatorThread.randomNum(1000,1500);
 

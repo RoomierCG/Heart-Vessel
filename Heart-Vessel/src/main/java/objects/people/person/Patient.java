@@ -44,6 +44,7 @@ public class Patient extends Person {
         this.allowVisitors = SimulatorThread.randomNum(0, 1) != 0;
         this.registry = new ArrayList<String>(){{add(String.valueOf(java.time.LocalTime.now()).substring(0, 8)+ "| Fue ingresado en el hospital.");}};
         ArrayList<ArrayList<String>> habitaciones = DataFunctions.getData(new ArrayList<String>(){{add("id");add("idPaciente");}},"ARH");
+        this.setStatus(Constants.estadosPaciente.get(SimulatorThread.randomNum(0,Constants.estadosPaciente.size())));
         for(int i = 0;i<habitaciones.get(0).size();i++) {
             if (habitaciones.get(1).get(i) == null) {
                 int ubica = AuxDB.Complete.indexOf(OpsID.decodeID(habitaciones.get(0).get(i)));
